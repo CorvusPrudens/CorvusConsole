@@ -1,0 +1,77 @@
+#### START OF AREA REPORT #####[
+
+Part:			ICE40HX8KCT256 (Lattice)
+
+-------------------------------------------------------------------
+########   Utilization report for  Top level view:   top   ########
+===================================================================
+
+SEQUENTIAL ELEMENTS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+FLOPS     123                100 %                
+==================================================
+Total SEQUENTIAL ELEMENTS in the block top:	123 (17.40 % Utilization)
+
+
+COMBINATIONAL LOGIC
+Name       Total elements     Utilization     Notes
+---------------------------------------------------
+LUTS       408                100 %                
+CARRYS     161                100 %                
+===================================================
+Total COMBINATIONAL LOGIC in the block top:	569 (80.48 % Utilization)
+
+
+IO PADS
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+PADS     9                  100 %                
+=================================================
+Total IO PADS in the block top:	9 (1.27 % Utilization)
+
+---------------------------------------------------------
+########   Utilization report for  cell:   alu   ########
+Instance path:   top.alu                                 
+=========================================================
+
+SEQUENTIAL ELEMENTS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+FLOPS     17                 13.8 %               
+==================================================
+Total SEQUENTIAL ELEMENTS in the block top.alu:	17 (2.40 % Utilization)
+
+
+COMBINATIONAL LOGIC
+Name       Total elements     Utilization     Notes
+---------------------------------------------------
+LUTS       319                78.2 %               
+CARRYS     136                84.5 %               
+===================================================
+Total COMBINATIONAL LOGIC in the block top.alu:	455 (64.36 % Utilization)
+
+----------------------------------------------------------
+########   Utilization report for  cell:   uart   ########
+Instance path:   top.uart                                 
+==========================================================
+
+SEQUENTIAL ELEMENTS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+FLOPS     32                 26 %                 
+==================================================
+Total SEQUENTIAL ELEMENTS in the block top.uart:	32 (4.53 % Utilization)
+
+
+COMBINATIONAL LOGIC
+Name       Total elements     Utilization     Notes
+---------------------------------------------------
+LUTS       43                 10.5 %               
+CARRYS     2                  1.24 %               
+===================================================
+Total COMBINATIONAL LOGIC in the block top.uart:	45 (6.36 % Utilization)
+
+
+##### END OF AREA REPORT #####]
+

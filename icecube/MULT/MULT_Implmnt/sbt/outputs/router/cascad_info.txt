@@ -1,0 +1,13 @@
+[VIC]
+ALU.mult_2_cascade_=ltout:in1
+FTDI.N_170_0_cascade_=ltout:in0
+FTDI.N_23_cascade_=ltout:in0
+FTDI.TXstate_RNIE1MMZ0Z_2_cascade_=ltout:in3
+FTDI.TXstate_cnst_0_0_2_cascade_=ltout:in1
+FTDI.i2_mux_cascade_=ltout:in2
+FTDI.m13_ns_1_cascade_=ltout:in3
+FTDI_TXready_cascade_=ltout:in0
+i3_mux_i_x0_cascade_=ltout:in1
+m7_x0_cascade_=ltout:in1
+testState30_testState30_1_cascade_=ltout:in2
+un1_testState31_0_cascade_=ltout:in1
