@@ -27,9 +27,6 @@ VL_MODULE(Vtop) {
     VL_IN8(CLK,0,0);
     VL_IN8(RX,0,0);
     VL_OUT8(TX,0,0);
-    VL_OUT8(GPIO0,0,0);
-    VL_OUT8(GPIO1,0,0);
-    VL_OUT8(GPIO2,0,0);
     VL_OUT8(GPIO3,0,0);
     VL_OUT8(GPIO9,0,0);
     VL_OUT8(GPIO11,0,0);
@@ -37,23 +34,27 @@ VL_MODULE(Vtop) {
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
     CData/*7:0*/ top__DOT__RXbuffer;
-    CData/*7:0*/ top__DOT__TXbuffer;
-    CData/*0:0*/ top__DOT__TXstart;
     CData/*0:0*/ top__DOT__RXready;
-    CData/*1:0*/ top__DOT__op;
+    CData/*2:0*/ top__DOT__a;
+    CData/*2:0*/ top__DOT__y;
     CData/*0:0*/ top__DOT__overflow;
-    CData/*3:0*/ top__DOT__testState;
     CData/*2:0*/ top__DOT__FTDI__DOT__baudAcc;
     CData/*0:0*/ top__DOT__FTDI__DOT__baudTick;
     CData/*3:0*/ top__DOT__FTDI__DOT__TXstate;
-    CData/*0:0*/ top__DOT__FTDI__DOT__TXready;
     CData/*7:0*/ top__DOT__FTDI__DOT__TXshift;
     CData/*3:0*/ top__DOT__FTDI__DOT__RXstate;
     CData/*2:0*/ top__DOT__FTDI__DOT__gap;
     CData/*0:0*/ top__DOT__FTDI__DOT__nextBit;
-    SData/*15:0*/ top__DOT__a;
-    SData/*15:0*/ top__DOT__b;
-    SData/*15:0*/ top__DOT__res;
+    SData/*15:0*/ top__DOT__ALU__DOT__r0;
+    SData/*15:0*/ top__DOT__ALU__DOT__r1;
+    SData/*15:0*/ top__DOT__ALU__DOT__r2;
+    SData/*15:0*/ top__DOT__ALU__DOT__r3;
+    SData/*15:0*/ top__DOT__ALU__DOT__r4;
+    SData/*15:0*/ top__DOT__ALU__DOT__r5;
+    SData/*15:0*/ top__DOT__ALU__DOT__r6;
+    SData/*15:0*/ top__DOT__ALU__DOT__r7;
+    SData/*15:0*/ top__DOT__ALU__DOT__a;
+    SData/*15:0*/ top__DOT__ALU__DOT__b;
     IData/*24:0*/ top__DOT__clkdiv;
     IData/*16:0*/ top__DOT__ALU__DOT__addsub;
     IData/*16:0*/ top__DOT__ALU__DOT__mult;

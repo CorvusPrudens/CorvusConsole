@@ -70,131 +70,120 @@ VL_INLINE_OPT void Vtop::_sequent__TOP__2(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_sequent__TOP__2\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Variables
-    CData/*3:0*/ __Vdly__top__DOT__testState;
-    CData/*1:0*/ __Vdly__top__DOT__op;
+    IData/*24:0*/ __Vdly__top__DOT__clkdiv;
     // Body
-    __Vdly__top__DOT__testState = vlTOPp->top__DOT__testState;
-    __Vdly__top__DOT__op = vlTOPp->top__DOT__op;
-    vlTOPp->top__DOT__clkdiv = (0x1ffffffU & ((IData)(1U) 
-                                              + vlTOPp->top__DOT__clkdiv));
-    if ((8U & (IData)(vlTOPp->top__DOT__testState))) {
-        vlTOPp->top__DOT__TXstart = 0U;
-        __Vdly__top__DOT__testState = 0U;
-    } else {
-        if ((4U & (IData)(vlTOPp->top__DOT__testState))) {
-            if ((2U & (IData)(vlTOPp->top__DOT__testState))) {
-                if ((1U & (IData)(vlTOPp->top__DOT__testState))) {
-                    vlTOPp->top__DOT__TXstart = 0U;
-                    if ((0U == (IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate))) {
-                        vlTOPp->top__DOT__TXbuffer 
-                            = vlTOPp->top__DOT__overflow;
-                        vlTOPp->top__DOT__TXstart = 1U;
-                        __Vdly__top__DOT__testState = 0U;
-                    }
-                } else {
-                    vlTOPp->top__DOT__TXstart = 0U;
-                    if ((0U == (IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate))) {
-                        vlTOPp->top__DOT__TXbuffer 
-                            = (0xffU & ((IData)(vlTOPp->top__DOT__res) 
-                                        >> 8U));
-                        vlTOPp->top__DOT__TXstart = 1U;
-                        __Vdly__top__DOT__testState = 7U;
-                    }
-                }
-            } else {
-                if ((1U & (IData)(vlTOPp->top__DOT__testState))) {
-                    if ((0U == (IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate))) {
-                        vlTOPp->top__DOT__TXbuffer 
-                            = (0xffU & (IData)(vlTOPp->top__DOT__res));
-                        vlTOPp->top__DOT__TXstart = 1U;
-                        __Vdly__top__DOT__testState = 6U;
-                    }
-                } else {
-                    if (vlTOPp->top__DOT__RXready) {
-                        vlTOPp->top__DOT__b = ((0xffU 
-                                                & (IData)(vlTOPp->top__DOT__b)) 
-                                               | ((IData)(vlTOPp->top__DOT__RXbuffer) 
-                                                  << 8U));
-                        __Vdly__top__DOT__testState = 5U;
-                    }
-                }
-            }
-        } else {
-            if ((2U & (IData)(vlTOPp->top__DOT__testState))) {
-                if ((1U & (IData)(vlTOPp->top__DOT__testState))) {
-                    if (vlTOPp->top__DOT__RXready) {
-                        vlTOPp->top__DOT__b = ((0xff00U 
-                                                & (IData)(vlTOPp->top__DOT__b)) 
-                                               | (IData)(vlTOPp->top__DOT__RXbuffer));
-                        __Vdly__top__DOT__testState = 4U;
-                    }
-                } else {
-                    if (vlTOPp->top__DOT__RXready) {
-                        vlTOPp->top__DOT__a = ((0xffU 
-                                                & (IData)(vlTOPp->top__DOT__a)) 
-                                               | ((IData)(vlTOPp->top__DOT__RXbuffer) 
-                                                  << 8U));
-                        __Vdly__top__DOT__testState = 3U;
-                    }
-                }
-            } else {
-                if ((1U & (IData)(vlTOPp->top__DOT__testState))) {
-                    if (vlTOPp->top__DOT__RXready) {
-                        vlTOPp->top__DOT__a = ((0xff00U 
-                                                & (IData)(vlTOPp->top__DOT__a)) 
-                                               | (IData)(vlTOPp->top__DOT__RXbuffer));
-                        __Vdly__top__DOT__testState = 2U;
-                    }
-                } else {
-                    vlTOPp->top__DOT__TXstart = 0U;
-                    if (vlTOPp->top__DOT__RXready) {
-                        __Vdly__top__DOT__op = (3U 
-                                                & (IData)(vlTOPp->top__DOT__RXbuffer));
-                        __Vdly__top__DOT__testState = 1U;
-                    }
-                }
+    __Vdly__top__DOT__clkdiv = vlTOPp->top__DOT__clkdiv;
+    vlTOPp->top__DOT__overflow = (1U & (vlTOPp->top__DOT__ALU__DOT__addsub 
+                                        >> 0x10U));
+    if ((4U & (IData)(vlTOPp->top__DOT__y))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__y) 
+                      >> 1U)))) {
+            if ((1U & (IData)(vlTOPp->top__DOT__y))) {
+                vlTOPp->top__DOT__ALU__DOT__r5 = (0xffffU 
+                                                  & vlTOPp->top__DOT__ALU__DOT__addsub);
             }
         }
     }
-    vlTOPp->top__DOT__testState = __Vdly__top__DOT__testState;
+    if ((4U & (IData)(vlTOPp->top__DOT__y))) {
+        if ((2U & (IData)(vlTOPp->top__DOT__y))) {
+            if ((1U & (~ (IData)(vlTOPp->top__DOT__y)))) {
+                vlTOPp->top__DOT__ALU__DOT__r6 = (0xffffU 
+                                                  & vlTOPp->top__DOT__ALU__DOT__addsub);
+            }
+        }
+    }
+    if ((1U & (~ ((IData)(vlTOPp->top__DOT__y) >> 2U)))) {
+        if ((2U & (IData)(vlTOPp->top__DOT__y))) {
+            if ((1U & (~ (IData)(vlTOPp->top__DOT__y)))) {
+                vlTOPp->top__DOT__ALU__DOT__r2 = (0xffffU 
+                                                  & vlTOPp->top__DOT__ALU__DOT__addsub);
+            }
+        }
+    }
+    if ((4U & (IData)(vlTOPp->top__DOT__y))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__y) 
+                      >> 1U)))) {
+            if ((1U & (~ (IData)(vlTOPp->top__DOT__y)))) {
+                vlTOPp->top__DOT__ALU__DOT__r4 = (0xffffU 
+                                                  & vlTOPp->top__DOT__ALU__DOT__addsub);
+            }
+        }
+    }
+    if ((4U & (IData)(vlTOPp->top__DOT__y))) {
+        if ((2U & (IData)(vlTOPp->top__DOT__y))) {
+            if ((1U & (IData)(vlTOPp->top__DOT__y))) {
+                vlTOPp->top__DOT__ALU__DOT__r7 = (0xffffU 
+                                                  & vlTOPp->top__DOT__ALU__DOT__addsub);
+            }
+        }
+    }
+    if ((1U & (~ ((IData)(vlTOPp->top__DOT__y) >> 2U)))) {
+        if ((2U & (IData)(vlTOPp->top__DOT__y))) {
+            if ((1U & (IData)(vlTOPp->top__DOT__y))) {
+                vlTOPp->top__DOT__ALU__DOT__r3 = (0xffffU 
+                                                  & vlTOPp->top__DOT__ALU__DOT__addsub);
+            }
+        }
+    }
+    if ((1U & (~ ((IData)(vlTOPp->top__DOT__y) >> 2U)))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__y) 
+                      >> 1U)))) {
+            if ((1U & (~ (IData)(vlTOPp->top__DOT__y)))) {
+                vlTOPp->top__DOT__ALU__DOT__r0 = (0xffffU 
+                                                  & vlTOPp->top__DOT__ALU__DOT__addsub);
+            }
+        }
+    }
+    if ((1U & (~ ((IData)(vlTOPp->top__DOT__y) >> 2U)))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__y) 
+                      >> 1U)))) {
+            if ((1U & (IData)(vlTOPp->top__DOT__y))) {
+                vlTOPp->top__DOT__ALU__DOT__r1 = (0xffffU 
+                                                  & vlTOPp->top__DOT__ALU__DOT__addsub);
+            }
+        }
+    }
+    __Vdly__top__DOT__clkdiv = (0x1ffffffU & ((IData)(1U) 
+                                              + vlTOPp->top__DOT__clkdiv));
+    if ((0xfU == (0xfU & vlTOPp->top__DOT__clkdiv))) {
+        vlTOPp->top__DOT__a = (7U & ((IData)(1U) + (IData)(vlTOPp->top__DOT__a)));
+        vlTOPp->top__DOT__y = (7U & ((IData)(1U) + (IData)(vlTOPp->top__DOT__y)));
+    }
+    vlTOPp->top__DOT__clkdiv = __Vdly__top__DOT__clkdiv;
+    vlTOPp->top__DOT__ALU__DOT__b = vlTOPp->top__DOT__ALU__DOT__r1;
     vlTOPp->GPIO3 = (1U & (vlTOPp->top__DOT__clkdiv 
                            >> 0x17U));
-    if ((2U & (IData)(vlTOPp->top__DOT__op))) {
-        vlTOPp->top__DOT__overflow = (1U & (vlTOPp->top__DOT__ALU__DOT__mult 
-                                            >> 0x10U));
-        vlTOPp->top__DOT__res = (0xffffU & vlTOPp->top__DOT__ALU__DOT__mult);
-    } else {
-        vlTOPp->top__DOT__overflow = (1U & (vlTOPp->top__DOT__ALU__DOT__addsub 
-                                            >> 0x10U));
-        vlTOPp->top__DOT__res = (0xffffU & vlTOPp->top__DOT__ALU__DOT__addsub);
-    }
-    vlTOPp->top__DOT__ALU__DOT__mult = (0x1ffffU & 
-                                        ((IData)(vlTOPp->top__DOT__a) 
-                                         * (IData)(vlTOPp->top__DOT__b)));
-    vlTOPp->top__DOT__op = __Vdly__top__DOT__op;
-    vlTOPp->GPIO0 = (1U & (IData)(vlTOPp->top__DOT__res));
-    vlTOPp->GPIO1 = (1U & ((IData)(vlTOPp->top__DOT__res) 
-                           >> 1U));
-    vlTOPp->GPIO2 = (1U & ((IData)(vlTOPp->top__DOT__res) 
-                           >> 2U));
+    vlTOPp->top__DOT__ALU__DOT__a = ((4U & (IData)(vlTOPp->top__DOT__a))
+                                      ? ((2U & (IData)(vlTOPp->top__DOT__a))
+                                          ? ((1U & (IData)(vlTOPp->top__DOT__a))
+                                              ? (IData)(vlTOPp->top__DOT__ALU__DOT__r7)
+                                              : (IData)(vlTOPp->top__DOT__ALU__DOT__r6))
+                                          : ((1U & (IData)(vlTOPp->top__DOT__a))
+                                              ? (IData)(vlTOPp->top__DOT__ALU__DOT__r5)
+                                              : (IData)(vlTOPp->top__DOT__ALU__DOT__r4)))
+                                      : ((2U & (IData)(vlTOPp->top__DOT__a))
+                                          ? ((1U & (IData)(vlTOPp->top__DOT__a))
+                                              ? (IData)(vlTOPp->top__DOT__ALU__DOT__r3)
+                                              : (IData)(vlTOPp->top__DOT__ALU__DOT__r2))
+                                          : ((1U & (IData)(vlTOPp->top__DOT__a))
+                                              ? (IData)(vlTOPp->top__DOT__ALU__DOT__r1)
+                                              : (IData)(vlTOPp->top__DOT__ALU__DOT__r0))));
     vlTOPp->top__DOT__ALU__DOT__addsub = (0x1ffffU 
-                                          & ((1U & (IData)(vlTOPp->top__DOT__op))
-                                              ? ((IData)(vlTOPp->top__DOT__a) 
-                                                 - (IData)(vlTOPp->top__DOT__b))
-                                              : ((IData)(vlTOPp->top__DOT__a) 
-                                                 + (IData)(vlTOPp->top__DOT__b))));
+                                          & ((IData)(vlTOPp->top__DOT__ALU__DOT__a) 
+                                             + (IData)(vlTOPp->top__DOT__ALU__DOT__b)));
+    vlTOPp->top__DOT__ALU__DOT__mult = (0x1ffffU & 
+                                        ((IData)(vlTOPp->top__DOT__ALU__DOT__a) 
+                                         * (IData)(vlTOPp->top__DOT__ALU__DOT__b)));
 }
 
 VL_INLINE_OPT void Vtop::_sequent__TOP__3(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_sequent__TOP__3\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Variables
-    CData/*7:0*/ __Vdly__top__DOT__FTDI__DOT__TXshift;
     CData/*3:0*/ __Vdly__top__DOT__FTDI__DOT__TXstate;
     CData/*3:0*/ __Vdly__top__DOT__FTDI__DOT__RXstate;
     // Body
     __Vdly__top__DOT__FTDI__DOT__RXstate = vlTOPp->top__DOT__FTDI__DOT__RXstate;
-    __Vdly__top__DOT__FTDI__DOT__TXshift = vlTOPp->top__DOT__FTDI__DOT__TXshift;
     __Vdly__top__DOT__FTDI__DOT__TXstate = vlTOPp->top__DOT__FTDI__DOT__TXstate;
     if ((8U & (IData)(vlTOPp->top__DOT__FTDI__DOT__RXstate))) {
         if ((4U & (IData)(vlTOPp->top__DOT__FTDI__DOT__RXstate))) {
@@ -277,16 +266,11 @@ VL_INLINE_OPT void Vtop::_sequent__TOP__3(Vtop__Syms* __restrict vlSymsp) {
     }
     vlTOPp->top__DOT__RXready = ((IData)(vlTOPp->top__DOT__FTDI__DOT__nextBit) 
                                  & (1U == (IData)(vlTOPp->top__DOT__FTDI__DOT__RXstate)));
-    if (((IData)(vlTOPp->top__DOT__FTDI__DOT__TXready) 
-         & (IData)(vlTOPp->top__DOT__TXstart))) {
-        __Vdly__top__DOT__FTDI__DOT__TXshift = vlTOPp->top__DOT__TXbuffer;
-    } else {
-        if ((((IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate) 
-              >> 3U) & (IData)(vlTOPp->top__DOT__FTDI__DOT__baudTick))) {
-            __Vdly__top__DOT__FTDI__DOT__TXshift = 
-                (0xffU & ((IData)(vlTOPp->top__DOT__FTDI__DOT__TXshift) 
-                          >> 1U));
-        }
+    if ((((IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate) 
+          >> 3U) & (IData)(vlTOPp->top__DOT__FTDI__DOT__baudTick))) {
+        vlTOPp->top__DOT__FTDI__DOT__TXshift = (0xffU 
+                                                & ((IData)(vlTOPp->top__DOT__FTDI__DOT__TXshift) 
+                                                   >> 1U));
     }
     vlTOPp->top__DOT__FTDI__DOT__baudAcc = ((0U == (IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate))
                                              ? 0U : 
@@ -367,22 +351,16 @@ VL_INLINE_OPT void Vtop::_sequent__TOP__3(Vtop__Syms* __restrict vlSymsp) {
                     if (vlTOPp->top__DOT__FTDI__DOT__baudTick) {
                         __Vdly__top__DOT__FTDI__DOT__TXstate = 0U;
                     }
-                } else {
-                    if (vlTOPp->top__DOT__TXstart) {
-                        __Vdly__top__DOT__FTDI__DOT__TXstate = 4U;
-                    }
                 }
             }
         }
     }
     vlTOPp->top__DOT__FTDI__DOT__RXstate = __Vdly__top__DOT__FTDI__DOT__RXstate;
-    vlTOPp->top__DOT__FTDI__DOT__TXshift = __Vdly__top__DOT__FTDI__DOT__TXshift;
     vlTOPp->top__DOT__FTDI__DOT__TXstate = __Vdly__top__DOT__FTDI__DOT__TXstate;
     vlTOPp->top__DOT__FTDI__DOT__nextBit = (1U & ((IData)(vlTOPp->top__DOT__FTDI__DOT__gap) 
                                                   >> 2U));
     vlTOPp->top__DOT__FTDI__DOT__baudTick = (1U & ((IData)(vlTOPp->top__DOT__FTDI__DOT__baudAcc) 
                                                    >> 2U));
-    vlTOPp->top__DOT__FTDI__DOT__TXready = (0U == (IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate));
     vlTOPp->TX = (1U & ((4U > (IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate)) 
                         | (((IData)(vlTOPp->top__DOT__FTDI__DOT__TXstate) 
                             >> 3U) & (IData)(vlTOPp->top__DOT__FTDI__DOT__TXshift))));

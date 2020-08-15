@@ -104,9 +104,9 @@ int main(int argc, char** argv) {
 
   int testState = 0;
 
-  // for (int i = 0; i < 128; i++){
-  //   tick(tb, tfp, ++logicStep);
-  // }
+  for (int i = 0; i < 128; i++){
+    tick(tb, tfp, ++logicStep);
+  }
 
   // for (int i = 0; i < 200; i++){
   //
@@ -114,49 +114,49 @@ int main(int argc, char** argv) {
   //
   //
   // }
-  int out = 0;
-  int data[6] = {0};
-  int inbuff[20] = {0};
-  int innum = 0;
-
-  printf("ALU mode (0 = add, 1 = sub, 2 = mult)\n");
-  scanf("%d", &input);
-  data[0] = input & 255;
-
-  printf("Value 1\n");
-  scanf("%d", &input);
-  data[1] = input & 255;
-  data[2] = input >> 8;
-
-  printf("Value 2\n");
-  scanf("%d", &input);
-  data[3] = input & 255;
-  data[4] = input >> 8;
-
-  int sendState = 0;
-  int go = 1;
-
-  //initialization tick
-  tick(tb, tfp, ++logicStep);
-  // Shouldn't need more than 10000 cycles
-  while (logicStep < 10000){
-    int status = uart(tb, go, data[sendState], &out);
-    tick(tb, tfp, ++logicStep);
-    if ((status & 4) > 0){
-      sendState++;
-      if (sendState == 5){
-        go = 0;
-        //sendState = 0;
-      }
-    }
-    if ((status & 2) > 0){
-      inbuff[innum] = out;
-      innum += 1;
-      if (innum == 3){
-        break;
-      }
-    }
-  }
-
-  printf("Recieved: %d, flag: %d\n", inbuff[0] | (inbuff[1] << 8), inbuff[2]);
+  // int out = 0;
+  // int data[6] = {0};
+  // int inbuff[20] = {0};
+  // int innum = 0;
+  //
+  // printf("ALU mode (0 = add, 1 = sub, 2 = mult)\n");
+  // scanf("%d", &input);
+  // data[0] = input & 255;
+  //
+  // printf("Value 1\n");
+  // scanf("%d", &input);
+  // data[1] = input & 255;
+  // data[2] = input >> 8;
+  //
+  // printf("Value 2\n");
+  // scanf("%d", &input);
+  // data[3] = input & 255;
+  // data[4] = input >> 8;
+  //
+  // int sendState = 0;
+  // int go = 1;
+  //
+  // //initialization tick
+  // tick(tb, tfp, ++logicStep);
+  // // Shouldn't need more than 10000 cycles
+  // while (logicStep < 10000){
+  //   int status = uart(tb, go, data[sendState], &out);
+  //   tick(tb, tfp, ++logicStep);
+  //   if ((status & 4) > 0){
+  //     sendState++;
+  //     if (sendState == 5){
+  //       go = 0;
+  //       //sendState = 0;
+  //     }
+  //   }
+  //   if ((status & 2) > 0){
+  //     inbuff[innum] = out;
+  //     innum += 1;
+  //     if (innum == 3){
+  //       break;
+  //     }
+  //   }
+  // }
+  //
+  // printf("Recieved: %d, flag: %d\n", inbuff[0] | (inbuff[1] << 8), inbuff[2]);
 }
