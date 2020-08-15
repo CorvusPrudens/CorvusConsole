@@ -34,13 +34,17 @@ VL_MODULE(Vtop) {
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
     CData/*7:0*/ top__DOT__RXbuffer;
+    CData/*7:0*/ top__DOT__TXbuffer;
+    CData/*0:0*/ top__DOT__TXstart;
     CData/*0:0*/ top__DOT__RXready;
-    CData/*2:0*/ top__DOT__a;
-    CData/*2:0*/ top__DOT__y;
+    CData/*5:0*/ top__DOT__op;
+    CData/*3:0*/ top__DOT__params;
     CData/*0:0*/ top__DOT__overflow;
+    CData/*3:0*/ top__DOT__testState;
     CData/*2:0*/ top__DOT__FTDI__DOT__baudAcc;
     CData/*0:0*/ top__DOT__FTDI__DOT__baudTick;
     CData/*3:0*/ top__DOT__FTDI__DOT__TXstate;
+    CData/*0:0*/ top__DOT__FTDI__DOT__TXready;
     CData/*7:0*/ top__DOT__FTDI__DOT__TXshift;
     CData/*3:0*/ top__DOT__FTDI__DOT__RXstate;
     CData/*2:0*/ top__DOT__FTDI__DOT__gap;
@@ -53,6 +57,9 @@ VL_MODULE(Vtop) {
     SData/*15:0*/ top__DOT__ALU__DOT__r5;
     SData/*15:0*/ top__DOT__ALU__DOT__r6;
     SData/*15:0*/ top__DOT__ALU__DOT__r7;
+    SData/*15:0*/ top__DOT__ALU__DOT__log;
+    SData/*15:0*/ top__DOT__ALU__DOT__lshift;
+    SData/*15:0*/ top__DOT__ALU__DOT__rshift;
     SData/*15:0*/ top__DOT__ALU__DOT__a;
     SData/*15:0*/ top__DOT__ALU__DOT__b;
     IData/*24:0*/ top__DOT__clkdiv;
@@ -61,8 +68,10 @@ VL_MODULE(Vtop) {
     
     // LOCAL VARIABLES
     // Internals; generally not touched by application code
+    CData/*3:0*/ __Vdly__top__DOT__testState;
     CData/*0:0*/ __Vclklast__TOP__CLK;
-    CData/*0:0*/ __Vm_traceActivity[3];
+    SData/*15:0*/ __Vdly__top__DOT__ALU__DOT__r0;
+    CData/*0:0*/ __Vm_traceActivity[4];
     
     // INTERNAL VARIABLES
     // Internals; generally not touched by application code
@@ -113,7 +122,11 @@ VL_MODULE(Vtop) {
     static void _initial__TOP__1(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _sequent__TOP__2(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__3(Vtop__Syms* __restrict vlSymsp);
-    static void _settle__TOP__4(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
+    static void _sequent__TOP__4(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__6(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__7(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__8(Vtop__Syms* __restrict vlSymsp);
+    static void _settle__TOP__5(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
   private:
     static void traceChgSub0(void* userp, VerilatedVcd* tracep);
     static void traceChgTop0(void* userp, VerilatedVcd* tracep);

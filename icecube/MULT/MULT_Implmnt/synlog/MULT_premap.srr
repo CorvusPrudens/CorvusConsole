@@ -1,4 +1,4 @@
-# Fri Aug 14 14:00:19 2020
+# Sat Aug 15 12:48:42 2020
 
 Synopsys Lattice Technology Pre-mapping, Version maplat, Build 1612R, Built Dec  5 2016 10:31:39
 Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
@@ -7,28 +7,47 @@ Product Version L-2016.09L+ice40
 Mapper Startup Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 99MB peak: 99MB)
 
 @A: MF827 |No constraint file specified.
-@L: D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\icecube\MULT\MULT_Implmnt\MULT_scck.rpt 
-Printing clock  summary report in "D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\icecube\MULT\MULT_Implmnt\MULT_scck.rpt" file 
+@L: C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT_scck.rpt 
+Printing clock  summary report in "C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT_scck.rpt" file 
 @N: MF248 |Running in 64-bit mode.
 @N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
 
-Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 102MB)
+Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 103MB)
 
 
-Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 102MB)
+Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 103MB)
 
 
-Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 101MB peak: 102MB)
+Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 101MB peak: 103MB)
 
 
 Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 101MB peak: 104MB)
 
+
+Making connections to hyper_source modules
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":91:39:91:39|Connected syn_hyper_connect __xmr_use__1_, tag __xmr_tag__10_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":90:39:90:39|Connected syn_hyper_connect __xmr_use__3_, tag __xmr_tag__f_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":89:39:89:39|Connected syn_hyper_connect __xmr_use__5_, tag __xmr_tag__e_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":88:39:88:39|Connected syn_hyper_connect __xmr_use__7_, tag __xmr_tag__d_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":87:39:87:39|Connected syn_hyper_connect __xmr_use__9_, tag __xmr_tag__c_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":86:39:86:39|Connected syn_hyper_connect __xmr_use__11_, tag __xmr_tag__b_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":85:38:85:38|Connected syn_hyper_connect __xmr_use__13_, tag __xmr_tag__a_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":84:38:84:38|Connected syn_hyper_connect __xmr_use__15_, tag __xmr_tag__9_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":83:37:83:37|Connected syn_hyper_connect __xmr_use__17_, tag __xmr_tag__8_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":82:37:82:37|Connected syn_hyper_connect __xmr_use__19_, tag __xmr_tag__7_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":81:37:81:37|Connected syn_hyper_connect __xmr_use__21_, tag __xmr_tag__6_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":80:37:80:37|Connected syn_hyper_connect __xmr_use__23_, tag __xmr_tag__5_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":79:37:79:37|Connected syn_hyper_connect __xmr_use__25_, tag __xmr_tag__4_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":78:37:78:37|Connected syn_hyper_connect __xmr_use__27_, tag __xmr_tag__3_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":77:37:77:37|Connected syn_hyper_connect __xmr_use__29_, tag __xmr_tag__2_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":76:37:76:37|Connected syn_hyper_connect __xmr_use__31_, tag __xmr_tag__1_0_7d5186020056a223808828e9cc25bba0
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXready (in view: work.uart(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
 ICG Latch Removal Summary:
 Number of ICG latches removed:	0
 Number of ICG latches not removed:	0
 syn_allowed_resources : blockrams=32  set on top level netlist top
 
-Finished netlist restructuring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 131MB peak: 133MB)
+Finished netlist restructuring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 132MB peak: 134MB)
 
 
 
@@ -38,26 +57,34 @@ Clock Summary
 Start       Requested     Requested     Clock        Clock                     Clock
 Clock       Frequency     Period        Type         Group                     Load 
 ------------------------------------------------------------------------------------
-top|CLK     4.1 MHz       244.568       inferred     Autoconstr_clkgroup_0     118  
+top|CLK     4.1 MHz       242.665       inferred     Autoconstr_clkgroup_0     210  
 ====================================================================================
 
-@W: MT529 :"d:\linuxenv\cygwin\home\corvus\testbenches\mult\verilog\uart.v":30:2:30:7|Found inferred clock top|CLK which controls 118 sequential elements including FTDI.TXstate[3:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+@W: MT529 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|Found inferred clock top|CLK which controls 210 sequential elements including FTDI.TXstate[3:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
 
 Finished Pre Mapping Phase.
-@N: BN225 |Writing default property annotation file D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\icecube\MULT\MULT_Implmnt\MULT.sap.
+@N: BN225 |Writing default property annotation file C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap.
 
-Starting constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 131MB peak: 133MB)
+Starting constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 132MB peak: 134MB)
 
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[0] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[1] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[2] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[3] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[4] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[5] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[6] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[7] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
 None
 None
 
-Finished constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 131MB peak: 133MB)
+Finished constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 132MB peak: 134MB)
 
 Pre-mapping successful!
 
-At Mapper Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 47MB peak: 133MB)
+At Mapper Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 47MB peak: 134MB)
 
 Process took 0h:00m:01s realtime, 0h:00m:01s cputime
-# Fri Aug 14 14:00:19 2020
+# Sat Aug 15 12:48:43 2020
 
 ###########################################################]

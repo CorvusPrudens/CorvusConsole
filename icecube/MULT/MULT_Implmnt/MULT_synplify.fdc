@@ -1,0 +1,1 @@
+define_attribute {i:ALU} {syn_noprune} 1

@@ -1,1 +1,3 @@
 #XMR Information
+xmrdecl work alu 2 0 
+xmruse work top 0 2 

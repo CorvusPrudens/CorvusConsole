@@ -1,21 +1,21 @@
 #--  Synopsys, Inc.
 #--  Version L-2016.09L+ice40
-#--  Project file D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\icecube\MULT\MULT_Implmnt\scratchproject.prs
+#--  Project file C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\scratchproject.prs
 
 #project files
-add_file -verilog "D:/LinuxEnv/Cygwin/home/corvus/testbenches/MULT/verilog/top.v"
+add_file -verilog "C:/LinuxEnv/Cygwin/home/Gabriel/testbenches/REG/verilog/top.v"
 
 
 
 #implementation: "MULT_Implmnt"
-impl -add D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\icecube\MULT\MULT_Implmnt -type fpga
+impl -add C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt -type fpga
 
 #
 #implementation attributes
 
 set_option -vlog_std v2001
 set_option -project_relative_includes 1
-set_option -include_path {D:/LinuxEnv/Cygwin/home/corvus/testbenches/MULT/icecube/MULT/}
+set_option -include_path {C:/LinuxEnv/Cygwin/home/Gabriel/testbenches/REG/icecube/MULT/}
 
 #device options
 set_option -technology SBTiCE40
@@ -64,5 +64,5 @@ set_option -auto_infer_blackbox 0
 set_option -write_apr_constraint 1
 
 #set result format/file last
-project -result_file "D:/LinuxEnv/Cygwin/home/corvus/testbenches/MULT/icecube/MULT/MULT_Implmnt/MULT.edf"
+project -result_file "C:/LinuxEnv/Cygwin/home/Gabriel/testbenches/REG/icecube/MULT/MULT_Implmnt/MULT.edf"
 impl -active "MULT_Implmnt"

@@ -1,9 +1,5 @@
-INPUT  RX 	 location (22, 0, 1) 	 T15 	 
-OUTPUT GPIO3 	 location (1, 33, 0) 	 C3 	 
 OUTPUT TX 	 location (24, 0, 0) 	 T13 	 
-OUTPUT GPIO2 	 location (0, 28, 0) 	 C2 	 
 OUTPUT GPIO11 	 location (2, 33, 1) 	 D4 	 
-OUTPUT GPIO0 	 location (1, 33, 1) 	 D3 	 
 INPUT  CLK 	 location (16, 0, 1) 	 R9 	 
 OUTPUT GPIO9 	 location (6, 33, 1) 	 B4 	 
-OUTPUT GPIO1 	 location (0, 28, 1) 	 C1 	 
+OUTPUT GPIO3 	 location (1, 33, 0) 	 C3 	 

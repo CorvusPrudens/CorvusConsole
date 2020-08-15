@@ -1,8 +1,8 @@
-# Written by Synplify Pro version maplat, Build 1612R. Synopsys Run ID: sid1597438819 
+# Written by Synplify Pro version maplat, Build 1612R. Synopsys Run ID: sid1597520923 
 # Top Level Design Parameters 
 
 # Clocks 
-create_clock -period 12.807 -waveform {0.000 6.404} -name {top|CLK} [get_ports {CLK}] 
+create_clock -period 21.848 -waveform {0.000 10.924} -name {top|CLK} [get_ports {CLK}] 
 
 # Virtual Clocks 
 

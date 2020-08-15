@@ -6,57 +6,384 @@ Synopsys Verilog Compiler, version comp2016q3p1, Build 141R, built Dec  5 2016
 @N|Running in 64-bit mode
 Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
 
-@I::"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\generic\sb_ice40.v" (library work)
-@I::"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\hypermods.v" (library __hyper__lib__)
-@I::"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\umr_capim.v" (library snps_haps)
-@I::"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\scemi_objects.v" (library snps_haps)
-@I::"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\scemi_pipes.svh" (library snps_haps)
-@I::"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v" (library work)
-@I:"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v":"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\uart.v" (library work)
-@I:"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v":"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\alu.v" (library work)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\generic\sb_ice40.v" (library work)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v" (library __hyper__lib__)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\umr_capim.v" (library snps_haps)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\scemi_objects.v" (library snps_haps)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\scemi_pipes.svh" (library snps_haps)
+@I::"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v" (library work)
+@I:"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v" (library work)
+@I:"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\alu.v" (library work)
 Verilog syntax check successful!
-File D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v changed - recompiling
+File C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v changed - recompiling
+File C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\alu.v changed - recompiling
 Selecting top level module top
-@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\uart.v":5:7:5:10|Synthesizing module uart in library work.
+@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v":5:7:5:10|Synthesizing module uart in library work.
 
-@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\alu.v":2:7:2:9|Synthesizing module alu in library work.
+@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\alu.v":3:7:3:9|Synthesizing module alu in library work.
 
-@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v":9:7:9:9|Synthesizing module top in library work.
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
 
-@N: CL201 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v":60:2:60:7|Trying to extract state machine for register testState.
-@N: CL189 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v":60:2:60:7|Register bit testState[3] is always 0.
-@W: CL260 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v":60:2:60:7|Pruning register bit 3 of testState[3:0]. If this is not the intended behavior, drive the input with valid values, or an input from the top level.
-@N: CL201 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\uart.v":30:2:30:7|Trying to extract state machine for register TXstate.
-@N: CL201 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\uart.v":66:2:66:7|Trying to extract state machine for register RXstate.
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__1_0_7d5186020056a223808828e9cc25bba0_Z1
 
-At c_ver Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 72MB peak: 73MB)
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__2_0_7d5186020056a223808828e9cc25bba0_Z2
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100110101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__3_0_7d5186020056a223808828e9cc25bba0_Z3
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__4_0_7d5186020056a223808828e9cc25bba0_Z4
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__5_0_7d5186020056a223808828e9cc25bba0_Z5
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__6_0_7d5186020056a223808828e9cc25bba0_Z6
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101110101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__7_0_7d5186020056a223808828e9cc25bba0_Z7
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001110000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__8_0_7d5186020056a223808828e9cc25bba0_Z8
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001110010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__9_0_7d5186020056a223808828e9cc25bba0_Z9
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011000010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__a_0_7d5186020056a223808828e9cc25bba0_Z10
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011000100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__b_0_7d5186020056a223808828e9cc25bba0_Z11
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011000110101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__c_0_7d5186020056a223808828e9cc25bba0_Z12
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011001000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__d_0_7d5186020056a223808828e9cc25bba0_Z13
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011001010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__e_0_7d5186020056a223808828e9cc25bba0_Z14
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011001100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__f_0_7d5186020056a223808828e9cc25bba0_Z15
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=384'b010111110101111101111000011011010111001001011111011101000110000101100111010111110101111100110001001100000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__10_0_7d5186020056a223808828e9cc25bba0_Z16
+
+@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":9:7:9:9|Synthesizing module top in library work.
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__1_0_7d5186020056a223808828e9cc25bba0_5s_1_Z17
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__2_0_7d5186020056a223808828e9cc25bba0_5s_1_Z18
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100110101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__3_0_7d5186020056a223808828e9cc25bba0_5s_1_Z19
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__4_0_7d5186020056a223808828e9cc25bba0_5s_1_Z20
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__5_0_7d5186020056a223808828e9cc25bba0_5s_1_Z21
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__6_0_7d5186020056a223808828e9cc25bba0_5s_1_Z22
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101110101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__7_0_7d5186020056a223808828e9cc25bba0_5s_1_Z23
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001110000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__8_0_7d5186020056a223808828e9cc25bba0_5s_1_Z24
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001110010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__9_0_7d5186020056a223808828e9cc25bba0_5s_1_Z25
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011000010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__a_0_7d5186020056a223808828e9cc25bba0_5s_1_Z26
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011000100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__b_0_7d5186020056a223808828e9cc25bba0_5s_1_Z27
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011000110101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__c_0_7d5186020056a223808828e9cc25bba0_5s_1_Z28
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011001000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__d_0_7d5186020056a223808828e9cc25bba0_5s_1_Z29
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011001010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__e_0_7d5186020056a223808828e9cc25bba0_5s_1_Z30
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111011001100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__f_0_7d5186020056a223808828e9cc25bba0_5s_1_Z31
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=384'b010111110101111101111000011011010111001001011111011101000110000101100111010111110101111100110001001100000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__10_0_7d5186020056a223808828e9cc25bba0_5s_1_Z32
+
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register a[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register b[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register y[2:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register op[4:0]. Make sure that there are no unused intermediate registers.
+@W: CL169 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":63:2:63:7|Pruning unused register params[3:0]. Make sure that there are no unused intermediate registers.
+@N: CL201 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v":30:2:30:7|Trying to extract state machine for register TXstate.
+@N: CL201 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v":66:2:66:7|Trying to extract state machine for register RXstate.
+
+At c_ver Exit (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 80MB peak: 96MB)
 
 Process took 0h:00m:01s realtime, 0h:00m:01s cputime
 
 Process completed successfully.
-# Fri Aug 14 14:00:17 2020
+# Sat Aug 15 12:48:40 2020
 
 ###########################################################]
 Synopsys Netlist Linker, version comp2016q3p1, Build 141R, built Dec  5 2016
 @N|Running in 64-bit mode
-@N: NF107 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v":9:7:9:9|Selected library: work cell: top view verilog as top level
-@N: NF107 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\verilog\top.v":9:7:9:9|Selected library: work cell: top view verilog as top level
+@N: NF107 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":9:7:9:9|Selected library: work cell: top view verilog as top level
+@N: NF107 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":9:7:9:9|Selected library: work cell: top view verilog as top level
 
-At syn_nfilter Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 67MB peak: 68MB)
+At syn_nfilter Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 68MB peak: 69MB)
 
 Process took 0h:00m:01s realtime, 0h:00m:01s cputime
 
 Process completed successfully.
-# Fri Aug 14 14:00:17 2020
+# Sat Aug 15 12:48:40 2020
 
 ###########################################################]
 @END
 
-At c_hdl Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 3MB peak: 4MB)
+At c_hdl Exit (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 3MB peak: 4MB)
 
 Process took 0h:00m:01s realtime, 0h:00m:01s cputime
 
 Process completed successfully.
-# Fri Aug 14 14:00:17 2020
+# Sat Aug 15 12:48:41 2020
 
 ###########################################################]

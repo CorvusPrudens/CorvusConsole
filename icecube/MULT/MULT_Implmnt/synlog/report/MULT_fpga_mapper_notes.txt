@@ -1,15 +1,21 @@
 @N: MF248 |Running in 64-bit mode.
 @N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
 @N: MT206 |Auto Constrain mode is enabled
-@N: MO231 :"d:\linuxenv\cygwin\home\corvus\testbenches\mult\verilog\top.v":60:2:60:7|Found counter in view:work.top(verilog) instance clkdiv[23:0] 
-@N: MF180 :"d:\linuxenv\cygwin\home\corvus\testbenches\mult\verilog\alu.v":18:16:18:19|Generating type mult multiplier 
-@N: FX271 :"d:\linuxenv\cygwin\home\corvus\testbenches\mult\verilog\uart.v":30:2:30:7|Replicating instance FTDI.TXstate[3] (in view: work.top(verilog)) with 16 loads 1 time to improve timing.
-@N: FX271 :"d:\linuxenv\cygwin\home\corvus\testbenches\mult\verilog\top.v":60:2:60:7|Replicating instance a[2] (in view: work.top(verilog)) with 16 loads 2 times to improve timing.
-@N: FX271 :"d:\linuxenv\cygwin\home\corvus\testbenches\mult\verilog\top.v":60:2:60:7|Replicating instance a[4] (in view: work.top(verilog)) with 14 loads 1 time to improve timing.
-@N: FX271 :"d:\linuxenv\cygwin\home\corvus\testbenches\mult\verilog\top.v":60:2:60:7|Replicating instance a[10] (in view: work.top(verilog)) with 8 loads 1 time to improve timing.
-@N: FX1016 :"d:\linuxenv\cygwin\home\corvus\testbenches\mult\verilog\top.v":10:15:10:17|SB_GB_IO inserted on the port CLK.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXstate[3:0] (in view: work.uart(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance gap[2:0] (in view: work.uart(verilog)) of type view:PrimLib.sdffr(prim) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[7:0] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: MO231 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Found counter in view:work.top(verilog) instance clkdiv[23:0] 
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|Removing sequential instance ALU.overflow (in view: work.top(verilog)) because it does not drive other instances.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[2] (in view: work.top(verilog)) with 62 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[2] (in view: work.top(verilog)) with 56 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[0] (in view: work.top(verilog)) with 40 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[0] (in view: work.top(verilog)) with 44 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[1] (in view: work.top(verilog)) with 76 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[1] (in view: work.top(verilog)) with 32 loads 3 times to improve timing.
+@N: FX1016 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":10:15:10:17|SB_GB_IO inserted on the port CLK.
+@N: FX1017 :|SB_GB inserted on the net params5.
 @N: BW103 |The default time unit for the Synopsys Constraint File (SDC or FDC) is 1ns.
 @N: BW107 |Synopsys Constraint File capacitance units using default value of 1pF 
-@N: FX1056 |Writing EDF file: D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\icecube\MULT\MULT_Implmnt\MULT.edf
+@N: FX1056 |Writing EDF file: C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.edf
 @N: MT320 |This timing report is an estimate of place and route data. For final timing results, use the FPGA vendor place and route report.
 @N: MT322 |Clock constraints include only register-to-register paths associated with each individual clock.
