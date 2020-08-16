@@ -39,20 +39,24 @@ module top(
     );
 
   // ALU
+  reg [15:0] din;
+  wire [15:0] dout;
   reg [2:0] a = 3'b000; // temporary hack for a SEC!!!!
   reg [2:0] b = 3'b001;
   reg [2:0] y = 0;
-  reg [5:0] op = 6'h0;
+  reg [5:0] operation = 6'h0;
   reg [3:0] params = 4'h0;
   //wire [15:0] res;
   wire overflow;
 
   alu ALU(
       .CLK(CLK),
-      .aindex(a),
-      .bindex(b),
-      .yindex(y),
-      .op(op),
+      .din(din),
+      .dout(dout),
+      .operandIndex1(a),
+      .operandIndex2(b),
+      .resultsIndex(y),
+      .operation(operation),
       .params(params),
       .overflow(overflow)
     );
@@ -71,7 +75,7 @@ module top(
     //   b <= b + 1'b1;
     //   y <= y + 1'b1;
     //   TXstart <= 1'b1;
-    //   op <= op + 1'b1;
+    //   operation <= operation + 1'b1;
     //   case (clkdiv[7:4]) // forcing icecube to synthesize
     //     4'd0: TXbuffer <= ALU.r0[7:0];
     //     4'd1: TXbuffer <= ALU.r1[7:0];
@@ -98,7 +102,7 @@ module top(
         begin
           TXstart <= 1'b0;
           if (RXready) begin
-            op <= RXbuffer[5:0];
+            operation <= RXbuffer[5:0];
             testState <= 4'd8;
           end
         end
@@ -106,13 +110,34 @@ module top(
         begin
           if (RXready) begin
             params <= RXbuffer[3:0];
+            testState <= 4'd9;
+          end
+        end
+      4'd9:
+        begin
+          if (RXready) begin
+            a <= RXbuffer[2:0];
+            testState <= 4'd10;
+          end
+        end
+      4'd10:
+        begin
+          if (RXready) begin
+            b <= RXbuffer[2:0];
+            testState <= 4'd11;
+          end
+        end
+      4'd11:
+        begin
+          if (RXready) begin
+            y <= RXbuffer[2:0];
             testState <= 4'd1;
           end
         end
       4'd1:
         begin
           if (RXready) begin
-            ALU.r0[7:0] <= RXbuffer;
+            ALU.a[7:0] <= RXbuffer;
             testState <= 4'd2;
           end
         end
@@ -135,13 +160,13 @@ module top(
           if (RXready) begin
             ALU.r1[15:8] <= RXbuffer;
             testState <= 4'd5;
-            op[5] <= 1'b1;
+            operation[5] <= 1'b1;
           end
         end
       4'd5:
         begin
           if (~TXbusy) begin
-            op[5] <= 1'b0;
+            operation[5] <= 1'b0;
             TXbuffer <= ALU.r0[7:0];
             TXstart <= 1'b1;
             testState <= 4'd6;

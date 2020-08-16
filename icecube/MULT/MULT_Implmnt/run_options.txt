@@ -1,7 +1,7 @@
 #--  Synopsys, Inc.
 #--  Version L-2016.09L+ice40
 #--  Project file C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\run_options.txt
-#--  Written on Sat Aug 15 12:48:38 2020
+#--  Written on Sat Aug 15 16:02:09 2020
 
 
 #project files

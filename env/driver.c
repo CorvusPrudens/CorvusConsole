@@ -92,6 +92,17 @@ int exponent(int input) {
   return (int)log2(input);
 }
 
+int charToIndex(char input, char* chars, int len){
+  int ret = 0;
+  for (int i = 0; i < len; i++){
+    if (input == chars[i]){
+      ret = i;
+      break;
+    }
+  }
+  return ret;
+}
+
 int main(int argc, char** argv) {
   Verilated::commandArgs(argc, argv);
   Verilated::traceEverOn(true);
@@ -105,6 +116,7 @@ int main(int argc, char** argv) {
   unsigned logicStep = 0;
   int prevVal = 0;
   int input = 0;
+  char inputChar;
 
   int testState = 0;
 
@@ -119,7 +131,7 @@ int main(int argc, char** argv) {
   //
   // }
   int out = 0;
-  int data[7] = {0};
+  int data[9] = {0};
   int inbuff[20] = {0};
   int innum = 0;
 
@@ -135,20 +147,43 @@ int main(int argc, char** argv) {
     "register >> param\n"
   };
 
+  char registers[8] = {
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h'
+  };
+
   printf("Opertion param\n");
   printf("%s", strs[exponent(data[0])]);
   scanf("%d", &input);
   data[1] = input & 255;
 
+  printf("Operand 1\n");
+  scanf("%s", &inputChar);
+  data[2] = charToIndex(inputChar, registers, 8);
+
+  printf("Operand 2\n");
+  scanf("%s", &inputChar);
+  data[3] = charToIndex(inputChar, registers, 8);
+
+  printf("Results register\n");
+  scanf("%s", &inputChar);
+  data[4] = charToIndex(inputChar, registers, 8);
+
   printf("Value 1\n");
   scanf("%d", &input);
-  data[2] = input & 255;
-  data[3] = input >> 8;
+  data[5] = input & 255;
+  data[6] = input >> 8;
 
   printf("Value 2\n");
   scanf("%d", &input);
-  data[4] = input & 255;
-  data[5] = input >> 8;
+  data[7] = input & 255;
+  data[8] = input >> 8;
 
   int sendState = 0;
   int go = 1;
