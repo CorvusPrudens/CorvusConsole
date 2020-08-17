@@ -3,13 +3,14 @@
 module alu(
     input wire CLK,
 
+    input wire readBus,
     input wire  [15:0] din,
     output wire [15:0] dout,
 
     input wire [2:0] operandIndex1,
     input wire [2:0] operandIndex2,
     input wire [2:0] resultsIndex,
-    input wire [6:0] operation,
+    input wire [5:0] operation,
     input wire [3:0] params,
 
     output reg overflow = 0
@@ -113,7 +114,7 @@ module alu(
   assign mult = operand1*operand2;
 
   always @(negedge CLK) begin
-    if (operation[6]) begin
+    if (operation[5]) begin
       if (operation[0]) begin
         case (resultsIndex)
           3'd0: a <= addsub[15:0];
@@ -171,7 +172,7 @@ module alu(
           3'd6: g <= rshift;
           3'd7: h <= rshift;
         endcase
-      end else if (operation[5]) begin
+      end else if (readBus) begin
         case (resultsIndex)
           3'd0: a <= din;
           3'd1: b <= din;

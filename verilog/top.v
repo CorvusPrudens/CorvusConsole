@@ -38,10 +38,64 @@ module top(
       .TXbusy(TXbusy)
     );
 
+
+  /* The typical bus setup will look like this:
+  reg [3:0] busState = 4'h0;
+
+  reg [15:0] bus = 16'h00;
+  wire [15:0] instanceOut;
+
+  mod instance(
+    .busIn(bus),
+    .busOut(instanceOut)
+  )
+
+  always @(*) begin
+    case (busState)
+      4'h0: bus = instanceOut;
+      4'h1: bus = instanceOut;
+      4'h2: bus = instanceOut;
+      4'h3: bus = instanceOut;
+      etc...
+    endcase
+  end
+  */
+
+  // bus
+  // any gpio and such should be memory mapped
+  wire [15:0] aluOut; // these are all the modules
+  wire [15:0] ramOut; // i'll need to design
+  wire [15:0] romOut;
+  wire [15:0] gpuOut;
+  wire [15:0] apuOut;
+  wire [15:0] ctrlOut;
+  wire [15:0] clkOut;
+
+  reg [3:0] busState = 4'h8;
+  reg [15:0] bus = 16'h00;
+
+  always @(*) begin
+    case (busState)
+      4'h0: bus = 16'h00;
+      4'h1: bus = aluOut;
+      4'h2: bus = ramOut;
+      4'h3: bus = romOut;
+      4'h4: bus = gpuOut;
+      4'h5: bus = apuOut;
+      4'h6: bus = ctrlOut;
+      4'h7: bus = clkOut;
+      4'h8: bus = RXbuffer; // for debug! (?)
+      default: bus = 16'h00;
+    endcase
+  end
+
+
+
   // ALU
+  reg aluRead = 1'b0;
   reg [15:0] din;
   wire [15:0] dout;
-  reg [2:0] a = 3'b000; // temporary hack for a SEC!!!!
+  reg [2:0] a = 3'b000;
   reg [2:0] b = 3'b001;
   reg [2:0] y = 0;
   reg [5:0] operation = 6'h0;
@@ -51,8 +105,9 @@ module top(
 
   alu ALU(
       .CLK(CLK),
-      .din(din),
-      .dout(dout),
+      .readBus(aluRead),
+      .din(bus),
+      .dout(ramOut),
       .operandIndex1(a),
       .operandIndex2(b),
       .resultsIndex(y),
