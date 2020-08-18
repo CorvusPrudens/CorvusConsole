@@ -3,6 +3,7 @@
 module alu(
     input wire CLK,
 
+    input wire immediate,
     input wire readBus,
     input wire  [15:0] din,
     output wire [15:0] dout,
@@ -34,7 +35,9 @@ module alu(
   reg [15:0] rshift;  // overflow unreliable
 
   reg [15:0] operand1 = 16'b0;
-  reg [15:0] operand2 = 16'b0;
+  reg [15:0] combOperand2 = 16'b0;
+
+  wire [15:0] combOperand2 = readBus ? din : combOperand2;
 
   always @(*) begin
     case (operandIndex1)
@@ -50,15 +53,16 @@ module alu(
   end
 
   always @(*) begin
+    if (immediate)
     case (operandIndex2)
-      3'd0: operand2 = a;
-      3'd1: operand2 = b;
-      3'd2: operand2 = c;
-      3'd3: operand2 = d;
-      3'd4: operand2 = e;
-      3'd5: operand2 = f;
-      3'd6: operand2 = g;
-      3'd7: operand2 = h;
+      3'd0: combOperand2 = a;
+      3'd1: combOperand2 = b;
+      3'd2: combOperand2 = c;
+      3'd3: combOperand2 = d;
+      3'd4: combOperand2 = e;
+      3'd5: combOperand2 = f;
+      3'd6: combOperand2 = g;
+      3'd7: combOperand2 = h;
     endcase
   end
 
@@ -108,12 +112,12 @@ module alu(
   assign dout = operand1;
   // 0 = AND, 1 = OR, 2 = XOR, 3 = NOT
   assign log = params[1] & params[0] ? ~operand1 : params[1] ?
-               operand1 ^ operand2 : params[0] ? operand1 | operand2 : operand1 & operand2;
-  // assign log = operation[0] ? operand1 | operand2 : operation[1] ? operand1 ^ operand2 : operand1 & operand2;
-  assign addsub = params[0] ? operand1 - operand2 : operand1 + operand2;
-  assign mult = operand1*operand2;
+               operand1 ^ combOperand2 : params[0] ? operand1 | combOperand2 : operand1 & combOperand2;
+  // assign log = operation[0] ? operand1 | combOperand2 : operation[1] ? operand1 ^ combOperand2 : operand1 & combOperand2;
+  assign addsub = params[0] ? operand1 - combOperand2 : operand1 + combOperand2;
+  assign mult = operand1*combOperand2;
 
-  always @(negedge CLK) begin
+  always @(posedge CLK) begin
     if (operation[5]) begin
       if (operation[0]) begin
         case (resultsIndex)

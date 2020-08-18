@@ -5,6 +5,8 @@
 
 `include "uart.v"
 `include "alu.v"
+`include "ram.v"
+`include "control.v"
 
 module top(
     input wire CLK,
@@ -61,6 +63,42 @@ module top(
   end
   */
 
+  // Control
+  wire [3:0] busState;
+
+  wire [2:0] aluOperand1;
+  wire [2:0] aluOperand2;
+  wire [2:0] aluResults;
+  wire [5:0] aluOperation;
+  wire [3:0] aluParams;
+  wire aluReadBus;
+
+  wire ramWrite = 1'b0;
+  wire greg = ALU.g;
+  wire hreg;
+
+  wire [15:0] ramAddress;
+  wire [15:0] romAddress;
+  wire [15:0] ctrlOut;
+
+  control CONTROL(
+      .CLK(CLK),
+      .operand1(aluOperand1),
+      .operand2(aluOperand2),
+      .results(aluResults),
+      .aluOperation(aluOperation),
+      .aluParams(aluParams),
+      .busState(busState),
+      .aluReadBus(aluReadBus),
+      .ramWrite(ramWrite),
+      .greg(greg),
+      .hreg(hreg),
+      .ramAdd(ramAddress),
+      .romAdd(romAddress),
+      .dout(ctrlOut)
+    );
+
+
   // bus
   // any gpio and such should be memory mapped
   wire [15:0] aluOut; // these are all the modules
@@ -68,10 +106,7 @@ module top(
   wire [15:0] romOut;
   wire [15:0] gpuOut;
   wire [15:0] apuOut;
-  wire [15:0] ctrlOut;
   wire [15:0] clkOut;
-
-  reg [3:0] busState = 4'h8;
   reg [15:0] bus = 16'h00;
 
   always @(*) begin
@@ -89,10 +124,8 @@ module top(
     endcase
   end
 
-
-
   // ALU
-  reg aluRead = 1'b0;
+  reg aluReadBus = 1'b0;
   reg [15:0] din;
   wire [15:0] dout;
   reg [2:0] a = 3'b000;
@@ -105,14 +138,14 @@ module top(
 
   alu ALU(
       .CLK(CLK),
-      .readBus(aluRead),
+      .readBus(aluReadBus),
       .din(bus),
       .dout(ramOut),
-      .operandIndex1(a),
-      .operandIndex2(b),
-      .resultsIndex(y),
-      .operation(operation),
-      .params(params),
+      .operandIndex1(aluOperand1),
+      .operandIndex2(aluOperand2),
+      .resultsIndex(aluResults),
+      .operation(aluOperation),
+      .params(aluParams),
       .overflow(overflow)
     );
 
@@ -152,105 +185,105 @@ module top(
     //   // a <= 0;
     // end else TXstart <= 1'b0;
 
-    case (testState)
-      4'd0:
-        begin
-          TXstart <= 1'b0;
-          if (RXready) begin
-            operation <= RXbuffer[5:0];
-            testState <= 4'd8;
-          end
-        end
-      4'd8:
-        begin
-          if (RXready) begin
-            params <= RXbuffer[3:0];
-            testState <= 4'd9;
-          end
-        end
-      4'd9:
-        begin
-          if (RXready) begin
-            a <= RXbuffer[2:0];
-            testState <= 4'd10;
-          end
-        end
-      4'd10:
-        begin
-          if (RXready) begin
-            b <= RXbuffer[2:0];
-            testState <= 4'd11;
-          end
-        end
-      4'd11:
-        begin
-          if (RXready) begin
-            y <= RXbuffer[2:0];
-            testState <= 4'd1;
-          end
-        end
-      4'd1:
-        begin
-          if (RXready) begin
-            ALU.a[7:0] <= RXbuffer;
-            testState <= 4'd2;
-          end
-        end
-      4'd2:
-        begin
-          if (RXready) begin
-            ALU.r0[15:8] <= RXbuffer;
-            testState <= 4'd3;
-          end
-        end
-      4'd3:
-        begin
-          if (RXready) begin
-            ALU.r1[7:0] <= RXbuffer;
-            testState <= 4'd4;
-          end
-        end
-      4'd4:
-        begin
-          if (RXready) begin
-            ALU.r1[15:8] <= RXbuffer;
-            testState <= 4'd5;
-            operation[5] <= 1'b1;
-          end
-        end
-      4'd5:
-        begin
-          if (~TXbusy) begin
-            operation[5] <= 1'b0;
-            TXbuffer <= ALU.r0[7:0];
-            TXstart <= 1'b1;
-            testState <= 4'd6;
-          end
-        end
-      4'd6:
-        begin
-          TXstart <= 1'b0;
-          if (~TXbusy) begin
-            TXbuffer <= ALU.r0[15:8];
-            TXstart <= 1'b1;
-            testState <= 4'd7;
-          end
-        end
-      4'd7:
-        begin
-          TXstart <= 1'b0;
-          if (~TXbusy) begin
-            TXbuffer <= {7'd0, overflow};
-            TXstart <= 1'b1;
-            testState <= 4'd0;
-          end
-        end
-      default:
-        begin
-          TXstart <= 1'b0;
-          testState <= 4'd0;
-        end
-    endcase
+    // case (testState)
+    //   4'd0:
+    //     begin
+    //       TXstart <= 1'b0;
+    //       if (RXready) begin
+    //         operation <= RXbuffer[5:0];
+    //         testState <= 4'd8;
+    //       end
+    //     end
+    //   4'd8:
+    //     begin
+    //       if (RXready) begin
+    //         params <= RXbuffer[3:0];
+    //         testState <= 4'd9;
+    //       end
+    //     end
+    //   4'd9:
+    //     begin
+    //       if (RXready) begin
+    //         a <= RXbuffer[2:0];
+    //         testState <= 4'd10;
+    //       end
+    //     end
+    //   4'd10:
+    //     begin
+    //       if (RXready) begin
+    //         b <= RXbuffer[2:0];
+    //         testState <= 4'd11;
+    //       end
+    //     end
+    //   4'd11:
+    //     begin
+    //       if (RXready) begin
+    //         y <= RXbuffer[2:0];
+    //         testState <= 4'd1;
+    //       end
+    //     end
+    //   4'd1:
+    //     begin
+    //       if (RXready) begin
+    //         ALU.a[7:0] <= RXbuffer;
+    //         testState <= 4'd2;
+    //       end
+    //     end
+    //   4'd2:
+    //     begin
+    //       if (RXready) begin
+    //         ALU.r0[15:8] <= RXbuffer;
+    //         testState <= 4'd3;
+    //       end
+    //     end
+    //   4'd3:
+    //     begin
+    //       if (RXready) begin
+    //         ALU.r1[7:0] <= RXbuffer;
+    //         testState <= 4'd4;
+    //       end
+    //     end
+    //   4'd4:
+    //     begin
+    //       if (RXready) begin
+    //         ALU.r1[15:8] <= RXbuffer;
+    //         testState <= 4'd5;
+    //         operation[5] <= 1'b1;
+    //       end
+    //     end
+    //   4'd5:
+    //     begin
+    //       if (~TXbusy) begin
+    //         operation[5] <= 1'b0;
+    //         TXbuffer <= ALU.r0[7:0];
+    //         TXstart <= 1'b1;
+    //         testState <= 4'd6;
+    //       end
+    //     end
+    //   4'd6:
+    //     begin
+    //       TXstart <= 1'b0;
+    //       if (~TXbusy) begin
+    //         TXbuffer <= ALU.r0[15:8];
+    //         TXstart <= 1'b1;
+    //         testState <= 4'd7;
+    //       end
+    //     end
+    //   4'd7:
+    //     begin
+    //       TXstart <= 1'b0;
+    //       if (~TXbusy) begin
+    //         TXbuffer <= {7'd0, overflow};
+    //         TXstart <= 1'b1;
+    //         testState <= 4'd0;
+    //       end
+    //     end
+    //   default:
+    //     begin
+    //       TXstart <= 1'b0;
+    //       testState <= 4'd0;
+    //     end
+    // endcase
    end
 
   assign GPIO9 = 1'b1;

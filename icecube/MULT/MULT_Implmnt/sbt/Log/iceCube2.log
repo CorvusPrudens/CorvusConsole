@@ -5622,3 +5622,101 @@ Bitmap run-time: 5 (sec)
 bitmap succeed.
 Unrecognizable name top
 Ignore unconnected port:RX, when loading IO constraint.
+"C:\lscc\iCEcube2.2017.08\sbt_backend\bin\win32\opt\synpwrap\synpwrap.exe" -prj "MULT_syn.prj" -log "MULT_Implmnt/MULT.srr"
+starting Synthesisrunning SynthesisCopyright (C) 1992-2014 Lattice Semiconductor Corporation. All rights reserved.
+
+==contents of MULT_Implmnt/MULT.srr
+#Build: Synplify Pro L-2016.09L+ice40, Build 077R, Dec  2 2016
+#install: C:\lscc\iCEcube2.2017.08\synpbase
+#OS: Windows 8 6.2
+#Hostname: DESKTOP-C9SO7TB
+
+# Sat Aug 15 16:02:09 2020
+
+#Implementation: MULT_Implmnt
+
+Synopsys HDL Compiler, version comp2016q3p1, Build 141R, built Dec  5 2016
+@N|Running in 64-bit mode
+Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+Synopsys Verilog Compiler, version comp2016q3p1, Build 141R, built Dec  5 2016
+@N|Running in 64-bit mode
+Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\generic\sb_ice40.v" (library work)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v" (library __hyper__lib__)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\umr_capim.v" (library snps_haps)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\scemi_objects.v" (library snps_haps)
+@I::"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\scemi_pipes.svh" (library snps_haps)
+@I::"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v" (library work)
+@I:"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v" (library work)
+@I:"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\alu.v" (library work)
+Verilog syntax check successful!
+File C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v changed - recompiling
+File C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\alu.v changed - recompiling
+Selecting top level module top
+@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v":5:7:5:10|Synthesizing module uart in library work.
+
+@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\alu.v":3:7:3:9|Synthesizing module alu in library work.
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__1_0_7d5186020056a223808828e9cc25bba0_5s_1_Z1
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__2_0_7d5186020056a223808828e9cc25bba0_5s_1_Z2
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001100110101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__3_0_7d5186020056a223808828e9cc25bba0_5s_1_Z3
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101000101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+	dflt=32'b00000000000000000000000000000101
+	mustconnect=1'b1
+   Generated name = syn_hyper_connect_8s___xmr_tag__4_0_7d5186020056a223808828e9cc25bba0_5s_1_Z4
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101010101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__5_0_7d5186020056a223808828e9cc25bba0_Z5
+
+@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+
+	w=32'b00000000000000000000000000001000
+	tag=376'b0101111101011111011110000110110101110010010111110111010001100001011001110101111101011111001101100101111100110000010111110011011101100100001101010011000100111000001101100011000000110010001100000011000000110101001101100110000100110010001100100011001100111000001100000011100000111000001100100011100001100101001110010110001101100011001100100011010101100010011000100110000100110000
+   Generated name = syn_hyper_source_8s___xmr_tag__6_0_7d5186020056a223808828e9cc25bba0_Z6
+
+@E: CS164 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":115:24:115:24|Expecting wire for output connection, found r0
+@E: CS164 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":115:24:115:24|Illegal or Unsupported Syntax within black box. Use: // synthesis translate_off {  unsupported Verilog } // synthesis translate_on 
+@E: CS164 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":115:24:115:24|Alternatively, set the builtin compiler directive IGNORE_VERILOG_BLACKBOX_GUTS in the Verilog tab of the UI or set `define IGNORE_VERILOG_BLACKBOX_GUTS in any Verilog file.
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+# Sat Aug 15 16:02:09 2020
+
+###########################################################]
+@END
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+# Sat Aug 15 16:02:10 2020
+
+###########################################################]
+
+
+Synthesis exit by 2.
+Synthesis failed.
+Synthesis batch mode runtime 2 seconds
