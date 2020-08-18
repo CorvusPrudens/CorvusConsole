@@ -1,11 +1,12 @@
 //verilator lint_off UNUSED
+//verilator lint_off UNDRIVEN
 
 `timescale 1ns/100ps
 `default_nettype none
 
 `include "uart.v"
 `include "alu.v"
-`include "ram.v"
+//`include "ram.v"
 `include "control.v"
 
 module top(
@@ -63,6 +64,10 @@ module top(
   end
   */
 
+  // debuggy stuff
+  reg [31:0] testWord = 32'b0;
+  reg testClock = 1'b1;
+
   // Control
   wire [3:0] busState;
 
@@ -74,15 +79,15 @@ module top(
   wire aluReadBus;
 
   wire ramWrite = 1'b0;
-  wire greg = ALU.g;
-  wire hreg;
+  wire [15:0] greg = ALU.g;
+  wire [15:0] hreg;
 
   wire [15:0] ramAddress;
   wire [15:0] romAddress;
   wire [15:0] ctrlOut;
 
   control CONTROL(
-      .CLK(CLK),
+      .CLK(testClock),
       .operand1(aluOperand1),
       .operand2(aluOperand2),
       .results(aluResults),
@@ -119,7 +124,7 @@ module top(
       4'h5: bus = apuOut;
       4'h6: bus = ctrlOut;
       4'h7: bus = clkOut;
-      4'h8: bus = RXbuffer; // for debug! (?)
+      4'h8: bus[7:0] = RXbuffer; // for debug! (?)
       default: bus = 16'h00;
     endcase
   end
@@ -137,10 +142,10 @@ module top(
   wire overflow;
 
   alu ALU(
-      .CLK(CLK),
+      .CLK(testClock),
       .readBus(aluReadBus),
       .din(bus),
-      .dout(ramOut),
+      .dout(aluOut),
       .operandIndex1(aluOperand1),
       .operandIndex2(aluOperand2),
       .resultsIndex(aluResults),
@@ -184,6 +189,59 @@ module top(
     //   endcase
     //   // a <= 0;
     // end else TXstart <= 1'b0;
+
+    case (testState)
+      4'h0:
+        begin
+          TXstart <= 1'b0;
+          if (RXready) begin
+            testWord[7:0] <= RXbuffer;
+            testState <= 4'h1;
+          end
+        end
+      4'h1:
+        begin
+          if (RXready) begin
+            testWord[15:8] <= RXbuffer;
+            testState <= 4'h2;
+          end
+        end
+      4'h2:
+        begin
+          if (RXready) begin
+            testWord[23:16] <= RXbuffer;
+            testState <= 4'h3;
+          end
+        end
+      4'h3:
+        begin
+          if (RXready) begin
+            testWord[31:24] <= RXbuffer;
+            testState <= 4'h4;
+          end
+        end
+      4'h4:
+        begin
+          testClock <= 1'b0;
+          testState <= 4'h5;
+        end
+      4'h5:
+        begin
+          testClock <= 1'b1;
+          testState <= 4'h6;
+        end
+      4'h6:
+        begin
+          TXbuffer <= ALU.a[7:0];
+          TXstart <= 1'b1;
+          testState <= 4'h0;
+        end
+      default:
+        begin
+          TXstart <= 1'b0;
+          testState <= 4'h0;
+        end
+    endcase
 
     // case (testState)
     //   4'd0:

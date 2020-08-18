@@ -3,7 +3,6 @@
 module alu(
     input wire CLK,
 
-    input wire immediate,
     input wire readBus,
     input wire  [15:0] din,
     output wire [15:0] dout,
@@ -18,14 +17,14 @@ module alu(
   );
 
   // verilator lint_off MULTIDRIVEN
-  reg [15:0] a = 16'h1;
-  reg [15:0] b = 16'h2;
-  reg [15:0] c = 16'h3;
-  reg [15:0] d = 16'h4;
-  reg [15:0] e = 16'h5;
-  reg [15:0] f = 16'h6;
-  reg [15:0] g = 16'h7;
-  reg [15:0] h = 16'h8;
+  reg [15:0] a = 16'h2;
+  reg [15:0] b = 16'h0;
+  reg [15:0] c = 16'h0;
+  reg [15:0] d = 16'h0;
+  reg [15:0] e = 16'h0;
+  reg [15:0] f = 16'h0;
+  reg [15:0] g = 16'h0;
+  reg [15:0] h = 16'h0;
   // verilator lint_on MULTIDRIVEN
 
   wire [16:0] addsub; // wire with overflow bit
@@ -35,9 +34,9 @@ module alu(
   reg [15:0] rshift;  // overflow unreliable
 
   reg [15:0] operand1 = 16'b0;
-  reg [15:0] combOperand2 = 16'b0;
+  reg [15:0] operand2 = 16'b0;
 
-  wire [15:0] combOperand2 = readBus ? din : combOperand2;
+  wire [15:0] combOperand2 = readBus ? din : operand2;
 
   always @(*) begin
     case (operandIndex1)
@@ -53,16 +52,15 @@ module alu(
   end
 
   always @(*) begin
-    if (immediate)
     case (operandIndex2)
-      3'd0: combOperand2 = a;
-      3'd1: combOperand2 = b;
-      3'd2: combOperand2 = c;
-      3'd3: combOperand2 = d;
-      3'd4: combOperand2 = e;
-      3'd5: combOperand2 = f;
-      3'd6: combOperand2 = g;
-      3'd7: combOperand2 = h;
+      3'd0: operand2 = a;
+      3'd1: operand2 = b;
+      3'd2: operand2 = c;
+      3'd3: operand2 = d;
+      3'd4: operand2 = e;
+      3'd5: operand2 = f;
+      3'd6: operand2 = g;
+      3'd7: operand2 = h;
     endcase
   end
 
