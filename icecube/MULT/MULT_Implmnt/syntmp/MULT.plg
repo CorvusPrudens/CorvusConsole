@@ -1,12 +1,12 @@
-@P:  Worst Slack : -3.856
-@P:  top|CLK - Estimated Frequency : 38.9 MHz
-@P:  top|CLK - Requested Frequency : 45.8 MHz
-@P:  top|CLK - Estimated Period : 25.703
-@P:  top|CLK - Requested Period : 21.848
-@P:  top|CLK - Slack : -3.856
+@P:  Worst Slack : -3.920
+@P:  top|CLK - Estimated Frequency : 38.3 MHz
+@P:  top|CLK - Requested Frequency : 45.0 MHz
+@P:  top|CLK - Estimated Period : 26.131
+@P:  top|CLK - Requested Period : 22.211
+@P:  top|CLK - Slack : -3.920
 @P: top Part : ice40hx8kct256
-@P: top I/O primitives : 5
+@P: top I/O primitives : 6
 @P: top I/O Register bits : 0
-@P: top Register bits (Non I/O) : 212 (2%)
-@P: top Total Luts : 1167 (15%)
-@P:  CPU Time : 0h:00m:07s
+@P: top Register bits (Non I/O) : 265 (3%)
+@P: top Total Luts : 1086 (14%)
+@P:  CPU Time : 0h:00m:08s

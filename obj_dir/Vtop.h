@@ -56,6 +56,7 @@ VL_MODULE(Vtop) {
     CData/*2:0*/ top__DOT__FTDI__DOT__gap;
     CData/*0:0*/ top__DOT__FTDI__DOT__nextBit;
     CData/*0:0*/ top__DOT__CONTROL__DOT__increment;
+    CData/*0:0*/ top__DOT__CONTROL__DOT__ramAddMode;
     SData/*15:0*/ top__DOT__hreg;
     SData/*15:0*/ top__DOT__romAddress;
     SData/*15:0*/ top__DOT__ramOut;
@@ -88,6 +89,7 @@ VL_MODULE(Vtop) {
     
     // LOCAL VARIABLES
     // Internals; generally not touched by application code
+    CData/*3:0*/ __Vdly__top__DOT__testState;
     CData/*0:0*/ __VinpClk__TOP__top__DOT__testClock;
     CData/*0:0*/ __Vclklast__TOP__CLK;
     CData/*0:0*/ __Vclklast__TOP____VinpClk__TOP__top__DOT__testClock;
@@ -141,13 +143,15 @@ VL_MODULE(Vtop) {
     static void _eval_initial(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _eval_settle(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _initial__TOP__1(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _multiclk__TOP__7(Vtop__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__8(Vtop__Syms* __restrict vlSymsp);
+    static void _multiclk__TOP__10(Vtop__Syms* __restrict vlSymsp);
+    static void _multiclk__TOP__9(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__2(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__3(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__4(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__5(Vtop__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__6(Vtop__Syms* __restrict vlSymsp);
-    static void _settle__TOP__4(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
+    static void _sequent__TOP__7(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__8(Vtop__Syms* __restrict vlSymsp);
+    static void _settle__TOP__6(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
   private:
     static void traceChgSub0(void* userp, VerilatedVcd* tracep);
     static void traceChgTop0(void* userp, VerilatedVcd* tracep);

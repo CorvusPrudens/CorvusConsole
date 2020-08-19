@@ -100,9 +100,9 @@ module top(
       .hreg(hreg),
       .ramAdd(ramAddress),
       .romAdd(romAddress),
-      .dout(ctrlOut)
+      .dout(ctrlOut),
+      .testWord(testWord)
     );
-
 
   // bus
   // any gpio and such should be memory mapped
@@ -130,7 +130,6 @@ module top(
   end
 
   // ALU
-  reg aluReadBus = 1'b0;
   reg [15:0] din;
   wire [15:0] dout;
   reg [2:0] a = 3'b000;

@@ -1,4 +1,4 @@
-# Sat Aug 15 12:48:43 2020
+# Tue Aug 18 14:54:49 2020
 
 Synopsys Lattice Technology Mapper, Version maplat, Build 1612R, Built Dec  5 2016 10:31:39
 Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
@@ -22,101 +22,142 @@ Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h
 
 
 
-Starting Optimization and Mapping (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 131MB peak: 133MB)
+Starting Optimization and Mapping (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 131MB peak: 134MB)
 
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_1 (in view: work.control(verilog)) on net romAdd_1 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_2 (in view: work.control(verilog)) on net romAdd_2 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_3 (in view: work.control(verilog)) on net romAdd_3 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_4 (in view: work.control(verilog)) on net romAdd_4 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_5 (in view: work.control(verilog)) on net romAdd_5 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_6 (in view: work.control(verilog)) on net romAdd_6 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_7 (in view: work.control(verilog)) on net romAdd_7 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_8 (in view: work.control(verilog)) on net romAdd_8 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_9 (in view: work.control(verilog)) on net romAdd_9 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_10 (in view: work.control(verilog)) on net romAdd_10 (in view: work.control(verilog)) has its enable tied to GND.
 
 Available hyper_sources - for debug and ip models
 	None Found
 
 @N: MT206 |Auto Constrain mode is enabled
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXstate[3:0] (in view: work.uart(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance gap[2:0] (in view: work.uart(verilog)) of type view:PrimLib.sdffr(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[7:0] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@A: BN291 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Boundary register RXbuffer[7:0] (in view: work.uart(verilog)) is packed into a complex cell. To disable register packing, set syn_keep=1 on the net between the register and the complex cell. 
+@W: FA239 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|ROM busState_2[2:0] (in view: work.control(verilog)) mapped in logic. To map to a technology ROM, apply attribute syn_romstyle on this instance.
+@W: FA239 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|ROM aluReadBus_2 (in view: work.control(verilog)) mapped in logic. To map to a technology ROM, apply attribute syn_romstyle on this instance.
+@W: FA239 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|ROM busState_2[2:0] (in view: work.control(verilog)) mapped in logic. To map to a technology ROM, apply attribute syn_romstyle on this instance.
+@N: MO106 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|Found ROM .delname. (in view: work.control(verilog)) with 19 words by 3 bits.
+@W: FA239 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|ROM aluReadBus_2 (in view: work.control(verilog)) mapped in logic. To map to a technology ROM, apply attribute syn_romstyle on this instance.
+@N: MO106 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|Found ROM .delname. (in view: work.control(verilog)) with 19 words by 1 bit.
 @W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|User-specified initial value defined for instance FTDI.TXstate[3:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|User-specified initial value defined for instance FTDI.RXstate[3:0] is being ignored. 
 @W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|User-specified initial value defined for instance FTDI.TXshift[7:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|User-specified initial value defined for instance FTDI.RXready is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|User-specified initial value defined for instance FTDI.gap[2:0] is being ignored. 
 @W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|User-specified initial value defined for instance FTDI.baudAcc[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.overflow is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.r7[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.r6[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.r5[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.r4[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.r3[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.r2[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.r1[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|User-specified initial value defined for instance ALU.r0[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|User-specified initial value defined for instance clkdiv[23:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|User-specified initial value defined for instance TXbuffer[7:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|User-specified initial value defined for instance params[3:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|User-specified initial value defined for instance op[4:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|User-specified initial value defined for instance y[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|User-specified initial value defined for instance b[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|User-specified initial value defined for instance a[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|User-specified initial value defined for instance TXstart is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|User-specified initial value defined for instance FTDI.RXbuffer[7:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.aluParams[3:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.results[2:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.operand1[2:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.aluOperation[5:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.operand2[2:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.busState_1[2:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.aluReadBus is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.overflow is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.h[15:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.g[15:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.f[15:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.e[15:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.d[15:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.c[15:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.b[15:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.a[15:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance testState[2:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[15] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[14] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[13] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[12] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[11] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[10] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[9] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[8] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance clkdiv[23:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance TXstart is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance testWord[31:0] is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance testClock is being ignored. 
+@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance TXbuffer[7:0] is being ignored. 
 
-Finished RTL optimizations (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 131MB peak: 133MB)
+Finished RTL optimizations (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 132MB peak: 134MB)
 
-@N: MO231 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Found counter in view:work.top(verilog) instance clkdiv[23:0] 
+@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[8] is reduced to a combinational gate by constant propagation.
+@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[9] is reduced to a combinational gate by constant propagation.
+@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[10] is reduced to a combinational gate by constant propagation.
+@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[11] is reduced to a combinational gate by constant propagation.
+@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[12] is reduced to a combinational gate by constant propagation.
+@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[13] is reduced to a combinational gate by constant propagation.
+@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[14] is reduced to a combinational gate by constant propagation.
+@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[15] is reduced to a combinational gate by constant propagation.
+@N: MO231 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|Found counter in view:work.top(verilog) instance clkdiv[23:0] 
 
-Starting factoring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 132MB peak: 133MB)
-
-
-Finished factoring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 136MB peak: 137MB)
-
-
-Finished gated-clock and generated-clock conversion (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 134MB peak: 138MB)
-
-
-Finished generic timing optimizations - Pass 1 (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 139MB peak: 140MB)
-
-
-Starting Early Timing Optimization (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 140MB)
+Starting factoring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 133MB peak: 134MB)
 
 
-Finished Early Timing Optimization (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 140MB peak: 140MB)
+Finished factoring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 141MB peak: 142MB)
+
+@W: BN132 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Removing instance CONTROL.busState_1[1] because it is equivalent to instance CONTROL.aluReadBus. To keep the instance, apply constraint syn_preserve=1 on the instance.
+
+Finished gated-clock and generated-clock conversion (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 137MB peak: 142MB)
 
 
-Finished generic timing optimizations - Pass 2 (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 139MB peak: 141MB)
-
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|Removing sequential instance ALU.overflow (in view: work.top(verilog)) because it does not drive other instances.
-
-Finished preparing to map (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 140MB peak: 141MB)
+Finished generic timing optimizations - Pass 1 (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 139MB peak: 144MB)
 
 
-Finished technology mapping (Real Time elapsed 0h:00m:03s; CPU Time elapsed 0h:00m:03s; Memory used current: 175MB peak: 177MB)
+Starting Early Timing Optimization (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 140MB peak: 144MB)
+
+
+Finished Early Timing Optimization (Real Time elapsed 0h:00m:02s; CPU Time elapsed 0h:00m:02s; Memory used current: 142MB peak: 144MB)
+
+
+Finished generic timing optimizations - Pass 2 (Real Time elapsed 0h:00m:02s; CPU Time elapsed 0h:00m:02s; Memory used current: 142MB peak: 144MB)
+
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|Removing sequential instance testWord[6] (in view: work.top(verilog)) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|Removing sequential instance testWord[0] (in view: work.top(verilog)) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|Removing sequential instance ALU.overflow (in view: work.top(verilog)) because it does not drive other instances.
+
+Finished preparing to map (Real Time elapsed 0h:00m:02s; CPU Time elapsed 0h:00m:02s; Memory used current: 142MB peak: 144MB)
+
+
+Finished technology mapping (Real Time elapsed 0h:00m:04s; CPU Time elapsed 0h:00m:04s; Memory used current: 166MB peak: 188MB)
 
 Pass		 CPU time		Worst Slack		Luts / Registers
 ------------------------------------------------------------
-   1		0h:00m:03s		    -6.49ns		1217 /       194
-   2		0h:00m:03s		    -6.49ns		1085 /       194
-   3		0h:00m:03s		    -5.09ns		1084 /       194
-   4		0h:00m:03s		    -5.09ns		1084 /       194
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[2] (in view: work.top(verilog)) with 62 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[2] (in view: work.top(verilog)) with 56 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[0] (in view: work.top(verilog)) with 40 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[0] (in view: work.top(verilog)) with 44 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[1] (in view: work.top(verilog)) with 76 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[1] (in view: work.top(verilog)) with 32 loads 3 times to improve timing.
+   1		0h:00m:04s		    -6.44ns		1100 /       248
+   2		0h:00m:04s		    -6.44ns		1001 /       248
+   3		0h:00m:04s		    -6.44ns		1001 /       248
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand2[2] (in view: work.top(verilog)) with 71 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand1[1] (in view: work.top(verilog)) with 62 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand1[2] (in view: work.top(verilog)) with 35 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand2[0] (in view: work.top(verilog)) with 35 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.aluReadBus (in view: work.top(verilog)) with 121 loads 3 times to improve timing.
 Timing driven replication report
-Added 18 Registers via timing driven replication
-Added 18 LUTs via timing driven replication
+Added 15 Registers via timing driven replication
+Added 15 LUTs via timing driven replication
 
-   5		0h:00m:04s		    -5.09ns		1132 /       212
-   6		0h:00m:05s		    -5.09ns		1133 /       212
-
-
-   7		0h:00m:05s		    -5.09ns		1136 /       212
-   8		0h:00m:05s		    -5.09ns		1137 /       212
-Re-levelizing using alternate method
-Assigned 0 out of 1747 signals to level zero using alternate method
-@N: FX1016 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":10:15:10:17|SB_GB_IO inserted on the port CLK.
-@N: FX1017 :|SB_GB inserted on the net params5.
-
-Finished technology timing optimizations and critical path resynthesis (Real Time elapsed 0h:00m:06s; CPU Time elapsed 0h:00m:05s; Memory used current: 162MB peak: 193MB)
+   4		0h:00m:06s		    -6.44ns		1073 /       263
+   5		0h:00m:06s		    -6.44ns		1071 /       263
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand2[1] (in view: work.top(verilog)) with 31 loads 2 times to improve timing.
+Timing driven replication report
+Added 2 Registers via timing driven replication
+Added 2 LUTs via timing driven replication
 
 
-Finished restoring hierarchy (Real Time elapsed 0h:00m:06s; CPU Time elapsed 0h:00m:05s; Memory used current: 162MB peak: 193MB)
+   6		0h:00m:07s		    -6.44ns		1067 /       265
+   7		0h:00m:07s		    -6.44ns		1068 /       265
+@N: FX1016 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":13:15:13:17|SB_GB_IO inserted on the port CLK.
+@N: FX1017 :|SB_GB inserted on the net testState_i[2].
 
+Finished technology timing optimizations and critical path resynthesis (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:07s; Memory used current: 199MB peak: 201MB)
+
+
+Finished restoring hierarchy (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:07s; Memory used current: 200MB peak: 201MB)
+
+@N: MT611 :|Automatically generated clock top|testClock_derived_clock is not used and is being removed
 
 
 @S |Clock Optimization Summary
@@ -124,25 +165,25 @@ Finished restoring hierarchy (Real Time elapsed 0h:00m:06s; CPU Time elapsed 0h:
 
 #### START OF CLOCK OPTIMIZATION REPORT #####[
 
-1 non-gated/non-generated clock tree(s) driving 212 clock pin(s) of sequential element(s)
+1 non-gated/non-generated clock tree(s) driving 265 clock pin(s) of sequential element(s)
 0 gated/generated clock tree(s) driving 0 clock pin(s) of sequential element(s)
-0 instances converted, 0 sequential instances remain driven by gated/generated clocks
+167 instances converted, 0 sequential instances remain driven by gated/generated clocks
 
 =========================== Non-Gated/Non-Generated Clocks ============================
 Clock Tree ID     Driving Element     Drive Element Type     Fanout     Sample Instance
 ---------------------------------------------------------------------------------------
-@K:CKID0001       CLK_ibuf_gb_io      SB_GB_IO               212        b_2_rep1       
+@K:CKID0001       CLK_ibuf_gb_io      SB_GB_IO               265        testWord[10]   
 =======================================================================================
 
 
 ##### END OF CLOCK OPTIMIZATION REPORT ######]
 
 
-Start Writing Netlists (Real Time elapsed 0h:00m:06s; CPU Time elapsed 0h:00m:06s; Memory used current: 133MB peak: 193MB)
+Start Writing Netlists (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:07s; Memory used current: 171MB peak: 201MB)
 
 Writing Analyst data base C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synwork\MULT_m.srm
 
-Finished Writing Netlist Databases (Real Time elapsed 0h:00m:06s; CPU Time elapsed 0h:00m:06s; Memory used current: 160MB peak: 193MB)
+Finished Writing Netlist Databases (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:07s; Memory used current: 198MB peak: 201MB)
 
 Writing EDIF Netlist and constraint files
 @N: BW103 |The default time unit for the Synopsys Constraint File (SDC or FDC) is 1ns.
@@ -150,21 +191,21 @@ Writing EDIF Netlist and constraint files
 @N: FX1056 |Writing EDF file: C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.edf
 L-2016.09L+ice40
 
-Finished Writing EDIF Netlist and constraint files (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:06s; Memory used current: 161MB peak: 193MB)
+Finished Writing EDIF Netlist and constraint files (Real Time elapsed 0h:00m:08s; CPU Time elapsed 0h:00m:08s; Memory used current: 199MB peak: 201MB)
 
 
-Start final timing analysis (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:07s; Memory used current: 160MB peak: 193MB)
+Start final timing analysis (Real Time elapsed 0h:00m:08s; CPU Time elapsed 0h:00m:08s; Memory used current: 197MB peak: 201MB)
 
-@W: MT420 |Found inferred clock top|CLK with period 21.85ns. Please declare a user-defined clock on object "p:CLK"
+@W: MT420 |Found inferred clock top|CLK with period 22.21ns. Please declare a user-defined clock on object "p:CLK"
 
 
 ##### START OF TIMING REPORT #####[
-# Timing Report written on Sat Aug 15 12:48:51 2020
+# Timing Report written on Tue Aug 18 14:54:58 2020
 #
 
 
 Top view:               top
-Requested Frequency:    45.8 MHz
+Requested Frequency:    45.0 MHz
 Wire load mode:         top
 Paths requested:        5
 Constraint File(s):    
@@ -178,12 +219,12 @@ Performance Summary
 *******************
 
 
-Worst slack in design: -3.856
+Worst slack in design: -3.920
 
                    Requested     Estimated     Requested     Estimated                Clock        Clock                
 Starting Clock     Frequency     Frequency     Period        Period        Slack      Type         Group                
 ------------------------------------------------------------------------------------------------------------------------
-top|CLK            45.8 MHz      38.9 MHz      21.848        25.703        -3.856     inferred     Autoconstr_clkgroup_0
+top|CLK            45.0 MHz      38.3 MHz      22.211        26.131        -3.920     inferred     Autoconstr_clkgroup_0
 ========================================================================================================================
 
 
@@ -197,7 +238,7 @@ Clocks             |    rise  to  rise    |    fall  to  fall    |    rise  to  
 -----------------------------------------------------------------------------------------------------------
 Starting  Ending   |  constraint  slack   |  constraint  slack   |  constraint  slack  |  constraint  slack
 -----------------------------------------------------------------------------------------------------------
-top|CLK   top|CLK  |  21.848      -3.856  |  21.848      14.057  |  10.924      6.773  |  No paths    -    
+top|CLK   top|CLK  |  22.211      -3.920  |  22.211      14.421  |  11.106      6.955  |  11.106      5.086
 ===========================================================================================================
  Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
        'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
@@ -220,41 +261,41 @@ Detailed Report for Clock: top|CLK
 Starting Points with Worst Slack
 ********************************
 
-              Starting                                        Arrival           
-Instance      Reference     Type        Pin     Net           Time        Slack 
-              Clock                                                             
---------------------------------------------------------------------------------
-b_fast[0]     top|CLK       SB_DFFE     Q       b_fast[0]     0.540       -3.856
-ALU.r0[1]     top|CLK       SB_DFFE     Q       r0[1]         0.540       -3.785
-ALU.r1[1]     top|CLK       SB_DFFE     Q       r1[1]         0.540       -3.757
-ALU.r4[1]     top|CLK       SB_DFFE     Q       r4[1]         0.540       -3.736
-ALU.r5[1]     top|CLK       SB_DFFE     Q       r5[1]         0.540       -3.715
-a_fast[0]     top|CLK       SB_DFFE     Q       a_fast[0]     0.540       -2.365
-a_0_rep1      top|CLK       SB_DFFE     Q       a_0_rep1      0.540       -2.316
-a_fast[2]     top|CLK       SB_DFFE     Q       a_fast[2]     0.540       -2.316
-ALU.r0[7]     top|CLK       SB_DFFE     Q       r0[7]         0.540       -2.295
-a_0_rep2      top|CLK       SB_DFFE     Q       a_0_rep2      0.540       -2.267
-================================================================================
+                             Starting                                                  Arrival           
+Instance                     Reference     Type        Pin     Net                     Time        Slack 
+                             Clock                                                                       
+---------------------------------------------------------------------------------------------------------
+ALU.e[0]                     top|CLK       SB_DFFE     Q       e[0]                    0.540       -3.920
+ALU.a[0]                     top|CLK       SB_DFFE     Q       a[0]                    0.540       -3.913
+ALU.c[0]                     top|CLK       SB_DFFE     Q       c[0]                    0.540       -3.913
+CONTROL.operand2_fast[2]     top|CLK       SB_DFF      Q       aluOperand2_fast[2]     0.540       -3.913
+ALU.e[1]                     top|CLK       SB_DFFE     Q       e[1]                    0.540       -3.899
+ALU.a[1]                     top|CLK       SB_DFFE     Q       a[1]                    0.540       -3.892
+ALU.c[1]                     top|CLK       SB_DFFE     Q       c[1]                    0.540       -3.892
+ALU.e[4]                     top|CLK       SB_DFFE     Q       e[4]                    0.540       -3.885
+ALU.a[4]                     top|CLK       SB_DFFE     Q       a[4]                    0.540       -3.878
+ALU.c[4]                     top|CLK       SB_DFFE     Q       c[4]                    0.540       -3.878
+=========================================================================================================
 
 
 Ending Points with Worst Slack
 ******************************
 
-               Starting                                        Required           
-Instance       Reference     Type        Pin     Net           Time         Slack 
-               Clock                                                              
-----------------------------------------------------------------------------------
-ALU.r0[14]     top|CLK       SB_DFFE     D       r0_12[14]     21.743       -3.856
-ALU.r1[14]     top|CLK       SB_DFFE     D       r0_12[14]     21.743       -3.856
-ALU.r2[14]     top|CLK       SB_DFFE     D       r0_12[14]     21.743       -3.856
-ALU.r3[14]     top|CLK       SB_DFFE     D       r0_12[14]     21.743       -3.856
-ALU.r4[14]     top|CLK       SB_DFFE     D       r0_12[14]     21.743       -3.856
-ALU.r5[14]     top|CLK       SB_DFFE     D       r0_12[14]     21.743       -3.856
-ALU.r6[14]     top|CLK       SB_DFFE     D       r0_12[14]     21.743       -3.856
-ALU.r7[14]     top|CLK       SB_DFFE     D       r0_12[14]     21.743       -3.856
-ALU.r0[13]     top|CLK       SB_DFFE     D       r0_12[13]     21.743       -3.715
-ALU.r1[13]     top|CLK       SB_DFFE     D       r0_12[13]     21.743       -3.715
-==================================================================================
+              Starting                                       Required           
+Instance      Reference     Type        Pin     Net          Time         Slack 
+              Clock                                                             
+--------------------------------------------------------------------------------
+ALU.a[15]     top|CLK       SB_DFFE     D       a_15[15]     22.106       -3.920
+ALU.b[15]     top|CLK       SB_DFFE     D       a_15[15]     22.106       -3.920
+ALU.c[15]     top|CLK       SB_DFFE     D       a_15[15]     22.106       -3.920
+ALU.d[15]     top|CLK       SB_DFFE     D       a_15[15]     22.106       -3.920
+ALU.e[15]     top|CLK       SB_DFFE     D       a_15[15]     22.106       -3.920
+ALU.f[15]     top|CLK       SB_DFFE     D       a_15[15]     22.106       -3.920
+ALU.g[15]     top|CLK       SB_DFFE     D       a_15[15]     22.106       -3.920
+ALU.h[15]     top|CLK       SB_DFFE     D       a_15[15]     22.106       -3.920
+ALU.a[14]     top|CLK       SB_DFFE     D       a_15[14]     22.106       -3.779
+ALU.b[14]     top|CLK       SB_DFFE     D       a_15[14]     22.106       -3.779
+================================================================================
 
 
 
@@ -263,377 +304,377 @@ Worst Path Information
 
 
 Path information for path number 1: 
-      Requested Period:                      21.848
+      Requested Period:                      22.211
     - Setup time:                            0.105
     + Clock delay at ending point:           0.000 (ideal)
-    = Required time:                         21.743
+    = Required time:                         22.106
 
-    - Propagation time:                      25.598
+    - Propagation time:                      26.026
     - Clock delay at starting point:         0.000 (ideal)
-    = Slack (critical) :                     -3.855
+    = Slack (critical) :                     -3.920
 
     Number of logic level(s):                16
-    Starting point:                          b_fast[0] / Q
-    Ending point:                            ALU.r0[14] / D
+    Starting point:                          ALU.e[0] / Q
+    Ending point:                            ALU.a[15] / D
     The start point is clocked by            top|CLK [rising] on pin C
     The end   point is clocked by            top|CLK [rising] on pin C
 
 Instance / Net                                      Pin      Pin               Arrival     No. of    
 Name                                   Type         Name     Dir     Delay     Time        Fan Out(s)
 -----------------------------------------------------------------------------------------------------
-b_fast[0]                              SB_DFFE      Q        Out     0.540     0.540       -         
-b_fast[0]                              Net          -        -       1.599     -           9         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      I0       In      -         2.139       -         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      O        Out     0.449     2.588       -         
-r0_RNIE5LH[1]                          Net          -        -       1.371     -           1         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      I0       In      -         3.959       -         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      O        Out     0.449     4.408       -         
-b_7_ns_1[1]                            Net          -        -       1.371     -           1         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      I0       In      -         5.779       -         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      O        Out     0.449     6.227       -         
-b[1]                                   Net          -        -       1.371     -           41        
-ALU.mult.g0_7_x1                       SB_LUT4      I2       In      -         7.598       -         
-ALU.mult.g0_7_x1                       SB_LUT4      O        Out     0.379     7.977       -         
-g0_7_x1                                Net          -        -       1.371     -           1         
-ALU.mult.g0_7_ns                       SB_LUT4      I2       In      -         9.348       -         
-ALU.mult.g0_7_ns                       SB_LUT4      O        Out     0.379     9.727       -         
-madd_76_1                              Net          -        -       1.371     -           1         
-ALU.mult.g2                            SB_LUT4      I2       In      -         11.098      -         
-ALU.mult.g2                            SB_LUT4      O        Out     0.379     11.477      -         
-g2_0                                   Net          -        -       1.371     -           1         
-ALU.mult.g0_2                          SB_LUT4      I3       In      -         12.848      -         
-ALU.mult.g0_2                          SB_LUT4      O        Out     0.316     13.163      -         
-madd_186_0                             Net          -        -       1.371     -           2         
-ALU.mult.madd_239                      SB_LUT4      I1       In      -         14.534      -         
-ALU.mult.madd_239                      SB_LUT4      O        Out     0.400     14.934      -         
-madd_239                               Net          -        -       1.371     -           3         
-ALU.mult.g0_3                          SB_LUT4      I3       In      -         16.305      -         
-ALU.mult.g0_3                          SB_LUT4      O        Out     0.316     16.620      -         
-g0_4                                   Net          -        -       1.371     -           1         
-ALU.mult.g0                            SB_LUT4      I0       In      -         17.991      -         
-ALU.mult.g0                            SB_LUT4      O        Out     0.449     18.440      -         
-g0                                     Net          -        -       1.371     -           1         
-ALU.mult.madd_axb_10                   SB_LUT4      I3       In      -         19.811      -         
-ALU.mult.madd_axb_10                   SB_LUT4      O        Out     0.316     20.127      -         
-madd_axb_10                            Net          -        -       0.905     -           2         
-ALU.mult.madd_cry_10_c                 SB_CARRY     I0       In      -         21.032      -         
-ALU.mult.madd_cry_10_c                 SB_CARRY     CO       Out     0.258     21.289      -         
-madd_cry_10                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CI       In      -         21.303      -         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.126     21.430      -         
+ALU.e[0]                               SB_DFFE      Q        Out     0.540     0.540       -         
+e[0]                                   Net          -        -       1.599     -           2         
+ALU.e_RNINIVJ[0]                       SB_LUT4      I0       In      -         2.139       -         
+ALU.e_RNINIVJ[0]                       SB_LUT4      O        Out     0.449     2.588       -         
+e_RNINIVJ[0]                           Net          -        -       1.371     -           1         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      I0       In      -         3.959       -         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      O        Out     0.386     4.345       -         
+operand2_7_ns_1[0]                     Net          -        -       1.371     -           1         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      I0       In      -         5.715       -         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      O        Out     0.449     6.164       -         
+operand2[0]                            Net          -        -       1.371     -           1         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      I0       In      -         7.535       -         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      O        Out     0.449     7.984       -         
+N_252_0                                Net          -        -       1.371     -           40        
+ALU.mult.madd_165_0_tz                 SB_LUT4      I1       In      -         9.355       -         
+ALU.mult.madd_165_0_tz                 SB_LUT4      O        Out     0.400     9.755       -         
+madd_165_0_tz                          Net          -        -       1.371     -           2         
+ALU.mult.madd_165_0                    SB_LUT4      I0       In      -         11.126      -         
+ALU.mult.madd_165_0                    SB_LUT4      O        Out     0.449     11.575      -         
+madd_165_0                             Net          -        -       1.371     -           2         
+ALU.mult.madd_227                      SB_LUT4      I1       In      -         12.946      -         
+ALU.mult.madd_227                      SB_LUT4      O        Out     0.400     13.345      -         
+madd_227                               Net          -        -       1.371     -           3         
+ALU.mult.madd_285                      SB_LUT4      I2       In      -         14.716      -         
+ALU.mult.madd_285                      SB_LUT4      O        Out     0.379     15.095      -         
+madd_285                               Net          -        -       1.371     -           2         
+ALU.mult.madd_295_0                    SB_LUT4      I0       In      -         16.466      -         
+ALU.mult.madd_295_0                    SB_LUT4      O        Out     0.449     16.915      -         
+madd_295_0                             Net          -        -       1.371     -           1         
+ALU.mult.madd_300_0                    SB_LUT4      I0       In      -         18.286      -         
+ALU.mult.madd_300_0                    SB_LUT4      O        Out     0.449     18.735      -         
+madd_N_10                              Net          -        -       1.371     -           2         
+ALU.mult.madd_axb_11                   SB_LUT4      I0       In      -         20.106      -         
+ALU.mult.madd_axb_11                   SB_LUT4      O        Out     0.449     20.554      -         
+madd_axb_11                            Net          -        -       0.905     -           2         
+ALU.mult.madd_cry_11_c                 SB_CARRY     I0       In      -         21.459      -         
+ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.258     21.717      -         
 madd_cry_11                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CI       In      -         21.444      -         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CO       Out     0.126     21.570      -         
-madd_cry_12                            Net          -        -       0.386     -           2         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      I3       In      -         21.956      -         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      O        Out     0.316     22.271      -         
-mult[14]                               Net          -        -       1.371     -           1         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      I0       In      -         23.642      -         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      O        Out     0.449     24.091      -         
-r0_12[14]                              Net          -        -       1.507     -           8         
-ALU.r0[14]                             SB_DFFE      D        In      -         25.598      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CI       In      -         21.731      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CO       Out     0.126     21.857      -         
+madd_cry_12                            Net          -        -       0.014     -           2         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CI       In      -         21.871      -         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CO       Out     0.126     21.997      -         
+madd_cry_13                            Net          -        -       0.386     -           1         
+ALU.mult.madd_s_14                     SB_LUT4      I3       In      -         22.383      -         
+ALU.mult.madd_s_14                     SB_LUT4      O        Out     0.316     22.699      -         
+mult[15]                               Net          -        -       1.371     -           1         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      I0       In      -         24.070      -         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      O        Out     0.449     24.519      -         
+a_15[15]                               Net          -        -       1.507     -           8         
+ALU.a[15]                              SB_DFFE      D        In      -         26.026      -         
 =====================================================================================================
-Total path delay (propagation time + setup) of 25.703 is 6.197(24.1%) logic and 19.506(75.9%) route.
+Total path delay (propagation time + setup) of 26.131 is 6.625(25.4%) logic and 19.506(74.6%) route.
 Path delay compensated for clock skew. Clock skew is added to clock-to-out value, and is subtracted from setup time value
 
 
 Path information for path number 2: 
-      Requested Period:                      21.848
+      Requested Period:                      22.211
     - Setup time:                            0.105
     + Clock delay at ending point:           0.000 (ideal)
-    = Required time:                         21.743
+    = Required time:                         22.106
 
-    - Propagation time:                      25.598
+    - Propagation time:                      26.026
     - Clock delay at starting point:         0.000 (ideal)
-    = Slack (critical) :                     -3.855
+    = Slack (critical) :                     -3.920
 
     Number of logic level(s):                16
-    Starting point:                          b_fast[0] / Q
-    Ending point:                            ALU.r1[14] / D
+    Starting point:                          ALU.e[0] / Q
+    Ending point:                            ALU.b[15] / D
     The start point is clocked by            top|CLK [rising] on pin C
     The end   point is clocked by            top|CLK [rising] on pin C
 
 Instance / Net                                      Pin      Pin               Arrival     No. of    
 Name                                   Type         Name     Dir     Delay     Time        Fan Out(s)
 -----------------------------------------------------------------------------------------------------
-b_fast[0]                              SB_DFFE      Q        Out     0.540     0.540       -         
-b_fast[0]                              Net          -        -       1.599     -           9         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      I0       In      -         2.139       -         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      O        Out     0.449     2.588       -         
-r0_RNIE5LH[1]                          Net          -        -       1.371     -           1         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      I0       In      -         3.959       -         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      O        Out     0.449     4.408       -         
-b_7_ns_1[1]                            Net          -        -       1.371     -           1         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      I0       In      -         5.779       -         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      O        Out     0.449     6.227       -         
-b[1]                                   Net          -        -       1.371     -           41        
-ALU.mult.g0_7_x1                       SB_LUT4      I2       In      -         7.598       -         
-ALU.mult.g0_7_x1                       SB_LUT4      O        Out     0.379     7.977       -         
-g0_7_x1                                Net          -        -       1.371     -           1         
-ALU.mult.g0_7_ns                       SB_LUT4      I2       In      -         9.348       -         
-ALU.mult.g0_7_ns                       SB_LUT4      O        Out     0.379     9.727       -         
-madd_76_1                              Net          -        -       1.371     -           1         
-ALU.mult.g2                            SB_LUT4      I2       In      -         11.098      -         
-ALU.mult.g2                            SB_LUT4      O        Out     0.379     11.477      -         
-g2_0                                   Net          -        -       1.371     -           1         
-ALU.mult.g0_2                          SB_LUT4      I3       In      -         12.848      -         
-ALU.mult.g0_2                          SB_LUT4      O        Out     0.316     13.163      -         
-madd_186_0                             Net          -        -       1.371     -           2         
-ALU.mult.madd_239                      SB_LUT4      I1       In      -         14.534      -         
-ALU.mult.madd_239                      SB_LUT4      O        Out     0.400     14.934      -         
-madd_239                               Net          -        -       1.371     -           3         
-ALU.mult.g0_3                          SB_LUT4      I3       In      -         16.305      -         
-ALU.mult.g0_3                          SB_LUT4      O        Out     0.316     16.620      -         
-g0_4                                   Net          -        -       1.371     -           1         
-ALU.mult.g0                            SB_LUT4      I0       In      -         17.991      -         
-ALU.mult.g0                            SB_LUT4      O        Out     0.449     18.440      -         
-g0                                     Net          -        -       1.371     -           1         
-ALU.mult.madd_axb_10                   SB_LUT4      I3       In      -         19.811      -         
-ALU.mult.madd_axb_10                   SB_LUT4      O        Out     0.316     20.127      -         
-madd_axb_10                            Net          -        -       0.905     -           2         
-ALU.mult.madd_cry_10_c                 SB_CARRY     I0       In      -         21.032      -         
-ALU.mult.madd_cry_10_c                 SB_CARRY     CO       Out     0.258     21.289      -         
-madd_cry_10                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CI       In      -         21.303      -         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.126     21.430      -         
+ALU.e[0]                               SB_DFFE      Q        Out     0.540     0.540       -         
+e[0]                                   Net          -        -       1.599     -           2         
+ALU.e_RNINIVJ[0]                       SB_LUT4      I0       In      -         2.139       -         
+ALU.e_RNINIVJ[0]                       SB_LUT4      O        Out     0.449     2.588       -         
+e_RNINIVJ[0]                           Net          -        -       1.371     -           1         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      I0       In      -         3.959       -         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      O        Out     0.386     4.345       -         
+operand2_7_ns_1[0]                     Net          -        -       1.371     -           1         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      I0       In      -         5.715       -         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      O        Out     0.449     6.164       -         
+operand2[0]                            Net          -        -       1.371     -           1         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      I0       In      -         7.535       -         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      O        Out     0.449     7.984       -         
+N_252_0                                Net          -        -       1.371     -           40        
+ALU.mult.madd_165_0_tz                 SB_LUT4      I1       In      -         9.355       -         
+ALU.mult.madd_165_0_tz                 SB_LUT4      O        Out     0.400     9.755       -         
+madd_165_0_tz                          Net          -        -       1.371     -           2         
+ALU.mult.madd_165_0                    SB_LUT4      I0       In      -         11.126      -         
+ALU.mult.madd_165_0                    SB_LUT4      O        Out     0.449     11.575      -         
+madd_165_0                             Net          -        -       1.371     -           2         
+ALU.mult.madd_227                      SB_LUT4      I1       In      -         12.946      -         
+ALU.mult.madd_227                      SB_LUT4      O        Out     0.400     13.345      -         
+madd_227                               Net          -        -       1.371     -           3         
+ALU.mult.madd_285                      SB_LUT4      I2       In      -         14.716      -         
+ALU.mult.madd_285                      SB_LUT4      O        Out     0.379     15.095      -         
+madd_285                               Net          -        -       1.371     -           2         
+ALU.mult.madd_295_0                    SB_LUT4      I0       In      -         16.466      -         
+ALU.mult.madd_295_0                    SB_LUT4      O        Out     0.449     16.915      -         
+madd_295_0                             Net          -        -       1.371     -           1         
+ALU.mult.madd_300_0                    SB_LUT4      I0       In      -         18.286      -         
+ALU.mult.madd_300_0                    SB_LUT4      O        Out     0.449     18.735      -         
+madd_N_10                              Net          -        -       1.371     -           2         
+ALU.mult.madd_axb_11                   SB_LUT4      I0       In      -         20.106      -         
+ALU.mult.madd_axb_11                   SB_LUT4      O        Out     0.449     20.554      -         
+madd_axb_11                            Net          -        -       0.905     -           2         
+ALU.mult.madd_cry_11_c                 SB_CARRY     I0       In      -         21.459      -         
+ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.258     21.717      -         
 madd_cry_11                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CI       In      -         21.444      -         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CO       Out     0.126     21.570      -         
-madd_cry_12                            Net          -        -       0.386     -           2         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      I3       In      -         21.956      -         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      O        Out     0.316     22.271      -         
-mult[14]                               Net          -        -       1.371     -           1         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      I0       In      -         23.642      -         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      O        Out     0.449     24.091      -         
-r0_12[14]                              Net          -        -       1.507     -           8         
-ALU.r1[14]                             SB_DFFE      D        In      -         25.598      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CI       In      -         21.731      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CO       Out     0.126     21.857      -         
+madd_cry_12                            Net          -        -       0.014     -           2         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CI       In      -         21.871      -         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CO       Out     0.126     21.997      -         
+madd_cry_13                            Net          -        -       0.386     -           1         
+ALU.mult.madd_s_14                     SB_LUT4      I3       In      -         22.383      -         
+ALU.mult.madd_s_14                     SB_LUT4      O        Out     0.316     22.699      -         
+mult[15]                               Net          -        -       1.371     -           1         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      I0       In      -         24.070      -         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      O        Out     0.449     24.519      -         
+a_15[15]                               Net          -        -       1.507     -           8         
+ALU.b[15]                              SB_DFFE      D        In      -         26.026      -         
 =====================================================================================================
-Total path delay (propagation time + setup) of 25.703 is 6.197(24.1%) logic and 19.506(75.9%) route.
+Total path delay (propagation time + setup) of 26.131 is 6.625(25.4%) logic and 19.506(74.6%) route.
 Path delay compensated for clock skew. Clock skew is added to clock-to-out value, and is subtracted from setup time value
 
 
 Path information for path number 3: 
-      Requested Period:                      21.848
+      Requested Period:                      22.211
     - Setup time:                            0.105
     + Clock delay at ending point:           0.000 (ideal)
-    = Required time:                         21.743
+    = Required time:                         22.106
 
-    - Propagation time:                      25.598
+    - Propagation time:                      26.026
     - Clock delay at starting point:         0.000 (ideal)
-    = Slack (critical) :                     -3.855
+    = Slack (critical) :                     -3.920
 
     Number of logic level(s):                16
-    Starting point:                          b_fast[0] / Q
-    Ending point:                            ALU.r2[14] / D
+    Starting point:                          ALU.e[0] / Q
+    Ending point:                            ALU.c[15] / D
     The start point is clocked by            top|CLK [rising] on pin C
     The end   point is clocked by            top|CLK [rising] on pin C
 
 Instance / Net                                      Pin      Pin               Arrival     No. of    
 Name                                   Type         Name     Dir     Delay     Time        Fan Out(s)
 -----------------------------------------------------------------------------------------------------
-b_fast[0]                              SB_DFFE      Q        Out     0.540     0.540       -         
-b_fast[0]                              Net          -        -       1.599     -           9         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      I0       In      -         2.139       -         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      O        Out     0.449     2.588       -         
-r0_RNIE5LH[1]                          Net          -        -       1.371     -           1         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      I0       In      -         3.959       -         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      O        Out     0.449     4.408       -         
-b_7_ns_1[1]                            Net          -        -       1.371     -           1         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      I0       In      -         5.779       -         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      O        Out     0.449     6.227       -         
-b[1]                                   Net          -        -       1.371     -           41        
-ALU.mult.g0_7_x1                       SB_LUT4      I2       In      -         7.598       -         
-ALU.mult.g0_7_x1                       SB_LUT4      O        Out     0.379     7.977       -         
-g0_7_x1                                Net          -        -       1.371     -           1         
-ALU.mult.g0_7_ns                       SB_LUT4      I2       In      -         9.348       -         
-ALU.mult.g0_7_ns                       SB_LUT4      O        Out     0.379     9.727       -         
-madd_76_1                              Net          -        -       1.371     -           1         
-ALU.mult.g2                            SB_LUT4      I2       In      -         11.098      -         
-ALU.mult.g2                            SB_LUT4      O        Out     0.379     11.477      -         
-g2_0                                   Net          -        -       1.371     -           1         
-ALU.mult.g0_2                          SB_LUT4      I3       In      -         12.848      -         
-ALU.mult.g0_2                          SB_LUT4      O        Out     0.316     13.163      -         
-madd_186_0                             Net          -        -       1.371     -           2         
-ALU.mult.madd_239                      SB_LUT4      I1       In      -         14.534      -         
-ALU.mult.madd_239                      SB_LUT4      O        Out     0.400     14.934      -         
-madd_239                               Net          -        -       1.371     -           3         
-ALU.mult.g0_3                          SB_LUT4      I3       In      -         16.305      -         
-ALU.mult.g0_3                          SB_LUT4      O        Out     0.316     16.620      -         
-g0_4                                   Net          -        -       1.371     -           1         
-ALU.mult.g0                            SB_LUT4      I0       In      -         17.991      -         
-ALU.mult.g0                            SB_LUT4      O        Out     0.449     18.440      -         
-g0                                     Net          -        -       1.371     -           1         
-ALU.mult.madd_axb_10                   SB_LUT4      I3       In      -         19.811      -         
-ALU.mult.madd_axb_10                   SB_LUT4      O        Out     0.316     20.127      -         
-madd_axb_10                            Net          -        -       0.905     -           2         
-ALU.mult.madd_cry_10_c                 SB_CARRY     I0       In      -         21.032      -         
-ALU.mult.madd_cry_10_c                 SB_CARRY     CO       Out     0.258     21.289      -         
-madd_cry_10                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CI       In      -         21.303      -         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.126     21.430      -         
+ALU.e[0]                               SB_DFFE      Q        Out     0.540     0.540       -         
+e[0]                                   Net          -        -       1.599     -           2         
+ALU.e_RNINIVJ[0]                       SB_LUT4      I0       In      -         2.139       -         
+ALU.e_RNINIVJ[0]                       SB_LUT4      O        Out     0.449     2.588       -         
+e_RNINIVJ[0]                           Net          -        -       1.371     -           1         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      I0       In      -         3.959       -         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      O        Out     0.386     4.345       -         
+operand2_7_ns_1[0]                     Net          -        -       1.371     -           1         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      I0       In      -         5.715       -         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      O        Out     0.449     6.164       -         
+operand2[0]                            Net          -        -       1.371     -           1         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      I0       In      -         7.535       -         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      O        Out     0.449     7.984       -         
+N_252_0                                Net          -        -       1.371     -           40        
+ALU.mult.madd_165_0_tz                 SB_LUT4      I1       In      -         9.355       -         
+ALU.mult.madd_165_0_tz                 SB_LUT4      O        Out     0.400     9.755       -         
+madd_165_0_tz                          Net          -        -       1.371     -           2         
+ALU.mult.madd_165_0                    SB_LUT4      I0       In      -         11.126      -         
+ALU.mult.madd_165_0                    SB_LUT4      O        Out     0.449     11.575      -         
+madd_165_0                             Net          -        -       1.371     -           2         
+ALU.mult.madd_227                      SB_LUT4      I1       In      -         12.946      -         
+ALU.mult.madd_227                      SB_LUT4      O        Out     0.400     13.345      -         
+madd_227                               Net          -        -       1.371     -           3         
+ALU.mult.madd_285                      SB_LUT4      I2       In      -         14.716      -         
+ALU.mult.madd_285                      SB_LUT4      O        Out     0.379     15.095      -         
+madd_285                               Net          -        -       1.371     -           2         
+ALU.mult.madd_295_0                    SB_LUT4      I0       In      -         16.466      -         
+ALU.mult.madd_295_0                    SB_LUT4      O        Out     0.449     16.915      -         
+madd_295_0                             Net          -        -       1.371     -           1         
+ALU.mult.madd_300_0                    SB_LUT4      I0       In      -         18.286      -         
+ALU.mult.madd_300_0                    SB_LUT4      O        Out     0.449     18.735      -         
+madd_N_10                              Net          -        -       1.371     -           2         
+ALU.mult.madd_axb_11                   SB_LUT4      I0       In      -         20.106      -         
+ALU.mult.madd_axb_11                   SB_LUT4      O        Out     0.449     20.554      -         
+madd_axb_11                            Net          -        -       0.905     -           2         
+ALU.mult.madd_cry_11_c                 SB_CARRY     I0       In      -         21.459      -         
+ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.258     21.717      -         
 madd_cry_11                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CI       In      -         21.444      -         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CO       Out     0.126     21.570      -         
-madd_cry_12                            Net          -        -       0.386     -           2         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      I3       In      -         21.956      -         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      O        Out     0.316     22.271      -         
-mult[14]                               Net          -        -       1.371     -           1         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      I0       In      -         23.642      -         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      O        Out     0.449     24.091      -         
-r0_12[14]                              Net          -        -       1.507     -           8         
-ALU.r2[14]                             SB_DFFE      D        In      -         25.598      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CI       In      -         21.731      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CO       Out     0.126     21.857      -         
+madd_cry_12                            Net          -        -       0.014     -           2         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CI       In      -         21.871      -         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CO       Out     0.126     21.997      -         
+madd_cry_13                            Net          -        -       0.386     -           1         
+ALU.mult.madd_s_14                     SB_LUT4      I3       In      -         22.383      -         
+ALU.mult.madd_s_14                     SB_LUT4      O        Out     0.316     22.699      -         
+mult[15]                               Net          -        -       1.371     -           1         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      I0       In      -         24.070      -         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      O        Out     0.449     24.519      -         
+a_15[15]                               Net          -        -       1.507     -           8         
+ALU.c[15]                              SB_DFFE      D        In      -         26.026      -         
 =====================================================================================================
-Total path delay (propagation time + setup) of 25.703 is 6.197(24.1%) logic and 19.506(75.9%) route.
+Total path delay (propagation time + setup) of 26.131 is 6.625(25.4%) logic and 19.506(74.6%) route.
 Path delay compensated for clock skew. Clock skew is added to clock-to-out value, and is subtracted from setup time value
 
 
 Path information for path number 4: 
-      Requested Period:                      21.848
+      Requested Period:                      22.211
     - Setup time:                            0.105
     + Clock delay at ending point:           0.000 (ideal)
-    = Required time:                         21.743
+    = Required time:                         22.106
 
-    - Propagation time:                      25.598
+    - Propagation time:                      26.026
     - Clock delay at starting point:         0.000 (ideal)
-    = Slack (critical) :                     -3.855
+    = Slack (critical) :                     -3.920
 
     Number of logic level(s):                16
-    Starting point:                          b_fast[0] / Q
-    Ending point:                            ALU.r3[14] / D
+    Starting point:                          ALU.e[0] / Q
+    Ending point:                            ALU.d[15] / D
     The start point is clocked by            top|CLK [rising] on pin C
     The end   point is clocked by            top|CLK [rising] on pin C
 
 Instance / Net                                      Pin      Pin               Arrival     No. of    
 Name                                   Type         Name     Dir     Delay     Time        Fan Out(s)
 -----------------------------------------------------------------------------------------------------
-b_fast[0]                              SB_DFFE      Q        Out     0.540     0.540       -         
-b_fast[0]                              Net          -        -       1.599     -           9         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      I0       In      -         2.139       -         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      O        Out     0.449     2.588       -         
-r0_RNIE5LH[1]                          Net          -        -       1.371     -           1         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      I0       In      -         3.959       -         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      O        Out     0.449     4.408       -         
-b_7_ns_1[1]                            Net          -        -       1.371     -           1         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      I0       In      -         5.779       -         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      O        Out     0.449     6.227       -         
-b[1]                                   Net          -        -       1.371     -           41        
-ALU.mult.g0_7_x1                       SB_LUT4      I2       In      -         7.598       -         
-ALU.mult.g0_7_x1                       SB_LUT4      O        Out     0.379     7.977       -         
-g0_7_x1                                Net          -        -       1.371     -           1         
-ALU.mult.g0_7_ns                       SB_LUT4      I2       In      -         9.348       -         
-ALU.mult.g0_7_ns                       SB_LUT4      O        Out     0.379     9.727       -         
-madd_76_1                              Net          -        -       1.371     -           1         
-ALU.mult.g2                            SB_LUT4      I2       In      -         11.098      -         
-ALU.mult.g2                            SB_LUT4      O        Out     0.379     11.477      -         
-g2_0                                   Net          -        -       1.371     -           1         
-ALU.mult.g0_2                          SB_LUT4      I3       In      -         12.848      -         
-ALU.mult.g0_2                          SB_LUT4      O        Out     0.316     13.163      -         
-madd_186_0                             Net          -        -       1.371     -           2         
-ALU.mult.madd_239                      SB_LUT4      I1       In      -         14.534      -         
-ALU.mult.madd_239                      SB_LUT4      O        Out     0.400     14.934      -         
-madd_239                               Net          -        -       1.371     -           3         
-ALU.mult.g0_3                          SB_LUT4      I3       In      -         16.305      -         
-ALU.mult.g0_3                          SB_LUT4      O        Out     0.316     16.620      -         
-g0_4                                   Net          -        -       1.371     -           1         
-ALU.mult.g0                            SB_LUT4      I0       In      -         17.991      -         
-ALU.mult.g0                            SB_LUT4      O        Out     0.449     18.440      -         
-g0                                     Net          -        -       1.371     -           1         
-ALU.mult.madd_axb_10                   SB_LUT4      I3       In      -         19.811      -         
-ALU.mult.madd_axb_10                   SB_LUT4      O        Out     0.316     20.127      -         
-madd_axb_10                            Net          -        -       0.905     -           2         
-ALU.mult.madd_cry_10_c                 SB_CARRY     I0       In      -         21.032      -         
-ALU.mult.madd_cry_10_c                 SB_CARRY     CO       Out     0.258     21.289      -         
-madd_cry_10                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CI       In      -         21.303      -         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.126     21.430      -         
+ALU.e[0]                               SB_DFFE      Q        Out     0.540     0.540       -         
+e[0]                                   Net          -        -       1.599     -           2         
+ALU.e_RNINIVJ[0]                       SB_LUT4      I0       In      -         2.139       -         
+ALU.e_RNINIVJ[0]                       SB_LUT4      O        Out     0.449     2.588       -         
+e_RNINIVJ[0]                           Net          -        -       1.371     -           1         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      I0       In      -         3.959       -         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      O        Out     0.386     4.345       -         
+operand2_7_ns_1[0]                     Net          -        -       1.371     -           1         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      I0       In      -         5.715       -         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      O        Out     0.449     6.164       -         
+operand2[0]                            Net          -        -       1.371     -           1         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      I0       In      -         7.535       -         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      O        Out     0.449     7.984       -         
+N_252_0                                Net          -        -       1.371     -           40        
+ALU.mult.madd_165_0_tz                 SB_LUT4      I1       In      -         9.355       -         
+ALU.mult.madd_165_0_tz                 SB_LUT4      O        Out     0.400     9.755       -         
+madd_165_0_tz                          Net          -        -       1.371     -           2         
+ALU.mult.madd_165_0                    SB_LUT4      I0       In      -         11.126      -         
+ALU.mult.madd_165_0                    SB_LUT4      O        Out     0.449     11.575      -         
+madd_165_0                             Net          -        -       1.371     -           2         
+ALU.mult.madd_227                      SB_LUT4      I1       In      -         12.946      -         
+ALU.mult.madd_227                      SB_LUT4      O        Out     0.400     13.345      -         
+madd_227                               Net          -        -       1.371     -           3         
+ALU.mult.madd_285                      SB_LUT4      I2       In      -         14.716      -         
+ALU.mult.madd_285                      SB_LUT4      O        Out     0.379     15.095      -         
+madd_285                               Net          -        -       1.371     -           2         
+ALU.mult.madd_295_0                    SB_LUT4      I0       In      -         16.466      -         
+ALU.mult.madd_295_0                    SB_LUT4      O        Out     0.449     16.915      -         
+madd_295_0                             Net          -        -       1.371     -           1         
+ALU.mult.madd_300_0                    SB_LUT4      I0       In      -         18.286      -         
+ALU.mult.madd_300_0                    SB_LUT4      O        Out     0.449     18.735      -         
+madd_N_10                              Net          -        -       1.371     -           2         
+ALU.mult.madd_axb_11                   SB_LUT4      I0       In      -         20.106      -         
+ALU.mult.madd_axb_11                   SB_LUT4      O        Out     0.449     20.554      -         
+madd_axb_11                            Net          -        -       0.905     -           2         
+ALU.mult.madd_cry_11_c                 SB_CARRY     I0       In      -         21.459      -         
+ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.258     21.717      -         
 madd_cry_11                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CI       In      -         21.444      -         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CO       Out     0.126     21.570      -         
-madd_cry_12                            Net          -        -       0.386     -           2         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      I3       In      -         21.956      -         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      O        Out     0.316     22.271      -         
-mult[14]                               Net          -        -       1.371     -           1         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      I0       In      -         23.642      -         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      O        Out     0.449     24.091      -         
-r0_12[14]                              Net          -        -       1.507     -           8         
-ALU.r3[14]                             SB_DFFE      D        In      -         25.598      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CI       In      -         21.731      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CO       Out     0.126     21.857      -         
+madd_cry_12                            Net          -        -       0.014     -           2         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CI       In      -         21.871      -         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CO       Out     0.126     21.997      -         
+madd_cry_13                            Net          -        -       0.386     -           1         
+ALU.mult.madd_s_14                     SB_LUT4      I3       In      -         22.383      -         
+ALU.mult.madd_s_14                     SB_LUT4      O        Out     0.316     22.699      -         
+mult[15]                               Net          -        -       1.371     -           1         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      I0       In      -         24.070      -         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      O        Out     0.449     24.519      -         
+a_15[15]                               Net          -        -       1.507     -           8         
+ALU.d[15]                              SB_DFFE      D        In      -         26.026      -         
 =====================================================================================================
-Total path delay (propagation time + setup) of 25.703 is 6.197(24.1%) logic and 19.506(75.9%) route.
+Total path delay (propagation time + setup) of 26.131 is 6.625(25.4%) logic and 19.506(74.6%) route.
 Path delay compensated for clock skew. Clock skew is added to clock-to-out value, and is subtracted from setup time value
 
 
 Path information for path number 5: 
-      Requested Period:                      21.848
+      Requested Period:                      22.211
     - Setup time:                            0.105
     + Clock delay at ending point:           0.000 (ideal)
-    = Required time:                         21.743
+    = Required time:                         22.106
 
-    - Propagation time:                      25.598
+    - Propagation time:                      26.026
     - Clock delay at starting point:         0.000 (ideal)
-    = Slack (critical) :                     -3.855
+    = Slack (critical) :                     -3.920
 
     Number of logic level(s):                16
-    Starting point:                          b_fast[0] / Q
-    Ending point:                            ALU.r4[14] / D
+    Starting point:                          ALU.e[0] / Q
+    Ending point:                            ALU.e[15] / D
     The start point is clocked by            top|CLK [rising] on pin C
     The end   point is clocked by            top|CLK [rising] on pin C
 
 Instance / Net                                      Pin      Pin               Arrival     No. of    
 Name                                   Type         Name     Dir     Delay     Time        Fan Out(s)
 -----------------------------------------------------------------------------------------------------
-b_fast[0]                              SB_DFFE      Q        Out     0.540     0.540       -         
-b_fast[0]                              Net          -        -       1.599     -           9         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      I0       In      -         2.139       -         
-ALU.r0_RNIE5LH[1]                      SB_LUT4      O        Out     0.449     2.588       -         
-r0_RNIE5LH[1]                          Net          -        -       1.371     -           1         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      I0       In      -         3.959       -         
-ALU.r0_RNI73OM1[1]                     SB_LUT4      O        Out     0.449     4.408       -         
-b_7_ns_1[1]                            Net          -        -       1.371     -           1         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      I0       In      -         5.779       -         
-ALU.r2_RNI0TRV3[1]                     SB_LUT4      O        Out     0.449     6.227       -         
-b[1]                                   Net          -        -       1.371     -           41        
-ALU.mult.g0_7_x1                       SB_LUT4      I2       In      -         7.598       -         
-ALU.mult.g0_7_x1                       SB_LUT4      O        Out     0.379     7.977       -         
-g0_7_x1                                Net          -        -       1.371     -           1         
-ALU.mult.g0_7_ns                       SB_LUT4      I2       In      -         9.348       -         
-ALU.mult.g0_7_ns                       SB_LUT4      O        Out     0.379     9.727       -         
-madd_76_1                              Net          -        -       1.371     -           1         
-ALU.mult.g2                            SB_LUT4      I2       In      -         11.098      -         
-ALU.mult.g2                            SB_LUT4      O        Out     0.379     11.477      -         
-g2_0                                   Net          -        -       1.371     -           1         
-ALU.mult.g0_2                          SB_LUT4      I3       In      -         12.848      -         
-ALU.mult.g0_2                          SB_LUT4      O        Out     0.316     13.163      -         
-madd_186_0                             Net          -        -       1.371     -           2         
-ALU.mult.madd_239                      SB_LUT4      I1       In      -         14.534      -         
-ALU.mult.madd_239                      SB_LUT4      O        Out     0.400     14.934      -         
-madd_239                               Net          -        -       1.371     -           3         
-ALU.mult.g0_3                          SB_LUT4      I3       In      -         16.305      -         
-ALU.mult.g0_3                          SB_LUT4      O        Out     0.316     16.620      -         
-g0_4                                   Net          -        -       1.371     -           1         
-ALU.mult.g0                            SB_LUT4      I0       In      -         17.991      -         
-ALU.mult.g0                            SB_LUT4      O        Out     0.449     18.440      -         
-g0                                     Net          -        -       1.371     -           1         
-ALU.mult.madd_axb_10                   SB_LUT4      I3       In      -         19.811      -         
-ALU.mult.madd_axb_10                   SB_LUT4      O        Out     0.316     20.127      -         
-madd_axb_10                            Net          -        -       0.905     -           2         
-ALU.mult.madd_cry_10_c                 SB_CARRY     I0       In      -         21.032      -         
-ALU.mult.madd_cry_10_c                 SB_CARRY     CO       Out     0.258     21.289      -         
-madd_cry_10                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CI       In      -         21.303      -         
-ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.126     21.430      -         
+ALU.e[0]                               SB_DFFE      Q        Out     0.540     0.540       -         
+e[0]                                   Net          -        -       1.599     -           2         
+ALU.e_RNINIVJ[0]                       SB_LUT4      I0       In      -         2.139       -         
+ALU.e_RNINIVJ[0]                       SB_LUT4      O        Out     0.449     2.588       -         
+e_RNINIVJ[0]                           Net          -        -       1.371     -           1         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      I0       In      -         3.959       -         
+ALU.e_RNIHCSL1[0]                      SB_LUT4      O        Out     0.386     4.345       -         
+operand2_7_ns_1[0]                     Net          -        -       1.371     -           1         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      I0       In      -         5.715       -         
+ALU.d_RNIPDJU2[0]                      SB_LUT4      O        Out     0.449     6.164       -         
+operand2[0]                            Net          -        -       1.371     -           1         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      I0       In      -         7.535       -         
+ALU.d_RNIGTOD3[0]                      SB_LUT4      O        Out     0.449     7.984       -         
+N_252_0                                Net          -        -       1.371     -           40        
+ALU.mult.madd_165_0_tz                 SB_LUT4      I1       In      -         9.355       -         
+ALU.mult.madd_165_0_tz                 SB_LUT4      O        Out     0.400     9.755       -         
+madd_165_0_tz                          Net          -        -       1.371     -           2         
+ALU.mult.madd_165_0                    SB_LUT4      I0       In      -         11.126      -         
+ALU.mult.madd_165_0                    SB_LUT4      O        Out     0.449     11.575      -         
+madd_165_0                             Net          -        -       1.371     -           2         
+ALU.mult.madd_227                      SB_LUT4      I1       In      -         12.946      -         
+ALU.mult.madd_227                      SB_LUT4      O        Out     0.400     13.345      -         
+madd_227                               Net          -        -       1.371     -           3         
+ALU.mult.madd_285                      SB_LUT4      I2       In      -         14.716      -         
+ALU.mult.madd_285                      SB_LUT4      O        Out     0.379     15.095      -         
+madd_285                               Net          -        -       1.371     -           2         
+ALU.mult.madd_295_0                    SB_LUT4      I0       In      -         16.466      -         
+ALU.mult.madd_295_0                    SB_LUT4      O        Out     0.449     16.915      -         
+madd_295_0                             Net          -        -       1.371     -           1         
+ALU.mult.madd_300_0                    SB_LUT4      I0       In      -         18.286      -         
+ALU.mult.madd_300_0                    SB_LUT4      O        Out     0.449     18.735      -         
+madd_N_10                              Net          -        -       1.371     -           2         
+ALU.mult.madd_axb_11                   SB_LUT4      I0       In      -         20.106      -         
+ALU.mult.madd_axb_11                   SB_LUT4      O        Out     0.449     20.554      -         
+madd_axb_11                            Net          -        -       0.905     -           2         
+ALU.mult.madd_cry_11_c                 SB_CARRY     I0       In      -         21.459      -         
+ALU.mult.madd_cry_11_c                 SB_CARRY     CO       Out     0.258     21.717      -         
 madd_cry_11                            Net          -        -       0.014     -           2         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CI       In      -         21.444      -         
-ALU.mult.madd_cry_12_0_c               SB_CARRY     CO       Out     0.126     21.570      -         
-madd_cry_12                            Net          -        -       0.386     -           2         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      I3       In      -         21.956      -         
-ALU.mult.madd_cry_13_0_s               SB_LUT4      O        Out     0.316     22.271      -         
-mult[14]                               Net          -        -       1.371     -           1         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      I0       In      -         23.642      -         
-ALU.r0_12_prm_1_14_s0_c_RNI357RUG3     SB_LUT4      O        Out     0.449     24.091      -         
-r0_12[14]                              Net          -        -       1.507     -           8         
-ALU.r4[14]                             SB_DFFE      D        In      -         25.598      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CI       In      -         21.731      -         
+ALU.mult.madd_cry_12_c                 SB_CARRY     CO       Out     0.126     21.857      -         
+madd_cry_12                            Net          -        -       0.014     -           2         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CI       In      -         21.871      -         
+ALU.mult.madd_cry_13_0_c               SB_CARRY     CO       Out     0.126     21.997      -         
+madd_cry_13                            Net          -        -       0.386     -           1         
+ALU.mult.madd_s_14                     SB_LUT4      I3       In      -         22.383      -         
+ALU.mult.madd_s_14                     SB_LUT4      O        Out     0.316     22.699      -         
+mult[15]                               Net          -        -       1.371     -           1         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      I0       In      -         24.070      -         
+ALU.un9_addsub_cry_14_c_RNIH4JOS63     SB_LUT4      O        Out     0.449     24.519      -         
+a_15[15]                               Net          -        -       1.507     -           8         
+ALU.e[15]                              SB_DFFE      D        In      -         26.026      -         
 =====================================================================================================
-Total path delay (propagation time + setup) of 25.703 is 6.197(24.1%) logic and 19.506(75.9%) route.
+Total path delay (propagation time + setup) of 26.131 is 6.625(25.4%) logic and 19.506(74.6%) route.
 Path delay compensated for clock skew. Clock skew is added to clock-to-out value, and is subtracted from setup time value
 
 
@@ -643,47 +684,47 @@ Path delay compensated for clock skew. Clock skew is added to clock-to-out value
 Timing exceptions that could not be applied
 None
 
-Finished final timing analysis (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:07s; Memory used current: 160MB peak: 193MB)
+Finished final timing analysis (Real Time elapsed 0h:00m:08s; CPU Time elapsed 0h:00m:08s; Memory used current: 197MB peak: 201MB)
 
 
-Finished timing report (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:07s; Memory used current: 160MB peak: 193MB)
+Finished timing report (Real Time elapsed 0h:00m:08s; CPU Time elapsed 0h:00m:08s; Memory used current: 197MB peak: 201MB)
 
 ---------------------------------------
 Resource Usage Report for top 
 
 Mapping to part: ice40hx8kct256
 Cell usage:
-GND             2 uses
-SB_CARRY        314 uses
-SB_DFF          25 uses
-SB_DFFE         172 uses
-SB_DFFN         7 uses
-SB_DFFNE        8 uses
+GND             3 uses
+SB_CARRY        69 uses
+SB_DFF          46 uses
+SB_DFFE         188 uses
+SB_DFFN         15 uses
+SB_DFFNE        16 uses
 SB_GB           1 use
-VCC             2 uses
-SB_LUT4         1167 uses
+VCC             3 uses
+SB_LUT4         1086 uses
 
 I/O ports: 6
-I/O primitives: 5
+I/O primitives: 6
 SB_GB_IO       1 use
-SB_IO          4 uses
+SB_IO          5 uses
 
 I/O Register bits:                  0
-Register bits not including I/Os:   212 (2%)
+Register bits not including I/Os:   265 (3%)
 Total load per clock:
    top|CLK: 1
 
 @S |Mapping Summary:
-Total  LUTs: 1167 (15%)
+Total  LUTs: 1086 (14%)
 
 Distribution of All Consumed LUTs = LUT4 
-Distribution of All Consumed Luts 1167 = 1167 
+Distribution of All Consumed Luts 1086 = 1086 
 
 Mapper successful!
 
-At Mapper Exit (Real Time elapsed 0h:00m:07s; CPU Time elapsed 0h:00m:07s; Memory used current: 30MB peak: 193MB)
+At Mapper Exit (Real Time elapsed 0h:00m:08s; CPU Time elapsed 0h:00m:08s; Memory used current: 30MB peak: 201MB)
 
-Process took 0h:00m:07s realtime, 0h:00m:07s cputime
-# Sat Aug 15 12:48:51 2020
+Process took 0h:00m:08s realtime, 0h:00m:08s cputime
+# Tue Aug 18 14:54:58 2020
 
 ###########################################################]

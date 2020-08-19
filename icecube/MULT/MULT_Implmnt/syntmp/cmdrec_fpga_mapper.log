@@ -1,14 +1,14 @@
 C:\lscc\iCEcube2.2017.08\synpbase\bin64\m_generic.exe  -prodtype  synplify_pro   -encrypt  -pro  -rundir  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt   -part iCE40HX8K  -package CT256    -maxfan 10000 -RWCheckOnRam 0 -pipe -fixgatedclocks 1 -fixgeneratedclocks 1 -summaryfile C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synlog\report\MULT_fpga_mapper.xml  -flow mapping  -multisrs  -oedif  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.edf   -autoconstraint  -freq 1.000   C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synwork\MULT_prem.srd  -sap  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap  -otap  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.tap  -omap  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.map  -devicelib  C:\lscc\iCEcube2.2017.08\synpbase\lib\generic\sb_ice40.v  -sap  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap  -ologparam  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\syntmp\MULT.plg  -osyn  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.srm  -prjdir  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\  -prjname  MULT_syn  -log  C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synlog\MULT_fpga_mapper.srr 
-rc:1 success:1 runtime:8
-file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.edf|io:o|time:1597520930|size:845602|exec:0
-file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synwork\MULT_prem.srd|io:i|time:1597520923|size:20427|exec:0
-file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap|io:o|time:1597520923|size:1095|exec:0
+rc:1 success:1 runtime:9
+file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.edf|io:o|time:1597787698|size:728884|exec:0
+file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synwork\MULT_prem.srd|io:i|time:1597787689|size:30773|exec:0
+file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap|io:o|time:1597787689|size:1580|exec:0
 file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.tap|io:o|time:0|size:0|exec:0
-file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.map|io:o|time:1597520931|size:28|exec:0
+file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.map|io:o|time:1597787698|size:28|exec:0
 file:C:\lscc\iCEcube2.2017.08\synpbase\lib\generic\sb_ice40.v|io:i|time:1586043136|size:224837|exec:0
-file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap|io:o|time:1597520923|size:1095|exec:0
-file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\syntmp\MULT.plg|io:o|time:1597520931|size:431|exec:0
-file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.srm|io:o|time:1597520930|size:23437|exec:0
-file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synlog\MULT_fpga_mapper.srr|io:o|time:1597520931|size:51539|exec:0
+file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap|io:o|time:1597787689|size:1580|exec:0
+file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\syntmp\MULT.plg|io:o|time:1597787698|size:431|exec:0
+file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.srm|io:o|time:1597787697|size:23526|exec:0
+file:C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synlog\MULT_fpga_mapper.srr|io:o|time:1597787698|size:59706|exec:0
 file:C:\lscc\iCEcube2.2017.08\synpbase\bin\m_generic.exe|io:i|time:1586043130|size:17853440|exec:1
 file:C:\lscc\iCEcube2.2017.08\synpbase\bin64\m_generic.exe|io:i|time:1586043132|size:32355840|exec:1

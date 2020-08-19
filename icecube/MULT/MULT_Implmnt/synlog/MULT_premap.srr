@@ -1,4 +1,4 @@
-# Sat Aug 15 12:48:42 2020
+# Tue Aug 18 14:54:49 2020
 
 Synopsys Lattice Technology Pre-mapping, Version maplat, Build 1612R, Built Dec  5 2016 10:31:39
 Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
@@ -12,36 +12,32 @@ Printing clock  summary report in "C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\R
 @N: MF248 |Running in 64-bit mode.
 @N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
 
-Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 103MB)
+Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 101MB peak: 103MB)
 
 
-Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 103MB)
+Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 101MB peak: 103MB)
 
 
-Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 101MB peak: 103MB)
+Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 102MB peak: 103MB)
 
 
-Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 101MB peak: 104MB)
+Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 102MB peak: 104MB)
 
 
 Making connections to hyper_source modules
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":91:39:91:39|Connected syn_hyper_connect __xmr_use__1_, tag __xmr_tag__10_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":90:39:90:39|Connected syn_hyper_connect __xmr_use__3_, tag __xmr_tag__f_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":89:39:89:39|Connected syn_hyper_connect __xmr_use__5_, tag __xmr_tag__e_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":88:39:88:39|Connected syn_hyper_connect __xmr_use__7_, tag __xmr_tag__d_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":87:39:87:39|Connected syn_hyper_connect __xmr_use__9_, tag __xmr_tag__c_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":86:39:86:39|Connected syn_hyper_connect __xmr_use__11_, tag __xmr_tag__b_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":85:38:85:38|Connected syn_hyper_connect __xmr_use__13_, tag __xmr_tag__a_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":84:38:84:38|Connected syn_hyper_connect __xmr_use__15_, tag __xmr_tag__9_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":83:37:83:37|Connected syn_hyper_connect __xmr_use__17_, tag __xmr_tag__8_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":82:37:82:37|Connected syn_hyper_connect __xmr_use__19_, tag __xmr_tag__7_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":81:37:81:37|Connected syn_hyper_connect __xmr_use__21_, tag __xmr_tag__6_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":80:37:80:37|Connected syn_hyper_connect __xmr_use__23_, tag __xmr_tag__5_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":79:37:79:37|Connected syn_hyper_connect __xmr_use__25_, tag __xmr_tag__4_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":78:37:78:37|Connected syn_hyper_connect __xmr_use__27_, tag __xmr_tag__3_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":77:37:77:37|Connected syn_hyper_connect __xmr_use__29_, tag __xmr_tag__2_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":76:37:76:37|Connected syn_hyper_connect __xmr_use__31_, tag __xmr_tag__1_0_7d5186020056a223808828e9cc25bba0
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXready (in view: work.uart(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":235:32:235:32|Connected syn_hyper_connect __xmr_use__1_, tag __xmr_tag__2_0_7d5186020056a223808828e9cc25bba0
+@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":82:21:82:23|Connected syn_hyper_connect __xmr_use__3_, tag __xmr_tag__1_0_7d5186020056a223808828e9cc25bba0
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_1 (in view: work.control(verilog)) on net hreg_1 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_2 (in view: work.control(verilog)) on net hreg_2 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_3 (in view: work.control(verilog)) on net hreg_3 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_4 (in view: work.control(verilog)) on net hreg_4 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_5 (in view: work.control(verilog)) on net hreg_5 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_6 (in view: work.control(verilog)) on net hreg_6 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_7 (in view: work.control(verilog)) on net hreg_7 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_8 (in view: work.control(verilog)) on net hreg_8 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_9 (in view: work.control(verilog)) on net hreg_9 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_10 (in view: work.control(verilog)) on net hreg_10 (in view: work.control(verilog)) has its enable tied to GND.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Removing sequential instance ramWrite (in view: work.control(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
 ICG Latch Removal Summary:
 Number of ICG latches removed:	0
 Number of ICG latches not removed:	0
@@ -54,27 +50,20 @@ Finished netlist restructuring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0
 Clock Summary
 *****************
 
-Start       Requested     Requested     Clock        Clock                     Clock
-Clock       Frequency     Period        Type         Group                     Load 
-------------------------------------------------------------------------------------
-top|CLK     4.1 MHz       242.665       inferred     Autoconstr_clkgroup_0     210  
-====================================================================================
+Start                           Requested     Requested     Clock                      Clock                     Clock
+Clock                           Frequency     Period        Type                       Group                     Load 
+----------------------------------------------------------------------------------------------------------------------
+top|CLK                         1.0 MHz       1000.000      inferred                   Autoconstr_clkgroup_0     100  
+top|testClock_derived_clock     1.0 MHz       1000.000      derived (from top|CLK)     Autoconstr_clkgroup_0     152  
+======================================================================================================================
 
-@W: MT529 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|Found inferred clock top|CLK which controls 210 sequential elements including FTDI.TXstate[3:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+@W: MT529 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|Found inferred clock top|CLK which controls 100 sequential elements including FTDI.TXstate[3:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
 
 Finished Pre Mapping Phase.
 @N: BN225 |Writing default property annotation file C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap.
 
 Starting constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 132MB peak: 134MB)
 
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[0] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[1] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[2] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[3] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[4] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[5] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[6] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[7] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
 None
 None
 
@@ -82,9 +71,9 @@ Finished constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:0
 
 Pre-mapping successful!
 
-At Mapper Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 47MB peak: 134MB)
+At Mapper Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 48MB peak: 134MB)
 
 Process took 0h:00m:01s realtime, 0h:00m:01s cputime
-# Sat Aug 15 12:48:43 2020
+# Tue Aug 18 14:54:49 2020
 
 ###########################################################]

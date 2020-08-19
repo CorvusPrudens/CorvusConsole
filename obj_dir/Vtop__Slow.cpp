@@ -34,11 +34,11 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     // Body
     vlTOPp->GPIO9 = 1U;
     vlTOPp->GPIO11 = 0U;
-    vlTOPp->top__DOT__testWord = 0U;
+    vlTOPp->top__DOT__CONTROL__DOT__ramAddMode = 0U;
     vlTOPp->top__DOT__aluParams = 0U;
     vlTOPp->top__DOT__ALU__DOT__operand2 = 0U;
-    vlTOPp->top__DOT__busState = 0U;
     vlTOPp->top__DOT__aluOperand2 = 0U;
+    vlTOPp->top__DOT__busState = 0U;
     vlTOPp->top__DOT__ALU__DOT__operand1 = 0U;
     vlTOPp->top__DOT__aluOperand1 = 0U;
     vlTOPp->top__DOT__ALU__DOT__b = 0U;
@@ -55,23 +55,24 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     vlTOPp->top__DOT__FTDI__DOT__baudAcc = 0U;
     vlTOPp->top__DOT__FTDI__DOT__TXshift = 0U;
     vlTOPp->top__DOT__FTDI__DOT__TXstate = 0U;
+    vlTOPp->top__DOT__CONTROL__DOT__increment = 0U;
+    vlTOPp->top__DOT__CONTROL__DOT__programCounter = 0U;
+    vlTOPp->top__DOT__overflow = 0U;
+    vlTOPp->top__DOT__testWord = 0U;
     vlTOPp->top__DOT__testState = 0U;
     vlTOPp->top__DOT__RXready = 0U;
     vlTOPp->top__DOT__ALU__DOT__a = 2U;
     vlTOPp->top__DOT__FTDI__DOT__RXstate = 0U;
-    vlTOPp->top__DOT__FTDI__DOT__gap = 0U;
-    vlTOPp->top__DOT__RXbuffer = 0U;
     vlTOPp->top__DOT__aluResults = 0U;
     vlTOPp->top__DOT__aluOperation = 0U;
-    vlTOPp->top__DOT__CONTROL__DOT__increment = 0U;
-    vlTOPp->top__DOT__CONTROL__DOT__programCounter = 0U;
-    vlTOPp->top__DOT__overflow = 0U;
+    vlTOPp->top__DOT__FTDI__DOT__gap = 0U;
     vlTOPp->top__DOT__bus = 0U;
     vlTOPp->top__DOT__aluReadBus = 0U;
+    vlTOPp->top__DOT__RXbuffer = 0U;
 }
 
-void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_settle__TOP__4\n"); );
+void Vtop::_settle__TOP__6(Vtop__Syms* __restrict vlSymsp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_settle__TOP__6\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
     vlTOPp->GPIO3 = (1U & (vlTOPp->top__DOT__clkdiv 
@@ -338,22 +339,33 @@ void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
                                                    ((0xff00U 
                                                      & (IData)(vlTOPp->top__DOT__bus)) 
                                                     | (IData)(vlTOPp->top__DOT__RXbuffer)))))
-                              : ((4U & (IData)(vlTOPp->top__DOT__busState))
-                                  ? ((2U & (IData)(vlTOPp->top__DOT__busState))
-                                      ? ((1U & (IData)(vlTOPp->top__DOT__busState))
-                                          ? (IData)(vlTOPp->top__DOT__clkOut)
-                                          : 4U) : (
-                                                   (1U 
-                                                    & (IData)(vlTOPp->top__DOT__busState))
-                                                    ? (IData)(vlTOPp->top__DOT__apuOut)
-                                                    : (IData)(vlTOPp->top__DOT__gpuOut)))
-                                  : ((2U & (IData)(vlTOPp->top__DOT__busState))
-                                      ? ((1U & (IData)(vlTOPp->top__DOT__busState))
-                                          ? (IData)(vlTOPp->top__DOT__romOut)
-                                          : (IData)(vlTOPp->top__DOT__ramOut))
-                                      : ((1U & (IData)(vlTOPp->top__DOT__busState))
-                                          ? (IData)(vlTOPp->top__DOT__ALU__DOT__operand1)
-                                          : 0U))));
+                              : (0xffffU & ((4U & (IData)(vlTOPp->top__DOT__busState))
+                                             ? ((2U 
+                                                 & (IData)(vlTOPp->top__DOT__busState))
+                                                 ? 
+                                                ((1U 
+                                                  & (IData)(vlTOPp->top__DOT__busState))
+                                                  ? (IData)(vlTOPp->top__DOT__clkOut)
+                                                  : 
+                                                 (vlTOPp->top__DOT__testWord 
+                                                  >> 0x10U))
+                                                 : 
+                                                ((1U 
+                                                  & (IData)(vlTOPp->top__DOT__busState))
+                                                  ? (IData)(vlTOPp->top__DOT__apuOut)
+                                                  : (IData)(vlTOPp->top__DOT__gpuOut)))
+                                             : ((2U 
+                                                 & (IData)(vlTOPp->top__DOT__busState))
+                                                 ? 
+                                                ((1U 
+                                                  & (IData)(vlTOPp->top__DOT__busState))
+                                                  ? (IData)(vlTOPp->top__DOT__romOut)
+                                                  : (IData)(vlTOPp->top__DOT__ramOut))
+                                                 : 
+                                                ((1U 
+                                                  & (IData)(vlTOPp->top__DOT__busState))
+                                                  ? (IData)(vlTOPp->top__DOT__ALU__DOT__operand1)
+                                                  : 0U)))));
     vlTOPp->top__DOT__ALU__DOT__combOperand2 = ((IData)(vlTOPp->top__DOT__aluReadBus)
                                                  ? (IData)(vlTOPp->top__DOT__bus)
                                                  : (IData)(vlTOPp->top__DOT__ALU__DOT__operand2));
@@ -417,7 +429,7 @@ void Vtop::_eval_settle(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_eval_settle\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    vlTOPp->_settle__TOP__4(vlSymsp);
+    vlTOPp->_settle__TOP__6(vlSymsp);
     vlTOPp->__Vm_traceActivity[6U] = 1U;
     vlTOPp->__Vm_traceActivity[5U] = 1U;
     vlTOPp->__Vm_traceActivity[4U] = 1U;
@@ -471,6 +483,7 @@ void Vtop::_ctor_var_reset() {
     top__DOT__FTDI__DOT__gap = VL_RAND_RESET_I(3);
     top__DOT__FTDI__DOT__nextBit = VL_RAND_RESET_I(1);
     top__DOT__CONTROL__DOT__increment = VL_RAND_RESET_I(1);
+    top__DOT__CONTROL__DOT__ramAddMode = VL_RAND_RESET_I(1);
     top__DOT__CONTROL__DOT__programCounter = VL_RAND_RESET_I(16);
     top__DOT__ALU__DOT__a = VL_RAND_RESET_I(16);
     top__DOT__ALU__DOT__b = VL_RAND_RESET_I(16);
@@ -488,6 +501,7 @@ void Vtop::_ctor_var_reset() {
     top__DOT__ALU__DOT__operand1 = VL_RAND_RESET_I(16);
     top__DOT__ALU__DOT__operand2 = VL_RAND_RESET_I(16);
     top__DOT__ALU__DOT__combOperand2 = VL_RAND_RESET_I(16);
+    __Vdly__top__DOT__testState = VL_RAND_RESET_I(4);
     __VinpClk__TOP__top__DOT__testClock = VL_RAND_RESET_I(1);
     __Vchglast__TOP__top__DOT__testClock = VL_RAND_RESET_I(1);
     { int __Vi0=0; for (; __Vi0<7; ++__Vi0) {

@@ -1,19 +1,31 @@
 @N: MF248 |Running in 64-bit mode.
 @N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_1 (in view: work.control(verilog)) on net romAdd_1 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_2 (in view: work.control(verilog)) on net romAdd_2 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_3 (in view: work.control(verilog)) on net romAdd_3 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_4 (in view: work.control(verilog)) on net romAdd_4 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_5 (in view: work.control(verilog)) on net romAdd_5 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_6 (in view: work.control(verilog)) on net romAdd_6 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_7 (in view: work.control(verilog)) on net romAdd_7 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_8 (in view: work.control(verilog)) on net romAdd_8 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_9 (in view: work.control(verilog)) on net romAdd_9 (in view: work.control(verilog)) has its enable tied to GND.
+@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":21:23:21:28|Tristate driver romAdd_10 (in view: work.control(verilog)) on net romAdd_10 (in view: work.control(verilog)) has its enable tied to GND.
 @N: MT206 |Auto Constrain mode is enabled
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXstate[3:0] (in view: work.uart(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance gap[2:0] (in view: work.uart(verilog)) of type view:PrimLib.sdffr(prim) because it does not drive other instances.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|Removing sequential instance RXbuffer[7:0] (in view: work.uart(verilog)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
-@N: MO231 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Found counter in view:work.top(verilog) instance clkdiv[23:0] 
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":109:2:109:7|Removing sequential instance ALU.overflow (in view: work.top(verilog)) because it does not drive other instances.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[2] (in view: work.top(verilog)) with 62 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[2] (in view: work.top(verilog)) with 56 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[0] (in view: work.top(verilog)) with 40 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[0] (in view: work.top(verilog)) with 44 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance a[1] (in view: work.top(verilog)) with 76 loads 3 times to improve timing.
-@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":63:2:63:7|Replicating instance b[1] (in view: work.top(verilog)) with 32 loads 3 times to improve timing.
-@N: FX1016 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":10:15:10:17|SB_GB_IO inserted on the port CLK.
-@N: FX1017 :|SB_GB inserted on the net params5.
+@N: MO106 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|Found ROM .delname. (in view: work.control(verilog)) with 19 words by 3 bits.
+@N: MO106 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|Found ROM .delname. (in view: work.control(verilog)) with 19 words by 1 bit.
+@N: MO231 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|Found counter in view:work.top(verilog) instance clkdiv[23:0] 
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|Removing sequential instance testWord[6] (in view: work.top(verilog)) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|Removing sequential instance testWord[0] (in view: work.top(verilog)) because it does not drive other instances.
+@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|Removing sequential instance ALU.overflow (in view: work.top(verilog)) because it does not drive other instances.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand2[2] (in view: work.top(verilog)) with 71 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand1[1] (in view: work.top(verilog)) with 62 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand1[2] (in view: work.top(verilog)) with 35 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand2[0] (in view: work.top(verilog)) with 35 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.aluReadBus (in view: work.top(verilog)) with 121 loads 3 times to improve timing.
+@N: FX271 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Replicating instance CONTROL.operand2[1] (in view: work.top(verilog)) with 31 loads 2 times to improve timing.
+@N: FX1016 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":13:15:13:17|SB_GB_IO inserted on the port CLK.
+@N: FX1017 :|SB_GB inserted on the net testState_i[2].
+@N: MT611 :|Automatically generated clock top|testClock_derived_clock is not used and is being removed
 @N: BW103 |The default time unit for the Synopsys Constraint File (SDC or FDC) is 1ns.
 @N: BW107 |Synopsys Constraint File capacitance units using default value of 1pF 
 @N: FX1056 |Writing EDF file: C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.edf

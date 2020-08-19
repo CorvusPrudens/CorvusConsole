@@ -147,14 +147,13 @@ int main(int argc, char** argv) {
   char inputString[6] = {0};
 
   char instCap[32][5] = {
-    "NOP", "LDR", "STR", "ADD",
-    "SUB", "MUL", "DIV", "MOD",
-    "LDI", "ADI", "SBI", "MLI",
-    "DVI", "MDI", "AND", "OR",
-    "XOR", "NOT", "ANI", "ORI",
-    "XRI", "LSL", "LSR", "PSH",
-    "POP", "PEK", "JMP", "JZ",
-    "JC",  "JSR", "RTS"
+    "NOP", "LDR", "STR", "LPT",
+    "SPT", "CMP", "ADD", "SUB",
+    "MUL", "DIV", "MOD", "AND",
+    "OR",  "XOR", "NOT", "LSL",
+    "LSR", "PSH", "POP", "PEK",
+    "JMP", "JSR", "RTS", "JC",
+    "JSC", "RSC"
   };
 
   char regCap[8][2] = {
@@ -167,6 +166,11 @@ int main(int argc, char** argv) {
   scanf("%s", &inputString);
   int match = 0;
   int instr = 0;
+
+  if (inputString[0] == '.') {
+    return 0;
+  }
+
   for (int i = 0; i < 32; i++){
     if (equals(instCap[i], inputString)) {
       instr = i;
@@ -179,6 +183,7 @@ int main(int argc, char** argv) {
     goto beginloop;
   }
   data[0] = instr*2;
+  //printf("%d, %d", data[0], instr);
 
   arg1loop:
   printf("Argument 1:\n");
@@ -245,8 +250,47 @@ int main(int argc, char** argv) {
   scanf("%d", &input);
   data[4] = input;
 
+  // lol why
+  // converting op details to their proper packed representation
+  data[0] |= data[1] << 7;
+  data[1] >>= 1;
+  data[1] |= data[2] << 2;
+  data[1] |= data[3] << 5;
+  data[2] = data[4] & 255;
+  data[3] = data[4] >> 8;
 
+  //initialization tick
+  tick(tb, tfp, ++logicStep);
+  int sendState = 0;
+  int go = 1;
+  int innum = 0;
+  // Shouldn't need more than 200 cycles
+  int currentStep = logicStep;
+  while (logicStep - currentStep < 240){
+    int status = uart(tb, go, data[sendState], &out);
+    tick(tb, tfp, ++logicStep);
+    if ((status & 4) > 0){
+      // sendState++;
+      if (sendState == 3){
+        go = 0;
+        //sendState = 0;
+      } else {
+        //printf("%d", sendState);
+        sendState++;
+      }
+    }
+    if ((status & 2) > 0){
+      inbuff[innum] = out;
+      innum += 1;
+      if (innum == 1){
+        break;
+      }
+    }
+  }
 
+  printf("A register: %d\n", inbuff[0]);
+
+  goto beginloop;
   // int out = 0;
   // int data[9] = {0};
   // int inbuff[20] = {0};
