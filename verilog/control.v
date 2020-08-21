@@ -62,10 +62,10 @@ module control(
           if (opvar[0]) begin // ROM TODO
             busState <= 4'h2;
           end else begin
-            busState <= 4'h2;
+            busState <= opvar[1] ? 4'h6 : 4'h2;
             ramWrite <= 1'b0;
             results <= resultsWire;
-            aluOperation[5] <= 1'b0;
+            aluOperation[5] <= 1'b1;
             increment <= 1'b1;
             aluReadBus <= 1'b1;
             ramAddMode <= 1'b0;
@@ -97,13 +97,17 @@ module control(
         end
       5'h04: // SPT
         begin
-          busState <= 4'h1;
-          ramWrite <= 1'b1;
-          operand1 <= operand1Wire;
-          aluOperation[5] <= 1'b0;
-          increment <= 1'b1;
-          aluReadBus <= 1'b0;
-          ramAddMode <= 1'b1;
+          if (opvar[0]) begin // ROM TODO
+            busState <= 4'h2;
+          end else begin
+            busState <= 4'h1;
+            ramWrite <= 1'b1;
+            operand1 <= operand1Wire;
+            aluOperation[5] <= 1'b0;
+            increment <= 1'b1;
+            aluReadBus <= 1'b0;
+            ramAddMode <= 1'b1;
+          end
         end
       5'h05: // CMP TODO
         begin
@@ -116,7 +120,6 @@ module control(
         end
       5'h06: // ADD
         begin
-          busState <= 4'h0;
           ramWrite <= 1'b0;
           operand1 <= operand1Wire;
           operand2 <= operand2Wire;
@@ -124,11 +127,12 @@ module control(
           aluOperation <= 6'b100001;
           aluParams[0] <= 1'b0;
           increment <= 1'b1;
+          busState <= 4'h6; // just in case an immediate
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h07: // SUB
         begin
-          busState <= 4'h0;
+          busState <= 4'h6;
           ramWrite <= 1'b0;
           operand1 <= operand1Wire;
           operand2 <= operand2Wire;
@@ -140,7 +144,7 @@ module control(
         end
       5'h08: // MUL
         begin
-          busState <= 4'h0;
+          busState <= 4'h6;
           ramWrite <= 1'b0;
           operand1 <= operand1Wire;
           operand2 <= operand2Wire;
@@ -170,7 +174,7 @@ module control(
         end
       5'h0B: // AND
         begin
-          busState <= 4'h0;
+          busState <= 4'h6;
           ramWrite <= 1'b0;
           operand1 <= operand1Wire;
           operand2 <= operand2Wire;
@@ -182,7 +186,7 @@ module control(
         end
       5'h0C: // OR
         begin
-          busState <= 4'h0;
+          busState <= 4'h6;
           ramWrite <= 1'b0;
           operand1 <= operand1Wire;
           operand2 <= operand2Wire;
@@ -194,7 +198,7 @@ module control(
         end
       5'h0D: // XOR
         begin
-          busState <= 4'h0;
+          busState <= 4'h6;
           ramWrite <= 1'b0;
           operand1 <= operand1Wire;
           operand2 <= operand2Wire;
@@ -206,7 +210,7 @@ module control(
         end
       5'h0E: // NOT
         begin
-          busState <= 4'h0;
+          busState <= 4'h6;
           ramWrite <= 1'b0;
           operand1 <= operand1Wire;
           results <= resultsWire;

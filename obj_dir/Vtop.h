@@ -30,6 +30,59 @@ VL_MODULE(Vtop) {
     VL_OUT8(GPIO3,0,0);
     VL_OUT8(GPIO9,0,0);
     VL_OUT8(GPIO11,0,0);
+    VL_OUT8(CE,0,0);
+    VL_OUT8(OE,0,0);
+    VL_OUT8(WR,0,0);
+    VL_OUT8(UB,0,0);
+    VL_OUT8(LB,0,0);
+    VL_OUT8(A0,0,0);
+    VL_OUT8(A1,0,0);
+    VL_OUT8(A2,0,0);
+    VL_OUT8(A3,0,0);
+    VL_OUT8(A4,0,0);
+    VL_OUT8(A5,0,0);
+    VL_OUT8(A6,0,0);
+    VL_OUT8(A7,0,0);
+    VL_OUT8(A8,0,0);
+    VL_OUT8(A9,0,0);
+    VL_OUT8(A10,0,0);
+    VL_OUT8(A11,0,0);
+    VL_OUT8(A12,0,0);
+    VL_OUT8(A13,0,0);
+    VL_OUT8(A14,0,0);
+    VL_OUT8(A15,0,0);
+    VL_OUT8(D0,0,0);
+    VL_OUT8(D1,0,0);
+    VL_OUT8(D2,0,0);
+    VL_OUT8(D3,0,0);
+    VL_OUT8(D4,0,0);
+    VL_OUT8(D5,0,0);
+    VL_OUT8(D6,0,0);
+    VL_OUT8(D7,0,0);
+    VL_OUT8(D8,0,0);
+    VL_OUT8(D9,0,0);
+    VL_OUT8(D10,0,0);
+    VL_OUT8(D11,0,0);
+    VL_OUT8(D12,0,0);
+    VL_OUT8(D13,0,0);
+    VL_OUT8(D14,0,0);
+    VL_OUT8(D15,0,0);
+    VL_IN8(D0_in,0,0);
+    VL_IN8(D1_in,0,0);
+    VL_IN8(D2_in,0,0);
+    VL_IN8(D3_in,0,0);
+    VL_IN8(D4_in,0,0);
+    VL_IN8(D5_in,0,0);
+    VL_IN8(D6_in,0,0);
+    VL_IN8(D7_in,0,0);
+    VL_IN8(D8_in,0,0);
+    VL_IN8(D9_in,0,0);
+    VL_IN8(D10_in,0,0);
+    VL_IN8(D11_in,0,0);
+    VL_IN8(D12_in,0,0);
+    VL_IN8(D13_in,0,0);
+    VL_IN8(D14_in,0,0);
+    VL_IN8(D15_in,0,0);
     
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
@@ -45,6 +98,7 @@ VL_MODULE(Vtop) {
     CData/*5:0*/ top__DOT__aluOperation;
     CData/*3:0*/ top__DOT__aluParams;
     CData/*0:0*/ top__DOT__aluReadBus;
+    CData/*0:0*/ top__DOT__ramWrite;
     CData/*0:0*/ top__DOT__overflow;
     CData/*3:0*/ top__DOT__testState;
     CData/*2:0*/ top__DOT__FTDI__DOT__baudAcc;
@@ -58,6 +112,7 @@ VL_MODULE(Vtop) {
     CData/*0:0*/ top__DOT__CONTROL__DOT__increment;
     CData/*0:0*/ top__DOT__CONTROL__DOT__ramAddMode;
     SData/*15:0*/ top__DOT__hreg;
+    SData/*15:0*/ top__DOT__ramAddress;
     SData/*15:0*/ top__DOT__romAddress;
     SData/*15:0*/ top__DOT__ramOut;
     SData/*15:0*/ top__DOT__romOut;
@@ -132,6 +187,9 @@ VL_MODULE(Vtop) {
   private:
     static QData _change_request(Vtop__Syms* __restrict vlSymsp);
     static QData _change_request_1(Vtop__Syms* __restrict vlSymsp);
+  public:
+    static void _combo__TOP__8(Vtop__Syms* __restrict vlSymsp);
+  private:
     void _ctor_var_reset() VL_ATTR_COLD;
   public:
     static void _eval(Vtop__Syms* __restrict vlSymsp);
@@ -144,13 +202,14 @@ VL_MODULE(Vtop) {
     static void _eval_settle(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _initial__TOP__1(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _multiclk__TOP__10(Vtop__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__9(Vtop__Syms* __restrict vlSymsp);
+    static void _multiclk__TOP__11(Vtop__Syms* __restrict vlSymsp);
+    static void _multiclk__TOP__12(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__2(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__3(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__4(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__5(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__7(Vtop__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__8(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__9(Vtop__Syms* __restrict vlSymsp);
     static void _settle__TOP__6(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
   private:
     static void traceChgSub0(void* userp, VerilatedVcd* tracep);

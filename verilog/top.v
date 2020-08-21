@@ -6,7 +6,7 @@
 
 `include "uart.v"
 `include "alu.v"
-//`include "ram.v"
+`include "ram.v"
 `include "control.v"
 
 module top(
@@ -20,7 +20,21 @@ module top(
     // output wire GPIO2,
     output wire GPIO3,
     output wire GPIO9,
-    output wire GPIO11
+    output wire GPIO11,
+
+    output wire CE, OE, WR, UB, LB,
+
+    output wire A0, A1, A2,  A3,  A4,  A5,  A6,  A7,
+    output wire A8, A9, A10, A11, A12, A13, A14, A15,
+
+    // inout wire D0, D1, D2,  D3,  D4,  D5,  D6,  D7,
+    // inout wire D8, D9, D10, D11, D12, D13, D14, D15
+    //sim hack:
+    output wire D0, D1, D2,  D3,  D4,  D5,  D6,  D7,
+    output wire D8, D9, D10, D11, D12, D13, D14, D15,
+
+    input wire D0_in, D1_in, D2_in,  D3_in,  D4_in,  D5_in,  D6_in,  D7_in,
+    input wire D8_in, D9_in, D10_in, D11_in, D12_in, D13_in, D14_in, D15_in
   );
 
   // UART communication
@@ -78,7 +92,7 @@ module top(
   wire [3:0] aluParams;
   wire aluReadBus;
 
-  wire ramWrite = 1'b0;
+  wire ramWrite;
   wire [15:0] greg = ALU.g;
   wire [15:0] hreg;
 
@@ -152,6 +166,34 @@ module top(
       .params(aluParams),
       .overflow(overflow)
     );
+
+  // RAM
+  ram RAM(
+      .CLK(CLK),
+      .address(ramAddress),
+      .dataIn(bus),
+      .write(ramWrite),
+      .dataOut(ramOut),
+
+      .CE(CE), .OE(OE), .WR(WR), .UB(UB), .LB(LB),
+
+      .A0(A0), .A1(A1), .A2(A2), .A3(A3),
+      .A4(A4), .A5(A5), .A6(A6), .A7(A7),
+      .A8(A8), .A9(A9), .A10(A10), .A11(A11),
+      .A12(A12), .A13(A13), .A14(A14), .A15(A15),
+
+      .D0(D0), .D1(D1), .D2(D2), .D3(D3),
+      .D4(D4), .D5(D5), .D6(D6), .D7(D7),
+      .D8(D8), .D9(D9), .D10(D10), .D11(D11),
+      .D12(D12), .D13(D13), .D14(D14), .D15(D15),
+
+      //sim hack
+      .D0_in(D0_in), .D1_in(D1_in), .D2_in(D2_in), .D3_in(D3_in),
+      .D4_in(D4_in), .D5_in(D5_in), .D6_in(D6_in), .D7_in(D7_in),
+      .D8_in(D8_in), .D9_in(D9_in), .D10_in(D10_in), .D11_in(D11_in),
+      .D12_in(D12_in), .D13_in(D13_in), .D14_in(D14_in), .D15_in(D15_in)
+    );
+
 
   reg [3:0] testState = 0;
   reg [24:0] clkdiv = 0;

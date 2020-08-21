@@ -37,6 +37,7 @@ def main():
   ass.reorderInstructions(assembly, infile)
   ass.addLabels(assembly, vars, lines)
   code = ass.encode(assembly, vars, lines, dict)
+  ass.write(code, outfile)
 
   for line in assembly:
     print(line)

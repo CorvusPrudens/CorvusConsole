@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 instructions = [
   "nop", "ldr", "str", "lpt",
@@ -64,6 +65,13 @@ def inst2word(instruction):
   word[3] = ((instruction[4] >> 8) & 255) & 255
   return word
 
+def write(code, outfile):
+  arr = np.array(code, dtype='u1')
+  arr = arr.tobytes()
+  with open(outfile, 'wb') as file:
+    file.write(arr)
+
+
 def encode(lines, variables, preserved, dict):
   code = []
   for i in range(len(lines)):
@@ -75,10 +83,111 @@ def encode(lines, variables, preserved, dict):
       exit()
     if opcode == 0: # nop
       pass
-    if opcode == 3 or opcode == 4:
+    if opcode == 1: # LDR
       inst = [opcode << 2, 0, 0, 0, 0]
-      
-    if opcode > 5 and opcode < 13: # mathematical operations
+      res = find(lines[i][2][1], registers)
+      if res == -1:
+        err(preserved, lines[i][0])
+        print("-> invalid register \'{}\' for results".format(lines[i][2][1]))
+        exit()
+      inst[3] = res
+      if str(lines[i][2][2]).isnumeric(): # what about hex/bin literals?
+        inst[0] |= 2
+        inst[4] = int(lines[i][2][2])
+      elif ismathy(lines[i][2][2], 0):
+        inst[0] |= 2
+        solution = 0
+        try:
+          solution = round(eval(lines[i][2][2], {}, dict))
+        except NameError:
+          err(preserved, lines[i][0])
+          print("-> undefined assignment")
+          exit()
+        except SyntaxError:
+          err(preserved, lines[i][0])
+          print("-> invalid syntax")
+          exit()
+        except AttributeError:
+          err(preserved, lines[i][0])
+          print("-> scope does not contain element")
+          exit()
+        except TypeError:
+          err(preserved, lines[i][0])
+          print("-> undefined assignment")
+          exit()
+        inst[4] = solution
+      else:
+        found = False
+        for variable in variables:
+          if lines[i][2][2] == variable[1]:
+            inst[0] |= 2
+            inst[4] = int(variable[2])
+            found = True
+            break
+          elif lines[i][2][2] == variable[2]:
+            if 'const' in variable[0]:
+              inst[0] |= 1
+            inst[4] = int(variable[1])
+            found = True
+            break
+        if not found:
+          err(preserved, lines[i][0])
+          print("-> undefined argument \'{}\'".format(lines[i][2][2]))
+          exit()
+    elif opcode == 2: # STR
+      inst = [opcode << 2, 0, 0, 0, 0]
+      op1 = find(lines[i][2][1], registers)
+      if op1 == -1:
+        err(preserved, lines[i][0])
+        print("-> invalid register \'{}\' for operand".format(lines[i][2][1]))
+        exit()
+      inst[1] = op1
+      if len(lines[i][2]) != 3 or str(lines[i][2][2]).isnumeric():
+        err(preserved, lines[i][0])
+        print("-> invalid syntax")
+        exit()
+      for variable in variables:
+        found = False
+        if lines[i][2][2] == variable[2]:
+          if 'const' in variable[0]:
+            err(preserved, lines[i][0])
+            print("-> argument \'{}\' must be a RAM address".format(lines[i][2][2]))
+            exit()
+          inst[4] = int(variable[1])
+          found = True
+          break
+        elif lines[i][2][2] == variable[1]:
+          err(preserved, lines[i][0])
+          print("-> argument \'{}\' must be a RAM address".format(lines[i][2][2]))
+          exit()
+      if not found:
+        err(preserved, lines[i][0])
+        print("-> undefined argument \'{}\'".format(lines[i][2][2]))
+        exit()
+    elif opcode == 3 or opcode == 4:
+      inst = [opcode << 2, 0, 0, 0, 0]
+      res = find(lines[i][2][1], registers)
+      if res == -1:
+        err(preserved, lines[i][0])
+        print("-> invalid register \'{}\' for results".format(lines[i][2][1]))
+        exit()
+      if opcode == 3:
+        inst[3] = res
+      else:
+        inst[1] = res
+      if len(lines[i][2]) != 3:
+        err(preserved, lines[i][0])
+        print("-> invalid syntax")
+        exit()
+      if lines[i][2][2] == 'RAM':
+        pass
+      elif lines[i][2][2] == 'ROM':
+        inst[0] |= 1
+      else:
+        err(preserved, lines[i][0])
+        print("-> \'{}\' must be set to \'RAM\' or \'ROM\'".format(lines[i][2][2]))
+        exit()
+    elif opcode > 5 and opcode < 13: # mathematical operations
       inst = [opcode << 2, 0, 0, 0, 0]
       if lines[i][2][1] in registers:
         inst[1] = find(lines[i][2][1], registers)
@@ -133,6 +242,22 @@ def encode(lines, variables, preserved, dict):
           print("-> invalid register \'{}\' for results".format(lines[i][2][3]))
           exit()
         inst[3] = res
+    elif opcode == 20:
+      inst = [opcode << 2, 0, 0, 0, 0]
+      if len(lines[i][2]) != 2:
+        err(preserved, lines[i][0])
+        print("-> invalid syntax")
+        exit()
+      found = False
+      for variable in variables:
+        if lines[i][2][1] == variable[1]:
+          inst[4] = int(variable[2])
+          found = True
+          break
+      if not found:
+        err(preserved, lines[i][0])
+        print("-> undefined label \'{}\'".format(lines[i][2][1]))
+        exit()
     code.append(inst2word(inst))
   return code
 
@@ -186,6 +311,9 @@ def reorderInstructions(lines, infile):
       lines.append(temp)
     else:
       i += 1
+      if i == len(lines):
+        done = True
+        break
 
 def cleanvars(lines, preserved):
   purge = ['def', 'var', 'const']
@@ -634,7 +762,7 @@ def expand(lines, infile):
   while (index < len(lines)):
     if 'import' in lines[index][1]:
       if importPattern.search(lines[index][1]) != None:
-        print('import keyword found in file \"{}\" at line {}'.format(lines[index][0].split()[0], lines[index][0].split()[1]))
+        # print('import keyword found in file \"{}\" at line {}'.format(lines[index][0].split()[0], lines[index][0].split()[1]))
         start = lines[index][1].find('import')
         if not insideExclusion(lines, index, start, start + 6):
           name = ''
@@ -654,10 +782,27 @@ def expand(lines, infile):
             exit()
 
           imported.append(name)
+          tokens = lines[index][1].split()
+          tempname = name[:-4]
+          if len(tokens) > 2 and tokens[2] == 'as':
+            if len(tokens) != 4:
+              err(lines, lines[index][0]);
+              print("-> invalid import syntax")
+              exit()
+            tempname = tokens[3]
+          templine = lines[index]
           lines.pop(index)
-          with open(name, 'r') as file:
-            numLines = 0
-            for numLines, line in enumerate(file):
-              lines.insert(index + numLines, ["{} {}".format(name[:-4], numLines + 1), line.strip(" \n")])
+          try:
+            with open(name, 'r') as file:
+              numLines = 0
+              for numLines, line in enumerate(file):
+                lines.insert(index + numLines, ["{} {}".format(tempname, numLines + 1), line.strip(" \n")])
+          except FileNotFoundError:
+            file = templine[0].split()[0]
+            num = templine[0].split()[1]
+            print('Error in file \'{}\' at line {}:'.format(file, num))
+            print('  {}'.format(templine[1].strip(' \n')))
+            print("-> file \'{}\' not found".format(name))
+            exit()
           index = -1
     index += 1

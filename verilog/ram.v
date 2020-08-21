@@ -13,13 +13,23 @@ module ram(
     output wire A0, A1, A2,  A3,  A4,  A5,  A6,  A7,
     output wire A8, A9, A10, A11, A12, A13, A14, A15,
 
-    inout wire D0, D1, D2,  D3,  D4,  D5,  D6,  D7,
-    inout wire D8, D9, D10, D11, D12, D13, D14, D15
+    // inout wire D0, D1, D2,  D3,  D4,  D5,  D6,  D7,
+    // inout wire D8, D9, D10, D11, D12, D13, D14, D15
+    //sim hack:
+    output wire D0, D1, D2,  D3,  D4,  D5,  D6,  D7,
+    output wire D8, D9, D10, D11, D12, D13, D14, D15,
+
+    input wire D0_in, D1_in, D2_in,  D3_in,  D4_in,  D5_in,  D6_in,  D7_in,
+    input wire D8_in, D9_in, D10_in, D11_in, D12_in, D13_in, D14_in, D15_in
   );
 
   always @(posedge CLK) begin
-    dataOut <= {D15, D14, D13, D12, D11, D10, D9,  D8,
-                D7,  D6,  D5,  D4,  D3,  D2,  D1,  D0};
+    // actual code
+    // dataOut <= {D15, D14, D13, D12, D11, D10, D9,  D8,
+    //             D7,  D6,  D5,  D4,  D3,  D2,  D1,  D0};
+    // sim code
+    dataOut <= {D15_in, D14_in, D13_in, D12_in, D11_in, D10_in, D9_in,  D8_in,
+                D7_in,  D6_in,  D5_in,  D4_in,  D3_in,  D2_in,  D1_in,  D0_in};
   end
 
   // How to handle address? should there be a register?
@@ -42,23 +52,23 @@ module ram(
   assign UB = WR;
   assign LB = WR;
 
-  assign D0 = write ? data[0] : 1'bz;
-  assign D1 = write ? data[1] : 1'bz;
-  assign D2 = write ? data[2] : 1'bz;
-  assign D3 = write ? data[3] : 1'bz;
-  assign D4 = write ? data[4] : 1'bz;
-  assign D5 = write ? data[5] : 1'bz;
-  assign D6 = write ? data[6] : 1'bz;
-  assign D7 = write ? data[7] : 1'bz;
+  assign D0 = write ? dataIn[0] : 1'bz;
+  assign D1 = write ? dataIn[1] : 1'bz;
+  assign D2 = write ? dataIn[2] : 1'bz;
+  assign D3 = write ? dataIn[3] : 1'bz;
+  assign D4 = write ? dataIn[4] : 1'bz;
+  assign D5 = write ? dataIn[5] : 1'bz;
+  assign D6 = write ? dataIn[6] : 1'bz;
+  assign D7 = write ? dataIn[7] : 1'bz;
 
-  assign D8 = write ? data[8] : 1'bz;
-  assign D9 = write ? data[9] : 1'bz;
-  assign D10 = write ? data[10] : 1'bz;
-  assign D11 = write ? data[11] : 1'bz;
-  assign D12 = write ? data[12] : 1'bz;
-  assign D13 = write ? data[13] : 1'bz;
-  assign D14 = write ? data[14] : 1'bz;
-  assign D15 = write ? data[15] : 1'bz;
+  assign D8 = write ? dataIn[8] : 1'bz;
+  assign D9 = write ? dataIn[9] : 1'bz;
+  assign D10 = write ? dataIn[10] : 1'bz;
+  assign D11 = write ? dataIn[11] : 1'bz;
+  assign D12 = write ? dataIn[12] : 1'bz;
+  assign D13 = write ? dataIn[13] : 1'bz;
+  assign D14 = write ? dataIn[14] : 1'bz;
+  assign D15 = write ? dataIn[15] : 1'bz;
 
   assign A0 = address[0];
   assign A1 = address[1];

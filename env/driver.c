@@ -65,15 +65,68 @@ int uart(Vtop *tb, int tr, int send, int* rec) {
   return transmitting | (just_recieved << 1) | (just_sent << 2);
 }
 
+int ram(uint16_t* buff, int address, int data, int write) {
+  if (write == 0){
+    buff[address] = data;
+    return -1;
+  }
+  return buff[address];
+}
+
+int getAddress(Vtop *tb){
+  return tb->A0 | (tb->A1 << 1) | (tb->A2 << 2) | (tb->A3 << 3) |
+        (tb->A4 << 4) | (tb->A5 << 5) | (tb->A6 << 6) | (tb->A7 << 7) |
+        (tb->A8 << 8) | (tb->A9 << 9) | (tb->A10 << 10) | (tb->A11 << 11) |
+        (tb->A12 << 12) | (tb->A13 << 13) | (tb->A14 << 14) | (tb->A15 << 15);
+}
+int getData(Vtop *tb) {
+  return tb->D0 | (tb->D1 << 1) | (tb->D2 << 2) | (tb->D3 << 3) |
+         (tb->D4 << 4) | (tb->D5 << 5) | (tb->D6 << 6) | (tb->D7 << 7) |
+         (tb->D8 << 8) | (tb->D9 << 9) | (tb->D10 << 10) | (tb->D11 << 11) |
+         (tb->D12 << 12) | (tb->D13 << 13) | (tb->D14 << 14) | (tb->D15 << 15);
+}
+void setData(Vtop *tb, int out) {
+  if (out != -1) {
+    tb->D0_in = (out & 1) > 0;
+    tb->D1_in = (out & 2) > 0;
+    tb->D2_in = (out & 4) > 0;
+    tb->D3_in = (out & 8) > 0;
+    tb->D4_in = (out & 16) > 0;
+    tb->D5_in = (out & 32) > 0;
+    tb->D6_in = (out & 64) > 0;
+    tb->D7_in = (out & 128) > 0;
+    tb->D8_in = (out & 256) > 0;
+    tb->D9_in = (out & 512) > 0;
+    tb->D10_in = (out & 1024) > 0;
+    tb->D11_in = (out & 2048) > 0;
+    tb->D12_in = (out & 4096) > 0;
+    tb->D13_in = (out & 8192) > 0;
+    tb->D14_in = (out & 16384) > 0;
+    tb->D15_in = (out & 32768) > 0;
+  }
+}
+
 // This tick assumes positive edge clocking only!!
-void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep) {
+void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep, uint16_t* buff) {
   tb->eval();
   if (tfp) tfp->dump(logicStep * CLOCK_NS - CLOCK_NS*0.2);
   tb->CLK = 1;
   tb->eval();
+
+  int address = getAddress(tb);
+  int data = getData(tb);
+  int out = ram(buff, address, data, tb->WR);
+  setData(tb, out);
+
   if (tfp) tfp->dump(logicStep * CLOCK_NS);
   tb->CLK = 0;
   tb->eval();
+
+  address = getAddress(tb);
+  data = getData(tb);
+  out = ram(buff, address, data, tb->WR);
+  setData(tb, out);
+  
   if (tfp){
     tfp->dump(logicStep * CLOCK_NS + CLOCK_NS*0.5);
     tfp->flush();
@@ -121,6 +174,42 @@ int equals(char* str1, char* str2) {
 }
 
 int main(int argc, char** argv) {
+
+  char* ops = NULL;
+  char buff[512];
+  // char ops[512];
+
+  if (argc != 2) {
+    printf("Please provide exactly one input file!\n");
+    exit(0);
+  }
+  FILE* infile = fopen(argv[1], "rb");
+  if (infile == NULL) {
+    printf("Unable to open file %s!", argv[1]);
+    exit(0);
+  }
+
+  int lenOps = 0;
+  int done = 0;
+  while (!done){
+    int numby = fread(buff, sizeof(char), 512, infile);
+    if (numby == 0){
+      break;
+    }
+    lenOps += numby;
+    ops = (char*)realloc(ops, sizeof(char)*lenOps);
+    for (int i = 0; i < numby; i++){
+      ops[i + lenOps - numby] = buff[i];
+    }
+    if (numby < 512){
+      break;
+    }
+  }
+
+  for (int i = 0; i < lenOps; i++){
+    printf("%d\n", ops[i]);
+  }
+
   Verilated::commandArgs(argc, argv);
   Verilated::traceEverOn(true);
 
@@ -137,9 +226,9 @@ int main(int argc, char** argv) {
 
   int testState = 0;
 
-  for (int i = 0; i < 3; i++){
-    tick(tb, tfp, ++logicStep);
-  }
+  // for (int i = 0; i < 3; i++){
+  //   tick(tb, tfp, ++logicStep);
+  // }
 
   int out = 0;
   int data[6] = {0};
@@ -161,215 +250,40 @@ int main(int argc, char** argv) {
     "E", "F", "G", "H"
   };
 
-  beginloop:
-  printf("Instruction:\n");
-  scanf("%s", &inputString);
-  int match = 0;
-  int instr = 0;
+  uint16_t rambuff[65536];
 
-  if (inputString[0] == '.') {
-    return 0;
-  }
-
-  for (int i = 0; i < 32; i++){
-    if (equals(instCap[i], inputString)) {
-      instr = i;
-      match = 1;
-      break;
-    }
-  }
-  if (match == 0){
-    printf("Please provide a valid opcode!\n");
-    goto beginloop;
-  }
-  data[0] = instr*2;
-  //printf("%d, %d", data[0], instr);
-
-  arg1loop:
-  printf("Argument 1:\n");
-  scanf("%s", inputString);
-  int reg = 0;
-  match = 0;
-  for (int i = 0; i < 32; i++){
-    if (equals(regCap[i], inputString)) {
-      reg = i;
-      match = 1;
-      break;
-    }
-  }
-  if (match == 0){
-    printf("Please provide a valid register!\n");
-    goto arg1loop;
-  }
-  data[1] = reg;
-  int isNum = 0;
-
-  arg2loop:
-
-  printf("Argument 2:\n");
-  scanf("%s", inputString);
-  reg = 0;
-  match = 0;
-  if (inputString[0] > 47 && inputString[0] < 58) {
-    isNum = true;
-  }
-  if (isNum) {
-    data[2] = atoi(inputString);
-  } else {
-    for (int i = 0; i < 32; i++){
-      if (equals(regCap[i], inputString)) {
-        reg = i;
-        match = 1;
-        break;
-      }
-    }
-    data[2] = reg;
-  }
-
-  printf("Results destination:\n");
-  scanf("%s", inputString);
-  reg = 0;
-  match = 0;
-  if (inputString[0] > 47 && inputString[0] < 58) {
-    isNum = true;
-  }
-  if (isNum) {
-    data[3] = atoi(inputString);
-  } else {
-    for (int i = 0; i < 32; i++){
-      if (equals(regCap[i], inputString)) {
-        reg = i;
-        match = 1;
-        break;
-      }
-    }
-    data[3] = reg;
-  }
-
-  printf("Word 2 data:\n");
-  scanf("%d", &input);
-  data[4] = input;
-
-  // lol why
-  // converting op details to their proper packed representation
-  data[0] |= data[1] << 7;
-  data[1] >>= 1;
-  data[1] |= data[2] << 2;
-  data[1] |= data[3] << 5;
-  data[2] = data[4] & 255;
-  data[3] = data[4] >> 8;
-
+  int numOps = lenOps/4;
   //initialization tick
-  tick(tb, tfp, ++logicStep);
-  int sendState = 0;
-  int go = 1;
-  int innum = 0;
-  // Shouldn't need more than 200 cycles
-  int currentStep = logicStep;
-  while (logicStep - currentStep < 240){
-    int status = uart(tb, go, data[sendState], &out);
-    tick(tb, tfp, ++logicStep);
-    if ((status & 4) > 0){
-      // sendState++;
-      if (sendState == 3){
-        go = 0;
-        //sendState = 0;
-      } else {
-        //printf("%d", sendState);
-        sendState++;
+  tick(tb, tfp, ++logicStep, rambuff);
+  for (int i = 0; i < numOps; i++){
+    int sendState = 0;
+    int go = 1;
+    int innum = 0;
+    // Shouldn't need more than 200 cycles
+    int currentStep = logicStep;
+    while (logicStep - currentStep < 240){
+      int status = uart(tb, go, ops[i*4 + sendState], &out);
+      tick(tb, tfp, ++logicStep, rambuff);
+      if ((status & 4) > 0){
+        // sendState++;
+        if (sendState == 3){
+          go = 0;
+          //sendState = 0;
+        } else {
+          //printf("%d", sendState);
+          sendState++;
+        }
+      }
+      if ((status & 2) > 0){
+        inbuff[innum] = out;
+        innum += 1;
+        if (innum == 1){
+          break;
+        }
       }
     }
-    if ((status & 2) > 0){
-      inbuff[innum] = out;
-      innum += 1;
-      if (innum == 1){
-        break;
-      }
-    }
+    printf("A register: %d\n", inbuff[0]);
+    printf("RAM 1024: %d\n", rambuff[1024]);
   }
-
-  printf("A register: %d\n", inbuff[0]);
-
-  goto beginloop;
-  // int out = 0;
-  // int data[9] = {0};
-  // int inbuff[20] = {0};
-  // int innum = 0;
-  //
-  // printf("ALU mode (1 = add/sub, 2 = mult, 4 = logic, 8 = lshift, 16 = rshift)\n");
-  // scanf("%d", &input);
-  // data[0] = input & 255;
-  //
-  // char strs[5][40] = {
-  //   "0 = add, 1 = sub\n",
-  //   "0 = mult, 1 = div (TODO)\n",
-  //   "0 = AND, 1 = OR, 2 = XOR, 3 = NOT\n",
-  //   "register << param\n",
-  //   "register >> param\n"
-  // };
-  //
-  // char registers[8] = {
-  //   'a',
-  //   'b',
-  //   'c',
-  //   'd',
-  //   'e',
-  //   'f',
-  //   'g',
-  //   'h'
-  // };
-
-  // printf("Opertion param\n");
-  // printf("%s", strs[exponent(data[0])]);
-  // scanf("%d", &input);
-  // data[1] = input & 255;
-  //
-  // printf("Operand 1\n");
-  // scanf("%s", &inputChar);
-  // data[2] = charToIndex(inputChar, registers, 8);
-  //
-  // printf("Operand 2\n");
-  // scanf("%s", &inputChar);
-  // data[3] = charToIndex(inputChar, registers, 8);
-  //
-  // printf("Results register\n");
-  // scanf("%s", &inputChar);
-  // data[4] = charToIndex(inputChar, registers, 8);
-  //
-  // printf("Value 1\n");
-  // scanf("%d", &input);
-  // data[5] = input & 255;
-  // data[6] = input >> 8;
-  //
-  // printf("Value 2\n");
-  // scanf("%d", &input);
-  // data[7] = input & 255;
-  // data[8] = input >> 8;
-  //
-  // int sendState = 0;
-  // int go = 1;
-  //
-  // //initialization tick
-  // tick(tb, tfp, ++logicStep);
-  // // Shouldn't need more than 10000 cycles
-  // while (logicStep < 10000){
-  //   int status = uart(tb, go, data[sendState], &out);
-  //   tick(tb, tfp, ++logicStep);
-  //   if ((status & 4) > 0){
-  //     sendState++;
-  //     if (sendState == 6){
-  //       go = 0;
-  //       //sendState = 0;
-  //     }
-  //   }
-  //   if ((status & 2) > 0){
-  //     inbuff[innum] = out;
-  //     innum += 1;
-  //     if (innum == 3){
-  //       break;
-  //     }
-  //   }
-  // }
-  //
-  // printf("Recieved: %d, flag: %d\n", inbuff[0] | (inbuff[1] << 8), inbuff[2]);
+  fclose(infile);
 }
