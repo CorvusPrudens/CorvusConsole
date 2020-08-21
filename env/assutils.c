@@ -62,8 +62,36 @@ void extractLines(FILE* input, char** lines, int maxLen) {
   rewind(input);
 }
 
-void clean(char** lines) {
+// indentation controls variable scope??
+void clean(char** lines, int len) {
 
+  int prevPos
+  for (int i = len - 1; i > -1; i--) {
+    int len = strlen(lines[i]);
+    for (int j = len - 1; j > -1; j--) {
+      if (lines[i][j] == '\"') {
+
+      }
+    }
+  }
+
+  // need to worry about filtering strings
+  regex_t comment;
+  regmatch_t commentPos[1];
+  newExp(&comment, "//");
+  int lastMark = -1;
+
+  for (int i = len - 1; i > -1; i--){
+    int len = strlen(lines[i]);
+    for (int j = len - 1; j > -1; j--){
+
+    }
+    if (regexec(&comment, lines[i], 1, commentPos, 0) == 0){
+      printf("Comment position: %d\n", commentPos[0].rm_so);
+      lines[i][commentPos[0].rm_so] = '\n';
+      lines[i][commentPos[0].rm_so + 1] = '\0';
+    }
+  }
 }
 
 int tokCmd(char** dest, char* src) {

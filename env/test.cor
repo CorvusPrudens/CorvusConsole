@@ -1,8 +1,12 @@
-include smol
+import smol
 
+/*
 define CONSTANT = 5
 define hex = 0x05
 define bin = 0b0101
+*/
+
+/* inline jobby */
 
 var variable
 const var boy
@@ -13,6 +17,8 @@ const var boy
 // lpt a
 const var *pboy = &boy
 var *pvariable = &variable
+const var trap = "This // is a trap!"
+const var esc = "Well let\'s escape \\ something"
 
 // comment
 // 4 word block allocated and

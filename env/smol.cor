@@ -1,2 +1,28 @@
-// initial testing
-ldr a, 25
+// sequence
+import side
+
+//def MACRO = MACRO // need to fix this bug!
+//def MACRO = 0x60 // non-decimal literals need work
+def MACRO = 1
+def MACRO2 = MACRO << (MACRO + 1)
+def MACRO3 = 20 + MACRO2*0b10
+const var always = side.HELLO*20
+// " \b " also this one
+var y
+var temp
+
+ldr a, MACRO4
+str a, x
+ldr a, 0
+str a, y
+str a, temp
+
+loop:
+  ldr a, x
+  str a, temp
+  ldr b, y
+  add a, b
+  str a, x
+  ldr a, temp
+  str a, y
+  jmp side.label

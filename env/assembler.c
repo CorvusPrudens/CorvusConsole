@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
 
   char** lines = malloc(numLines*sizeof(char*));
   extractLines(txt, lines, maxlen);
+  clean(lines, numLines);
 
   for (int i = 0; i < numLines; i++){
     printf("%s", lines[i]);
