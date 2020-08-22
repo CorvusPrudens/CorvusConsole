@@ -3,15 +3,15 @@
 // 8 data bits, 1 stop bit, no parity
 
 module uart(
-    input CLK,
-    input RX,
-    input [7:0] TXbuffer,
-    input TXstart,
+    input wire CLK,
+    input wire RX,
+    input wire [7:0] TXbuffer,
+    input wire TXstart,
 
-    output TX,
+    output wire TX,
     output reg [7:0] RXbuffer = 0,
     output reg RXready = 0,
-    output TXbusy
+    output wire TXbusy
   );
 
   parameter CLOCK_DIVISOR = 2; // 2 ^ CLOCK_DIVISOR
