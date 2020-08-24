@@ -185,7 +185,7 @@ int main(int argc, char** argv) {
   }
   FILE* infile = fopen(argv[1], "rb");
   if (infile == NULL) {
-    printf("Unable to open file %s!", argv[1]);
+    printf("Unable to open file %s!\n", argv[1]);
     exit(0);
   }
 
@@ -206,9 +206,9 @@ int main(int argc, char** argv) {
     }
   }
 
-  for (int i = 0; i < lenOps; i++){
-    printf("%d\n", ops[i]);
-  }
+  // for (int i = 0; i < lenOps; i++){
+    // printf("%d\n", ops[i]);
+  // }
 
   Verilated::commandArgs(argc, argv);
   Verilated::traceEverOn(true);
@@ -282,8 +282,16 @@ int main(int argc, char** argv) {
         }
       }
     }
+    int opcode = (ops[i*4]>>2)&31;
+    int op1 = (ops[i*4] >> 7) + ((ops[i*4 + 1] << 1) & 7);
+    int op2 = (ops[i*4 + 1] >> 2) & 7;
+    int res = (ops[i*4 + 1] >> 5);
+    printf("%s, op1: %s, op2: %s, res: %s\n",
+           instCap[opcode], regCap[op1], regCap[op2], regCap[res]);
+    printf("imm: %d\n", ops[i*4 + 2] + (ops[i*4 + 3] << 8));
     printf("A register: %d\n", inbuff[0]);
     printf("RAM 1024: %d\n", rambuff[1024]);
+    printf("\n");
   }
   fclose(infile);
 }

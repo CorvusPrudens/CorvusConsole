@@ -33,7 +33,7 @@
 var x
 
 label:
-  ldr a, 200
+  ldr a, 44
   str a, x
   ldr a, 22
   ldr b, x
