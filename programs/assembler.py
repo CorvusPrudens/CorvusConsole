@@ -7,16 +7,27 @@ import assemblyutils as ass
 def main():
 
   infile = ''
-  outfile = 'out.vus'
+  outfile = ''
+  verifile = ''
   if len(argv) < 2:
-    print('Error: no input file provided')
-    exit()
-  elif len(argv) == 3:
+    print('Error: no input or output file provided')
+    exit(1)
+  elif len(argv) < 3:
+    print('Error: no output file provided')
+    exit(1)
+  elif len(argv) == 4:
     outfile = argv[2]
+    verifile = argv[3]
   infile = argv[1]
-  if '.cor' not in infile:
+  if '.cor' not in infile[-4:]:
     print('Error: input file must be of type .cor')
-    exit()
+    exit(1)
+  if '.vus' not in outfile[-4:]:
+    print('Error: output file must be of type .vus')
+    exit(1)
+  if '.v' not in verifile[-2:]:
+    print('Error: expecting verilog output file')
+    exit(1)
 
   lines = []
   with open(infile, 'r') as file:
@@ -25,6 +36,7 @@ def main():
 
   ass.expand(lines, infile)
   ass.clean(lines)
+  print(lines)
   # preserving 'lines' for error reporting
   assembly = ass.copy2d(lines)
   ass.convertStrings(assembly, lines)
@@ -34,10 +46,15 @@ def main():
   dict = {}
   vars = ass.convertVariables(assembly, lines, infile, dict)
   ass.cleanvars(assembly, lines)
+  if len(assembly) == 0:
+    print('Error: the provided file \'{}\' contains no executable code'.format(infile))
+    exit(1)
   ass.reorderInstructions(assembly, infile)
   ass.addLabels(assembly, vars, lines)
   code = ass.encode(assembly, vars, lines, dict)
-  ass.write(code, outfile)
+  ass.write(code, outfile) # binary
+
+  ass.writeVerilog(code, verifile) # verilog inferred rom
 
   for line in assembly:
     print(line)
@@ -46,10 +63,10 @@ def main():
     print(var)
   print()
   i = 0
-  for line in code:
-    print('Word {}:'.format(i))
-    i += 1
-    ass.printWord(line)
+  # for line in code:
+  #   print('Word {}:'.format(i))
+  #   i += 1
+  #   ass.printWord(line)
   # print("Code:")
   # for element in code:
   #   print(element)

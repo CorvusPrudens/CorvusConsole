@@ -6,7 +6,7 @@ module ram(
     input wire [15:0] dataIn,
     input wire write,
 
-    output reg [15:0] dataOut,
+    output [15:0] dataOut,
 
     output wire CE, OE, WR, UB, LB,
 
@@ -23,13 +23,11 @@ module ram(
     input wire D8_in, D9_in, D10_in, D11_in, D12_in, D13_in, D14_in, D15_in
   );
 
+  reg writeToggle = 1'b0;
+  reg writePulse = 1'b0;
+
   always @(posedge CLK) begin
-    // actual code
-    // dataOut <= {D15, D14, D13, D12, D11, D10, D9,  D8,
-    //             D7,  D6,  D5,  D4,  D3,  D2,  D1,  D0};
-    // sim code
-    dataOut <= {D15_in, D14_in, D13_in, D12_in, D11_in, D10_in, D9_in,  D8_in,
-                D7_in,  D6_in,  D5_in,  D4_in,  D3_in,  D2_in,  D1_in,  D0_in};
+
   end
 
   // How to handle address? should there be a register?
@@ -47,8 +45,9 @@ module ram(
   // into account)
 
   assign CE = 1'b1;
-  assign OE = write ? 1'b1 : 1'b0;
-  assign WR = write ? ~CLK : 1'b1;
+  assign OE = (write & ~CLK);
+  //assign WR = writePulse ? ~CLK : 1'b1;
+  assign WR = ~(write & ~CLK);
   assign UB = WR;
   assign LB = WR;
 
@@ -87,6 +86,9 @@ module ram(
   assign A13 = address[13];
   assign A14 = address[14];
   assign A15 = address[15];
+
+  assign dataOut = {D15_in, D14_in, D13_in, D12_in, D11_in, D10_in, D9_in,  D8_in,
+              D7_in,  D6_in,  D5_in,  D4_in,  D3_in,  D2_in,  D1_in,  D0_in};
 
 
 endmodule

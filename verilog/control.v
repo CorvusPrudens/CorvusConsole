@@ -21,16 +21,16 @@ module control(
     output wire [15:0] romAdd,
     output wire [15:0] dout,
 
-    input wire [31:0] testWord
+    input wire [31:0] controlWord
   );
 
   // {interrupt, display, compare, zero, carry}
   reg [4:0] flags = 5'b0;
-  reg increment = 1'b0;
+  reg [1:0] increment = 2'b0;
   reg ramAddMode = 1'b0;
   reg [15:0] programCounter = 16'b0;
   // wire [31:0] controlWord = 32'b00000000_00000100_000_000_000_00_01000;
-  wire [31:0] controlWord = testWord;
+  // wire [31:0] controlWord = testWord;
 
   wire [1:0] opvar = controlWord[1:0];
   wire [4:0] opcode = controlWord[6:2];
@@ -44,18 +44,27 @@ module control(
   // the instruction word or the g register
   assign ramAdd = ramAddMode ? greg : word2Wire;
 
-  always @(posedge CLK) if (increment) programCounter <= programCounter + 1'b1;
+
+  always @(posedge CLK) begin
+    if (increment[1]) begin
+      case (increment[0])
+        1'b0: programCounter <= programCounter + 1'b1;
+        1'b1: programCounter <= word2Wire;
+      endcase
+    end
+  end
+  assign romAdd = programCounter;
 
   always @(negedge CLK) begin
     case (opcode)
       5'h00: // NOP
         begin
           busState <= 4'h0;
-          increment <= 1'b1;
+          increment <= 2'b10;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[5] <= 1'b0;
-          increment <= 1'b1;
+          increment <= 2'b10;
         end
       5'h01: // LDR
         begin
@@ -65,8 +74,8 @@ module control(
             busState <= opvar[1] ? 4'h6 : 4'h2;
             ramWrite <= 1'b0;
             results <= resultsWire;
-            aluOperation[5] <= 1'b1;
-            increment <= 1'b1;
+            aluOperation <= 6'b100000;
+            increment <= 2'b10;
             aluReadBus <= 1'b1;
             ramAddMode <= 1'b0;
           end
@@ -76,8 +85,8 @@ module control(
           busState <= 4'h1;
           ramWrite <= 1'b1;
           operand1 <= operand1Wire;
-          aluOperation[5] <= 1'b0;
-          increment <= 1'b1;
+          aluOperation <= 6'b0;
+          increment <= 2'b10;
           aluReadBus <= 1'b0;
           ramAddMode <= 1'b0;
         end
@@ -90,7 +99,7 @@ module control(
             ramWrite <= 1'b0;
             results <= resultsWire;
             aluOperation[5] <= 1'b0;
-            increment <= 1'b1;
+            increment <= 2'b10;
             aluReadBus <= 1'b1;
             ramAddMode <= 1'b1;
           end
@@ -104,7 +113,7 @@ module control(
             ramWrite <= 1'b1;
             operand1 <= operand1Wire;
             aluOperation[5] <= 1'b0;
-            increment <= 1'b1;
+            increment <= 2'b10;
             aluReadBus <= 1'b0;
             ramAddMode <= 1'b1;
           end
@@ -112,11 +121,11 @@ module control(
       5'h05: // CMP TODO
         begin
           busState <= 4'h0;
-          increment <= 1'b1;
+          increment <= 2'b10;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[5] <= 1'b0;
-          increment <= 1'b1;
+          increment <= 2'b10;
         end
       5'h06: // ADD
         begin
@@ -126,7 +135,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b100001;
           aluParams[0] <= 1'b0;
-          increment <= 1'b1;
+          increment <= 2'b10;
           busState <= 4'h6; // just in case an immediate
           aluReadBus <= opvar[1]; // immediate if 1
         end
@@ -139,7 +148,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b100001;
           aluParams[0] <= 1'b1;
-          increment <= 1'b1;
+          increment <= 2'b10;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h08: // MUL
@@ -151,26 +160,26 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b100010;
           aluParams[0] <= 1'b0;
-          increment <= 1'b1;
+          increment <= 2'b10;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h09: // DIV TODO
         begin
           busState <= 4'h0;
-          increment <= 1'b1;
+          increment <= 2'b10;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[5] <= 1'b0;
-          increment <= 1'b1;
+          increment <= 2'b10;
         end
       5'h0A: // MOD TODO
         begin
           busState <= 4'h0;
-          increment <= 1'b1;
+          increment <= 2'b10;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[5] <= 1'b0;
-          increment <= 1'b1;
+          increment <= 2'b10;
         end
       5'h0B: // AND
         begin
@@ -181,7 +190,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b100100;
           aluParams <= 4'b0000;
-          increment <= 1'b1;
+          increment <= 2'b10;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h0C: // OR
@@ -193,7 +202,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b100100;
           aluParams <= 4'b0001;
-          increment <= 1'b1;
+          increment <= 2'b10;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h0D: // XOR
@@ -205,7 +214,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b100100;
           aluParams <= 4'b0010;
-          increment <= 1'b1;
+          increment <= 2'b10;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h0E: // NOT
@@ -216,7 +225,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b100100;
           aluParams <= 4'b0011;
-          increment <= 1'b1;
+          increment <= 2'b10;
           aluReadBus <= 1'b0;
         end
       5'h0F: // LSL
@@ -227,7 +236,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b101000;
           aluParams <= word2Wire[3:0];
-          increment <= 1'b1;
+          increment <= 2'b10;
           aluReadBus <= 1'b1;
         end
       5'h10: // LSR
@@ -238,17 +247,26 @@ module control(
           results <= resultsWire;
           aluOperation <= 6'b110000;
           aluParams <= word2Wire[3:0];
-          increment <= 1'b1;
+          increment <= 2'b10;
           aluReadBus <= 1'b1;
+        end
+      5'h14: // JMP
+        begin
+          busState <= 4'h0;
+          increment <= 2'b10;
+          ramWrite <= 1'b0;
+          aluReadBus <= 1'b0;
+          aluOperation[5] <= 1'b0;
+          increment <= 2'b11;
         end
       default:
         begin
           busState <= 4'h0;
-          increment <= 1'b1;
+          increment <= 2'b10;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[5] <= 1'b0;
-          increment <= 1'b1;
+          increment <= 2'b10;
         end
     endcase
 
@@ -256,11 +274,11 @@ module control(
     //   5'h00: // NOP
     //     begin
     //       busState <= 4'h0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       ramWrite <= 1'b0;
     //       aluReadBus <= 1'b0;
     //       aluOperation[5] <= 1'b0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //     end
     //   5'h01: // LDR
     //     begin
@@ -268,7 +286,7 @@ module control(
     //       ramWrite <= 1'b0;
     //       results <= resultsWire;
     //       aluOperation[5] <= 1'b0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //       ramAddMode <= 1'b0;
     //     end
@@ -278,7 +296,7 @@ module control(
     //       ramWrite <= 1'b1;
     //       operand1 <= operand1Wire;
     //       aluOperation[5] <= 1'b0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b0;
     //       ramAddMode <= 1'b0;
     //     end
@@ -291,7 +309,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100001;
     //       aluParams[0] <= 1'b0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b0;
     //     end
     //   5'h04: // SUB
@@ -303,7 +321,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100001;
     //       aluParams[0] <= 1'b1;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b0;
     //     end
     //   5'h05: // MUL
@@ -315,7 +333,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100010;
     //       aluParams[0] <= 1'b0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b0;
     //     end
     //   5'h08: // LDI
@@ -324,7 +342,7 @@ module control(
     //       ramWrite <= 1'b0;
     //       results <= resultsWire;
     //       aluOperation <= 6'b100000;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //   5'h09: // ADI
@@ -335,7 +353,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100001;
     //       aluParams[0] <= 1'b0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //   5'h0A: // SBI
@@ -346,7 +364,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100001;
     //       aluParams[0] <= 1'b1;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //   5'h0B: // MLI
@@ -357,7 +375,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100010;
     //       aluParams[0] <= 1'b0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //   5'h0E: // AND
@@ -369,7 +387,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100100;
     //       aluParams <= 4'b0000;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b0;
     //     end
     //   5'h0F: // OR
@@ -381,7 +399,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100100;
     //       aluParams <= 4'b0001;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b0;
     //     end
     //   5'h10: // XOR
@@ -393,7 +411,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100100;
     //       aluParams <= 4'b0010;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b0;
     //     end
     //   5'h11: // NOT
@@ -404,7 +422,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100100;
     //       aluParams <= 4'b0011;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b0;
     //     end
     //   5'h12: // ANI
@@ -415,7 +433,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100100;
     //       aluParams <= 4'b0000;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //   5'h13: // ORI
@@ -426,7 +444,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100100;
     //       aluParams <= 4'b0001;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //   5'h14: // XRI
@@ -437,7 +455,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b100100;
     //       aluParams <= 4'b0010;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //   5'h15: // LSL
@@ -448,7 +466,7 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b101000;
     //       aluParams <= word2Wire[3:0];
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //   5'h16: // LSR
@@ -459,17 +477,17 @@ module control(
     //       results <= resultsWire;
     //       aluOperation <= 6'b110000;
     //       aluParams <= word2Wire[3:0];
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       aluReadBus <= 1'b1;
     //     end
     //
     //   default:
     //     begin
     //       busState <= 4'h0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //       ramWrite <= 1'b0;
     //       aluReadBus <= 1'b0;
-    //       increment <= 1'b1;
+    //       increment <= 2'b10;
     //     end
     // endcase
   end

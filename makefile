@@ -7,11 +7,17 @@ COM = g++
 VSRC = top
 CSRC = driver
 OUT = run
+PROG = program
+PROGOUT = out
+PROGROM = romdata
 INCL = ~/verilator/include
+PYVAR = py
+PYCOMP = assembler.py
 
-all: clean src sim
 
-.PHONY: clean all sim src
+all: clean prog src sim
+
+.PHONY: clean all sim src prog
 
 src: ./verilog/${VSRC}.v ./env/${CSRC}.c
 	@ # consider using trace threads to improve performance
@@ -30,6 +36,9 @@ sim: ./env/${CSRC}.c
 	${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp \
 	./obj_dir/V${VSRC}__ALL.a -o ${OUT}
+
+prog: ./programs/${PROG}.cor ./programs/${PYCOMP}
+	${PYVAR} ./programs/${PYCOMP} ./programs/${PROG}.cor ./programs/${PROGOUT}.vus ./verilog/${PROGROM}.v
 
 clean:
 	@ if [ -d "./obj_dir" ]; then rm -r ./obj_dir; fi

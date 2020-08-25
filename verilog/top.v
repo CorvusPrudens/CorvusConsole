@@ -7,6 +7,7 @@
 `include "uart.v"
 `include "alu.v"
 `include "ram.v"
+`include "rom.v"
 `include "control.v"
 
 module top(
@@ -99,6 +100,7 @@ module top(
   wire [15:0] ramAddress;
   wire [15:0] romAddress;
   wire [15:0] ctrlOut;
+  wire [31:0] controlWord;
 
   control CONTROL(
       .CLK(testClock),
@@ -115,7 +117,7 @@ module top(
       .ramAdd(ramAddress),
       .romAdd(romAddress),
       .dout(ctrlOut),
-      .testWord(testWord)
+      .controlWord(controlWord)
     );
 
   // bus
@@ -143,6 +145,13 @@ module top(
     endcase
   end
 
+  // ROM
+  rom ROM(
+      .CLK(CLK),
+      .address(romAddress),
+      .data(controlWord)
+    );
+
   // ALU
   reg [15:0] din;
   wire [15:0] dout;
@@ -169,7 +178,7 @@ module top(
 
   // RAM
   ram RAM(
-      .CLK(CLK),
+      .CLK(testClock),
       .address(ramAddress),
       .dataIn(bus),
       .write(ramWrite),
@@ -201,6 +210,35 @@ module top(
   always @(posedge CLK) begin
 
     clkdiv <= clkdiv + 1'b1;
+
+    case (testState)
+      4'h0:
+        begin
+          TXstart <= 1'b0;
+          if (~TXbusy) begin
+            testClock <= 1'b0;
+            testState <= 4'h1;
+          end
+        end
+      4'h1:
+        begin
+          testClock <= 1'b1;
+          TXbuffer <= ALU.a[7:0];
+          TXstart <= 1'b1;
+          testState <= 4'h2;
+        end
+      4'h2:
+        begin
+          TXstart <= 1'b0;
+          if (~TXbusy) begin
+            TXbuffer <= ALU.a[15:8];
+            TXstart <= 1'b1;
+            testState <= 4'h0;
+          end
+        end
+      default: testState <= 4'h0;
+    endcase
+
     // testState <= testState + 1'b1;
     //
     // if (clkdiv[3:0] == 4'd15) begin
@@ -231,58 +269,59 @@ module top(
     //   // a <= 0;
     // end else TXstart <= 1'b0;
 
-    case (testState)
-      4'h0:
-        begin
-          TXstart <= 1'b0;
-          if (RXready) begin
-            testWord[7:0] <= RXbuffer;
-            testState <= 4'h1;
-          end
-        end
-      4'h1:
-        begin
-          if (RXready) begin
-            testWord[15:8] <= RXbuffer;
-            testState <= 4'h2;
-          end
-        end
-      4'h2:
-        begin
-          if (RXready) begin
-            testWord[23:16] <= RXbuffer;
-            testState <= 4'h3;
-          end
-        end
-      4'h3:
-        begin
-          if (RXready) begin
-            testWord[31:24] <= RXbuffer;
-            testState <= 4'h4;
-          end
-        end
-      4'h4:
-        begin
-          testClock <= 1'b0;
-          testState <= 4'h5;
-        end
-      4'h5:
-        begin
-          testClock <= 1'b1;
-          testState <= 4'h6;
-        end
-      4'h6:
-        begin
-          TXbuffer <= ALU.a[7:0];
-          TXstart <= 1'b1;
-          testState <= 4'h0;
-        end
-      default:
-        begin
-          TXstart <= 1'b0;
-          testState <= 4'h0;
-        end
-    endcase
+
+    // case (testState)
+    //   4'h0:
+    //     begin
+    //       TXstart <= 1'b0;
+    //       if (RXready) begin
+    //         testWord[7:0] <= RXbuffer;
+    //         testState <= 4'h1;
+    //       end
+    //     end
+    //   4'h1:
+    //     begin
+    //       if (RXready) begin
+    //         testWord[15:8] <= RXbuffer;
+    //         testState <= 4'h2;
+    //       end
+    //     end
+    //   4'h2:
+    //     begin
+    //       if (RXready) begin
+    //         testWord[23:16] <= RXbuffer;
+    //         testState <= 4'h3;
+    //       end
+    //     end
+    //   4'h3:
+    //     begin
+    //       if (RXready) begin
+    //         testWord[31:24] <= RXbuffer;
+    //         testState <= 4'h4;
+    //       end
+    //     end
+    //   4'h4:
+    //     begin
+    //       testClock <= 1'b0;
+    //       testState <= 4'h5;
+    //     end
+    //   4'h5:
+    //     begin
+    //       testClock <= 1'b1;
+    //       testState <= 4'h6;
+    //     end
+    //   4'h6:
+    //     begin
+    //       TXbuffer <= ALU.a[7:0];
+    //       TXstart <= 1'b1;
+    //       testState <= 4'h0;
+    //     end
+    //   default:
+    //     begin
+    //       TXstart <= 1'b0;
+    //       testState <= 4'h0;
+    //     end
+    // endcase
 
     // case (testState)
     //   4'd0:

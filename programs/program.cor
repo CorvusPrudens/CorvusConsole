@@ -1,0 +1,32 @@
+var x
+var y
+var temp
+
+/*
+ldr a, 1
+str a, x
+ldr a, 0
+str a, y
+str a, temp
+
+
+begin:
+  ldr a, x
+  str a, temp
+  ldr b, y
+  add a, b
+  str a, x
+  ldr a, temp
+  str a, y
+  jmp begin
+*/
+
+ldr a, 1
+ldr b, 0
+ldr c, 0
+
+begin:
+  add a, 0, c // temp hack in place of pseudo op 'tfr a, c'
+  add a, b
+  add c, 0, b
+  jmp begin

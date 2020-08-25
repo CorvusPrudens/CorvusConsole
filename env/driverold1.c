@@ -175,37 +175,36 @@ int equals(char* str1, char* str2) {
 
 int main(int argc, char** argv) {
 
-  // char* ops = NULL;
-  // char buff[512];
-  // // char ops[512];
-  //
-  // if (argc != 2) {
-  //   printf("Please provide exactly one input file!\n");
-  //   exit(0);
-  // }
-  // FILE* infile = fopen(argv[1], "rb");
-  // if (infile == NULL) {
-  //   printf("Unable to open file %s!\n", argv[1]);
-  //   exit(0);
-  // }
-  //
-  // int lenOps = 0;
-  // int done = 0;
-  // while (!done){
-  //   int numby = fread(buff, sizeof(char), 512, infile);
-  //   if (numby == 0){
-  //     break;
-  //   }
-  //   lenOps += numby;
-  //   ops = (char*)realloc(ops, sizeof(char)*lenOps);
-  //   for (int i = 0; i < numby; i++){
-  //     ops[i + lenOps - numby] = buff[i];
-  //   }
-  //   if (numby < 512){
-  //     break;
-  //   }
-  // }
-  // fclose(infile);
+  char* ops = NULL;
+  char buff[512];
+  // char ops[512];
+
+  if (argc != 2) {
+    printf("Please provide exactly one input file!\n");
+    exit(0);
+  }
+  FILE* infile = fopen(argv[1], "rb");
+  if (infile == NULL) {
+    printf("Unable to open file %s!\n", argv[1]);
+    exit(0);
+  }
+
+  int lenOps = 0;
+  int done = 0;
+  while (!done){
+    int numby = fread(buff, sizeof(char), 512, infile);
+    if (numby == 0){
+      break;
+    }
+    lenOps += numby;
+    ops = (char*)realloc(ops, sizeof(char)*lenOps);
+    for (int i = 0; i < numby; i++){
+      ops[i + lenOps - numby] = buff[i];
+    }
+    if (numby < 512){
+      break;
+    }
+  }
 
   // for (int i = 0; i < lenOps; i++){
     // printf("%d\n", ops[i]);
@@ -253,56 +252,46 @@ int main(int argc, char** argv) {
 
   uint16_t rambuff[65536];
 
-  // int numOps = lenOps/4;
+  int numOps = lenOps/4;
   //initialization tick
   tick(tb, tfp, ++logicStep, rambuff);
-  int sendState = 0;
-  int go = 0;
-  int innum = 0;
-  int messnum = 0;
-  // Shouldn't need more than 200 cycles
-  // int currentStep = logicStep;
-  while (logicStep < 3000){
-    int status = uart(tb, go, 0, &out);
-    tick(tb, tfp, ++logicStep, rambuff);
-    // if ((status & 4) > 0){
-    //   // sendState++;
-    //   if (sendState == 3){
-    //     go = 0;
-    //     //sendState = 0;
-    //   } else {
-    //     //printf("%d", sendState);
-    //     sendState++;
-    //   }
-    // }
-    if ((status & 2) > 0){
-
-      if (innum == 0){
-        inbuff[0] = out;
-        innum = 1;
-      } else {
-        innum = 0;
-        printf("Message %d:\n", messnum++);
-        printf("A register: %d\n", inbuff[0] | (out << 8));
-        printf("RAM 1024: %d\n", rambuff[1024]);
-        printf("RAM 1025: %d\n", rambuff[1025]);
-        printf("RAM 1026: %d\n\n", rambuff[1026]);
+  for (int i = 0; i < numOps; i++){
+    int sendState = 0;
+    int go = 1;
+    int innum = 0;
+    // Shouldn't need more than 200 cycles
+    int currentStep = logicStep;
+    while (logicStep - currentStep < 240){
+      int status = uart(tb, go, ops[i*4 + sendState], &out);
+      tick(tb, tfp, ++logicStep, rambuff);
+      if ((status & 4) > 0){
+        // sendState++;
+        if (sendState == 3){
+          go = 0;
+          //sendState = 0;
+        } else {
+          //printf("%d", sendState);
+          sendState++;
+        }
       }
-      // inbuff[innum] = out;
-      // innum += 1;
-      // if (innum == 1){
-      //   break;
-      // }
+      if ((status & 2) > 0){
+        inbuff[innum] = out;
+        innum += 1;
+        if (innum == 1){
+          break;
+        }
+      }
     }
+    int opcode = (ops[i*4]>>2)&31;
+    int op1 = (ops[i*4] >> 7) + ((ops[i*4 + 1] << 1) & 7);
+    int op2 = (ops[i*4 + 1] >> 2) & 7;
+    int res = (ops[i*4 + 1] >> 5);
+    printf("%s, op1: %s, op2: %s, res: %s\n",
+           instCap[opcode], regCap[op1], regCap[op2], regCap[res]);
+    printf("imm: %d\n", ops[i*4 + 2] + (ops[i*4 + 3] << 8));
+    printf("A register: %d\n", inbuff[0]);
+    printf("RAM 1024: %d\n", rambuff[1024]);
+    printf("\n");
   }
-  // int opcode = (ops[i*4]>>2)&31;
-  // int op1 = (ops[i*4] >> 7) + ((ops[i*4 + 1] << 1) & 7);
-  // int op2 = (ops[i*4 + 1] >> 2) & 7;
-  // int res = (ops[i*4 + 1] >> 5);
-  // printf("%s, op1: %s, op2: %s, res: %s\n",
-  //        instCap[opcode], regCap[op1], regCap[op2], regCap[res]);
-  // printf("imm: %d\n", ops[i*4 + 2] + (ops[i*4 + 3] << 8));
-  // printf("A register: %d\n", inbuff[0]);
-  // printf("RAM 1024: %d\n", rambuff[1024]);
-  printf("\n");
+  fclose(infile);
 }

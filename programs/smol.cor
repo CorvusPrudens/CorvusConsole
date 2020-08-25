@@ -30,6 +30,7 @@
     str a, y
     jmp s.label
 */
+
 var x
 
 label:
