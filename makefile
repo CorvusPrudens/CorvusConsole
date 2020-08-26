@@ -10,10 +10,20 @@ OUT = run
 PROG = program
 PROGOUT = out
 PROGROM = romdata
-INCL = ~/verilator/include
-PYVAR = py
 PYCOMP = assembler.py
 
+UNAME = $(shell uname)
+
+ifeq ($(UNAME), Linux)
+INCL = /usr/share/verilator/include
+else
+INCL = ~/verilator/include
+endif
+ifeq ($(UNAME), Linux)
+PYVAR = python3
+else
+PYVAR = py
+endif
 
 all: clean prog src sim
 
@@ -37,8 +47,10 @@ sim: ./env/${CSRC}.c
 	${INCL}/verilated_vcd_c.cpp \
 	./obj_dir/V${VSRC}__ALL.a -o ${OUT}
 
+
 prog: ./programs/${PROG}.cor ./programs/${PYCOMP}
-	${PYVAR} ./programs/${PYCOMP} ./programs/${PROG}.cor ./programs/${PROGOUT}.vus ./verilog/${PROGROM}.v
+	${PYVAR} ./programs/${PYCOMP} ./programs/${PROG}.cor \
+	./programs/${PROGOUT}.vus ./verilog/${PROGROM}.v
 
 clean:
 	@ if [ -d "./obj_dir" ]; then rm -r ./obj_dir; fi
