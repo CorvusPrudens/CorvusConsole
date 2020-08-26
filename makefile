@@ -32,7 +32,7 @@ endif
 
 all: clean prog src sim
 
-.PHONY: clean all sim src prog overwrite
+.PHONY: clean all sim src prog reset
 
 src: ./verilog/${VSRC}.v ./env/${CSRC}.c
 	@ # consider using trace threads to improve performance
@@ -60,7 +60,7 @@ prog: ./programs/${PROG}.cor ./programs/${PYCOMP}
 clean:
 	@ if [ -d "./obj_dir" ]; then rm -r ./obj_dir; fi
 
-overwrite:
+reset:
 	git fetch
 	git reset --hard origin/master
 	git pull
