@@ -13,9 +13,12 @@ PROGROM = romdata
 PYCOMP = assembler.py
 
 UNAME = $(shell uname)
+PHONETEST = $(shell $PREFIX)
 
 ifeq ($(UNAME), Linux)
 INCL = /usr/share/verilator/include
+else ifeq ($(PHONETEST), /data/data/com.termux/files/usr)
+INCL = ~/verilator/include
 else
 INCL = ~/verilator/include
 endif
