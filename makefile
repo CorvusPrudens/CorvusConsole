@@ -15,7 +15,7 @@ PYCOMP = assembler.py
 UNAME = $(shell uname)
 PHONETEST = $(shell $PREFIX)
 
-ifeq ($(PHONETEST), /data/data/com.termux/files/usr)
+ifeq ($PREFIX, "/data/data/com.termux/files/usr")
 INCL = ~/verilator/include
 else ifeq ($(UNAME), Linux)
 INCL = /usr/share/verilator/include
