@@ -6,7 +6,7 @@ module ram(
     input wire [15:0] dataIn,
     input wire write,
 
-    output [15:0] dataOut,
+    output wire [15:0] dataOut,
 
     output wire CE, OE, WR, UB, LB,
 
