@@ -11,11 +11,12 @@ PROG = program
 PROGOUT = out
 PROGROM = romdata
 PYCOMP = assembler.py
+PHONEPATH = /data/data/com.termux/files/usr
 
 UNAME = $(shell uname)
 PHONETEST = $(shell $PREFIX)
 
-ifeq ($PREFIX, "/data/data/com.termux/files/usr")
+ifeq ($PREFIX, ${PHONEPATH})
 INCL = ~/verilator/include
 else ifeq ($(UNAME), Linux)
 INCL = /usr/share/verilator/include
