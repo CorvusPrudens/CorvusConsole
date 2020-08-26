@@ -22,7 +22,7 @@ SRCEX = verilator -Wall --trace --trace-depth 1 -cc \
 ./verilog/${VSRC}.v -I./verilog/
 else ifeq ($(UNAME), Linux)
 INCL = /usr/share/verilator/include
-SRCEX = verilator -Wall --trace --trace-threads 4 -cc \
+SRCEX = verilator -Wall --trace -cc \
 ./verilog/${VSRC}.v -I./verilog/
 else
 INCL = ~/verilator/include
@@ -50,11 +50,8 @@ src: ./verilog/${VSRC}.v ./env/${CSRC}.c
 	make -f V${VSRC}.mk -C ./obj_dir/
 
 sim: ./env/${CSRC}.c
-	${COM} ./env/${CSRC}.c \
-	-I ./env/ \
-	-I ${INCL} \
-	-I ./obj_dir/ \
-	${INCL}/verilated.cpp \
+	${COM} ./env/${CSRC}.c -I ./env/ \
+	-I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp \
 	./obj_dir/V${VSRC}__ALL.a -o ${OUT}
 
