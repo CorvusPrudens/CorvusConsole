@@ -8,19 +8,31 @@ module ram(
 
     output wire [15:0] dataOut,
 
+    input wire [15:0] memIn,
+    output wire [15:0] memOut,
+
     output wire CE, OE, WR, UB, LB,
 
     output wire A0, A1, A2,  A3,  A4,  A5,  A6,  A7,
     output wire A8, A9, A10, A11, A12, A13, A14, A15,
 
     // inout wire D0, D1, D2,  D3,  D4,  D5,  D6,  D7,
-    // inout wire D8, D9, D10, D11, D12, D13, D14, D15
+    // inout wire D8, D9, D10, D11, D12, D13, D14, D15,
     //sim hack:
     output wire D0, D1, D2,  D3,  D4,  D5,  D6,  D7,
     output wire D8, D9, D10, D11, D12, D13, D14, D15,
 
-    input wire D0_in, D1_in, D2_in,  D3_in,  D4_in,  D5_in,  D6_in,  D7_in,
-    input wire D8_in, D9_in, D10_in, D11_in, D12_in, D13_in, D14_in, D15_in
+    input wire D0_in, D1_in, D2_in,  D3_in,  
+    input wire D4_in,  D5_in,  D6_in,  D7_in,
+    input wire D8_in, D9_in, D10_in, D11_in, 
+    input wire D12_in, D13_in, D14_in, D15_in,
+
+    output wire uart,
+    output wire addrstack,
+    output wire userstack,
+    output wire gpio,
+    output wire gpiodir,
+    output wire memwrite = write
   );
 
   reg writeToggle = 1'b0;
@@ -87,8 +99,19 @@ module ram(
   assign A14 = address[14];
   assign A15 = address[15];
 
-  assign dataOut = {D15_in, D14_in, D13_in, D12_in, D11_in, D10_in, D9_in,  D8_in,
+  wire memmap;
+
+  assign dataOut = memmap ? memIn : {D15_in, D14_in, D13_in, D12_in, D11_in, D10_in, D9_in,  D8_in,
               D7_in,  D6_in,  D5_in,  D4_in,  D3_in,  D2_in,  D1_in,  D0_in};
 
+  assign addrstack = address == 16'd0;
+  assign userstack = address == 16'd1;
+  assign uart = address == 16'd2;
+  assign gpio = address == 16'd3;
+  assign gpiodir = address == 16'd4;
+  // we'll need to add a large area for graphics commands/data
+  assign memmap = addrstack | userstack | uart | gpio | gpiodir;
+
+  assign memOut = dataIn;
 
 endmodule
