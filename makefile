@@ -18,10 +18,16 @@ PHONETEST = $(shell $PREFIX)
 
 ifeq ($(PREFIX), $(PHONEPATH))
 INCL = ~/verilator/include
+SRCEX = verilator -Wall --trace --trace-depth 1 -cc \
+./verilog/${VSRC}.v -I./verilog/
 else ifeq ($(UNAME), Linux)
 INCL = /usr/share/verilator/include
+SRCEX = verilator -Wall --trace --trace-threads 4 -cc \
+./verilog/${VSRC}.v -I./verilog/
 else
 INCL = ~/verilator/include
+SRCEX = verilator -Wall --trace -cc \
+./verilog/${VSRC}.v -I./verilog/
 endif
 
 ifeq ($(UNAME), Linux)
@@ -40,7 +46,7 @@ src: ./verilog/${VSRC}.v ./env/${CSRC}.c
 	@ # trace depth will also improve performance
 	@ # a level of 1 limits tracing to merely top level signals!
 	@ # i.e. --trace-depth <depth>
-	verilator -Wall --trace -cc ./verilog/${VSRC}.v -I./verilog/
+	${SRCEX}
 	make -f V${VSRC}.mk -C ./obj_dir/
 
 sim: ./env/${CSRC}.c
