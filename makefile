@@ -16,7 +16,7 @@ PHONEPATH = /data/data/com.termux/files/usr
 UNAME = $(shell uname)
 PHONETEST = $(shell $PREFIX)
 
-ifeq ($PREFIX, ${PHONEPATH})
+ifeq ($(PREFIX), $(PHONEPATH))
 INCL = ~/verilator/include
 else ifeq ($(UNAME), Linux)
 INCL = /usr/share/verilator/include
