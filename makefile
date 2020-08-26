@@ -15,13 +15,14 @@ PYCOMP = assembler.py
 UNAME = $(shell uname)
 PHONETEST = $(shell $PREFIX)
 
-ifeq ($(UNAME), Linux)
-INCL = /usr/share/verilator/include
-else ifeq ($(PHONETEST), /data/data/com.termux/files/usr)
+ifeq ($(PHONETEST), /data/data/com.termux/files/usr)
 INCL = ~/verilator/include
+else ifeq ($(UNAME), Linux)
+INCL = /usr/share/verilator/include
 else
 INCL = ~/verilator/include
 endif
+
 ifeq ($(UNAME), Linux)
 PYVAR = python3
 else
@@ -30,7 +31,7 @@ endif
 
 all: clean prog src sim
 
-.PHONY: clean all sim src prog
+.PHONY: clean all sim src prog overwrite
 
 src: ./verilog/${VSRC}.v ./env/${CSRC}.c
 	@ # consider using trace threads to improve performance
@@ -57,3 +58,8 @@ prog: ./programs/${PROG}.cor ./programs/${PYCOMP}
 
 clean:
 	@ if [ -d "./obj_dir" ]; then rm -r ./obj_dir; fi
+
+overwrite:
+	git fetch
+	git reset --hard origin/master
+	git pull
