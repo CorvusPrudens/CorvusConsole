@@ -29,4 +29,8 @@ begin:
   add a, 0, c // temp hack in place of pseudo op 'tfr a, c'
   add a, b
   add c, 0, b
+  str a, UART // default behavior should just be to send uart data
+              // as fast as possible. of course, this will fill up the
+              // fifo since the computer can write to the uart 10 times
+              // faster than it can send it out (or more!)
   jmp begin

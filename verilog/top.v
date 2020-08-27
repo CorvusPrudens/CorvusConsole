@@ -4,11 +4,12 @@
 `timescale 1ns/100ps
 `default_nettype none
 
-`include "uart.v"
+// `include "uart.v"
 `include "alu.v"
 `include "ram.v"
 `include "rom.v"
 `include "control.v"
+`include "uartwrapper.v"
 
 module top(
     input wire CLK,
@@ -38,23 +39,23 @@ module top(
     input wire D8_in, D9_in, D10_in, D11_in, D12_in, D13_in, D14_in, D15_in
   );
 
-  // UART communication
-  wire [7:0] RXbuffer;
-  reg [7:0] TXbuffer = 0;
-  reg TXstart = 0;
-  wire RXready;
-  wire TXbusy;
-
-  uart FTDI(
-      .CLK(CLK),
-      .RX(RX),
-      .TXbuffer(TXbuffer),
-      .TXstart(TXstart),
-      .TX(TX),
-      .RXbuffer(RXbuffer),
-      .RXready(RXready),
-      .TXbusy(TXbusy)
-    );
+  // // UART communication
+  // wire [7:0] RXbuffer;
+  // reg [7:0] TXbuffer = 0;
+  // reg TXstart = 0;
+  // wire RXready;
+  // wire TXbusy;
+  //
+  // uart FTDI(
+  //     .CLK(CLK),
+  //     .RX(RX),
+  //     .TXbuffer(TXbuffer),
+  //     .TXstart(TXstart),
+  //     .TX(TX),
+  //     .RXbuffer(RXbuffer),
+  //     .RXready(RXready),
+  //     .TXbusy(TXbusy)
+  //   );
 
 
   /* The typical bus setup will look like this:
@@ -145,6 +146,44 @@ module top(
     endcase
   end
 
+  wire MEMstatus;
+  wire MEMuart;
+  wire MEMaddrstack;
+  wire MEMuserstack;
+  wire MEMgpio;
+  wire MEMgpiodir;
+  wire MEMram;
+  wire MEMwrite;
+  wire [15:0] MEMbus;
+
+  wire [15:0] MEMout;
+
+  wire [15:0] uartOut;
+  wire [15:0] statusOut;
+  wire [15:0] addrstackOut;
+  wire [15:0] userstackOut;
+  wire [15:0] gpioOut;
+  wire [15:0] gpiodirOut;
+  wire [6:0] MEMstate = {
+    MEMram,
+    MEMgpiodir, MEMgpio,
+    MEMuserstack, MEMaddrstack,
+    MEMuart, MEMstatus
+  };
+
+  always @(*) begin
+    case (MEMstate)
+      7'b0000001: MEMbus = statusOut;
+      7'b0000010: MEMbus = addrstackOut;
+      7'b0000100: MEMbus = userstackOut;
+      7'b0001000: MEMbus = uartOut;
+      7'b0010000: MEMbus = gpioOut;
+      7'b0100000: MEMbus = gpiodirOut;
+      7'b1000000: MEMbus = MEMout;
+      default: MEMbus = 16'b0;
+    endcase
+  end
+
   // ROM
   rom ROM(
       .CLK(CLK),
@@ -196,11 +235,24 @@ module top(
       .D8(D8), .D9(D9), .D10(D10), .D11(D11),
       .D12(D12), .D13(D13), .D14(D14), .D15(D15),
 
-      //sim hack
+      //simulation hack
       .D0_in(D0_in), .D1_in(D1_in), .D2_in(D2_in), .D3_in(D3_in),
       .D4_in(D4_in), .D5_in(D5_in), .D6_in(D6_in), .D7_in(D7_in),
       .D8_in(D8_in), .D9_in(D9_in), .D10_in(D10_in), .D11_in(D11_in),
-      .D12_in(D12_in), .D13_in(D13_in), .D14_in(D14_in), .D15_in(D15_in)
+      .D12_in(D12_in), .D13_in(D13_in), .D14_in(D14_in), .D15_in(D15_in),
+
+      .memIn(MEMbus),
+      .memOut(MEMout)
+    );
+
+  uartwrapper UART(
+      .CLK(CLK),
+      .dataIn(MEMbus[7:0]),
+      .write(MEMwrite & MEMuart),
+      .read(MEMuart),
+      .dataOut(uartOut),
+      .RX(RX),
+      .TX(TX)
     );
 
 
