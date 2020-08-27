@@ -36,7 +36,7 @@ def main():
 
   ass.expand(lines, infile)
   ass.clean(lines)
-  print(lines)
+  # print(lines)
   # preserving 'lines' for error reporting
   assembly = ass.copy2d(lines)
   ass.convertStrings(assembly, lines)
@@ -51,6 +51,7 @@ def main():
     exit(1)
   ass.reorderInstructions(assembly, infile)
   ass.addLabels(assembly, vars, lines)
+  print(vars)
   code = ass.encode(assembly, vars, lines, dict)
   ass.write(code, outfile) # binary
 
@@ -63,10 +64,10 @@ def main():
     print(var)
   print()
   i = 0
-  # for line in code:
-  #   print('Word {}:'.format(i))
-  #   i += 1
-  #   ass.printWord(line)
+  for line in code:
+    print('Word {}:'.format(i))
+    i += 1
+    ass.printWord(line)
   # print("Code:")
   # for element in code:
   #   print(element)

@@ -92,12 +92,13 @@ VL_MODULE(Vtop) {
         CData/*2:0*/ top__DOT__aluOperand1;
         CData/*2:0*/ top__DOT__aluOperand2;
         CData/*2:0*/ top__DOT__aluResults;
-        CData/*5:0*/ top__DOT__aluOperation;
+        CData/*6:0*/ top__DOT__aluOperation;
         CData/*3:0*/ top__DOT__aluParams;
         CData/*0:0*/ top__DOT__aluReadBus;
         CData/*0:0*/ top__DOT__ramWrite;
         CData/*6:0*/ top__DOT__MEMstate;
         CData/*0:0*/ top__DOT__overflow;
+        CData/*5:0*/ top__DOT__aluStatus;
         CData/*1:0*/ top__DOT__CONTROL__DOT__increment;
         CData/*0:0*/ top__DOT__CONTROL__DOT__ramAddMode;
         CData/*7:0*/ top__DOT__UART__DOT__dataOutReg;
@@ -105,7 +106,9 @@ VL_MODULE(Vtop) {
         CData/*7:0*/ top__DOT__UART__DOT__uartin;
         CData/*7:0*/ top__DOT__UART__DOT__uartout;
         CData/*0:0*/ top__DOT__UART__DOT__uartoutwrite;
-        CData/*0:0*/ top__DOT__UART__DOT__empty;
+        CData/*0:0*/ top__DOT__UART__DOT__outfull;
+        CData/*0:0*/ top__DOT__UART__DOT__TXempty;
+        CData/*0:0*/ top__DOT__UART__DOT__RXempty;
         CData/*0:0*/ top__DOT__UART__DOT__sendState;
         CData/*0:0*/ top__DOT__UART__DOT__sendRead;
         CData/*0:0*/ top__DOT__UART__DOT__TXstart;
@@ -125,6 +128,7 @@ VL_MODULE(Vtop) {
         CData/*7:0*/ top__DOT__UART__DOT__OUTFIFO__DOT__idxn;
         CData/*7:0*/ top__DOT__UART__DOT__OUTFIFO__DOT__idx0prev;
         CData/*7:0*/ top__DOT__UART__DOT__OUTFIFO__DOT__idxnprev;
+        SData/*15:0*/ top__DOT__ctrlOut;
         SData/*15:0*/ top__DOT__romOut;
         SData/*15:0*/ top__DOT__gpuOut;
         SData/*15:0*/ top__DOT__apuOut;
@@ -136,8 +140,6 @@ VL_MODULE(Vtop) {
         SData/*15:0*/ top__DOT__userstackOut;
         SData/*15:0*/ top__DOT__gpioOut;
         SData/*15:0*/ top__DOT__gpiodirOut;
-        SData/*15:0*/ top__DOT__din;
-        SData/*15:0*/ top__DOT__dout;
         SData/*15:0*/ top__DOT__CONTROL__DOT__ramAddReg;
         SData/*15:0*/ top__DOT__CONTROL__DOT__programCounter;
         SData/*15:0*/ top__DOT__ALU__DOT__a;
@@ -150,10 +152,10 @@ VL_MODULE(Vtop) {
         SData/*15:0*/ top__DOT__ALU__DOT__h;
         SData/*15:0*/ top__DOT__ALU__DOT__log;
         SData/*15:0*/ top__DOT__ALU__DOT__lshift;
-        SData/*15:0*/ top__DOT__ALU__DOT__rshift;
-        SData/*15:0*/ top__DOT__ALU__DOT__operand1;
     };
     struct {
+        SData/*15:0*/ top__DOT__ALU__DOT__rshift;
+        SData/*15:0*/ top__DOT__ALU__DOT__operand1;
         SData/*15:0*/ top__DOT__ALU__DOT__operand2;
         SData/*15:0*/ top__DOT__ALU__DOT__combOperand2;
         IData/*24:0*/ top__DOT__clkdiv;

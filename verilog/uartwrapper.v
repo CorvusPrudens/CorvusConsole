@@ -15,18 +15,19 @@ module uartwrapper(
   );
 
   reg [7:0] dataOutReg;
-  assign dataOut = {{6{1'b0}}, empty, full, dataOutReg};
+  assign dataOut = {{4{1'b0}}, RXempty, RXfull, TXempty, TXfull, dataOutReg};
 
   wire uartread;
-  wire uartdone;
   wire [7:0] uartin;
   wire [7:0] uartout;
   wire uartoutwrite;
   wire TXbusy;
   wire outfull;
 
-  wire full;
-  wire empty;
+  wire TXfull;
+  wire TXempty;
+  wire RXfull;
+  wire RXempty;
 
   fifo8 INFIFO(
       .CLK(CLK),
@@ -34,8 +35,8 @@ module uartwrapper(
       .write(write),
       .read(sendRead),
       .dataOut(uartin),
-      .full(full),
-      .empty(uartdone)
+      .full(TXfull),
+      .empty(TXempty)
     );
 
   reg sendState = 1'b0;
@@ -47,7 +48,7 @@ module uartwrapper(
       1'b0:
         begin
           TXstart <= 1'b0;
-          if (~uartdone & ~TXbusy) begin
+          if (~TXempty & ~TXbusy) begin
             sendRead <= 1'b1;
             sendState <= 1'b1;
           end
@@ -80,10 +81,10 @@ module uartwrapper(
       .CLK(CLK),
       .dataIn(uartout),
       .write(uartoutwrite),
-      .read(read & ~empty),
+      .read(read & ~RXempty),
       .dataOut(dataOutReg),
-      .full(outfull),
-      .empty(empty)
+      .full(RXfull),
+      .empty(RXempty)
     );
 
 endmodule

@@ -1,38 +1,36 @@
+// consider adding store/restore on all registers?
 var x
 var y
 var temp
-
-/*
-ldr a, 1
-str a, x
-ldr a, 0
-str a, y
-str a, temp
-
-
-begin:
-  ldr a, x
-  str a, temp
-  ldr b, y
-  add a, b
-  str a, x
-  ldr a, temp
-  str a, y
-  jmp begin
-*/
+def SOME = 2**15
 
 ldr a, 1
 ldr b, 0
 ldr c, 0
+ldr e, 0
 
 begin:
+  cmp a, SOME
+  joc greater, reset
   add a, 0, c // temp hack in place of pseudo op 'tfr a, c'
   add a, b
   add c, 0, b
-  str a, UART // default behavior should just be to send uart data
-              // as fast as possible. of course, this will fill up the
-              // fifo since the computer can write to the uart 10 times
-              // faster than it can send it out (or more!)
+  str a, UART
   lsr a, 8, d
   str d, UART
+  add e, 2
+  cmp e, 255
+  joc greater, wait
+  jmp begin
+
+wait:
+  ldr f, UART
+  and f, TX_EMPTY
+  joc zero, wait
+  jmp begin
+
+reset:
+  ldr a, 1
+  ldr b, 0
+  ldr c, 0
   jmp begin

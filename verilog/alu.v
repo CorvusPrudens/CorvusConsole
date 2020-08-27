@@ -10,14 +10,15 @@ module alu(
     input wire [2:0] operandIndex1,
     input wire [2:0] operandIndex2,
     input wire [2:0] resultsIndex,
-    input wire [5:0] operation,
+    input wire [6:0] operation,
     input wire [3:0] params,
 
-    output reg overflow = 0
+    // output reg overflow = 0,
+    output reg [5:0] status = 6'b0
   );
 
   // verilator lint_off MULTIDRIVEN
-  reg [15:0] a = 16'h2;
+  reg [15:0] a = 16'h0;
   reg [15:0] b = 16'h0;
   reg [15:0] c = 16'h0;
   reg [15:0] d = 16'h0;
@@ -116,7 +117,7 @@ module alu(
   assign mult = operand1*combOperand2;
 
   always @(posedge CLK) begin
-    if (operation[5]) begin
+    if (operation[6]) begin
       if (operation[0]) begin
         case (resultsIndex)
           3'd0: a <= addsub[15:0];
@@ -128,7 +129,9 @@ module alu(
           3'd6: g <= addsub[15:0];
           3'd7: h <= addsub[15:0];
         endcase
-        overflow <= overflow | addsub[16];
+        status[0] <= addsub[15:0] == 16'b0; // zero
+        status[1] <= addsub[16]; // carry
+        status[2] <= addsub[15]; // negative
       end else if (operation[1]) begin
         case (resultsIndex)
           3'd0: a <= mult[15:0];
@@ -140,7 +143,9 @@ module alu(
           3'd6: g <= mult[15:0];
           3'd7: h <= mult[15:0];
         endcase
-        overflow <= overflow | mult[16];
+        status[0] <= addsub[15:0] == 16'b0; // zero
+        status[1] <= addsub[16]; // carry
+        status[2] <= addsub[15]; // negative
       end else if (operation[2]) begin
         case (resultsIndex)
           3'd0: a <= log;
@@ -152,6 +157,9 @@ module alu(
           3'd6: g <= log;
           3'd7: h <= log;
         endcase
+        status[0] <= log[15:0] == 16'b0; // zero
+        status[1] <= 1'b0;
+        status[2] <= log[15]; // negative
       end else if (operation[3]) begin
         case (resultsIndex)
           3'd0: a <= lshift;
@@ -163,6 +171,9 @@ module alu(
           3'd6: g <= lshift;
           3'd7: h <= lshift;
         endcase
+        status[0] <= addsub[15:0] == 16'b0; // zero
+        status[1] <= addsub[16]; // carry
+        status[2] <= addsub[15]; // negative
       end else if (operation[4]) begin
         case (resultsIndex)
           3'd0: a <= rshift;
@@ -174,6 +185,13 @@ module alu(
           3'd6: g <= rshift;
           3'd7: h <= rshift;
         endcase
+        status[0] <= addsub[15:0] == 16'b0; // zero
+        status[1] <= addsub[16]; // carry
+        status[2] <= addsub[15]; // negative
+      end else if (operation[5]) begin // CMP
+        status[3] <= operand1 == combOperand2;
+        status[4] <= operand1 > combOperand2;
+        status[5] <= operand1 < combOperand2;
       end else if (readBus) begin
         case (resultsIndex)
           3'd0: a <= din;
