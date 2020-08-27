@@ -15,8 +15,7 @@ module control(
 
     output reg aluReadBus = 1'b0,
     output reg ramWrite = 1'b0,
-    input wire [15:0] greg,
-    output wire [15:0] hreg,
+    input wire [15:0] hreg,
     output wire [15:0] ramAdd,
     output wire [15:0] romAdd,
     output wire [15:0] dout,
@@ -28,6 +27,7 @@ module control(
   reg [4:0] flags = 5'b0;
   reg [1:0] increment = 2'b0;
   reg ramAddMode = 1'b0;
+  reg [15:0] ramAddReg = 16'd1024;
   reg [15:0] programCounter = 16'b0;
   // wire [31:0] controlWord = 32'b00000000_00000100_000_000_000_00_01000;
   // wire [31:0] controlWord = testWord;
@@ -42,7 +42,9 @@ module control(
 
   // The ram address is either the second part of
   // the instruction word or the g register
-  assign ramAdd = ramAddMode ? greg : word2Wire;
+  // This is now changed!!! hreg is the actual one TODO
+  // assign ramAdd = ramAddMode ? greg : ramAddReg;
+  assign ramAdd = ramAddReg;
 
 
   always @(posedge CLK) begin
@@ -77,7 +79,7 @@ module control(
             aluOperation <= 6'b100000;
             increment <= 2'b10;
             aluReadBus <= 1'b1;
-            ramAddMode <= 1'b0;
+            ramAddReg <= word2Wire;
           end
         end
       5'h02: // STR
@@ -89,6 +91,7 @@ module control(
           increment <= 2'b10;
           aluReadBus <= 1'b0;
           ramAddMode <= 1'b0;
+          ramAddReg <= word2Wire;
         end
       5'h03: // LPT
         begin
@@ -102,6 +105,7 @@ module control(
             increment <= 2'b10;
             aluReadBus <= 1'b1;
             ramAddMode <= 1'b1;
+            ramAddReg <= hreg;
           end
         end
       5'h04: // SPT
@@ -115,7 +119,7 @@ module control(
             aluOperation[5] <= 1'b0;
             increment <= 2'b10;
             aluReadBus <= 1'b0;
-            ramAddMode <= 1'b1;
+            ramAddReg <= hreg;
           end
         end
       5'h05: // CMP TODO

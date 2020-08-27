@@ -96,7 +96,6 @@ module top(
 
   wire ramWrite;
   wire [15:0] greg = ALU.g;
-  wire [15:0] hreg;
 
   wire [15:0] ramAddress;
   wire [15:0] romAddress;
@@ -104,7 +103,8 @@ module top(
   wire [31:0] controlWord;
 
   control CONTROL(
-      .CLK(testClock),
+      //.CLK(testClock),
+      .CLK(CLK),
       .operand1(aluOperand1),
       .operand2(aluOperand2),
       .results(aluResults),
@@ -113,8 +113,7 @@ module top(
       .busState(busState),
       .aluReadBus(aluReadBus),
       .ramWrite(ramWrite),
-      .greg(greg),
-      .hreg(hreg),
+      .hreg(ALU.h),
       .ramAdd(ramAddress),
       .romAdd(romAddress),
       .dout(ctrlOut),
@@ -141,7 +140,7 @@ module top(
       4'h5: bus = apuOut;
       4'h6: bus = ctrlOut;
       4'h7: bus = clkOut;
-      4'h8: bus[7:0] = RXbuffer; // for debug! (?)
+      // 4'h8: bus[7:0] = RXbuffer; // for debug! (?)
       default: bus = 16'h00;
     endcase
   end
@@ -152,9 +151,8 @@ module top(
   wire MEMuserstack;
   wire MEMgpio;
   wire MEMgpiodir;
-  wire MEMram;
   wire MEMwrite;
-  wire [15:0] MEMbus;
+  reg [15:0] MEMbus = 16'b0;
 
   wire [15:0] MEMout;
 
@@ -165,10 +163,10 @@ module top(
   wire [15:0] gpioOut;
   wire [15:0] gpiodirOut;
   wire [6:0] MEMstate = {
-    MEMram,
+    MEMwrite,
     MEMgpiodir, MEMgpio,
-    MEMuserstack, MEMaddrstack,
-    MEMuart, MEMstatus
+    MEMuart, MEMuserstack,
+    MEMaddrstack, MEMstatus
   };
 
   always @(*) begin
@@ -179,8 +177,8 @@ module top(
       7'b0001000: MEMbus = uartOut;
       7'b0010000: MEMbus = gpioOut;
       7'b0100000: MEMbus = gpiodirOut;
-      7'b1000000: MEMbus = MEMout;
-      default: MEMbus = 16'b0;
+      // 7'b1000000: MEMbus = MEMout;
+      default: MEMbus = MEMout;
     endcase
   end
 
@@ -203,7 +201,8 @@ module top(
   wire overflow;
 
   alu ALU(
-      .CLK(testClock),
+      // .CLK(testClock),
+      .CLK(CLK),
       .readBus(aluReadBus),
       .din(bus),
       .dout(aluOut),
@@ -217,7 +216,8 @@ module top(
 
   // RAM
   ram RAM(
-      .CLK(testClock),
+      // .CLK(testClock),
+      .CLK(CLK),
       .address(ramAddress),
       .dataIn(bus),
       .write(ramWrite),
@@ -242,8 +242,23 @@ module top(
       .D12_in(D12_in), .D13_in(D13_in), .D14_in(D14_in), .D15_in(D15_in),
 
       .memIn(MEMbus),
-      .memOut(MEMout)
+      .memOut(MEMout),
+
+      .status(MEMstatus),
+      .uart(MEMuart),
+      .addrstack(MEMaddrstack),
+      .userstack(MEMuserstack),
+      .gpio(MEMgpio),
+      .gpiodir(MEMgpiodir),
+      .memwrite(MEMwrite)
     );
+
+    wire MEMstatus;
+    wire MEMuart;
+    wire MEMaddrstack;
+    wire MEMuserstack;
+    wire MEMgpio;
+    wire MEMgpiodir;
 
   uartwrapper UART(
       .CLK(CLK),
@@ -263,33 +278,33 @@ module top(
 
     clkdiv <= clkdiv + 1'b1;
 
-    case (testState)
-      4'h0:
-        begin
-          TXstart <= 1'b0;
-          if (~TXbusy) begin
-            testClock <= 1'b0;
-            testState <= 4'h1;
-          end
-        end
-      4'h1:
-        begin
-          testClock <= 1'b1;
-          TXbuffer <= ALU.a[7:0];
-          TXstart <= 1'b1;
-          testState <= 4'h2;
-        end
-      4'h2:
-        begin
-          TXstart <= 1'b0;
-          if (~TXbusy) begin
-            TXbuffer <= ALU.a[15:8];
-            TXstart <= 1'b1;
-            testState <= 4'h0;
-          end
-        end
-      default: testState <= 4'h0;
-    endcase
+    // case (testState)
+    //   4'h0:
+    //     begin
+    //       TXstart <= 1'b0;
+    //       if (~TXbusy) begin
+    //         testClock <= 1'b0;
+    //         testState <= 4'h1;
+    //       end
+    //     end
+    //   4'h1:
+    //     begin
+    //       testClock <= 1'b1;
+    //       TXbuffer <= ALU.a[7:0];
+    //       TXstart <= 1'b1;
+    //       testState <= 4'h2;
+    //     end
+    //   4'h2:
+    //     begin
+    //       TXstart <= 1'b0;
+    //       if (~TXbusy) begin
+    //         TXbuffer <= ALU.a[15:8];
+    //         TXstart <= 1'b1;
+    //         testState <= 4'h0;
+    //       end
+    //     end
+    //   default: testState <= 4'h0;
+    // endcase
 
     // testState <= testState + 1'b1;
     //
@@ -479,9 +494,6 @@ module top(
   assign GPIO9 = 1'b1;
   assign GPIO11 = 1'b0;
 
-  // assign GPIO0 = res[0];
-  // assign GPIO1 = res[1];
-  // assign GPIO2 = res[2];
   assign GPIO3 = clkdiv[23];
 
 endmodule

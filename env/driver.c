@@ -283,10 +283,10 @@ int main(int argc, char** argv) {
       } else {
         innum = 0;
         printf("Message %d:\n", messnum++);
-        printf("A register: %d\n", inbuff[0] | (out << 8));
-        printf("RAM 1024: %d\n", rambuff[1024]);
-        printf("RAM 1025: %d\n", rambuff[1025]);
-        printf("RAM 1026: %d\n\n", rambuff[1026]);
+        printf("A register: %d\n\n", inbuff[0] | (out << 8));
+        // printf("RAM 1024: %d\n", rambuff[1024]);
+        // printf("RAM 1025: %d\n", rambuff[1025]);
+        // printf("RAM 1026: %d\n\n", rambuff[1026]);
       }
       // inbuff[innum] = out;
       // innum += 1;

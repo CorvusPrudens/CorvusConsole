@@ -102,10 +102,10 @@ module ram(
 
   wire memmap;
 
-  assign dataOut = memmap ? memIn : {D15_in, D14_in, D13_in, D12_in,
-                                     D11_in, D10_in, D9_in,  D8_in,
-                                     D7_in,  D6_in,  D5_in,  D4_in,
-                                     D3_in,  D2_in,  D1_in,  D0_in};
+  assign dataOut = {D15_in, D14_in, D13_in, D12_in,
+                    D11_in, D10_in, D9_in,  D8_in,
+                    D7_in,  D6_in,  D5_in,  D4_in,
+                    D3_in,  D2_in,  D1_in,  D0_in};
 
   assign status = address == 16'd0;
   assign addrstack = address == 16'd1;
@@ -117,6 +117,6 @@ module ram(
   assign memmap = status | addrstack | userstack | uart | gpio | gpiodir;
 
   assign memOut = dataIn;
-  assign memwrite = write & memmap;
+  assign memwrite = write;
 
 endmodule

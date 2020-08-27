@@ -279,6 +279,63 @@ def encode(lines, variables, preserved, dict):
         err(preserved, lines[i][0])
         print("-> undefined label \'{}\'".format(lines[i][2][1]))
         exit(2)
+    elif opcode == 15 or opcode == 16: # lsl and lsr
+      inst = [opcode << 2, 0, 0, 0, 0]
+      if lines[i][2][1] in registers:
+        inst[1] = find(lines[i][2][1], registers)
+      else:
+        err(preserved, lines[i][0])
+        print("-> invalid register \'{}\' for operand 1".format(lines[i][2][1]))
+        exit(2)
+      op2 = find(lines[i][2][2], registers)
+      if op2 == -1:
+        inst[0] |= 2
+        if isinstance(lines[i][2][2], int) or lines[i][2][2].isnumeric():
+          inst[4] = int(lines[i][2][2])
+        else:
+          if ismathy(lines[i][2][2], 0):
+            solution = 0
+            try:
+              solution = round(eval(lines[i][2][2], {}, dict))
+            except NameError:
+              err(preserved, lines[i][0])
+              print("-> undefined assignment")
+              exit(2)
+            except SyntaxError:
+              err(preserved, lines[i][0])
+              print("-> invalid syntax")
+              exit(2)
+            except AttributeError:
+              err(preserved, lines[i][0])
+              print("-> scope does not contain element")
+              exit(2)
+            except TypeError:
+              err(preserved, lines[i][0])
+              print("-> undefined assignment")
+              exit(2)
+            inst[4] = solution
+          else:
+            for variable in variables:
+              if lines[i][2][2] == variable[1]:
+                inst[4] = int(variable[2])
+                break
+              elif lines[i][2][2] == variable[2]:
+                err(preserved, lines[i][0])
+                print("-> \'{}\' is not a literal or macro".format(lines[i][2][2]))
+                exit(2)
+      else:
+        err(preserved, lines[i][0])
+        print("-> shift operations cannot accept register assignments for operand 2")
+        exit(2)
+      if (len(lines[i][2]) == 3):
+        inst[3] = inst[1]
+      else:
+        res = find(lines[i][2][3], registers)
+        if res == -1:
+          err(preserved, lines[i][0])
+          print("-> invalid register \'{}\' for results".format(lines[i][2][3]))
+          exit(2)
+        inst[3] = res
     code.append(inst2word(inst))
   return code
 
@@ -310,9 +367,12 @@ def addLabels(lines, variables, preserved):
     if 'const' in variables[i][0]:
       variables[i].insert(1, address)
       address += 1
+    elif 'sysvar' in variables[i][0]:
+      variables[i].insert(1, int(variables[i][2]))
     elif 'var' in variables[i][0]:
       variables[i].insert(1, ramadd)
       ramadd += 1
+
 
 
 
@@ -349,7 +409,14 @@ def cleanvars(lines, preserved):
 
 # def encodeInstPass2(string, )
 def convertVariables(lines, preserved, infile, dict):
-  variables = []
+  # hack? i think this is fine
+  variables = [
+    ['sysvar', 'STATUS', '0'],
+    ['sysvar', 'STACK', '2'],
+    ['sysvar', 'UART', '3'],
+    ['sysvar', 'GPIO', '4'],
+    ['sysvar', 'GPIO_DIR', '5'],
+  ]
   # initializing array
   for i in range(len(lines)):
     tokens = lines[i][1].split()

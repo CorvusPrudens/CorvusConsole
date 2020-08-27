@@ -10,17 +10,30 @@ module fifo8(
   );
 
   reg [7:0] buffer [255:0];
-  reg idx0 [7:0];
-  reg idxn [7:0];
+  reg [7:0] idx0;
+  reg [7:0] idxn;
+
+  // kinda dumb but works in a pinch
+  reg [7:0] idx0prev;
+  reg [7:0] idxnprev;
 
   always @(posedge CLK) begin
     if (write) begin
-      buffer[idxn] = dataIn;
-      idxn = idxn + 1'b1;
+      buffer[idxnprev] <= dataIn;
+      idxn <= idxn + 1'b1;
     end
     if (read) begin
-      dataOut = buffer[idx0];
-      idx0 = idx0 + 1'b1;
+      dataOut <= buffer[idx0prev];
+      idx0 <= idx0 + 1'b1;
+    end
+  end
+
+  always @(negedge CLK) begin
+    if (idx0prev != idx0) begin
+      idx0prev <= idx0prev + 1'b1;
+    end
+    if (idxnprev != idxn) begin
+      idxnprev <= idxnprev + 1'b1;
     end
   end
 

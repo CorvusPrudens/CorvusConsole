@@ -15,7 +15,10 @@ module romdata(
       16'h0003: dintern = 32'h0000401A;
       16'h0004: dintern = 32'h00000418;
       16'h0005: dintern = 32'h0000211A;
-      16'h0006: dintern = 32'h00030050;
+      16'h0006: dintern = 32'h00030008;
+      16'h0007: dintern = 32'h00086042;
+      16'h0008: dintern = 32'h00030188;
+      16'h0009: dintern = 32'h00030050;
       default: dintern = 32'h0;
     endcase
   end
