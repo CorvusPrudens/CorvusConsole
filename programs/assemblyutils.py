@@ -357,6 +357,25 @@ def encode(lines, variables, preserved, dict):
       if not found:
         errstr = "-> undefined label \'{}\'".format(lines[i][2][1])
         err(preserved, lines[i][0], errstr, 2)
+    elif opcode == 21: # JSR
+      inst = [opcode << 2, 0, 0, 0, 0]
+      if len(lines[i][2]) != 2:
+        errstr = "-> invalid syntax"
+        err(preserved, lines[i][0], errstr, 2)
+      for variable in variables:
+        if lines[i][2][1] == variable[1]:
+          inst[4] = int(variable[2])
+          found = True
+          break
+      if not found:
+        errstr = "-> undefined label \'{}\'".format(lines[i][2][1])
+        err(preserved, lines[i][0], errstr, 2)
+    elif opcode == 22: # RTS
+      inst = [opcode << 2, 0, 0, 0, 0]
+      if len(lines[i][2]) != 1:
+        errstr = "-> invalid syntax"
+        err(preserved, lines[i][0], errstr, 2)
+      
     elif opcode == 23: # JOC
       inst = [opcode << 2, 0, 0, 0, 0]
       condition = find(lines[i][2][1], conditions)
@@ -653,58 +672,6 @@ def scope(lines, preserved, infile):
           # print('in keywords: {}'.format(target))
           subindex += match.end()
         match = var.search(lines[i][1][subindex:])
-
-# need error for lowercase, single char a-h variables
-# defined macros should be converted to numbers by this point
-def encodeInstPass1(string, preserved, index):
-  tokens = string.split()
-  for i in range(len(tokens)):
-    tokens[i] = tokens[i].strip(' ,')
-  op = tokens[0].lower()
-  opcode = find(op, instructions)
-  # print(tokens)
-  word = [0, 0, 0, 0, 0]
-  if opcode == -1:
-    err(preserved, index, "-> invalid instruction", 2)
-  if opcode == 0:
-    return [0, 0, 0, 0, 0]
-  if opcode > 5 and opcode < 13:
-    word = [opcode << 2, 0, 0, 0, 0]
-    if tokens[1] in registers:
-      word[1] = find(tokens[1], registers)
-    else:
-      err(preserved, index, "-> invalid register for operand 1", 2)
-    op2 = find(tokens[2], registers)
-    if op2 == -1:
-      word[0] |= 2
-      word[4] = tokens[2]
-    else:
-      word[2] = op2
-    if (len(tokens) == 3):
-      word[3] = word[1]
-    else:
-      res = find(tokens[3], registers)
-      if res == -1:
-        err(preserved, index, "-> invalid register for results", 2)
-      word[3] = res
-  if op == instructions[2]:
-    pass
-  if op == instructions[3]:
-    pass
-  if op == instructions[4]:
-    pass
-  if op == instructions[5]:
-    pass
-  if op == instructions[6]:
-    pass
-  if op == instructions[7]:
-    pass
-  if op == instructions[8]:
-    pass
-  if op == instructions[9]:
-    pass
-
-  return word
 
 
 def repchr(string, insert, index):

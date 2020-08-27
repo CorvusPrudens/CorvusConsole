@@ -26,7 +26,7 @@ module control(
 
   // {interrupt, display, compare, zero, carry}
   reg [4:0] flags = 5'b0;
-  reg [1:0] increment = 2'b0;
+  reg [2:0] increment = 3'b0;
   reg ramAddMode = 1'b0;
   reg [15:0] ramAddReg = 16'd1024;
   reg [15:0] programCounter = 16'b0;
@@ -41,12 +41,23 @@ module control(
   // assign dout = word2Wire;
   assign ramAdd = ramAddReg;
 
+  //addrstack -- TODO must be replaced by proper BRAM
+  reg [15:0] addrstack [255:0];
+  // verilator lint_off MULTIDRIVEN
+  reg [7:0] addrstackptr = 8'b0;
+  // verilator lint_on MULTIDRIVEN
 
   always @(posedge CLK) begin
-    if (increment[1]) begin
-      case (increment[0])
-        1'b0: programCounter <= programCounter + 1'b1;
-        1'b1: programCounter <= dout;
+    if (increment[2]) begin
+      case (increment[1:0])
+        2'b00: programCounter <= programCounter + 1'b1;
+        2'b01: programCounter <= dout;
+        2'b10:
+          begin
+            programCounter <= dout;
+            addrstackptr <= addrstackptr + 1'b1;
+          end
+        2'b11: programCounter <= addrstack[addrstackptr];
       endcase
     end
   end
@@ -57,11 +68,10 @@ module control(
       5'h00: // NOP
         begin
           busState <= 4'h0;
-          increment <= 2'b10;
+          increment <= 3'b100;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
-          increment <= 2'b10;
         end
       5'h01: // LDR
         begin
@@ -72,7 +82,7 @@ module control(
             ramWrite <= 1'b0;
             results <= resultsWire;
             aluOperation <= 7'b1000000;
-            increment <= 2'b10;
+            increment <= 3'b100;
             aluReadBus <= 1'b1;
             ramAddReg <= word2Wire;
             dout <= word2Wire;
@@ -84,7 +94,7 @@ module control(
           ramWrite <= 1'b1;
           operand1 <= operand1Wire;
           aluOperation <= 7'b0;
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= 1'b0;
           ramAddMode <= 1'b0;
           ramAddReg <= word2Wire;
@@ -99,7 +109,7 @@ module control(
             ramWrite <= 1'b0;
             results <= resultsWire;
             aluOperation[6] <= 1'b0;
-            increment <= 2'b10;
+            increment <= 3'b100;
             aluReadBus <= 1'b1;
             ramAddMode <= 1'b1;
             ramAddReg <= hreg;
@@ -115,7 +125,7 @@ module control(
             ramWrite <= 1'b1;
             operand1 <= operand1Wire;
             aluOperation[6] <= 1'b0;
-            increment <= 2'b10;
+            increment <= 3'b100;
             aluReadBus <= 1'b0;
             ramAddReg <= hreg;
             dout <= word2Wire;
@@ -125,12 +135,11 @@ module control(
         begin
           busState <= 4'h6;
           dout <= word2Wire;
-          increment <= 2'b10;
+          increment <= 3'b100;
           ramWrite <= 1'b0;
           operand1 <= operand1Wire;
           operand2 <= operand2Wire;
           aluOperation <= 7'b1100000;
-          increment <= 2'b10;
           aluReadBus <= opvar[1];
         end
       5'h06: // ADD
@@ -141,7 +150,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1000001;
           aluParams[0] <= 1'b0;
-          increment <= 2'b10;
+          increment <= 3'b100;
           busState <= 4'h6; // just in case an immediate
           dout <= word2Wire;
           aluReadBus <= opvar[1]; // immediate if 1
@@ -156,7 +165,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1000001;
           aluParams[0] <= 1'b1;
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h08: // MUL
@@ -169,26 +178,24 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1000010;
           aluParams[0] <= 1'b0;
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h09: // DIV TODO
         begin
           busState <= 4'h0;
-          increment <= 2'b10;
+          increment <= 3'b100;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
-          increment <= 2'b10;
         end
       5'h0A: // MOD TODO
         begin
           busState <= 4'h0;
-          increment <= 2'b10;
+          increment <= 3'b100;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
-          increment <= 2'b10;
         end
       5'h0B: // AND
         begin
@@ -200,7 +207,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1000100;
           aluParams <= 4'b0000;
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h0C: // OR
@@ -213,7 +220,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1000100;
           aluParams <= 4'b0001;
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h0D: // XOR
@@ -226,7 +233,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1000100;
           aluParams <= 4'b0010;
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h0E: // NOT
@@ -238,7 +245,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1000100;
           aluParams <= 4'b0011;
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= 1'b0;
         end
       5'h0F: // LSL
@@ -249,7 +256,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1001000;
           aluParams <= word2Wire[3:0];
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= 1'b1;
         end
       5'h10: // LSR
@@ -260,7 +267,7 @@ module control(
           results <= resultsWire;
           aluOperation <= 7'b1010000;
           aluParams <= word2Wire[3:0];
-          increment <= 2'b10;
+          increment <= 3'b100;
           aluReadBus <= 1'b1;
         end
       5'h14: // JMP
@@ -269,16 +276,35 @@ module control(
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
-          increment <= 2'b11;
+          increment <= 3'b101;
           dout <= word2Wire;
+        end
+      5'h15: // JSR
+        begin
+          busState <= 4'h0;
+          ramWrite <= 1'b0;
+          aluReadBus <= 1'b0;
+          aluOperation[6] <= 1'b0;
+          increment <= 3'b110;
+          dout <= word2Wire;
+          addrstack[addrstackptr] <= programCounter + 1'b1;
+        end
+      5'h16: // RTS
+        begin
+          busState <= 4'h0;
+          ramWrite <= 1'b0;
+          aluReadBus <= 1'b0;
+          aluOperation[6] <= 1'b0;
+          increment <= 3'b111;
+          addrstackptr <= addrstackptr - 1'b1;
         end
       5'h17: // JOC
         begin
           if ((conditions & aluStatus) > 6'b0) begin
-            increment <= 2'b11;
+            increment <= 3'b101;
             dout <= word2Wire;
           end else begin
-            increment <= 2'b10;
+            increment <= 3'b100;
           end
           busState <= 4'h0;
           ramWrite <= 1'b0;
@@ -288,11 +314,10 @@ module control(
       default:
         begin
           busState <= 4'h0;
-          increment <= 2'b10;
+          increment <= 3'b100;
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
-          increment <= 2'b10;
         end
     endcase
   end

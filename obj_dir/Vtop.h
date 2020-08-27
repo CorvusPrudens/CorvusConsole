@@ -99,8 +99,9 @@ VL_MODULE(Vtop) {
         CData/*6:0*/ top__DOT__MEMstate;
         CData/*0:0*/ top__DOT__overflow;
         CData/*5:0*/ top__DOT__aluStatus;
-        CData/*1:0*/ top__DOT__CONTROL__DOT__increment;
+        CData/*2:0*/ top__DOT__CONTROL__DOT__increment;
         CData/*0:0*/ top__DOT__CONTROL__DOT__ramAddMode;
+        CData/*7:0*/ top__DOT__CONTROL__DOT__addrstackptr;
         CData/*7:0*/ top__DOT__UART__DOT__dataOutReg;
         CData/*0:0*/ top__DOT__UART__DOT__uartread;
         CData/*7:0*/ top__DOT__UART__DOT__uartin;
@@ -151,9 +152,9 @@ VL_MODULE(Vtop) {
         SData/*15:0*/ top__DOT__ALU__DOT__g;
         SData/*15:0*/ top__DOT__ALU__DOT__h;
         SData/*15:0*/ top__DOT__ALU__DOT__log;
-        SData/*15:0*/ top__DOT__ALU__DOT__lshift;
     };
     struct {
+        SData/*15:0*/ top__DOT__ALU__DOT__lshift;
         SData/*15:0*/ top__DOT__ALU__DOT__rshift;
         SData/*15:0*/ top__DOT__ALU__DOT__operand1;
         SData/*15:0*/ top__DOT__ALU__DOT__operand2;
@@ -162,6 +163,7 @@ VL_MODULE(Vtop) {
         IData/*31:0*/ top__DOT__ROM__DOT__ROMDATA__DOT__dintern;
         IData/*16:0*/ top__DOT__ALU__DOT__addsub;
         IData/*16:0*/ top__DOT__ALU__DOT__mult;
+        SData/*15:0*/ top__DOT__CONTROL__DOT__addrstack[256];
         CData/*7:0*/ top__DOT__UART__DOT__INFIFO__DOT__buffer[256];
         CData/*7:0*/ top__DOT__UART__DOT__OUTFIFO__DOT__buffer[256];
     };
@@ -170,8 +172,11 @@ VL_MODULE(Vtop) {
     // Internals; generally not touched by application code
     CData/*0:0*/ top__DOT____Vcellinp__UART__write;
     CData/*0:0*/ top__DOT__UART__DOT____Vcellinp__OUTFIFO__read;
+    CData/*7:0*/ __Vdly__top__DOT__CONTROL__DOT__addrstackptr;
+    CData/*0:0*/ __Vdlyvset__top__DOT__CONTROL__DOT__addrstack__v0;
     CData/*0:0*/ __Vclklast__TOP__CLK;
-    CData/*0:0*/ __Vm_traceActivity[5];
+    SData/*15:0*/ __Vdly__top__DOT__CONTROL__DOT__programCounter;
+    CData/*0:0*/ __Vm_traceActivity[6];
     
     // INTERNAL VARIABLES
     // Internals; generally not touched by application code
@@ -210,8 +215,7 @@ VL_MODULE(Vtop) {
     static QData _change_request(Vtop__Syms* __restrict vlSymsp);
     static QData _change_request_1(Vtop__Syms* __restrict vlSymsp);
   public:
-    static void _combo__TOP__5(Vtop__Syms* __restrict vlSymsp);
-    static void _combo__TOP__7(Vtop__Syms* __restrict vlSymsp);
+    static void _combo__TOP__6(Vtop__Syms* __restrict vlSymsp);
   private:
     void _ctor_var_reset() VL_ATTR_COLD;
   public:
@@ -224,10 +228,13 @@ VL_MODULE(Vtop) {
     static void _eval_initial(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _eval_settle(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _initial__TOP__1(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _multiclk__TOP__6(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__2(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__3(Vtop__Syms* __restrict vlSymsp);
-    static void _settle__TOP__4(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
+    static void _sequent__TOP__4(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__7(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__8(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__9(Vtop__Syms* __restrict vlSymsp);
+    static void _settle__TOP__5(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
   private:
     static void traceChgSub0(void* userp, VerilatedVcd* tracep);
     static void traceChgTop0(void* userp, VerilatedVcd* tracep);

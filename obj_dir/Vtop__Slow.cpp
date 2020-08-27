@@ -51,6 +51,7 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     vlTOPp->top__DOT__ALU__DOT__f = 0U;
     vlTOPp->top__DOT__ALU__DOT__g = 0U;
     vlTOPp->top__DOT__CONTROL__DOT__increment = 0U;
+    vlTOPp->top__DOT__CONTROL__DOT__addrstackptr = 0U;
     vlTOPp->top__DOT__UART__DOT__TXstart = 0U;
     vlTOPp->top__DOT__UART__DOT__uartoutwrite = 0U;
     vlTOPp->top__DOT__MEMbus = 0U;
@@ -74,8 +75,8 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     vlTOPp->top__DOT__ROM__DOT__ROMDATA__DOT__dintern = 0U;
 }
 
-void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_settle__TOP__4\n"); );
+void Vtop::_settle__TOP__5(Vtop__Syms* __restrict vlSymsp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_settle__TOP__5\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
     vlTOPp->top__DOT__UART__DOT__RXempty = ((IData)(vlTOPp->top__DOT__UART__DOT__OUTFIFO__DOT__idx0) 
@@ -184,32 +185,20 @@ void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
                                                            : 
                                                           ((4U 
                                                             & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                            ? 
-                                                           ((2U 
-                                                             & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                             ? 
-                                                            ((1U 
-                                                              & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x40050U
-                                                              : 0x4006U)
-                                                             : 
-                                                            ((1U 
-                                                              & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x2006U
-                                                              : 0x10006U))
+                                                            ? 0U
                                                             : 
                                                            ((2U 
                                                              & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
                                                              ? 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x40050U
-                                                              : 0x1000dcU)
+                                                              ? 0U
+                                                              : 0x58U)
                                                              : 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x200a2aeU
-                                                              : 0x3a004U))))
+                                                              ? 0x60050U
+                                                              : 0x12085cU))))
                                                           : 
                                                          ((8U 
                                                            & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
@@ -222,26 +211,26 @@ void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
                                                              ? 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x40050U
-                                                              : 0x10085cU)
+                                                              ? 0xff0216U
+                                                              : 0x2821aU)
                                                              : 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0xff0216U
-                                                              : 0x2821aU))
+                                                              ? 0x30188U
+                                                              : 0x86042U))
                                                             : 
                                                            ((2U 
                                                              & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
                                                              ? 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x30188U
-                                                              : 0x86042U)
+                                                              ? 0x30008U
+                                                              : 0x211aU)
                                                              : 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x30008U
-                                                              : 0x211aU)))
+                                                              ? 0x418U
+                                                              : 0x401aU)))
                                                            : 
                                                           ((4U 
                                                             & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
@@ -251,26 +240,26 @@ void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
                                                              ? 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x418U
-                                                              : 0x401aU)
+                                                              ? 0x3085cU
+                                                              : 0x80000016U)
                                                              : 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x14085cU
-                                                              : 0x80000016U))
+                                                              ? 0x4006U
+                                                              : 0x2006U))
                                                             : 
                                                            ((2U 
                                                              & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
                                                              ? 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x8006U
-                                                              : 0x4006U)
+                                                              ? 0x10006U
+                                                              : 0x20050U)
                                                              : 
                                                             ((1U 
                                                               & (IData)(vlTOPp->top__DOT__CONTROL__DOT__programCounter))
-                                                              ? 0x2006U
-                                                              : 0x10006U))))))))))))))));
+                                                              ? 0x30054U
+                                                              : 0x8006U))))))))))))))));
     vlTOPp->top__DOT__ALU__DOT__operand2 = ((4U & (IData)(vlTOPp->top__DOT__aluOperand2))
                                              ? ((2U 
                                                  & (IData)(vlTOPp->top__DOT__aluOperand2))
@@ -573,39 +562,9 @@ void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
                                            : ((1U & (IData)(vlTOPp->top__DOT__busState))
                                                ? (IData)(vlTOPp->top__DOT__ALU__DOT__operand1)
                                                : 0U))));
-    vlTOPp->D0 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                     & (IData)(vlTOPp->top__DOT__bus)) 
-                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                  & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D1 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                     & ((IData)(vlTOPp->top__DOT__bus) 
-                        >> 1U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                  & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D12 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                      & ((IData)(vlTOPp->top__DOT__bus) 
-                         >> 0xcU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D9 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                     & ((IData)(vlTOPp->top__DOT__bus) 
-                        >> 9U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                  & (IData)(vlTOPp->top__DOT__ramWrite));
     vlTOPp->D5 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
                      & ((IData)(vlTOPp->top__DOT__bus) 
                         >> 5U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                  & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D10 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                      & ((IData)(vlTOPp->top__DOT__bus) 
-                         >> 0xaU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D6 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                     & ((IData)(vlTOPp->top__DOT__bus) 
-                        >> 6U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
                   & (IData)(vlTOPp->top__DOT__ramWrite));
     vlTOPp->D2 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
@@ -613,31 +572,16 @@ void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
                         >> 2U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
                   & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D11 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+    vlTOPp->D6 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                     & ((IData)(vlTOPp->top__DOT__bus) 
+                        >> 6U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                  & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D13 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
                       & ((IData)(vlTOPp->top__DOT__bus) 
-                         >> 0xbU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                         >> 0xdU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
                     & (IData)(vlTOPp->top__DOT__ramWrite)) 
                    & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D7 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                     & ((IData)(vlTOPp->top__DOT__bus) 
-                        >> 7U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                  & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D4 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                     & ((IData)(vlTOPp->top__DOT__bus) 
-                        >> 4U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                  & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D15 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                      & ((IData)(vlTOPp->top__DOT__bus) 
-                         >> 0xfU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D8 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
-                     & ((IData)(vlTOPp->top__DOT__bus) 
-                        >> 8U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
-                  & (IData)(vlTOPp->top__DOT__ramWrite));
     vlTOPp->D3 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
                      & ((IData)(vlTOPp->top__DOT__bus) 
                         >> 3U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
@@ -648,11 +592,56 @@ void Vtop::_settle__TOP__4(Vtop__Syms* __restrict vlSymsp) {
                          >> 0xeU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
                     & (IData)(vlTOPp->top__DOT__ramWrite)) 
                    & (IData)(vlTOPp->top__DOT__ramWrite));
-    vlTOPp->D13 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+    vlTOPp->D12 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
                       & ((IData)(vlTOPp->top__DOT__bus) 
-                         >> 0xdU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                         >> 0xcU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
                     & (IData)(vlTOPp->top__DOT__ramWrite)) 
                    & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D10 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                      & ((IData)(vlTOPp->top__DOT__bus) 
+                         >> 0xaU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D4 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                     & ((IData)(vlTOPp->top__DOT__bus) 
+                        >> 4U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                  & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D15 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                      & ((IData)(vlTOPp->top__DOT__bus) 
+                         >> 0xfU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D11 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                      & ((IData)(vlTOPp->top__DOT__bus) 
+                         >> 0xbU)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D0 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                     & (IData)(vlTOPp->top__DOT__bus)) 
+                    & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                  & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D8 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                     & ((IData)(vlTOPp->top__DOT__bus) 
+                        >> 8U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                  & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D7 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                     & ((IData)(vlTOPp->top__DOT__bus) 
+                        >> 7U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                  & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D9 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                     & ((IData)(vlTOPp->top__DOT__bus) 
+                        >> 9U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                  & (IData)(vlTOPp->top__DOT__ramWrite));
+    vlTOPp->D1 = (((((IData)(vlTOPp->top__DOT__ramWrite) 
+                     & ((IData)(vlTOPp->top__DOT__bus) 
+                        >> 1U)) & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                   & (IData)(vlTOPp->top__DOT__ramWrite)) 
+                  & (IData)(vlTOPp->top__DOT__ramWrite));
     vlTOPp->top__DOT__MEMbus = ((0x40U & (IData)(vlTOPp->top__DOT__MEMstate))
                                  ? (IData)(vlTOPp->top__DOT__bus)
                                  : ((0x20U & (IData)(vlTOPp->top__DOT__MEMstate))
@@ -781,6 +770,7 @@ void Vtop::_eval_initial(Vtop__Syms* __restrict vlSymsp) {
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
     vlTOPp->_initial__TOP__1(vlSymsp);
+    vlTOPp->__Vm_traceActivity[5U] = 1U;
     vlTOPp->__Vm_traceActivity[4U] = 1U;
     vlTOPp->__Vm_traceActivity[3U] = 1U;
     vlTOPp->__Vm_traceActivity[2U] = 1U;
@@ -800,7 +790,8 @@ void Vtop::_eval_settle(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_eval_settle\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    vlTOPp->_settle__TOP__4(vlSymsp);
+    vlTOPp->_settle__TOP__5(vlSymsp);
+    vlTOPp->__Vm_traceActivity[5U] = 1U;
     vlTOPp->__Vm_traceActivity[4U] = 1U;
     vlTOPp->__Vm_traceActivity[3U] = 1U;
     vlTOPp->__Vm_traceActivity[2U] = 1U;
@@ -895,10 +886,14 @@ void Vtop::_ctor_var_reset() {
     top__DOT__aluStatus = VL_RAND_RESET_I(6);
     top__DOT____Vcellinp__UART__write = VL_RAND_RESET_I(1);
     top__DOT__clkdiv = VL_RAND_RESET_I(25);
-    top__DOT__CONTROL__DOT__increment = VL_RAND_RESET_I(2);
+    top__DOT__CONTROL__DOT__increment = VL_RAND_RESET_I(3);
     top__DOT__CONTROL__DOT__ramAddMode = VL_RAND_RESET_I(1);
     top__DOT__CONTROL__DOT__ramAddReg = VL_RAND_RESET_I(16);
     top__DOT__CONTROL__DOT__programCounter = VL_RAND_RESET_I(16);
+    { int __Vi0=0; for (; __Vi0<256; ++__Vi0) {
+            top__DOT__CONTROL__DOT__addrstack[__Vi0] = VL_RAND_RESET_I(16);
+    }}
+    top__DOT__CONTROL__DOT__addrstackptr = VL_RAND_RESET_I(8);
     top__DOT__ROM__DOT__ROMDATA__DOT__dintern = VL_RAND_RESET_I(32);
     top__DOT__ALU__DOT__a = VL_RAND_RESET_I(16);
     top__DOT__ALU__DOT__b = VL_RAND_RESET_I(16);
@@ -950,7 +945,10 @@ void Vtop::_ctor_var_reset() {
     top__DOT__UART__DOT__OUTFIFO__DOT__idxn = VL_RAND_RESET_I(8);
     top__DOT__UART__DOT__OUTFIFO__DOT__idx0prev = VL_RAND_RESET_I(8);
     top__DOT__UART__DOT__OUTFIFO__DOT__idxnprev = VL_RAND_RESET_I(8);
-    { int __Vi0=0; for (; __Vi0<5; ++__Vi0) {
+    __Vdly__top__DOT__CONTROL__DOT__programCounter = VL_RAND_RESET_I(16);
+    __Vdly__top__DOT__CONTROL__DOT__addrstackptr = VL_RAND_RESET_I(8);
+    __Vdlyvset__top__DOT__CONTROL__DOT__addrstack__v0 = 0;
+    { int __Vi0=0; for (; __Vi0<6; ++__Vi0) {
             __Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);
     }}
 }
