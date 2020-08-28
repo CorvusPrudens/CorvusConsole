@@ -174,6 +174,7 @@ VL_MODULE(Vtop) {
     CData/*0:0*/ top__DOT__UART__DOT____Vcellinp__OUTFIFO__read;
     CData/*7:0*/ __Vdly__top__DOT__CONTROL__DOT__addrstackptr;
     CData/*0:0*/ __Vdlyvset__top__DOT__CONTROL__DOT__addrstack__v0;
+    CData/*0:0*/ __Vdlyvset__top__DOT__CONTROL__DOT__addrstack__v1;
     CData/*0:0*/ __Vclklast__TOP__CLK;
     SData/*15:0*/ __Vdly__top__DOT__CONTROL__DOT__programCounter;
     CData/*0:0*/ __Vm_traceActivity[6];

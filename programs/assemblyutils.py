@@ -375,7 +375,7 @@ def encode(lines, variables, preserved, dict):
       if len(lines[i][2]) != 1:
         errstr = "-> invalid syntax"
         err(preserved, lines[i][0], errstr, 2)
-      
+
     elif opcode == 23: # JOC
       inst = [opcode << 2, 0, 0, 0, 0]
       condition = find(lines[i][2][1], conditions)
@@ -396,6 +396,39 @@ def encode(lines, variables, preserved, dict):
           break
       if not found:
         errstr = "-> undefined label \'{}\'".format(lines[i][2][2])
+        err(preserved, lines[i][0], errstr, 2)
+    if opcode == 24: # JSC
+      inst = [opcode << 2, 0, 0, 0, 0]
+      condition = find(lines[i][2][1], conditions)
+      if condition == -1:
+        errstr1 = "-> condition \'{}\' must be set to one of the following:".format(lines[i][2][1])
+        errstr2 = "-> zero, carry, negative, equal, greater, less"
+        err(preserved, lines[i][0], errstr1 + '\n' + errstr2, 2)
+      inst[1] = (1 << condition) & 7
+      inst[2] = (1 << condition) >> 3
+      if len(lines[i][2]) != 3:
+        errstr = "-> invalid syntax"
+        err(preserved, lines[i][0], errstr, 2)
+      found = False
+      for variable in variables:
+        if lines[i][2][2] == variable[1]:
+          inst[4] = int(variable[2])
+          found = True
+          break
+      if not found:
+        errstr = "-> undefined label \'{}\'".format(lines[i][2][2])
+        err(preserved, lines[i][0], errstr, 2)
+    elif opcode == 25: # RSC
+      inst = [opcode << 2, 0, 0, 0, 0]
+      condition = find(lines[i][2][1], conditions)
+      if condition == -1:
+        errstr1 = "-> condition \'{}\' must be set to one of the following:".format(lines[i][2][1])
+        errstr2 = "-> zero, carry, negative, equal, greater, less"
+        err(preserved, lines[i][0], errstr1 + '\n' + errstr2, 2)
+      inst[1] = (1 << condition) & 7
+      inst[2] = (1 << condition) >> 3
+      if len(lines[i][2]) != 2:
+        errstr = "-> invalid syntax"
         err(preserved, lines[i][0], errstr, 2)
     code.append(inst2word(inst))
   return code

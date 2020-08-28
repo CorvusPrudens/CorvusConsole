@@ -311,6 +311,33 @@ module control(
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
         end
+      5'h18: // JSC
+        begin
+          if ((conditions & aluStatus) > 6'b0) begin
+            increment <= 3'b110;
+            dout <= word2Wire;
+            addrstack[addrstackptr] <= programCounter + 1'b1;
+          end else begin
+            increment <= 3'b100;
+          end
+          busState <= 4'h0;
+          ramWrite <= 1'b0;
+          aluReadBus <= 1'b0;
+          aluOperation[6] <= 1'b0;
+        end
+      5'h19: // RSC
+        begin
+          if ((conditions & aluStatus) > 6'b0) begin
+            increment <= 3'b111;
+            addrstackptr <= addrstackptr - 1'b1;
+          end else begin
+            increment <= 3'b100;
+          end
+          busState <= 4'h0;
+          ramWrite <= 1'b0;
+          aluReadBus <= 1'b0;
+          aluOperation[6] <= 1'b0;
+        end
       default:
         begin
           busState <= 4'h0;
