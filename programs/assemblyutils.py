@@ -362,6 +362,7 @@ def encode(lines, variables, preserved, dict):
       if len(lines[i][2]) != 2:
         errstr = "-> invalid syntax"
         err(preserved, lines[i][0], errstr, 2)
+      found = False
       for variable in variables:
         if lines[i][2][1] == variable[1]:
           inst[4] = int(variable[2])
@@ -677,7 +678,16 @@ def convertVariables(lines, preserved, infile, dict):
 
 
 def scope(lines, preserved, infile):
-  var = re.compile('((?<=[^A-z_0-9\\.])|^)([A-z_][A-z_0-9]*)((?=[^A-z_0-9\\.])|$)')
+  var = re.compile('((?<=[^A-z_0-9\\./])|^)([A-z_][A-z_0-9]*)((?=[^A-z_0-9\\.])|$)')
+  ['sysvar', 'STATUS', '0'],
+  ['sysvar', 'STACK', '2'],
+  ['sysvar', 'UART', '3'],
+  ['sysvar', 'GPIO', '4'],
+  ['sysvar', 'GPIO_DIR', '5'],
+  ['macro', 'TX_EMPTY', '512'],
+  ['macro', 'TX_FULL', '256'],
+  ['macro', 'RX_EMPTY', '2048'],
+  ['macro', 'RX_FULL', '1024'],
   keywords = [
     'nop', 'ldr', 'str', 'lpt',
     'spt', 'cmp', 'add', 'sub',
@@ -687,11 +697,17 @@ def scope(lines, preserved, infile):
     'jmp', 'jsr', 'rts', 'joc',
     'jsc', 'rsc',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-    'def', 'var', 'const'
+    'def', 'var', 'const',
+    'zero', 'carry', 'negative',
+    'equal', 'greater', 'less',
+    'UART', 'STACK', 'STATUS',
+    'GPIO', 'GPIO_DIR', 'TX_EMPTY',
+    'TX_FULL', 'RX_EMPTY', 'RX_FULL'
   ]
   for i in range(len(lines)):
     file = lines[i][0].split()[0]
     if file != infile[:-4]:
+      # print(lines[i][1])
       match = var.search(lines[i][1])
       subindex = 0
       while match != None:
@@ -800,13 +816,17 @@ def clean(lines):
 
 
 def err(lines, key, message, exitcode):
-  print("\nError in file \'{}\' at line {}:".format(key.split()[0], key.split()[1]))
+  print("\nError in file \'{}.cor\' at line {}:".format(key.split()[0], key.split()[1]))
   error = ''
   for line in lines:
     if key == line[0]:
       error = line[1]
       break
   print("  {}".format(error.strip(' \n')))
+  # it's possible this may instroduce errors in strings and stuff
+  # consider sanitizing the input a bit more and accounting for strings TODO
+  if key.split()[0] + '.' in message:
+    message = message.replace(key.split()[0] + '.', '')
   print(message + '\n')
   exit(exitcode)
 
@@ -878,10 +898,11 @@ def insideExclusion(lines, lineindex, start, end):
 
   return False
 
-def expand(lines, infile):
+def expand(lines, infile, prefix):
   importPattern = re.compile('^ *import')
   index = 0
   imported = []
+
   while (index < len(lines)):
     if 'import' in lines[index][1]:
       if importPattern.search(lines[index][1]) != None:
@@ -910,7 +931,7 @@ def expand(lines, infile):
           templine = lines[index]
           lines.pop(index)
           try:
-            with open(name, 'r') as file:
+            with open(prefix + name, 'r') as file:
               numLines = 0
               for numLines, line in enumerate(file):
                 lines.insert(index + numLines, ["{} {}".format(tempname, numLines + 1), line.strip(" \n")])

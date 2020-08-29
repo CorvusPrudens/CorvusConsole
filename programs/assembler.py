@@ -29,12 +29,20 @@ def main():
     print('Error: expecting verilog output file')
     exit(1)
 
+  prefix = ''
+  for i in range(len(infile) - 1, -1, -1):
+      if infile[i] == '/':
+          prefix = infile[:i + 1]
+          infile = infile[i + 1:]
+          break
+
   lines = []
-  with open(infile, 'r') as file:
+  with open(prefix + infile, 'r') as file:
+
     for numLines, line in enumerate(file):
       lines.append(['{} {}'.format(infile[:-4], numLines + 1), line.strip(" \n")])
 
-  ass.expand(lines, infile)
+  ass.expand(lines, infile, prefix)
   ass.clean(lines)
   # print(lines)
   # preserving 'lines' for error reporting
@@ -51,7 +59,7 @@ def main():
     exit(1)
   ass.reorderInstructions(assembly, infile)
   ass.addLabels(assembly, vars, lines)
-  print(vars)
+  # print(vars)
   code = ass.encode(assembly, vars, lines, dict)
   ass.write(code, outfile) # binary
 

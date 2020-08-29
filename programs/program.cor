@@ -1,35 +1,12 @@
-
-// divide
-var quotient
-var remainder
+import divide
 
 main:
-  ldr a, 255
+  ldr a, 10
   ldr b, 3
   ldr c, 0
 
-  jsr divide
-  jsr display
-  jmp stop
-
-divide:
-  sub a, b
-  joc negative, divide_result
-  add c, 1
-  jmp divide
-
-  divide_result:
-    add a, b
-    rts
-
-display:
-  str a, UART
-  lsr a, 8, d
-  str d, UART
-  str c, UART
-  lsr c, 8, d
-  str d, UART
-  rts
+  jsr divide.divide
+  jsr divide.display
 
 stop:
   jmp stop
