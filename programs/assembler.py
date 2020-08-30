@@ -8,16 +8,21 @@ def main():
 
   infile = ''
   outfile = ''
-  verifile = ''
+  promName = ''
+  dromName = ''
   if len(argv) < 2:
     print('Error: no input or output file provided')
     exit(1)
   elif len(argv) < 3:
     print('Error: no output file provided')
     exit(1)
-  elif len(argv) == 4:
+  elif len(argv) < 5: 
+    print("give me more agruments dangit")
+    exit(1)
+  elif len(argv) == 5:
     outfile = argv[2]
-    verifile = argv[3]
+    promName = argv[3]
+    dromName = argv[4]
   infile = argv[1]
   if '.cor' not in infile[-4:]:
     print('Error: input file must be of type .cor')
@@ -25,7 +30,7 @@ def main():
   if '.vus' not in outfile[-4:]:
     print('Error: output file must be of type .vus')
     exit(1)
-  if '.v' not in verifile[-2:]:
+  if '.v' not in promName[-2:]:
     print('Error: expecting verilog output file')
     exit(1)
 
@@ -63,7 +68,8 @@ def main():
   code = ass.encode(assembly, vars, lines, dict)
   ass.write(code, outfile) # binary
 
-  ass.writeVerilog(code, verifile) # verilog inferred rom
+  ass.writeVerilogPROM(code, promName) # verilog inferred rom
+  ass.writeVerilogDROM(vars, dromName)
 
   for line in assembly:
     print(line)

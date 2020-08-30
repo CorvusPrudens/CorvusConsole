@@ -16,9 +16,14 @@ module control(
     output reg aluReadBus = 1'b0,
     input wire [5:0] aluStatus,
     output reg ramWrite = 1'b0,
+    output reg gpuWrite = 1'b0,
+    input wire [15:0] freg,
+    input wire [15:0] greg,
     input wire [15:0] hreg,
     output wire [15:0] ramAdd,
-    output wire [15:0] romAdd,
+    output wire [15:0] progRomAdd,
+    output wire [15:0] dataRomAdd,
+    output wire [15:0] gpuAdd,
     output reg [15:0] dout,
 
     input wire [31:0] controlWord
@@ -27,8 +32,9 @@ module control(
   // {interrupt, display, compare, zero, carry}
   reg [4:0] flags = 5'b0;
   reg [2:0] increment = 3'b0;
-  reg ramAddMode = 1'b0;
   reg [15:0] ramAddReg = 16'd1024;
+  reg [15:0] romAddReg = 16'b0;
+  reg [15:0] gpuAddReg = 16'b0;
   reg [15:0] programCounter = 16'b0;
 
   wire [1:0] opvar = controlWord[1:0];
@@ -40,6 +46,8 @@ module control(
   wire [5:0] conditions = controlWord[12:7];
   // assign dout = word2Wire;
   assign ramAdd = ramAddReg;
+  assign dataRomAdd = romAddReg;
+  assign gpuAdd = gpuAddReg;
 
   //addrstack -- TODO must be replaced by proper BRAM
   reg [15:0] addrstack [255:0];
@@ -61,7 +69,7 @@ module control(
       endcase
     end
   end
-  assign romAdd = programCounter;
+  assign progRomAdd = programCounter;
 
   always @(negedge CLK) begin
     case (opcode)
@@ -75,111 +83,250 @@ module control(
         end
       5'h01: // LDR
         begin
-          if (opvar[0]) begin // ROM TODO
-            busState <= 4'h2;
-          end else begin
-            busState <= opvar[1] ? 4'h6 : 4'h2;
-            ramWrite <= 1'b0;
-            results <= resultsWire;
-            aluOperation <= 7'b1000000;
-            increment <= 3'b100;
-            aluReadBus <= 1'b1;
-            ramAddReg <= word2Wire;
-            dout <= word2Wire;
-          end
+          case (opvar)
+            2'b00:
+              begin
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                busState <= 4'h3;
+                romAddReg <= word2Wire;
+              end
+            2'b10: 
+              begin
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
+          ramWrite <= 1'b0;
+          results <= resultsWire;
+          aluOperation <= 7'b1000000;
+          increment <= 3'b100;
+          aluReadBus <= 1'b1;
         end
       5'h02: // STR
         begin
+          case (opvar)
+            2'b00:
+              begin
+                ramAddReg <= word2Wire;
+                ramWrite <= 1'b1;
+                gpuWrite <= 1'b0;
+              end
+            2'b10:
+              begin
+                gpuAddReg <= word2Wire;
+                ramWrite <= 1'b0;
+                gpuWrite <= 1'b1;
+              end
+            default:
+              begin
+                ramWrite <= 1'b0;
+                ramWrite <= 1'b0;
+              end
+          endcase
           busState <= 4'h1;
-          ramWrite <= 1'b1;
           operand1 <= operand1Wire;
           aluOperation <= 7'b0;
-          increment <= 3'b100;
           aluReadBus <= 1'b0;
-          ramAddMode <= 1'b0;
-          ramAddReg <= word2Wire;
-          dout <= word2Wire;
+          increment <= 3'b100;
         end
       5'h03: // LPT
         begin
-          if (opvar[0]) begin // ROM TODO
-            busState <= 4'h2;
-          end else begin
-            busState <= 4'h2;
-            ramWrite <= 1'b0;
-            results <= resultsWire;
-            aluOperation[6] <= 1'b0;
-            increment <= 3'b100;
-            aluReadBus <= 1'b1;
-            ramAddMode <= 1'b1;
-            ramAddReg <= hreg;
-            dout <= word2Wire;
-          end
+          case (opvar)
+            2'b00:
+              begin
+                busState <= 4'h2;
+                ramAddReg <= freg;
+              end
+            2'b01:
+              begin
+                busState <= 4'h3; 
+                romAddReg <= greg;
+              end
+            2'b10:
+              begin
+                busState <= 4'h4;
+                gpuAddReg <= hreg;
+              end
+            2'b11:
+              begin
+                busState <= 4'h0;
+              end
+          endcase
+          ramWrite <= 1'b0;
+          results <= resultsWire;
+          aluOperation <= 7'b1000000;
+          increment <= 3'b100;
+          aluReadBus <= 1'b1;
         end
-      5'h04: // SPT
+      5'h04: // SPT TODO - edit assembler to conform
         begin
-          if (opvar[0]) begin // ROM TODO
-            busState <= 4'h2;
-          end else begin
-            busState <= 4'h1;
-            ramWrite <= 1'b1;
-            operand1 <= operand1Wire;
-            aluOperation[6] <= 1'b0;
-            increment <= 3'b100;
-            aluReadBus <= 1'b0;
-            ramAddReg <= hreg;
-            dout <= word2Wire;
-          end
-        end
-      5'h05: // CMP TODO
-        begin
-          busState <= 4'h6;
+          case (opvar[0])
+            1'b0:
+              begin
+                ramAddReg <= freg;
+                ramWrite <= 1'b1;
+                gpuWrite <= 1'b0;
+              end
+            1'b1: // 
+              begin
+                gpuAddReg <= hreg;
+                ramWrite <= 1'b0;
+                gpuWrite <= 1'b1;
+              end
+          endcase
+          busState <= opvar[1] ? 4'h1: 4'h6;
+          operand1 <= operand1Wire;
+          aluOperation <= 7'b0;
+          aluReadBus <= 1'b0;
+          increment <= 3'b100;
           dout <= word2Wire;
+        end
+      5'h05: // CMP
+        begin
+          case (opvar)
+            2'b00:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
           increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           operand1 <= operand1Wire;
-          operand2 <= operand2Wire;
           aluOperation <= 7'b1100000;
-          aluReadBus <= opvar[1];
         end
       5'h06: // ADD
         begin
+          case (opvar)
+            2'b00:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           operand1 <= operand1Wire;
-          operand2 <= operand2Wire;
           results <= resultsWire;
           aluOperation <= 7'b1000001;
           aluParams[0] <= 1'b0;
-          increment <= 3'b100;
-          busState <= 4'h6; // just in case an immediate
-          dout <= word2Wire;
-          aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h07: // SUB
         begin
-          busState <= 4'h6;
-          dout <= word2Wire;
+          case (opvar)
+            2'b00:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           operand1 <= operand1Wire;
-          operand2 <= operand2Wire;
           results <= resultsWire;
           aluOperation <= 7'b1000001;
           aluParams[0] <= 1'b1;
-          increment <= 3'b100;
-          aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h08: // MUL
         begin
-          busState <= 4'h6;
-          dout <= word2Wire;
+          case (opvar)
+            2'b00:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           operand1 <= operand1Wire;
-          operand2 <= operand2Wire;
           results <= resultsWire;
           aluOperation <= 7'b1000010;
           aluParams[0] <= 1'b0;
-          increment <= 3'b100;
-          aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h09: // DIV TODO
         begin
@@ -199,76 +346,185 @@ module control(
         end
       5'h0B: // AND
         begin
-          busState <= 4'h6;
-          dout <= word2Wire;
+          case (opvar)
+            2'b00:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           operand1 <= operand1Wire;
-          operand2 <= operand2Wire;
           results <= resultsWire;
           aluOperation <= 7'b1000100;
-          aluParams <= 4'b0000;
-          increment <= 3'b100;
-          aluReadBus <= opvar[1]; // immediate if 1
+          aluParams <= 4'b0;
         end
       5'h0C: // OR
         begin
-          busState <= 4'h6;
-          dout <= word2Wire;
+          case (opvar)
+            2'b00:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           operand1 <= operand1Wire;
-          operand2 <= operand2Wire;
           results <= resultsWire;
           aluOperation <= 7'b1000100;
           aluParams <= 4'b0001;
-          increment <= 3'b100;
-          aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h0D: // XOR
         begin
-          busState <= 4'h6;
-          dout <= word2Wire;
+          case (opvar)
+            2'b00:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           operand1 <= operand1Wire;
-          operand2 <= operand2Wire;
           results <= resultsWire;
           aluOperation <= 7'b1000100;
           aluParams <= 4'b0010;
-          increment <= 3'b100;
-          aluReadBus <= opvar[1]; // immediate if 1
         end
       5'h0E: // NOT
         begin
-          busState <= 4'h6;
-          dout <= word2Wire;
+          case (opvar)
+            2'b00:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            2'b01:
+              begin
+                aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           operand1 <= operand1Wire;
           results <= resultsWire;
           aluOperation <= 7'b1000100;
           aluParams <= 4'b0011;
-          increment <= 3'b100;
-          aluReadBus <= 1'b0;
         end
-      5'h0F: // LSL
+      5'h0F: // LSL 
         begin
-          busState <= 4'h6;
+          case (opvar[0])
+            1'b0: // compromise -- only ram values can be immediately shifted
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            1'b1:
+              begin
+                aluReadBus <= 1'b0;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
-          operand1 <= operand1Wire;
+          gpuWrite <= 1'b0;
           results <= resultsWire;
           aluOperation <= 7'b1001000;
-          aluParams <= word2Wire[3:0];
-          increment <= 3'b100;
-          aluReadBus <= 1'b1;
+          aluParams <= {opvar[1], operand1Wire};
         end
       5'h10: // LSR
         begin
-          busState <= 4'h6;
+          case (opvar[0])
+            1'b0: // compromise -- only ram values can be immediately shifted
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h2;
+                ramAddReg <= word2Wire;
+              end
+            1'b1:
+              begin
+                aluReadBus <= 1'b0;
+              end
+          endcase
+          increment <= 3'b100;
           ramWrite <= 1'b0;
-          operand1 <= operand1Wire;
+          gpuWrite <= 1'b0;
           results <= resultsWire;
           aluOperation <= 7'b1010000;
-          aluParams <= word2Wire[3:0];
-          increment <= 3'b100;
-          aluReadBus <= 1'b1;
+          aluParams <= {opvar[1], operand1Wire};
         end
       5'h14: // JMP
         begin
@@ -337,6 +593,40 @@ module control(
           ramWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
+        end
+      5'h1A: // TRM TODO - implement in assembler
+        begin
+          case (opvar)
+            2'b00:
+              begin
+                busState <= 4'h2;
+                gpuWrite <= 1'b1;
+                ramWrite <= 1'b0;
+              end
+            2'b01:
+              begin
+                busState <= 4'h4;
+                gpuWrite <= 1'b0;
+                ramWrite <= 1'b1;
+              end
+            2'b10:
+              begin
+                busState <= 4'h3;
+                gpuWrite <= 1'b1;
+                ramWrite <= 1'b0;
+              end
+            2'b11:
+              begin
+                busState <= 4'h3;
+                gpuWrite <= 1'b0;
+                ramWrite <= 1'b1;
+              end
+          endcase
+          ramAddReg <= freg;
+          romAddReg <= greg;
+          gpuAddReg <= hreg;
+          increment <= 3'b100;
+          aluOperation <= 7'b0;
         end
       default:
         begin

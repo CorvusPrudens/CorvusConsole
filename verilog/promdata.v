@@ -1,4 +1,4 @@
-module romdata(
+module promdata(
     input wire CLK,
     input wire [15:0] address,
     output wire [31:0] data

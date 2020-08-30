@@ -1,9 +1,30 @@
 import divide
+const var nut = 10
+var smol
+
+// non-const pointers need memory type
+// ptr ram nutter
+// ptr rom nutterr
+
+// const pointers do not need these typings
+// const ptr wow = &nut
+// const ptr im = &smol
+
+// tfm ROM, RAM
+// tfm ROM, GPU
+// tfm RAM, GPU
+// tfm GPU, RAM
+
+// 
+
+// lpt 
 
 main:
   ldr a, 10
   ldr b, 3
   ldr c, 0
+
+  ldr 
 
   jsr divide.divide
   jsr divide.display

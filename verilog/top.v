@@ -7,7 +7,8 @@
 // `include "uart.v"
 `include "alu.v"
 `include "ram.v"
-`include "rom.v"
+`include "prom.v"
+`include "drom.v"
 `include "control.v"
 `include "uartwrapper.v"
 
@@ -50,9 +51,12 @@ module top(
   wire aluReadBus;
 
   wire ramWrite;
+  wire gpuWrite;
 
   wire [15:0] ramAddress;
-  wire [15:0] romAddress;
+  wire [15:0] progRomAddress;
+  wire [15:0] dataRomAddress;
+  wire [15:0] gpuAddress;
   wire [15:0] ctrlOut;
   wire [31:0] controlWord;
 
@@ -67,9 +71,14 @@ module top(
       .aluReadBus(aluReadBus),
       .aluStatus(aluStatus),
       .ramWrite(ramWrite),
+      .gpuWrite(gpuWrite),
+      .freg(ALU.f),
+      .greg(ALU.g),
       .hreg(ALU.h),
       .ramAdd(ramAddress),
-      .romAdd(romAddress),
+      .progRomAdd(progRomAddress),
+      .dataRomAdd(dataRomAddress),
+      .gpuAdd(gpuAddress),
       .dout(ctrlOut),
       .controlWord(controlWord)
     );
@@ -77,7 +86,7 @@ module top(
   // bus
   wire [15:0] aluOut; // these are all the modules
   wire [15:0] ramOut; // i'll need to design
-  wire [15:0] romOut;
+  wire [15:0] romOut; // this is our data rom
   wire [15:0] gpuOut;
   wire [15:0] apuOut;
   wire [15:0] clkOut;
@@ -134,12 +143,19 @@ module top(
     endcase
   end
 
-  // ROM
-  rom ROM(
+  // program ROM
+  prom PROM(
       .CLK(CLK),
-      .address(romAddress),
+      .address(progRomAddress),
       .data(controlWord)
     );
+
+  drom DROM(
+  	.CLK(CLK),
+  	.address(dataRomAddress),
+  	.data(romOut)
+  );
+
 
   // ALU
   wire overflow;

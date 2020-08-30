@@ -8,7 +8,7 @@ instructions = [
   "or",  "xor", "not", "lsl",
   "lsr", "psh", "pop", "pek",
   "jmp", "jsr", "rts", "joc",
-  "jsc", "rsc"
+  "jsc", "rsc", "tfm"
 ]
 
 registers = [
@@ -65,9 +65,9 @@ def inst2word(instruction):
   word[3] = ((instruction[4] >> 8) & 255) & 255
   return word
 
-def writeVerilog(code, outfile):
+def writeVerilogPROM(code, outfile):
   with open(outfile, 'w') as file:
-    file.write('module romdata(\n')
+    file.write('module promdata(\n')
     file.write('    input wire CLK,\n')
     file.write('    input wire [15:0] address,\n')
     file.write('    output wire [31:0] data\n')
@@ -82,6 +82,31 @@ def writeVerilog(code, outfile):
       line = '      16\'h{:04X}: dintern = 32\'h{:08X};\n'.format(i, data)
       file.write(line)
     file.write('      default: dintern = 32\'h0;\n')
+    file.write('    endcase\n')
+    file.write('  end\n\n')
+    file.write('  assign data = dintern;\n\n')
+    file.write('endmodule\n')
+
+def writeVerilogDROM(code, outfile):
+  with open(outfile, 'w') as file:
+    file.write('module dromdata(\n')
+    file.write('    input wire CLK,\n')
+    file.write('    input wire [15:0] address,\n')
+    file.write('    output wire [15:0] data\n')
+    file.write('    );\n\n')
+    file.write('    (* rom_style = \"block\" *) reg [15:0] dintern = 16\'b0;\n\n')
+    file.write('    always @( * ) begin\n')
+    file.write('        case (address)\n')
+    index = 0
+    for i in range(len(code)):
+      if 'const' in code[i][0]:
+        print(code[i])
+        data = int(code[i][3])
+        index = code[i][1]
+        line = '      16\'h{:04X}: dintern = 16\'h{:08X};\n'.format(index, data)
+        file.write(line)
+        
+    file.write('        default: dintern = 16\'h0;\n')
     file.write('    endcase\n')
     file.write('  end\n\n')
     file.write('  assign data = dintern;\n\n')
@@ -458,6 +483,7 @@ def addLabels(lines, variables, preserved):
       address += 1
       i += 1
   ramadd = 1024 # why not? enough space for stacks and memory-mapped io
+  address =0
   for i in range(len(variables)):
     if 'const' in variables[i][0]:
       variables[i].insert(1, address)

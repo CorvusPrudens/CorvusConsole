@@ -68,49 +68,49 @@ module alu(
   // left shift
   always @(*) begin
     case (params)
-      4'h0: lshift = operand1;
-      4'h1: lshift = {operand1[14:0], 1'b0};
-      4'h2: lshift = {operand1[13:0], 2'b0};
-      4'h3: lshift = {operand1[12:0], 3'b0};
-      4'h4: lshift = {operand1[11:0], 4'b0};
-      4'h5: lshift = {operand1[10:0], 5'b0};
-      4'h6: lshift = {operand1[9:0], 6'b0};
-      4'h7: lshift = {operand1[8:0], 7'b0};
-      4'h8: lshift = {operand1[7:0], 8'b0};
-      4'h9: lshift = {operand1[6:0], 9'b0};
-      4'hA: lshift = {operand1[5:0], 10'b0};
-      4'hB: lshift = {operand1[4:0], 11'b0};
-      4'hC: lshift = {operand1[3:0], 12'b0};
-      4'hD: lshift = {operand1[2:0], 13'b0};
-      4'hE: lshift = {operand1[1:0], 14'b0};
-      4'hF: lshift = {operand1[0], 15'b0};
+      4'h0: lshift = combOperand2;
+      4'h1: lshift = {combOperand2[14:0], 1'b0};
+      4'h2: lshift = {combOperand2[13:0], 2'b0};
+      4'h3: lshift = {combOperand2[12:0], 3'b0};
+      4'h4: lshift = {combOperand2[11:0], 4'b0};
+      4'h5: lshift = {combOperand2[10:0], 5'b0};
+      4'h6: lshift = {combOperand2[9:0], 6'b0};
+      4'h7: lshift = {combOperand2[8:0], 7'b0};
+      4'h8: lshift = {combOperand2[7:0], 8'b0};
+      4'h9: lshift = {combOperand2[6:0], 9'b0};
+      4'hA: lshift = {combOperand2[5:0], 10'b0};
+      4'hB: lshift = {combOperand2[4:0], 11'b0};
+      4'hC: lshift = {combOperand2[3:0], 12'b0};
+      4'hD: lshift = {combOperand2[2:0], 13'b0};
+      4'hE: lshift = {combOperand2[1:0], 14'b0};
+      4'hF: lshift = {combOperand2[0], 15'b0};
     endcase
   end
 
   always @(*) begin
     case (params)
-      4'h0: rshift = operand1;
-      4'h1: rshift = {1'b0, operand1[15:1]};
-      4'h2: rshift = {2'b0, operand1[15:2]};
-      4'h3: rshift = {3'b0, operand1[15:3]};
-      4'h4: rshift = {4'b0, operand1[15:4]};
-      4'h5: rshift = {5'b0, operand1[15:5]};
-      4'h6: rshift = {6'b0, operand1[15:6]};
-      4'h7: rshift = {7'b0, operand1[15:7]};
-      4'h8: rshift = {8'b0, operand1[15:8]};
-      4'h9: rshift = {9'b0, operand1[15:9]};
-      4'hA: rshift = {10'b0, operand1[15:10]};
-      4'hB: rshift = {11'b0, operand1[15:11]};
-      4'hC: rshift = {12'b0, operand1[15:12]};
-      4'hD: rshift = {13'b0, operand1[15:13]};
-      4'hE: rshift = {14'b0, operand1[15:14]};
-      4'hF: rshift = {15'b0, operand1[15]};
+      4'h0: rshift = combOperand2;
+      4'h1: rshift = {1'b0, combOperand2[15:1]};
+      4'h2: rshift = {2'b0, combOperand2[15:2]};
+      4'h3: rshift = {3'b0, combOperand2[15:3]};
+      4'h4: rshift = {4'b0, combOperand2[15:4]};
+      4'h5: rshift = {5'b0, combOperand2[15:5]};
+      4'h6: rshift = {6'b0, combOperand2[15:6]};
+      4'h7: rshift = {7'b0, combOperand2[15:7]};
+      4'h8: rshift = {8'b0, combOperand2[15:8]};
+      4'h9: rshift = {9'b0, combOperand2[15:9]};
+      4'hA: rshift = {10'b0, combOperand2[15:10]};
+      4'hB: rshift = {11'b0, combOperand2[15:11]};
+      4'hC: rshift = {12'b0, combOperand2[15:12]};
+      4'hD: rshift = {13'b0, combOperand2[15:13]};
+      4'hE: rshift = {14'b0, combOperand2[15:14]};
+      4'hF: rshift = {15'b0, combOperand2[15]};
     endcase
   end
 
   assign dout = operand1;
   // 0 = AND, 1 = OR, 2 = XOR, 3 = NOT
-  assign log = params[1] & params[0] ? ~operand1 : params[1] ?
+  assign log = params[1] & params[0] ? ~combOperand2 : params[1] ?
                operand1 ^ combOperand2 : params[0] ? operand1 | combOperand2 : operand1 & combOperand2;
   // assign log = operation[0] ? operand1 | combOperand2 : operation[1] ? operand1 ^ combOperand2 : operand1 & combOperand2;
   assign addsub = params[0] ? operand1 - combOperand2 : operand1 + combOperand2;
