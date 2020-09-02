@@ -9,7 +9,8 @@ CSRC = driver
 OUT = run
 PROG = program
 PROGOUT = out
-PROGROM = romdata
+PROGROM = promdata
+DATROM = dromdata
 PYCOMP = assembler.py
 PHONEPATH = /data/data/com.termux/files/usr
 
@@ -58,7 +59,8 @@ sim: ./env/${CSRC}.c
 
 prog: ./programs/${PROG}.cor ./programs/${PYCOMP}
 	${PYVAR} ./programs/${PYCOMP} ./programs/${PROG}.cor \
-	./programs/${PROGOUT}.vus ./verilog/${PROGROM}.v
+	./programs/${PROGOUT}.vus ./verilog/${PROGROM}.v \
+	./verilog/${DATROM}.v
 
 clean:
 	@ if [ -d "./obj_dir" ]; then rm -r ./obj_dir; fi

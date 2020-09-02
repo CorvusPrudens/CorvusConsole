@@ -141,15 +141,16 @@ def encode(lines, variables, preserved, dict):
     if opcode == 1: # LDR
       inst = [opcode << 2, 0, 0, 0, 0]
       res = find(lines[i][2][1], registers)
+      # needs expansion for loading pointers
       if res == -1:
-        errstr = "-> invalid register \'{}\' for results".format(lines[i][2][1])
+        errstr = "-> invalid register \'{}\' for load".format(lines[i][2][1])
         err(preserved, lines[i][0], errstr, 2)
       inst[3] = res
       if str(lines[i][2][2]).isnumeric(): # what about hex/bin literals?
-        inst[0] |= 2
+        inst[0] |= 3 # immediate flag
         inst[4] = int(lines[i][2][2])
       elif ismathy(lines[i][2][2], 0):
-        inst[0] |= 2
+        inst[0] |= 3
         solution = 0
         try:
           solution = round(eval(lines[i][2][2], {}, dict))
@@ -170,7 +171,7 @@ def encode(lines, variables, preserved, dict):
         found = False
         for variable in variables:
           if lines[i][2][2] == variable[1]:
-            inst[0] |= 2
+            inst[0] |= 0 # needs disambiguation for ram/rom/gpu
             inst[4] = int(variable[2])
             found = True
             break
@@ -197,13 +198,14 @@ def encode(lines, variables, preserved, dict):
         found = False
         if lines[i][2][2] == variable[2]:
           if 'const' in variable[0]:
-            errstr = "-> argument \'{}\' must be a RAM address".format(lines[i][2][2])
+            errstr = "-> argument \'{}\' must be a RAM or GPU address".format(lines[i][2][2])
             err(preserved, lines[i][0], errstr, 2)
           inst[4] = int(variable[1])
+          inst[0] |= 0 # if ram!!
           found = True
           break
         elif lines[i][2][2] == variable[1]:
-          errstr = "-> argument \'{}\' must be a RAM address".format(lines[i][2][2])
+          errstr = "-> argument \'{}\' must be a RAM or GPU address".format(lines[i][2][2])
           err(preserved, lines[i][0], errstr, 2)
       if not found:
         errstr = "-> undefined argument \'{}\'".format(lines[i][2][2])
@@ -237,9 +239,9 @@ def encode(lines, variables, preserved, dict):
         err(preserved, lines[i][0], errstr, 2)
       op2 = find(lines[i][2][2], registers)
       if op2 == -1:
-        inst[0] |= 2
         if isinstance(lines[i][2][2], int) or lines[i][2][2].isnumeric():
           inst[4] = int(lines[i][2][2])
+          inst[0] |= 3
         else:
           if ismathy(lines[i][2][2], 0):
             solution = 0
@@ -257,14 +259,20 @@ def encode(lines, variables, preserved, dict):
             except TypeError:
               errstr = "-> undefined assignment"
               err(preserved, lines[i][0], errstr, 2)
+            inst[0] |= 3
             inst[4] = solution
           else:
             for variable in variables:
               if lines[i][2][2] == variable[1]:
+                inst[0] |= 3
                 inst[4] = int(variable[2])
                 break
               elif lines[i][2][2] == variable[2]:
-                errstr = "-> \'{}\' is not a register, literal, or macro".format(lines[i][2][2])
+                inst[0] |= 0
+                inst[4] = int(variable[1])
+                break
+              else:
+                errstr = "-> undefined argument \'{}\'".format(lines[i][2][2])
                 err(preserved, lines[i][0], errstr, 2)
       else:
         inst[2] = op2

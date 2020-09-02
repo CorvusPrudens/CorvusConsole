@@ -1,4 +1,6 @@
-
+import divide
+const var nut = 10
+var smol
 
 // non-const pointers need memory type
 // ptr ram nutter
@@ -31,14 +33,8 @@ main:
   ldr b, 3
   ldr c, 0
 
-  cmp a, b
-  joc greater, display
+  jsr divide.divide
+  jsr divide.display
 
 stop:
-  jmp stop
-
-display:
-  ldr a, 1
-  str a, UART
-  str c, UART
   jmp stop
