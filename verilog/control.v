@@ -94,7 +94,7 @@ module control(
                 busState <= 4'h3;
                 romAddReg <= word2Wire;
               end
-            2'b10: 
+            2'b10:
               begin
                 busState <= 4'h4;
                 gpuAddReg <= word2Wire;
@@ -148,7 +148,7 @@ module control(
               end
             2'b01:
               begin
-                busState <= 4'h3; 
+                busState <= 4'h3;
                 romAddReg <= greg;
               end
             2'b10:
@@ -176,7 +176,7 @@ module control(
                 ramWrite <= 1'b1;
                 gpuWrite <= 1'b0;
               end
-            1'b1: // 
+            1'b1: //
               begin
                 gpuAddReg <= hreg;
                 ramWrite <= 1'b0;
@@ -484,48 +484,119 @@ module control(
           aluOperation <= 7'b1000100;
           aluParams <= 4'b0011;
         end
-      5'h0F: // LSL 
+      5'h0F: // LSL
         begin
-          case (opvar[0])
-            1'b0: // compromise -- only ram values can be immediately shifted
+          case (opvar)
+            2'b00:
               begin
                 aluReadBus <= 1'b1;
                 busState <= 4'h2;
                 ramAddReg <= word2Wire;
               end
-            1'b1:
+            2'b01:
               begin
                 aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
               end
           endcase
           increment <= 3'b100;
           ramWrite <= 1'b0;
           gpuWrite <= 1'b0;
+          operand1 <= operand1Wire;
           results <= resultsWire;
           aluOperation <= 7'b1001000;
-          aluParams <= {opvar[1], operand1Wire};
+          aluParams[0] <= 1'b0;
         end
       5'h10: // LSR
         begin
-          case (opvar[0])
-            1'b0: // compromise -- only ram values can be immediately shifted
+          case (opvar)
+            2'b00:
               begin
                 aluReadBus <= 1'b1;
                 busState <= 4'h2;
                 ramAddReg <= word2Wire;
               end
-            1'b1:
+            2'b01:
               begin
                 aluReadBus <= 1'b0;
+                operand2 <= operand2Wire;
+              end
+            2'b10:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h4;
+                gpuAddReg <= word2Wire;
+              end
+            2'b11:
+              begin
+                aluReadBus <= 1'b1;
+                busState <= 4'h6;
+                dout <= word2Wire;
               end
           endcase
           increment <= 3'b100;
           ramWrite <= 1'b0;
           gpuWrite <= 1'b0;
+          operand1 <= operand1Wire;
           results <= resultsWire;
           aluOperation <= 7'b1010000;
-          aluParams <= {opvar[1], operand1Wire};
+          aluParams[0] <= 1'b0;
         end
+      // 5'h0F: // LSL
+      //   begin
+      //     case (opvar[0])
+      //       1'b0: // compromise -- only ram values can be immediately shifted
+      //         begin
+      //           aluReadBus <= 1'b1;
+      //           busState <= 4'h2;
+      //           ramAddReg <= word2Wire;
+      //         end
+      //       1'b1:
+      //         begin
+      //           operand2 <= operand2Wire
+      //           aluReadBus <= 1'b0;
+      //         end
+      //     endcase
+      //     increment <= 3'b100;
+      //     ramWrite <= 1'b0;
+      //     gpuWrite <= 1'b0;
+      //     results <= resultsWire;
+      //     aluOperation <= 7'b1001000;
+      //     aluParams <= {opvar[1], operand1Wire};
+      //   end
+      // 5'h10: // LSR
+      //   begin
+      //     case (opvar[0])
+      //       1'b0: // compromise -- only ram values can be immediately shifted
+      //         begin
+      //           aluReadBus <= 1'b1;
+      //           busState <= 4'h2;
+      //           ramAddReg <= word2Wire;
+      //         end
+      //       1'b1:
+      //         begin
+      //           aluReadBus <= 1'b0;
+      //         end
+      //     endcase
+      //     increment <= 3'b100;
+      //     ramWrite <= 1'b0;
+      //     gpuWrite <= 1'b0;
+      //     results <= resultsWire;
+      //     aluOperation <= 7'b1010000;
+      //     aluParams <= {opvar[1], operand1Wire};
+      //   end
       5'h14: // JMP
         begin
           busState <= 4'h0;

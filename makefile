@@ -37,9 +37,9 @@ else
 PYVAR = py
 endif
 
-all: clean prog src sim
+all: clean prog src sim execute
 
-.PHONY: clean all sim src prog reset
+.PHONY: clean all sim src prog reset execute
 
 src: ./verilog/${VSRC}.v ./env/${CSRC}.c
 	@ # consider using trace threads to improve performance
@@ -68,3 +68,6 @@ clean:
 reset:
 	git fetch
 	git reset --hard origin/master
+
+execute:
+	./$(OUT)

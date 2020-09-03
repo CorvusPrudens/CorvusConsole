@@ -8,6 +8,8 @@ module dromdata(
 
     always @( * ) begin
         case (address)
+      16'h0000: dintern = 16'h00000002;
+      16'h0001: dintern = 16'h00000002;
         default: dintern = 16'h0;
     endcase
   end

@@ -13,32 +13,55 @@
 // tfm RAM, GPU
 // tfm GPU, RAM
 
-// 
+//
 
-// lpt 
+// lpt
 
 // loading a pointer should be easy, ie
-// ldr nutter // implicit ldr f, nutter since nutter is a pointer to ram
+// ldr nutter // implicit <ldr f, nutter> since nutter is a pointer to ram
 // str nutter // same thing here
 
 // typical pointer initialization:
 // ptr ram nutty
+//
 // ldr a, &smol
 // str a, nutty
+const var nut = 2
+const var butt = 2
+def VAL = 8
+def VAL1 = VAL*2
+def VAL2 = VAL1/2
+
+/* ideal types
+pre VAL = 20
+ram nutt
+rom butt = 1
+
+ram ptr nutty
+rom ptr butty = &butt
+*/
+
+var test
 
 main:
-  ldr a, 10
-  ldr b, 3
+  ldr a, VAL
+  str a, test
+  ldr b, nut
+
   ldr c, 0
 
-  cmp a, b
+  add a, b
+  lsl a, b
+
+  cmp a, VAL
   joc greater, display
 
 stop:
   jmp stop
 
 display:
-  ldr a, 1
+  //ldr a, 22
   str a, UART
-  str c, UART
+  lsr a, 8
+  str a, UART
   jmp stop

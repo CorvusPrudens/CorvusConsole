@@ -16,7 +16,7 @@ def main():
   elif len(argv) < 3:
     print('Error: no output file provided')
     exit(1)
-  elif len(argv) < 5: 
+  elif len(argv) < 5:
     print("give me more agruments dangit")
     exit(1)
   elif len(argv) == 5:
@@ -82,6 +82,11 @@ def main():
     print('Word {}:'.format(i))
     i += 1
     ass.printWord(line)
+
+  for element in vars:
+    if 'const' in element[0]:
+      print('Address {}:'.format(int(element[1])))
+      ass.printDromWord(int(element[3]))
   # print("Code:")
   # for element in code:
   #   print(element)
