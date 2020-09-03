@@ -30,7 +30,7 @@ const var nut = 2
 const var butt = 2
 def VAL = 8
 def VAL1 = VAL*2
-def VAL2 = VAL1/2
+def VAL2 = VAL1/3
 
 /* ideal types
 pre VAL = 20
@@ -41,10 +41,31 @@ ram ptr nutty
 rom ptr butty = &butt
 */
 
+/*
+GPU memory should be accesssed through a buffered fifo interface to allow
+'simultaneous' reads and writes throughout the frame.
+The fifo status can be read by a memory mapped status register in the frame buffer
+This also conveniently allows translation between processor and gpu clock domains
+
+The one problem is that buffer reads will be awkward, taking an indeterminate amount
+of ti.e to comete.
+
+An alternative is to stall the read and write to gpu instructions until a write can be made.
+This will be much easier to interface with for programming, but potentially a bit slower.
+I think this ^ is actually the best solution, though.
+
+the refreah rate will be controllable by the clock module, which interfaces with
+a (minimum) two output programmable clock chip
+
+
+
+
+*/
+
 var test
 
 main:
-  ldr a, VAL
+  ldr a, VAL2
   str a, test
   ldr b, nut
 
