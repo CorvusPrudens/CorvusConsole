@@ -11,6 +11,7 @@
 `include "drom.v"
 `include "control.v"
 `include "uartwrapper.v"
+`include "gpu.v"
 
 module top(
     input wire CLK,
@@ -38,6 +39,11 @@ module top(
 
     input wire D0_in, D1_in, D2_in,  D3_in,  D4_in,  D5_in,  D6_in,  D7_in,
     input wire D8_in, D9_in, D10_in, D11_in, D12_in, D13_in, D14_in, D15_in
+
+    input wire [15:0] BUFFER_DATA_IN,
+    output wire [15:0] BUFFER_DATA_OUT,
+    output wire [15:0] BUFFER_ADDRESS,
+    output wire B_CE, B_OE, B_WR, B_UB, B_LB
   );
 
   // Control
@@ -229,6 +235,18 @@ module top(
       .dataOut(uartOut),
       .RX(RX),
       .TX(TX)
+    );
+
+  gpu GPU(
+      .CLK(CLK),
+      .write(gpuWrite),
+      .address(gpuAddress),
+      .dataIn(bus),
+      .dataOut(gpuOut),
+      .BUFFER_DATA_IN(BUFFER_DATA_IN),
+      .BUFFER_DATA_OUT(BUFFER_DATA_OUT),
+      .ADDRESS_PINS(BUFFER_ADDRESS),
+      .B_CE, .B_OE, .B_WR, .B_UB, .B_LB
     );
 
 

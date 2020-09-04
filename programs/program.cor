@@ -57,10 +57,11 @@ I think this ^ is actually the best solution, though.
 the refreah rate will be controllable by the clock module, which interfaces with
 a (minimum) two output programmable clock chip
 
-
-
-
+Maybe include registers that allow automatic reading of a frame buffer rectangle
 */
+
+// TODO -- need to figure out pointers and arrays for getting that
+// display working
 
 var test
 
