@@ -3,6 +3,7 @@ import strings as s
 rom string[] = "Hello, world!"
 pre string = $string[0]
 
+ldr h, 1
 ldr g, s.string0
 lpt a, rom
 
@@ -17,4 +18,5 @@ printloop:
   jmp printloop
 
 stop:
+  spt g, gpu
   jmp stop

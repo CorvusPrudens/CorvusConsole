@@ -9,19 +9,19 @@ module promdata(
 
   always @( * ) begin
     case (address)
-      16'h0000: dintern = 32'h00080007;
-      16'h0001: dintern = 32'h04000008;
-      16'h0002: dintern = 32'h00002005;
-      16'h0003: dintern = 32'h00004007;
-      16'h0004: dintern = 32'h00000419;
-      16'h0005: dintern = 32'h0000043D;
-      16'h0006: dintern = 32'h00080017;
-      16'h0007: dintern = 32'h0009085C;
-      16'h0008: dintern = 32'h00080050;
-      16'h0009: dintern = 32'h00030008;
-      16'h000A: dintern = 32'h00080043;
-      16'h000B: dintern = 32'h00030008;
-      16'h000C: dintern = 32'h00080050;
+      16'h0000: dintern = 32'h0001E007;
+      16'h0001: dintern = 32'h0000C007;
+      16'h0002: dintern = 32'h0000000D;
+      16'h0003: dintern = 32'h00000017;
+      16'h0004: dintern = 32'h000B045C;
+      16'h0005: dintern = 32'h00030008;
+      16'h0006: dintern = 32'h00082043;
+      16'h0007: dintern = 32'h00030088;
+      16'h0008: dintern = 32'h0001C31B;
+      16'h0009: dintern = 32'h0000000D;
+      16'h000A: dintern = 32'h00030050;
+      16'h000B: dintern = 32'h00000311;
+      16'h000C: dintern = 32'h000B0050;
       default: dintern = 32'h0;
     endcase
   end

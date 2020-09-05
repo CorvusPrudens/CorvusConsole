@@ -49,12 +49,14 @@ src: ./verilog/${VSRC}.v ./env/${CSRC}.c
 	@ # i.e. --trace-depth <depth>
 	${SRCEX}
 	make -f V${VSRC}.mk -C ./obj_dir/
-
+# so this needs a bit of work -- we need to figure out how to compile
+# this visual library without creating an object file
 sim: ./env/${CSRC}.c
-	${COM} ./env/${CSRC}.c -I ./env/ \
+	${COM} -c ./env/${CSRC}.c -I ./env/ \
 	-I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp \
-	./obj_dir/V${VSRC}__ALL.a -o ${OUT}
+	./obj_dir/V${VSRC}__ALL.a
+	${COM} ${CSRC}.o -o ${OUT} -lsfml-graphics -lsfml-window -lsfml-system
 
 
 prog: ./programs/${PROG}.cor ./programs/${PYCOMP}

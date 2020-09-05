@@ -78,6 +78,7 @@ module control(
           busState <= 4'h0;
           increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
         end
@@ -129,7 +130,7 @@ module control(
             default:
               begin
                 ramWrite <= 1'b0;
-                ramWrite <= 1'b0;
+                gpuWrite <= 1'b0;
               end
           endcase
           busState <= 4'h1;
@@ -162,12 +163,13 @@ module control(
               end
           endcase
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           results <= resultsWire;
           aluOperation <= 7'b1000000;
           increment <= 3'b100;
           aluReadBus <= 1'b1;
         end
-      5'h04: // SPT TODO - edit assembler to conform
+      5'h04: // SPT
         begin
           case (opvar[0])
             1'b0:
@@ -183,7 +185,7 @@ module control(
                 gpuWrite <= 1'b1;
               end
           endcase
-          busState <= opvar[1] ? 4'h1: 4'h6;
+          busState <= opvar[1] ? 4'h6 : 4'h1;
           operand1 <= operand1Wire;
           aluOperation <= 7'b0;
           aluReadBus <= 1'b0;
@@ -333,6 +335,7 @@ module control(
           busState <= 4'h0;
           increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
         end
@@ -341,6 +344,7 @@ module control(
           busState <= 4'h0;
           increment <= 3'b100;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
         end
@@ -601,6 +605,7 @@ module control(
         begin
           busState <= 4'h0;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
           increment <= 3'b101;
@@ -610,6 +615,7 @@ module control(
         begin
           busState <= 4'h0;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
           increment <= 3'b110;
@@ -620,6 +626,7 @@ module control(
         begin
           busState <= 4'h0;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
           increment <= 3'b111;
@@ -635,6 +642,7 @@ module control(
           end
           busState <= 4'h0;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
         end
@@ -649,6 +657,7 @@ module control(
           end
           busState <= 4'h0;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
         end
@@ -662,6 +671,7 @@ module control(
           end
           busState <= 4'h0;
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           aluReadBus <= 1'b0;
           aluOperation[6] <= 1'b0;
         end

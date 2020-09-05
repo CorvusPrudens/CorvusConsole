@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+# include <SFML/Graphics.hpp>
+# include <time.h>
+
 #include "Vtop.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
@@ -106,8 +110,26 @@ void setData(Vtop *tb, int out) {
   }
 }
 
+int getGpuAddress(Vtop* tb){
+  return tb->BUFFER_ADDRESS;
+}
+int getGpuData(Vtop* tb) {
+  return tb->BUFFER_DATA_OUT;
+}
+void setGpuData(Vtop* tb, int out) {
+  tb->BUFFER_DATA_IN = out & 65535;
+}
+
+int gpu(uint16_t* buff, int address, int data, int write) {
+  if (write == 0){
+    buff[address] = data;
+    return -1;
+  }
+  return buff[address];
+}
+
 // This tick assumes positive edge clocking only!!
-void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep, uint16_t* buff) {
+void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep, uint16_t* buff, uint16_t* gpubuff) {
   tb->eval();
   if (tfp) tfp->dump(logicStep * CLOCK_NS - CLOCK_NS*0.2);
   tb->CLK = 1;
@@ -118,6 +140,11 @@ void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep, uint16_t* buff) {
   int out = ram(buff, address, data, tb->WR);
   setData(tb, out);
 
+  address = getGpuAddress(tb);
+  data = getGpuData(tb);
+  out = gpu(gpubuff, address, data, tb->B_WR);
+  setGpuData(tb, out);
+
   if (tfp) tfp->dump(logicStep * CLOCK_NS);
   tb->CLK = 0;
   tb->eval();
@@ -126,6 +153,11 @@ void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep, uint16_t* buff) {
   data = getData(tb);
   out = ram(buff, address, data, tb->WR);
   setData(tb, out);
+
+  address = getGpuAddress(tb);
+  data = getGpuData(tb);
+  out = gpu(gpubuff, address, data, tb->B_WR);
+  setGpuData(tb, out);
 
   if (tfp){
     tfp->dump(logicStep * CLOCK_NS + CLOCK_NS*0.5);
@@ -252,10 +284,11 @@ int main(int argc, char** argv) {
   };
 
   uint16_t rambuff[65536];
+  uint16_t gpubuff[65536];
 
   // int numOps = lenOps/4;
   //initialization tick
-  tick(tb, tfp, ++logicStep, rambuff);
+  tick(tb, tfp, ++logicStep, rambuff, gpubuff);
   int sendState = 0;
   int go = 0;
   int innum = 0;
@@ -264,7 +297,7 @@ int main(int argc, char** argv) {
   // int currentStep = logicStep;
   while (logicStep < 3000){
     int status = uart(tb, go, 0, &out);
-    tick(tb, tfp, ++logicStep, rambuff);
+    tick(tb, tfp, ++logicStep, rambuff, gpubuff);
     // if ((status & 4) > 0){
     //   // sendState++;
     //   if (sendState == 3){
@@ -305,4 +338,30 @@ int main(int argc, char** argv) {
   // printf("A register: %d\n", inbuff[0]);
   // printf("RAM 1024: %d\n", rambuff[1024]);
   printf("\n");
+  printf("GPU buffer: %d\n", gpubuff[1]);
+
+  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+  sf::CircleShape shape(100.f);
+  shape.setFillColor(sf::Color::Green);
+
+  clock_t period = clock();
+  while (window.isOpen())
+  {
+      if ((clock() - period)/CLOCKS_PER_SEC > 0.016667){
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+
+          period = clock();
+          window.clear();
+          window.draw(shape);
+          window.display();
+      }
+
+  }
+  return 0;
 }

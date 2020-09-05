@@ -329,7 +329,10 @@ def encode(lines, variables, preserved, dict):
           errstr = "-> cannot write to read-only memory"
           err(preserved, lines[i][0], errstr, 2)
       elif lines[i][2][2] == 'gpu':
-        inst[0] |= 2
+        if opcode == 3:
+          inst[0] |= 2
+        elif opcode == 4:
+          inst[0] |= 1
       else:
         errstr = "-> \'{}\' must be set to \'ram\', \'rom\', or \'gpu\'".format(lines[i][2][2])
         err(preserved, lines[i][0], errstr, 2)
@@ -743,8 +746,8 @@ def convertVariables(lines, preserved, infile, dict):
     elif 'var' in variables[i][0]:
       variables.insert(i + 1, ['macro', '$' + variables[i][2], str(variables[i][1])])
 
-  for variable in variables:
-    print(variable)
+  # for variable in variables:
+  #   print(variable)
 
   # filling out array
   for i in range(len(variables)):
