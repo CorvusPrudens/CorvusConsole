@@ -27,6 +27,7 @@ module gpu(
       .write(write),
       .dataIn(dataIn),
       .dataOut(dataOut),
+      .address(address),
       .ADDRESS_PINS(ADDRESS_PINS),
       .DATA_OUT_PINS(BUFFER_DATA_OUT),
       .DATA_IN_PINS(BUFFER_DATA_IN),

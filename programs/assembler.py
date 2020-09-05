@@ -56,15 +56,20 @@ def main():
   # code = []
   # code.append(ass.encodeInstPass1(assembly[0][1], lines, 0))
   ass.scope(assembly, lines, infile)
+  ass.expandArrays(assembly, lines)
+  for line in assembly:
+    print(line)
   dict = {}
   vars = ass.convertVariables(assembly, lines, infile, dict)
+  # print(vars)
   ass.cleanvars(assembly, lines)
   if len(assembly) == 0:
     print('Error: the provided file \'{}\' contains no executable code'.format(infile))
     exit(1)
+
   ass.reorderInstructions(assembly, infile)
   ass.addLabels(assembly, vars, lines)
-  # print(vars)
+
   code = ass.encode(assembly, vars, lines, dict)
   ass.write(code, outfile) # binary
 

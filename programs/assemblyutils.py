@@ -47,7 +47,7 @@ def printWord(word):
 
 def varToLine(varName, preserved):
   for i in range(len(preserved)):
-    if varName in preserved[i][1]:
+    if preserved[i][1].find(varName) != -1:
       return preserved[i][0]
 
 def findMulti(str, arr, start, depth):
@@ -76,6 +76,90 @@ def inst2word(instruction):
   word[2] = (instruction[4] & 255) & 255
   word[3] = ((instruction[4] >> 8) & 255) & 255
   return word
+
+def expandArrays(lines, preserved):
+  vars = []
+  # sanitizing arrays for easier processing
+  tightBracket = re.compile(r"\{[^ ]")
+  for i in range(len(lines)):
+  #   for j in range(lenreversed(re.finditer(r"\{[^ ]", lines[i][1])):
+  #     lines[i][1] = lines[i][1][:match.end()] + ' ' + lines[i][1][match.end():]
+    matches = [match for match in tightBracket.finditer(lines[i][1])]
+    # matches = [match for match in matches]
+    if len(matches) > 0:
+      # print("WOW")
+      # print(matches)
+      for j in range(len(matches) - 1, -1, -1):
+        lines[i][1] = lines[i][1][:matches[j].end() - 1] + ' ' + lines[i][1][matches[j].end() - 1:]
+  found = False
+  numClosing = 0
+  i = len(lines) - 1
+  while i > -1:
+    if not found and '}' in lines[i][1]:
+      found = True
+      numClosing = 0
+    if found:
+      found = False
+      opening = False
+      openingIndex = i # line index we'll use for iteration
+      closingIndex = lines[i][1].rfind('}') - 1 # character index in line
+      while not opening:
+        if closingIndex == -1:
+          openingIndex -= 1
+          if openingIndex == -1:
+            errstr = "-> unexpected closing bracket"
+            err(preserved, lines[i][0], errstr, 2)
+          closingIndex = len(lines[openingIndex][1]) - 1
+
+        if lines[openingIndex][1][closingIndex] == '{':
+          if numClosing == 0:
+            opening = True
+            break
+          else:
+            numClosing -= 1
+        elif lines[openingIndex][1][closingIndex] == '}':
+          numClosing += 1
+        closingIndex -= 1
+      if openingIndex < i:
+        j = i
+        while j > openingIndex:
+          lines[j - 1][1] = lines[j - 1][1] + ' ' + lines[j][1]
+          lines.pop(j)
+          j -= 1
+        i = openingIndex
+    i -= 1
+  # array expansion into useful structures
+  onedim = re.compile(r"\[([1-9][0-9]*){0,1}\]")
+  twodim = re.compile(r"\[([1-9][0-9]*){0,1}\]\[([1-9][0-9]*){0,1}\]")
+
+  # This process is so scuffed -- we would already know exactly where arrays
+  # are if we did this competently
+  for i in range(len(lines) - 1, -1, -1):
+    tokens = lines[i][1].split(' ')
+    if len(tokens) > 1:
+      match = onedim.search(tokens[1])
+      if match != None:
+        name = tokens[1][:match.start()]
+        start = lines[i][1].find('{')
+        end = lines[i][1].find('}')
+        arr = lines[i][1][start + 1:end].split(',')
+        for j in range(len(arr) - 1, -1, -1):
+          arr[j] = arr[j].strip(' ')
+          if arr[j] == '':
+            arr.pop(j)
+        # print('arr:', arr)
+        for j in range(len(arr) - 1, -1, -1):
+          templist = []
+          templist.append(lines[i][0])
+          if 'rom' in tokens[0]:
+            templist.append('rom {}[{}] = {}'.format(name, j, arr[j]))
+            # print(templist)
+            lines.insert(i + 1, templist)
+        lines.pop(i)
+      elif twodim.search(lines[i][1]) != None:
+        pass
+    pass
+
 
 def writeVerilogPROM(code, outfile):
   with open(outfile, 'w') as file:
@@ -112,7 +196,7 @@ def writeVerilogDROM(code, outfile):
     index = 0
     for i in range(len(code)):
       if 'const' in code[i][0]:
-        print(code[i])
+        # print(code[i])
         data = int(code[i][3])
         index = code[i][1]
         line = '      16\'h{:04X}: dintern = 16\'h{:08X};\n'.format(index, data)
@@ -181,7 +265,9 @@ def encode(lines, variables, preserved, dict):
         inst[4] = solution
       else:
         found = False
+
         for variable in variables:
+          # print(variable)
           if lines[i][2][2] == variable[1]:
             inst[0] |= 3 # immediate
             inst[4] = int(variable[2])
@@ -235,12 +321,17 @@ def encode(lines, variables, preserved, dict):
       if len(lines[i][2]) != 3:
         errstr = "-> invalid syntax"
         err(preserved, lines[i][0], errstr, 2)
-      if lines[i][2][2] == 'RAM':
+      if lines[i][2][2] == 'ram':
         pass
-      elif lines[i][2][2] == 'ROM':
+      elif lines[i][2][2] == 'rom':
         inst[0] |= 1
+        if opcode == 4:
+          errstr = "-> cannot write to read-only memory"
+          err(preserved, lines[i][0], errstr, 2)
+      elif lines[i][2][2] == 'gpu':
+        inst[0] |= 2
       else:
-        errstr = "-> \'{}\' must be set to \'RAM\' or \'ROM\'".format(lines[i][2][2])
+        errstr = "-> \'{}\' must be set to \'ram\', \'rom\', or \'gpu\'".format(lines[i][2][2])
         err(preserved, lines[i][0], errstr, 2)
     elif opcode == 5: # CMP
       inst = [opcode << 2, 0, 0, 0, 0]
@@ -529,15 +620,15 @@ def addLabels(lines, variables, preserved):
       i += 1
   ramadd = 1024 # why not? enough space for stacks and memory-mapped io
   address =0
-  for i in range(len(variables)):
-    if 'const' in variables[i][0]:
-      variables[i].insert(1, address)
-      address += 1
-    elif 'sysvar' in variables[i][0]:
-      variables[i].insert(1, int(variables[i][2]))
-    elif 'var' in variables[i][0]:
-      variables[i].insert(1, ramadd)
-      ramadd += 1
+  # for i in range(len(variables)):
+  #   if 'const' in variables[i][0]:
+  #     variables[i].insert(1, address)
+  #     address += 1
+  #   elif 'sysvar' in variables[i][0]:
+  #     variables[i].insert(1, int(variables[i][2]))
+  #   elif 'var' in variables[i][0]:
+  #     variables[i].insert(1, ramadd)
+  #     ramadd += 1
 
 
 
@@ -563,7 +654,8 @@ def reorderInstructions(lines, infile):
         break
 
 def cleanvars(lines, preserved):
-  purge = ['def', 'var', 'const']
+  # purge = ['def', 'var', 'const']
+  purge = ['pre', 'ram', 'rom']
   for i in range(len(lines) - 1, -1, -1):
     tokens = lines[i][1].split()
     if tokens[0].strip(':') in purge:
@@ -595,7 +687,7 @@ def convertVariables(lines, preserved, infile, dict):
     tokens = lines[i][1].split()
     for j in range(len(tokens)):
       tokens[j] = tokens[j].strip(', ')
-    if tokens[0] == 'def':
+    if tokens[0] == 'pre':
       if tokens[2] != '=': # this could be expanded
         errstr = "-> malformed definition"
         err(preserved, lines[i][0], errstr, 2)
@@ -608,42 +700,52 @@ def convertVariables(lines, preserved, infile, dict):
         variables.append(temp)
       else:
         variables.append(['macro', tokens[1], tokens[3]])
-    elif tokens[0] == 'var' or tokens[0] == 'const':
-      if tokens[0] == 'const':
-        if tokens[1] != 'var':
-          errstr = "-> type error, expected \'var\' after \'const\'"
-          err(preserved, lines[i][0], errstr, 2)
-        if tokens[3] != '=' or len(tokens) < 5:
-          errstr = "-> no assignment of const variable \'{}\'".format(tokens[2])
-          err(preserved, lines[i][0], errstr, 2)
-        if len(tokens) > 5 or ismathy(tokens, 4):
-          temp = ['constcalc', tokens[2]]
-          temptemp = ''
-          for j in range(len(tokens) - 4):
-            temptemp += tokens[4 + j]
-          temp.append(temptemp)
-          variables.append(temp)
-        else:
-          variables.append(['const', tokens[2], tokens[4]])
-      elif tokens[0] == 'var':
-        if tokens[1] == 'const':
-          if tokens[3] != '=' or len(tokens) < 5:
-            errstr = "-> no assignment of const variable \'{}\'".format(tokens[2])
-            err(preserved, lines[i][0], errstr, 2)
-          if len(tokens) > 5:
-            temp = ['constcalc', tokens[2]]
-            temptemp = ''
-            for j in range(len(tokens) - 4):
-              temptemp += tokens[4 + j]
-            temp.append(temptemp)
-            variables.append(temp)
-          else:
-            variables.append(['const', tokens[2], tokens[4]])
-        else:
-          if len(tokens) > 2:
-            errstr = "-> non-const variable \'{}\' cannot be initialized".format(tokens[1])
-            err(preserved, lines[i][0], errstr, 2)
-          variables.append(['var', tokens[1]])
+    # elif tokens[0] == 'var' or tokens[0] == 'const':
+    # elif tokens[0] == 'ram' or tokens[0] == 'rom':
+    elif tokens[0] == 'rom':
+      # if tokens[1] != 'var':
+      #   errstr = "-> type error, expected \'var\' after \'const\'"
+      #   err(preserved, lines[i][0], errstr, 2)
+      if tokens[2] != '=' or len(tokens) < 4:
+        errstr = "-> no assignment of const variable \'{}\'".format(tokens[1])
+        err(preserved, lines[i][0], errstr, 2)
+      if len(tokens) > 4 or ismathy(tokens, 3):
+        temp = ['constcalc', tokens[1]]
+        temptemp = ''
+        for j in range(len(tokens) - 3):
+          temptemp += tokens[3 + j]
+        temp.append(temptemp)
+        variables.append(temp)
+      else:
+        variables.append(['const', tokens[1], tokens[3]])
+    elif tokens[0] == 'ram':
+      if len(tokens) > 2:
+        errstr = "-> ram variable \'{}\' cannot be initialized".format(tokens[1])
+        err(preserved, lines[i][0], errstr, 2)
+      variables.append(['var', tokens[1]])
+  # we'll likely need to enter the variable index here!
+  address = 0
+  ramadd = 0
+  for i in range(len(variables)):
+    if 'const' in variables[i][0]:
+      variables[i].insert(1, address)
+      address += 1
+    elif 'sysvar' in variables[i][0]:
+      variables[i].insert(1, int(variables[i][2]))
+    elif 'var' in variables[i][0]:
+      variables[i].insert(1, ramadd)
+      ramadd += 1
+
+  # adding silly ram/rom variable solution
+  for i in range(len(variables) - 1, -1, -1):
+    if 'const' in variables[i][0]:
+      variables.insert(i + 1, ['macro', '$' + variables[i][2], str(variables[i][1])])
+    elif 'var' in variables[i][0]:
+      variables.insert(i + 1, ['macro', '$' + variables[i][2], str(variables[i][1])])
+
+  for variable in variables:
+    print(variable)
+
   # filling out array
   for i in range(len(variables)):
     if variables[i][0] == 'macro':
@@ -713,25 +815,27 @@ def convertVariables(lines, preserved, infile, dict):
         dict[variables[i][1]] = solution
       variables[i][2] = solution
     elif variables[i][0] == 'const':
-      if not variables[i][2].isnumeric():
-        idx = findMulti(variables[i][2], variables, i - 1, 1)
+      if not variables[i][3].isnumeric():
+        idx = findMulti(variables[i][3], variables, i - 1, 1)
         if idx == -1 or idx >= i:
           for j in range(len(preserved)):
-            if variables[i][1] in preserved[j][1]:
-              errstr = "-> undefined assignment \'{}\'".format(variables[i][2])
+            if variables[i][2] in preserved[j][1]:
+              errstr = "-> undefined assignment \'{}\'".format(variables[i][3])
               err(preserved, preserved[j][0], errstr, 2)
         elif variables[idx][0] != 'macro' and variables[idx][0] != 'macrocalc':
           for j in range(len(preserved)):
-            if variables[i][1] in preserved[j][1]:
+            if variables[i][2] in preserved[j][1]:
               errstr = "-> const variables only accept macro or literal assigment"
               err(preserved, preserved[j][0], errstr, 2)
-        variables[i][2] = variables[idx][2]
+        # print(len(variables[i]), len(variables[idx]))
+        # print(variables[i], variables[idx])
+        variables[i][3] = variables[idx][2]
     elif variables[i][0] == 'constcalc':
       solution = 0
       try:
         # print(variables[i])
         # print(dict)
-        solution = round(eval(variables[i][2], {}, dict))
+        solution = round(eval(variables[i][3], {}, dict))
       except NameError:
         errstr = "-> undefined assignment"
         err(preserved, lines[i][0], errstr, 2)
@@ -744,7 +848,7 @@ def convertVariables(lines, preserved, infile, dict):
       except TypeError:
         errstr = "-> undefined assignment"
         err(preserved, lines[i][0], errstr, 2)
-      variables[i][2] = solution
+      variables[i][3] = solution
   return variables
 
 
@@ -768,6 +872,7 @@ def scope(lines, preserved, infile):
     'jmp', 'jsr', 'rts', 'joc',
     'jsc', 'rsc',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+    'pre', 'ram', 'rom', 'gpu',
     'def', 'var', 'const',
     'zero', 'carry', 'negative',
     'equal', 'greater', 'less',
@@ -827,7 +932,9 @@ def convertStrings(lines, preserved):
           insert = "{}, ".format(ord(lines[i][1][currentIndex]))
         lines[i][1] = repchr(lines[i][1], insert, currentIndex)
         currentIndex += len(insert)
-      lines[i][1] = repchr(lines[i][1], '}', currentIndex)
+      #null terminated:
+      lines[i][1] = lines[i][1][:currentIndex] + '0 ' + lines[i][1][currentIndex + 1:]
+      lines[i][1] = repchr(lines[i][1], '}', currentIndex + 2)
 
 
 def copy2d(lines):

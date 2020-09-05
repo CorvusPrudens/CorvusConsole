@@ -1,3 +1,4 @@
+
 module framebuffer(
     input wire CLK,
 
@@ -12,7 +13,7 @@ module framebuffer(
     output wire [15:0] ADDRESS_PINS,
 
     output wire [15:0] DATA_OUT_PINS,
-    input wire [15:0] DATA_IN_PINS,
+    input wire [15:0] DATA_IN_PINS
 
     // inout wire [15:0] DATA_PINS,
   );
