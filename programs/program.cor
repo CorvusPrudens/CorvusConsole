@@ -1,22 +1,85 @@
-import strings as s
 
-rom string[] = "Hello, world!"
-pre string = $string[0]
+// pos = d register
+pre C_IDX0 = (153 << 8) + 2
+pre COLOR = 255 | (255 << 8) | (255 << 16)
+pre PIXELXY = 10 | (10 << 8)
 
-ldr h, 1
-ldr g, s.string0
-lpt a, rom
+pre COLOR_INDEX = 1
+pre POS_0 = 8 | (8 << 8)
 
-printloop:
-  cmp a, 0
-  joc equal, stop
-  str a, UART
-  lsr a, 8, b
-  str b, UART
-  add g, 1
-  lpt a, rom
-  jmp printloop
+ram position
 
-stop:
+init:
+  //ldr d, 0
+  ldr h, C_IDX0
+  // spt COLOR, gpu // not currently supported, but needs to be implemented
+  ldr a, COLOR & 0xffff
+  spt a, gpu
+  add h, 1
+  ldr a, COLOR >> 16
+  spt a, gpu
+  ldr h, PIXELXY
+  ldr c, COLOR_INDEX
+  ldr d, POS_0 - 1
+  str d, position
+  ldr d, 0
+  //spt c, gpu
+
+
+main:
+  jsr frameStart
+  jsr clearFrameFlag
+  //jsr indicateProgress
+  jsr movePixel
+  jmp main
+
+frameStart:
+  ldr h, 0xffff
+  lpt a, gpu
+  cmp a, 1
+  rsc equal
+  jmp frameStart
+
+clearFrameFlag:
+  ldr h, 0xffff
+  ldr g, 0
   spt g, gpu
-  jmp stop
+  rts
+
+movePixel:
+  ldr h, position
+  ldr c, 0
+  spt c, gpu
+  ldr c, 1
+  add h, 1
+  spt c, gpu
+  str h, position
+  and h, 0xff, g
+  cmp g, 248
+  jsc equal, resetX // There's actually no overhead for doing this over jumping
+  cmp h, 135 << 8
+  jsc equal, resetY
+  rts
+
+  resetX:
+    ldr h, position
+    add h, 8
+    rts
+  resetY:
+    ldr h, POS_0
+    str h, position
+    rts
+
+indicateProgress:
+  str d, UART
+  lsr d, 8, e
+  str e, UART
+  add d, 1
+  rts
+
+clear:
+  ldr h, 0x0100
+  ldr c, 0
+
+  clearloop:
+    spt c, gpu

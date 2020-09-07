@@ -19,7 +19,6 @@ module gpu(
     output wire [15:0] BUFFER_DATA_OUT,
     output wire [15:0] ADDRESS_PINS,
     output wire B_CE, B_OE, B_WR, B_UB, B_LB
-
   );
 
   framebuffer BUFFER(

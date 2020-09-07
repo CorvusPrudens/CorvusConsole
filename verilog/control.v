@@ -107,6 +107,7 @@ module control(
               end
           endcase
           ramWrite <= 1'b0;
+          gpuWrite <= 1'b0;
           results <= resultsWire;
           aluOperation <= 7'b1000000;
           increment <= 3'b100;

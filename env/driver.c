@@ -1,15 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 
+// We need to use openGL directly to avoid
+// this library's costly overhead
+# include <SFML/Window.hpp>
+# include <SFML/System.hpp>
 # include <SFML/Graphics.hpp>
-# include <time.h>
+
+# include <ctime>
+
+#ifdef THREAD
+# include <atomic>
+# include <thread>
+#include "verilated_threads.h"
+#endif
 
 #include "Vtop.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 
+
 #define CYCLE_REDUCTION 1024
 #define CLOCK_NS (1000.0/12.0)*10.0 // 12 MHz to period w/ 100ps precision
+#define SCALE 5
+#define WIDTH 240
+#define HEIGHT 135
+#define XOFFSET 8
+#define YOFFSET 8
+#define COLOR_TABLE (153 << 8)
+#define CLOCKS_PER_FRAME 10000
+
+void updatePixels(uint16_t* framebuffer, sf::RenderWindow* window){
+  sf::RectangleShape pixel(sf::Vector2f(SCALE, SCALE));
+  for (int y = 0; y < HEIGHT; y++){
+    for (int x = 0; x < WIDTH; x++){
+      int index = framebuffer[(x + 8) + (y + 8)*(WIDTH + 16)]*2;
+      int colLSB = framebuffer[index + COLOR_TABLE];
+      int colMSB = framebuffer[index + COLOR_TABLE + 1];
+      pixel.setFillColor(
+        sf::Color(colLSB & 255, (colLSB >> 8) & 255, (colMSB >> 0) & 255)
+      );
+      pixel.setPosition(x*SCALE, y*SCALE);
+      window->draw(pixel);
+      // if (framebuffer[(x + 8) + (y + 8)*(WIDTH + 16)] != 0){
+      //   pixel.setFillColor(sf::Color(255, 255, 255));
+      //   pixel.setPosition(x*SCALE, y*SCALE);
+      //   window->draw(pixel);
+      // }
+    }
+  }
+}
 
 int uart(Vtop *tb, int tr, int send, int* rec) {
   // 3 Mbaud uart
@@ -122,6 +163,7 @@ void setGpuData(Vtop* tb, int out) {
 
 int gpu(uint16_t* buff, int address, int data, int write) {
   if (write == 0){
+    // printf("WROTE %d", data);
     buff[address] = data;
     return -1;
   }
@@ -131,7 +173,11 @@ int gpu(uint16_t* buff, int address, int data, int write) {
 // This tick assumes positive edge clocking only!!
 void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep, uint16_t* buff, uint16_t* gpubuff) {
   tb->eval();
-  if (tfp) tfp->dump(logicStep * CLOCK_NS - CLOCK_NS*0.2);
+
+  #ifdef TRACE
+    if (tfp) tfp->dump(logicStep * CLOCK_NS - CLOCK_NS*0.2);
+  #endif
+
   tb->CLK = 1;
   tb->eval();
 
@@ -145,7 +191,9 @@ void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep, uint16_t* buff, uint
   out = gpu(gpubuff, address, data, tb->B_WR);
   setGpuData(tb, out);
 
-  if (tfp) tfp->dump(logicStep * CLOCK_NS);
+  #ifdef TRACE
+    if (tfp) tfp->dump(logicStep * CLOCK_NS);
+  #endif
   tb->CLK = 0;
   tb->eval();
 
@@ -159,10 +207,12 @@ void tick(Vtop *tb, VerilatedVcdC *tfp, unsigned logicStep, uint16_t* buff, uint
   out = gpu(gpubuff, address, data, tb->B_WR);
   setGpuData(tb, out);
 
-  if (tfp){
-    tfp->dump(logicStep * CLOCK_NS + CLOCK_NS*0.5);
-    tfp->flush();
-  }
+  #ifdef TRACE
+    if (tfp){
+      tfp->dump(logicStep * CLOCK_NS + CLOCK_NS*0.5);
+      tfp->flush();
+    }
+  #endif
 }
 
 void init(Vtop *tb){
@@ -248,8 +298,10 @@ int main(int argc, char** argv) {
 
   Vtop *tb = new Vtop;
   VerilatedVcdC* tfp = new VerilatedVcdC;
-  tb->trace(tfp, 99);
-  tfp->open("trace.vcd");
+  #ifdef TRACE
+    tb->trace(tfp, 99);
+    tfp->open("trace.vcd");
+  #endif
 
   init(tb);
   unsigned logicStep = 0;
@@ -286,68 +338,44 @@ int main(int argc, char** argv) {
   uint16_t rambuff[65536];
   uint16_t gpubuff[65536];
 
-  // int numOps = lenOps/4;
-  //initialization tick
   tick(tb, tfp, ++logicStep, rambuff, gpubuff);
   int sendState = 0;
   int go = 0;
   int innum = 0;
   int messnum = 0;
-  // Shouldn't need more than 200 cycles
-  // int currentStep = logicStep;
-  while (logicStep < 3000){
-    int status = uart(tb, go, 0, &out);
-    tick(tb, tfp, ++logicStep, rambuff, gpubuff);
-    // if ((status & 4) > 0){
-    //   // sendState++;
-    //   if (sendState == 3){
-    //     go = 0;
-    //     //sendState = 0;
-    //   } else {
-    //     //printf("%d", sendState);
-    //     sendState++;
-    //   }
-    // }
-    if ((status & 2) > 0){
 
-      if (innum == 0){
-        inbuff[0] = out;
-        innum = 1;
-      } else {
-        innum = 0;
-        printf("\nMessage %d:\n", messnum++);
-        printf("A register: %d\n", inbuff[0] | (out << 8));
-        // printf("RAM 1024: %d\n", rambuff[1024]);
-        // printf("RAM 1025: %d\n", rambuff[1025]);
-        // printf("RAM 1026: %d\n\n", rambuff[1026]);
-      }
-      // inbuff[innum] = out;
-      // innum += 1;
-      // if (innum == 1){
-      //   break;
-      // }
-    }
-  }
-  // int opcode = (ops[i*4]>>2)&31;
-  // int op1 = (ops[i*4] >> 7) + ((ops[i*4 + 1] << 1) & 7);
-  // int op2 = (ops[i*4 + 1] >> 2) & 7;
-  // int res = (ops[i*4 + 1] >> 5);
-  // printf("%s, op1: %s, op2: %s, res: %s\n",
-  //        instCap[opcode], regCap[op1], regCap[op2], regCap[res]);
-  // printf("imm: %d\n", ops[i*4 + 2] + (ops[i*4 + 3] << 8));
-  // printf("A register: %d\n", inbuff[0]);
-  // printf("RAM 1024: %d\n", rambuff[1024]);
-  printf("\n");
-  printf("GPU buffer: %d\n", gpubuff[1]);
 
-  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-  sf::CircleShape shape(100.f);
-  shape.setFillColor(sf::Color::Green);
+  sf::RenderWindow window(sf::VideoMode(240*SCALE, 135*SCALE), "Display");
 
-  clock_t period = clock();
+  // for now, we'll say that the new frame is determined
+  // by a memory mapped register at FFFF of gpu ram
+
+  clock_t period = std::clock();
+  float frametime = 0.016;
+  float avg[30];
+  int secCount = 0;
   while (window.isOpen())
   {
-      if ((clock() - period)/CLOCKS_PER_SEC > 0.016667){
+      if (float(std::clock() - period)/CLOCKS_PER_SEC > 0.016667){
+        frametime = float(std::clock() - period)/CLOCKS_PER_SEC;
+        period = std::clock();
+        gpubuff[0xffff] = 1;
+
+        for (int i = 0; i < CLOCKS_PER_FRAME; i++){
+          int status = uart(tb, go, 0, &out);
+          tick(tb, tfp, ++logicStep, rambuff, gpubuff);
+          if ((status & 2) > 0){
+            if (innum == 0){
+              inbuff[0] = out;
+              innum = 1;
+            } else {
+              innum = 0;
+              printf("\nMessage %d:\n", messnum++);
+              printf("A register: %d\n", inbuff[0] | (out << 8));
+            }
+          }
+        }
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -355,13 +383,25 @@ int main(int argc, char** argv) {
                 window.close();
         }
 
-
-          period = clock();
-          window.clear();
-          window.draw(shape);
+          updatePixels(gpubuff, &window);
           window.display();
+          for (int i = 1; i < 30; i++){
+            avg[i] = avg[i - 1];
+          }
+          // avg[0] = float(std::clock() - period)/CLOCKS_PER_SEC;
+          avg[0] = frametime;
+          if (secCount++ == 60){
+            secCount = 0;
+            float total = 0;
+            for (int i = 0; i < 30; i++){
+              total += avg[i];
+            }
+            total /= 30.0;
+            printf("Avg fps: %.2f\n", 1.0/total);
+            printf("frametime: %.4f\n\n", float(std::clock() - period)/CLOCKS_PER_SEC);
+          }
+          // printf("frametime: %.4f\n", float(std::clock() - period)/CLOCKS_PER_SEC);
       }
-
   }
   return 0;
 }

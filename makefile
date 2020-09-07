@@ -13,22 +13,27 @@ PROGROM = promdata
 DATROM = dromdata
 PYCOMP = assembler.py
 PHONEPATH = /data/data/com.termux/files/usr
+SRCEX = verilator -Wall -cc
+SRCEX_W_TRACE = verilator -Wall --trace -cc
 
 UNAME = $(shell uname)
 PHONETEST = $(shell $PREFIX)
+THREADED =
+EXEC_THREADED = ./$(OUT)
 
 ifeq ($(PREFIX), $(PHONEPATH))
 INCL = ~/verilator/include
-SRCEX = verilator -Wall --trace --trace-depth 1 -cc \
-./verilog/${VSRC}.v -I./verilog/
+SRCOPT = ./verilog/${VSRC}.v -I./verilog/
 else ifeq ($(UNAME), Linux)
+LIB = /usr/share/verilatore/
 INCL = /usr/share/verilator/include
-SRCEX = verilator -Wall --trace -cc \
-./verilog/${VSRC}.v -I./verilog/
+SRCOPT = -O3 --x-assign fast --x-initial fast --noassert ./verilog/${VSRC}.v -I./verilog/
+SRCOPT_THREAD = --threads 4 -O3 --x-assign fast --x-initial fast --noassert ./verilog/${VSRC}.v -I./verilog/
+THREADED = -DVL_THREADED
+EXEC_THREADED = numactl -m 0 -C 0,1,2,3 -- $(OUT)
 else
 INCL = ~/verilator/include
-SRCEX = verilator -Wall --trace -cc \
-./verilog/${VSRC}.v -I./verilog/
+SRCOPT = ./verilog/${VSRC}.v -I./verilog/
 endif
 
 ifeq ($(UNAME), Linux)
@@ -39,25 +44,38 @@ endif
 
 all: clean prog src sim execute
 
-.PHONY: clean all sim src prog reset execute
+
+.PHONY: clean all sim src prog reset execute trace src_w_trace sim_w_trace thread
 
 src: ./verilog/${VSRC}.v ./env/${CSRC}.c
-	@ # consider using trace threads to improve performance
-	@ # i.e. --trace-threads <number of threads>
-	@ # trace depth will also improve performance
-	@ # a level of 1 limits tracing to merely top level signals!
-	@ # i.e. --trace-depth <depth>
-	${SRCEX}
+	${SRCEX} ${SRCOPT}
 	make -f V${VSRC}.mk -C ./obj_dir/
-# so this needs a bit of work -- we need to figure out how to compile
-# this visual library without creating an object file
+
+src_w_thread: ./verilog/${VSRC}.v ./env/${CSRC}.c
+	${SRCEX} ${SRCOPT_THREAD}
+	make -f V${VSRC}.mk -C ./obj_dir/
+
 sim: ./env/${CSRC}.c
 	${COM} -c ./env/${CSRC}.c -I ./env/ \
+  -I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
+	${INCL}/verilated_vcd_c.cpp
+	@ # ./obj_dir/V${VSRC}__ALL.a
+	${COM} ${CSRC}.o -o ${OUT} \
+	-lsfml-graphics -lsfml-window -lsfml-system -pthread \
 	-I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp \
 	./obj_dir/V${VSRC}__ALL.a
-	${COM} ${CSRC}.o -o ${OUT} -lsfml-graphics -lsfml-window -lsfml-system
 
+sim_w_thread: ./env/${CSRC}.c
+	${COM} -c ./env/${CSRC}.c -D THREAD ${THREADED} -I ./env/ \
+  -I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
+	${INCL}/verilated_vcd_c.cpp ${INCL}/verilated_threads.cpp
+	@ # ./obj_dir/V${VSRC}__ALL.a
+	${COM} ${CSRC}.o -o ${OUT} ${THREADED} \
+	-lsfml-graphics -lsfml-window -lsfml-system -pthread \
+	-I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
+	${INCL}/verilated_vcd_c.cpp \
+	./obj_dir/V${VSRC}__ALL.a ${INCL}/verilated_threads.cpp
 
 prog: ./programs/${PROG}.cor ./programs/${PYCOMP}
 	${PYVAR} ./programs/${PYCOMP} ./programs/${PROG}.cor \
@@ -72,4 +90,25 @@ reset:
 	git reset --hard origin/master
 
 execute:
-	./$(OUT)
+	./${OUT}
+
+execut_threaded:
+	${EXEC_THREADED}
+
+src_w_trace:
+	${SRCEX_W_TRACE} ${SRCOPT}
+	make -f V${VSRC}.mk -C ./obj_dir/
+
+sim_w_trace:
+	${COM} -c ./env/${CSRC}.c -D TRACE -I ./env/ \
+  -I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
+	${INCL}/verilated_vcd_c.cpp
+	@ # ./obj_dir/V${VSRC}__ALL.a
+	${COM} ${CSRC}.o -o ${OUT} -lsfml-graphics -lsfml-window -lsfml-system \
+	-I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
+	${INCL}/verilated_vcd_c.cpp \
+	./obj_dir/V${VSRC}__ALL.a
+
+trace: clean prog src_w_trace sim_w_trace execute
+
+thread: clean prog src_w_thread sim_w_thread execute

@@ -62,12 +62,28 @@ def find(str, arr):
       return i
   return -1
 
+def isNumber(string):
+  number = re.compile(r"\b((0x[A-Fa-f0-9][A-Fa-f0-9_]*)|(0b[0-1][0-1_]*)|([1-9][0-9]*)|0)\b")
+  if number.search(string) != None and len(string.split(' ')) == 1:
+    return True
+  return False
+
+
+def isbasey(line, start):
+  base = re.compile(r"\b(0x|0b)")
+  for i in range(len(line) - start):
+    if base.search(line[start + i]) != None:
+      return True
+  return False
+
 def ismathy(line, start):
   math = re.compile('[+\\-=/\\*\\(\\)<>\\|\\&\\^]')
   for i in range(len(line) - start):
     if math.search(line[start + i]) != None:
       return True
-  return False
+  return isbasey(line, start)
+
+
 
 def inst2word(instruction):
   word = [0, 0, 0, 0]
@@ -235,6 +251,9 @@ def encode(lines, variables, preserved, dict):
     if opcode == 0: # nop
       pass
     if opcode == 1: # LDR
+      if len(lines[i][2]) != 3:
+        errstr = "-> invalid syntax".format(lines[i][2][1])
+        err(preserved, lines[i][0], errstr, 2)
       inst = [opcode << 2, 0, 0, 0, 0]
       res = find(lines[i][2][1], registers)
       # needs expansion for loading pointers
@@ -242,9 +261,11 @@ def encode(lines, variables, preserved, dict):
         errstr = "-> invalid register \'{}\' for load".format(lines[i][2][1])
         err(preserved, lines[i][0], errstr, 2)
       inst[3] = res
-      if str(lines[i][2][2]).isnumeric(): # what about hex/bin literals?
+      # if str(lines[i][2][2]).isnumeric(): # what about hex/bin literals?
+      if isNumber(str(lines[i][2][2])):
+        print(str(lines[i][2][2]))
         inst[0] |= 3 # immediate flag
-        inst[4] = int(lines[i][2][2])
+        inst[4] = int(lines[i][2][2], 0)
       elif ismathy(lines[i][2][2], 0):
         inst[0] |= 3
         solution = 0
@@ -289,7 +310,7 @@ def encode(lines, variables, preserved, dict):
         errstr = "-> invalid register \'{}\' for operand".format(lines[i][2][1])
         err(preserved, lines[i][0], errstr, 2)
       inst[1] = op1
-      if len(lines[i][2]) != 3 or str(lines[i][2][2]).isnumeric():
+      if len(lines[i][2]) != 3 or isNumber(str(lines[i][2][2])):
         errstr = "-> invalid syntax"
         err(preserved, lines[i][0], errstr, 2)
       for variable in variables:
@@ -349,8 +370,9 @@ def encode(lines, variables, preserved, dict):
         err(preserved, lines[i][0], errstr, 2)
       op2 = find(lines[i][2][2], registers)
       if op2 == -1:
-        if isinstance(lines[i][2][2], int) or lines[i][2][2].isnumeric():
-          inst[4] = int(lines[i][2][2])
+        if isinstance(lines[i][2][2], int) or isNumber(lines[i][2][2]):
+        # if isinstance(lines[i][2][2], int) or lines[i][2][2].isnumeric():
+          inst[4] = int(lines[i][2][2], 0)
           inst[0] |= 3
         else:
           if ismathy(lines[i][2][2], 0):
@@ -405,8 +427,9 @@ def encode(lines, variables, preserved, dict):
       op2 = find(lines[i][2][2], registers)
       if op2 == -1:
         # inst[0] |= 2
-        if isinstance(lines[i][2][2], int) or lines[i][2][2].isnumeric():
-          inst[4] = int(lines[i][2][2])
+        if isinstance(lines[i][2][2], int) or isNumber(lines[i][2][2]):
+        # if isinstance(lines[i][2][2], int) or lines[i][2][2].isnumeric():
+          inst[4] = int(lines[i][2][2], 0)
           inst[0] |= 3
         else:
           if ismathy(lines[i][2][2], 0):
@@ -753,7 +776,8 @@ def convertVariables(lines, preserved, infile, dict):
   for i in range(len(variables)):
     if variables[i][0] == 'macro':
       # print(variables[i])
-      if not variables[i][2].isnumeric():
+      # if not variables[i][2].isnumeric():
+      if not isNumber(variables[i][2]):
         # print(variables[i])
         idx = findMulti(variables[i][2], variables, i, 1)
         if idx == -1:
@@ -789,7 +813,7 @@ def convertVariables(lines, preserved, infile, dict):
             setattr(dict[name], attribute, int(variables[i][2]))
             # print(dict[name].attribute, name, attribute)
         else:
-          dict[variables[i][1]] = int(variables[i][2])
+          dict[variables[i][1]] = int(variables[i][2], 0)
     elif variables[i][0] == 'macrocalc':
       solution = 0
       try:
@@ -818,7 +842,7 @@ def convertVariables(lines, preserved, infile, dict):
         dict[variables[i][1]] = solution
       variables[i][2] = solution
     elif variables[i][0] == 'const':
-      if not variables[i][3].isnumeric():
+      if not isNumber(variables[i][3]):
         idx = findMulti(variables[i][3], variables, i - 1, 1)
         if idx == -1 or idx >= i:
           for j in range(len(preserved)):
