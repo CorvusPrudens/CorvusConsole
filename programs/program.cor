@@ -1,37 +1,31 @@
-
+import ascii
 // pos = d register
 pre C_IDX0 = (153 << 8) + 2
 pre COLOR = 255 | (255 << 8) | (255 << 16)
 pre PIXELXY = 10 | (10 << 8)
 
 pre COLOR_INDEX = 1
-pre POS_0 = 8 | (8 << 8)
+pre POS_0 = 32 | (32 << 8)
 
 ram position
 
-init:
-  //ldr d, 0
-  ldr h, C_IDX0
-  // spt COLOR, gpu // not currently supported, but needs to be implemented
-  ldr a, COLOR & 0xffff
-  spt a, gpu
-  add h, 1
-  ldr a, COLOR >> 16
-  spt a, gpu
-  ldr h, PIXELXY
-  ldr c, COLOR_INDEX
-  ldr d, POS_0 - 1
-  str d, position
-  ldr d, 0
-  //spt c, gpu
+rom string[] = "okee it oMEGAsnoz tiiiime >.>"
+pre string = $string[0]
 
+jsr init
 
 main:
   jsr frameStart
   jsr clearFrameFlag
-  //jsr indicateProgress
-  jsr movePixel
-  jmp main
+  ldr g, string
+  ldr h, POS_0
+  ldr e, 1
+  ldr f, 0
+  jsr drawString
+  jmp stop
+
+stop:
+  jmp stop
 
 frameStart:
   ldr h, 0xffff
@@ -46,6 +40,7 @@ clearFrameFlag:
   spt g, gpu
   rts
 
+/*
 movePixel:
   ldr h, position
   ldr c, 0
@@ -69,13 +64,8 @@ movePixel:
     ldr h, POS_0
     str h, position
     rts
+*/
 
-indicateProgress:
-  str d, UART
-  lsr d, 8, e
-  str e, UART
-  add d, 1
-  rts
 
 clear:
   ldr h, 0x0100
@@ -83,3 +73,85 @@ clear:
 
   clearloop:
     spt c, gpu
+
+init:
+  //ldr d, 0
+  ldr h, C_IDX0
+  // spt COLOR, gpu // not currently supported, but needs to be implemented
+  ldr a, COLOR & 0xffff
+  spt a, gpu
+  add h, 1
+  ldr a, COLOR >> 16
+  spt a, gpu
+  ldr h, PIXELXY
+  ldr c, COLOR_INDEX
+  ldr d, POS_0 - 1
+  str d, position
+  ldr d, 0
+  rts
+  //spt c, gpu
+
+drawChar:
+  pre WIDTH = 3
+  pre HEIGHT = 6
+  pre INC_Y = 0x0100
+  // expects input char in register g,
+  // xy pos in h register
+  // fg color in e, bg color in f
+  // and a 3x6 characters
+  mul g, 3            // converting ascii number to table index
+  add g, ascii.chars // adding memory offset
+  lpt a, rom
+
+  ldr c, 0               // column loop
+  ldr d, 0               // row loop
+
+  //sub h, INC_Y           // starting y-1 cause im dumb
+
+  columnLoop:
+    cmp c, HEIGHT
+    joc equal, rowLoop
+    add c, 1             // incrementing column loop
+    and a, 1, b
+    lsr a, 1
+    cmp b, 0
+    joc equal, bgcolor // if bitmap bit is zero...
+    spt e, gpu
+    add h, INC_Y         // incrementing ypos
+    jmp columnLoop
+
+    bgcolor:
+      spt f, gpu
+      add h, INC_Y         // incrementing ypos
+      jmp columnLoop
+
+
+  rowLoop:
+    cmp d, WIDTH - 1
+    rsc equal // exit subroutine when all columns written
+    add d, 1
+    add g, 1 // increment rom pointer
+    lpt a, rom
+    ldr c, 0
+    add h, 1 //increment gpu xpos
+    sub h, INC_Y*HEIGHT // returning y pos
+    jmp columnLoop
+
+drawString:
+  // expects starting position in h,
+  // string pointer in g, and fg and bg in
+  // e and f
+  ram tempPtr
+
+  drawStringStart:
+    str g, tempPtr
+    lpt a, rom
+    cmp a, 0
+    rsc equal // return when null terminating character reached
+    add a, 0, g // transfer character to rom pointer
+    jsr drawChar
+    add h, 2 // incrementing x by two
+    sub h, 0x0100*6
+    ldr g, tempPtr
+    add g, 1
+    jmp drawStringStart

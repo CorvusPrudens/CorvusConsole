@@ -57,8 +57,8 @@ def main():
   # code.append(ass.encodeInstPass1(assembly[0][1], lines, 0))
   ass.scope(assembly, lines, infile)
   ass.expandArrays(assembly, lines)
-  for line in assembly:
-    print(line)
+  # for line in assembly:
+  #   print(line)
   dict = {}
   vars = ass.convertVariables(assembly, lines, infile, dict)
   # print(vars)
@@ -79,19 +79,22 @@ def main():
   for line in assembly:
     print(line)
   print()
-  for var in vars:
-    print(var)
-  print()
+  # for var in vars:
+  #   print(var)
+  # print()
   i = 0
   for line in code:
     print('Word {}:'.format(i))
     i += 1
     ass.printWord(line)
 
-  for element in vars:
-    if 'const' in element[0]:
-      print('Address {}:'.format(int(element[1])))
-      ass.printDromWord(int(element[3]))
+  for var in vars:
+    print(var)
+
+  # for element in vars:
+  #   if 'const' in element[0]:
+  #     print('Address {}:'.format(int(element[1])))
+  #     ass.printDromWord(int(element[3]))
   # print("Code:")
   # for element in code:
   #   print(element)

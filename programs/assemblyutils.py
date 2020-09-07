@@ -63,8 +63,9 @@ def find(str, arr):
   return -1
 
 def isNumber(string):
-  number = re.compile(r"\b((0x[A-Fa-f0-9][A-Fa-f0-9_]*)|(0b[0-1][0-1_]*)|([1-9][0-9]*)|0)\b")
-  if number.search(string) != None and len(string.split(' ')) == 1:
+  number = re.compile(r"^((0x[A-Fa-f0-9][A-Fa-f0-9_]*)|(0b[0-1][0-1_]*)|([1-9][0-9]*)|0)$")
+  tok = string.split(' ')
+  if len(tok) == 1 and number.search(tok[0]) != None:
     return True
   return False
 
@@ -124,11 +125,14 @@ def expandArrays(lines, preserved):
           openingIndex -= 1
           if openingIndex == -1:
             errstr = "-> unexpected closing bracket"
-            err(preserved, lines[i][0], errstr, 2)
+            err(preserved, lines[i][0], errstr, 69)
           closingIndex = len(lines[openingIndex][1]) - 1
 
         if lines[openingIndex][1][closingIndex] == '{':
           if numClosing == 0:
+            if '[' not in lines[openingIndex][1]:
+              errstr = '-> array initializer must include brackets \'[]\' to indicate dimensionality'
+              err(preserved, lines[openingIndex][0], errstr, 70)
             opening = True
             break
           else:
@@ -247,23 +251,23 @@ def encode(lines, variables, preserved, dict):
     inst = [0, 0, 0, 0, 0]
     if opcode == -1:
       errstr = "-> invalid instruction \'{}\'".format(lines[i][2][0])
-      err(preserved, lines[i][0], errstr, 2)
+      err(preserved, lines[i][0], errstr, 3)
     if opcode == 0: # nop
       pass
     if opcode == 1: # LDR
       if len(lines[i][2]) != 3:
         errstr = "-> invalid syntax".format(lines[i][2][1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 4)
       inst = [opcode << 2, 0, 0, 0, 0]
       res = find(lines[i][2][1], registers)
       # needs expansion for loading pointers
       if res == -1:
         errstr = "-> invalid register \'{}\' for load".format(lines[i][2][1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 5)
       inst[3] = res
       # if str(lines[i][2][2]).isnumeric(): # what about hex/bin literals?
       if isNumber(str(lines[i][2][2])):
-        print(str(lines[i][2][2]))
+        # print(str(lines[i][2][2]))
         inst[0] |= 3 # immediate flag
         inst[4] = int(lines[i][2][2], 0)
       elif ismathy(lines[i][2][2], 0):
@@ -273,16 +277,16 @@ def encode(lines, variables, preserved, dict):
           solution = round(eval(lines[i][2][2], {}, dict))
         except NameError:
           errstr = "-> undefined assignment"
-          err(preserved, lines[i][0], errstr, 2)
+          err(preserved, lines[i][0], errstr, 6)
         except SyntaxError:
           errstr = "-> invalid syntax"
-          err(preserved, lines[i][0], errstr, 2)
+          err(preserved, lines[i][0], errstr, 7)
         except AttributeError:
           errstr = "-> scope does not contain element"
-          err(preserved, lines[i][0], errstr, 2)
+          err(preserved, lines[i][0], errstr, 8)
         except TypeError:
           errstr = "-> undefined assignment"
-          err(preserved, lines[i][0], errstr, 2)
+          err(preserved, lines[i][0], errstr, 9)
         inst[4] = solution
       else:
         found = False
@@ -302,53 +306,53 @@ def encode(lines, variables, preserved, dict):
             break
         if not found:
           errstr = "-> undefined argument \'{}\'".format(lines[i][2][2])
-          err(preserved, lines[i][0], errstr, 2)
+          err(preserved, lines[i][0], errstr, 10)
     elif opcode == 2: # STR
       inst = [opcode << 2, 0, 0, 0, 0]
       op1 = find(lines[i][2][1], registers)
       if op1 == -1:
         errstr = "-> invalid register \'{}\' for operand".format(lines[i][2][1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 11)
       inst[1] = op1
       if len(lines[i][2]) != 3 or isNumber(str(lines[i][2][2])):
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 12)
       for variable in variables:
         found = False
         if lines[i][2][2] == variable[2]:
           if 'const' in variable[0]:
             errstr = "-> argument \'{}\' must be a RAM or GPU address".format(lines[i][2][2])
-            err(preserved, lines[i][0], errstr, 2)
+            err(preserved, lines[i][0], errstr, 13)
           inst[4] = int(variable[1])
           inst[0] |= 0 # if ram!!
           found = True
           break
         elif lines[i][2][2] == variable[1]:
           errstr = "-> argument \'{}\' must be a RAM or GPU address".format(lines[i][2][2])
-          err(preserved, lines[i][0], errstr, 2)
+          err(preserved, lines[i][0], errstr, 14)
       if not found:
         errstr = "-> undefined argument \'{}\'".format(lines[i][2][2])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 15)
     elif opcode == 3 or opcode == 4: # LPT, SPT
       inst = [opcode << 2, 0, 0, 0, 0]
       res = find(lines[i][2][1], registers)
       if res == -1:
         errstr = "-> invalid register \'{}\' for results".format(lines[i][2][1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 16)
       if opcode == 3:
         inst[3] = res
       else:
         inst[1] = res
       if len(lines[i][2]) != 3:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 17)
       if lines[i][2][2] == 'ram':
         pass
       elif lines[i][2][2] == 'rom':
         inst[0] |= 1
         if opcode == 4:
           errstr = "-> cannot write to read-only memory"
-          err(preserved, lines[i][0], errstr, 2)
+          err(preserved, lines[i][0], errstr, 18)
       elif lines[i][2][2] == 'gpu':
         if opcode == 3:
           inst[0] |= 2
@@ -356,18 +360,18 @@ def encode(lines, variables, preserved, dict):
           inst[0] |= 1
       else:
         errstr = "-> \'{}\' must be set to \'ram\', \'rom\', or \'gpu\'".format(lines[i][2][2])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 19)
     elif opcode == 5: # CMP
       inst = [opcode << 2, 0, 0, 0, 0]
       if (len(lines[i][2]) != 3):
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 20)
 
       if lines[i][2][1] in registers:
         inst[1] = find(lines[i][2][1], registers)
       else:
         errstr = "-> invalid register \'{}\' for operand 1".format(lines[i][2][1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 21)
       op2 = find(lines[i][2][2], registers)
       if op2 == -1:
         if isinstance(lines[i][2][2], int) or isNumber(lines[i][2][2]):
@@ -381,16 +385,16 @@ def encode(lines, variables, preserved, dict):
               solution = round(eval(lines[i][2][2], {}, dict))
             except NameError:
               errstr = "-> undefined assignment"
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 22)
             except SyntaxError:
               errstr = "-> invalid syntax"
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 23)
             except AttributeError:
               errstr = "-> scope does not contain element"
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 24)
             except TypeError:
               errstr = "-> undefined assignment"
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 25)
             inst[0] |= 3
             inst[4] = solution
           else:
@@ -409,7 +413,7 @@ def encode(lines, variables, preserved, dict):
                 break
             if not found:
               errstr = "-> undefined argument \'{}\'".format(lines[i][2][2])
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 26)
       else:
         inst[2] = op2
         inst[0] |= 1
@@ -417,13 +421,13 @@ def encode(lines, variables, preserved, dict):
       inst = [opcode << 2, 0, 0, 0, 0]
       if (len(lines[i][2]) != 3 and len(lines[i][2]) != 4):
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 27)
 
       if lines[i][2][1] in registers:
         inst[1] = find(lines[i][2][1], registers)
       else:
         errstr = "-> invalid register \'{}\' for operand 1".format(lines[i][2][1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 28)
       op2 = find(lines[i][2][2], registers)
       if op2 == -1:
         # inst[0] |= 2
@@ -438,16 +442,16 @@ def encode(lines, variables, preserved, dict):
               solution = round(eval(lines[i][2][2], {}, dict))
             except NameError:
               errstr = "-> undefined assignment"
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 29)
             except SyntaxError:
               errstr = "-> invalid syntax"
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 30)
             except AttributeError:
               errstr = "-> scope does not contain element"
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 31)
             except TypeError:
               errstr = "-> undefined assignment"
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 32)
             inst[4] = solution
             inst[0] |= 3
           else:
@@ -455,7 +459,7 @@ def encode(lines, variables, preserved, dict):
               if lines[i][2][2] == variable[1]: # macro
                 found = True
                 inst[0] |= 3
-                inst[4] = int(variable[2])
+                inst[4] = int(str(variable[2]), 0)
                 break
               elif lines[i][2][2] == variable[2]: # ram
                 found = True
@@ -463,13 +467,13 @@ def encode(lines, variables, preserved, dict):
                 # immediate reads, saving potential parameter space
                 if 'const' in variable[0]:
                   errstr = " havent implemented const ops yet".format(lines[i][2][2])
-                  err(preserved, lines[i][0], errstr, 2)
+                  err(preserved, lines[i][0], errstr, 33)
                 inst[0] |= 0
                 inst[4] = int(variable[1])
                 break
             if not found:
               errstr = "-> undefined argument \'{}\'".format(lines[i][2][2])
-              err(preserved, lines[i][0], errstr, 2)
+              err(preserved, lines[i][0], errstr, 34)
       else:
         inst[2] = op2
         inst[0] |= 1
@@ -479,7 +483,7 @@ def encode(lines, variables, preserved, dict):
         res = find(lines[i][2][3], registers)
         if res == -1:
           errstr = "-> invalid register \'{}\' for results".format(lines[i][2][3])
-          err(preserved, lines[i][0], errstr, 2)
+          err(preserved, lines[i][0], errstr, 35)
         inst[3] = res
     # elif opcode == 15 or opcode == 16: # lsl and lsr
     #   inst = [opcode << 2, 0, 0, 0, 0]
@@ -534,7 +538,7 @@ def encode(lines, variables, preserved, dict):
       inst = [opcode << 2, 0, 0, 0, 0]
       if len(lines[i][2]) != 2:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 36)
       found = False
       for variable in variables:
         if lines[i][2][1] == variable[1]:
@@ -543,12 +547,12 @@ def encode(lines, variables, preserved, dict):
           break
       if not found:
         errstr = "-> undefined label \'{}\'".format(lines[i][2][1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 37)
     elif opcode == 21: # JSR
       inst = [opcode << 2, 0, 0, 0, 0]
       if len(lines[i][2]) != 2:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 38)
       found = False
       for variable in variables:
         if lines[i][2][1] == variable[1]:
@@ -557,12 +561,12 @@ def encode(lines, variables, preserved, dict):
           break
       if not found:
         errstr = "-> undefined label \'{}\'".format(lines[i][2][1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 39)
     elif opcode == 22: # RTS
       inst = [opcode << 2, 0, 0, 0, 0]
       if len(lines[i][2]) != 1:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 40)
 
     elif opcode == 23: # JOC
       inst = [opcode << 2, 0, 0, 0, 0]
@@ -570,12 +574,12 @@ def encode(lines, variables, preserved, dict):
       if condition == -1:
         errstr1 = "-> condition \'{}\' must be set to one of the following:".format(lines[i][2][1])
         errstr2 = "-> zero, carry, negative, equal, greater, less"
-        err(preserved, lines[i][0], errstr1 + '\n' + errstr2, 2)
+        err(preserved, lines[i][0], errstr1 + '\n' + errstr2, 41)
       inst[1] = (1 << condition) & 7
       inst[2] = (1 << condition) >> 3
       if len(lines[i][2]) != 3:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 42)
       found = False
       for variable in variables:
         if lines[i][2][2] == variable[1]:
@@ -584,19 +588,19 @@ def encode(lines, variables, preserved, dict):
           break
       if not found:
         errstr = "-> undefined label \'{}\'".format(lines[i][2][2])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 43)
     if opcode == 24: # JSC
       inst = [opcode << 2, 0, 0, 0, 0]
       condition = find(lines[i][2][1], conditions)
       if condition == -1:
         errstr1 = "-> condition \'{}\' must be set to one of the following:".format(lines[i][2][1])
         errstr2 = "-> zero, carry, negative, equal, greater, less"
-        err(preserved, lines[i][0], errstr1 + '\n' + errstr2, 2)
+        err(preserved, lines[i][0], errstr1 + '\n' + errstr2, 44)
       inst[1] = (1 << condition) & 7
       inst[2] = (1 << condition) >> 3
       if len(lines[i][2]) != 3:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 45)
       found = False
       for variable in variables:
         if lines[i][2][2] == variable[1]:
@@ -605,19 +609,19 @@ def encode(lines, variables, preserved, dict):
           break
       if not found:
         errstr = "-> undefined label \'{}\'".format(lines[i][2][2])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 46)
     elif opcode == 25: # RSC
       inst = [opcode << 2, 0, 0, 0, 0]
       condition = find(lines[i][2][1], conditions)
       if condition == -1:
         errstr1 = "-> condition \'{}\' must be set to one of the following:".format(lines[i][2][1])
         errstr2 = "-> zero, carry, negative, equal, greater, less"
-        err(preserved, lines[i][0], errstr1 + '\n' + errstr2, 2)
+        err(preserved, lines[i][0], errstr1 + '\n' + errstr2, 47)
       inst[1] = (1 << condition) & 7
       inst[2] = (1 << condition) >> 3
       if len(lines[i][2]) != 2:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 48)
     code.append(inst2word(inst))
   return code
 
@@ -687,7 +691,7 @@ def cleanvars(lines, preserved):
     if tokens[0].strip(':') in purge:
       if ':' in lines[i][1]:
         errstr = "-> label must not use reserved key words"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 49)
       lines.pop(i)
 
 # def encodeInstPass2(string, )
@@ -716,7 +720,7 @@ def convertVariables(lines, preserved, infile, dict):
     if tokens[0] == 'pre':
       if tokens[2] != '=': # this could be expanded
         errstr = "-> malformed definition"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 50)
       if len(tokens) > 4 or ismathy(tokens, 3):
         temp = ['macrocalc', tokens[1]]
         temptemp = ''
@@ -734,7 +738,7 @@ def convertVariables(lines, preserved, infile, dict):
       #   err(preserved, lines[i][0], errstr, 2)
       if tokens[2] != '=' or len(tokens) < 4:
         errstr = "-> no assignment of const variable \'{}\'".format(tokens[1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 51)
       if len(tokens) > 4 or ismathy(tokens, 3):
         temp = ['constcalc', tokens[1]]
         temptemp = ''
@@ -747,7 +751,7 @@ def convertVariables(lines, preserved, infile, dict):
     elif tokens[0] == 'ram':
       if len(tokens) > 2:
         errstr = "-> ram variable \'{}\' cannot be initialized".format(tokens[1])
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 52)
       variables.append(['var', tokens[1]])
   # we'll likely need to enter the variable index here!
   address = 0
@@ -777,6 +781,7 @@ def convertVariables(lines, preserved, infile, dict):
     if variables[i][0] == 'macro':
       # print(variables[i])
       # if not variables[i][2].isnumeric():
+      # print(variables[i], isNumber(variables[i][2]))
       if not isNumber(variables[i][2]):
         # print(variables[i])
         idx = findMulti(variables[i][2], variables, i, 1)
@@ -785,12 +790,12 @@ def convertVariables(lines, preserved, infile, dict):
           for j in range(len(preserved)):
             if variables[i][1] in preserved[j][1]:
               errstr = "-> undefined assignment \'{}\'".format(variables[i][2])
-              err(preserved, varToLine(variables[i][1], preserved), errstr, 2)
+              err(preserved, varToLine(variables[i][1], preserved), errstr, 53)
         elif variables[idx][0] != 'macro' and variables[idx][0] != 'macrocalc':
           for j in range(len(preserved)):
             if variables[i][1] in preserved[j][1]:
               errstr = "-> macros only accept macro or literal assigment"
-              err(preserved, preserved[j][0], errstr, 2)
+              err(preserved, preserved[j][0], errstr, 54)
         if '.' in variables[i][1]:
           name = variables[i][1][:variables[i][1].find('.')]
           attribute = variables[i][1][variables[i][1].find('.') + 1:]
@@ -798,10 +803,12 @@ def convertVariables(lines, preserved, infile, dict):
             setattr(dict[name], attribute, int(variables[idx][2]))
           except KeyError:
             dict[name] = type(name, (object, ), {})
-            setattr(dict[name], attribute, int(variables[idx][2]))
+            setattr(dict[name], attribute, int(variables[idx][2], 0))
         else:
           dict[variables[i][1]] = int(variables[idx][2])
         variables[i][2] = variables[idx][2]
+        # print(variables[i][2], variables[idx][2])
+        # exit(99)
       else:
         if '.' in variables[i][1]:
           name = variables[i][1][:variables[i][1].find('.')]
@@ -820,16 +827,16 @@ def convertVariables(lines, preserved, infile, dict):
         solution = round(eval(variables[i][2], {}, dict))
       except NameError:
         errstr = "-> undefined assignment"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 55)
       except SyntaxError:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 56)
       except AttributeError:
         errstr = "-> scope does not contain element"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 57)
       except TypeError:
         errstr = "-> undefined assignment"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 58)
       if '.' in variables[i][1]:
         name = variables[i][1][:variables[i][1].find('.')]
         attribute = variables[i][1][variables[i][1].find('.') + 1:]
@@ -848,12 +855,12 @@ def convertVariables(lines, preserved, infile, dict):
           for j in range(len(preserved)):
             if variables[i][2] in preserved[j][1]:
               errstr = "-> undefined assignment \'{}\'".format(variables[i][3])
-              err(preserved, preserved[j][0], errstr, 2)
+              err(preserved, preserved[j][0], errstr, 59)
         elif variables[idx][0] != 'macro' and variables[idx][0] != 'macrocalc':
           for j in range(len(preserved)):
             if variables[i][2] in preserved[j][1]:
               errstr = "-> const variables only accept macro or literal assigment"
-              err(preserved, preserved[j][0], errstr, 2)
+              err(preserved, preserved[j][0], errstr, 60)
         # print(len(variables[i]), len(variables[idx]))
         # print(variables[i], variables[idx])
         variables[i][3] = variables[idx][2]
@@ -865,16 +872,16 @@ def convertVariables(lines, preserved, infile, dict):
         solution = round(eval(variables[i][3], {}, dict))
       except NameError:
         errstr = "-> undefined assignment"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 61)
       except SyntaxError:
         errstr = "-> invalid syntax"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 62)
       except AttributeError:
         errstr = "-> scope does not contain element"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 63)
       except TypeError:
         errstr = "-> undefined assignment"
-        err(preserved, lines[i][0], errstr, 2)
+        err(preserved, lines[i][0], errstr, 64)
       variables[i][3] = solution
   return variables
 
@@ -943,7 +950,7 @@ def convertStrings(lines, preserved):
       end = 0
       match = unescApos.search(lines[i][1][start + 1:])
       if (match == None):
-        err(preserved, lines[i][0], "-> dangling string", 2)
+        err(preserved, lines[i][0], "-> dangling string", 65)
       end = match.start() + start
       index = 0
       lines[i][1] = repchr(lines[i][1], '{ ', start)
@@ -1122,16 +1129,16 @@ def expand(lines, infile, prefix):
           # Error checking!
 
           if name == infile:
-            err(lines, lines[index][0], "-> recursive import call", 2);
+            err(lines, lines[index][0], "-> recursive import call", 66);
           elif name in imported:
-            err(lines, lines[index][0], "-> file already imported", 2);
+            err(lines, lines[index][0], "-> file already imported", 67);
 
           imported.append(name)
           tokens = lines[index][1].split()
           tempname = name[:-4]
           if len(tokens) > 2 and tokens[2] == 'as':
             if len(tokens) != 4:
-              err(lines, lines[index][0], "-> invalid import syntax", 2);
+              err(lines, lines[index][0], "-> invalid import syntax", 68);
             tempname = tokens[3]
           templine = lines[index]
           lines.pop(index)
