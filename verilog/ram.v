@@ -60,7 +60,7 @@ module ram(
   assign CE = 1'b1;
   assign OE = (write & ~CLK);
   //assign WR = writePulse ? ~CLK : 1'b1;
-  assign WR = ~(write & ~CLK);
+  assign WR = ~(write & ~CLK & ~memmap);
   assign UB = WR;
   assign LB = WR;
 

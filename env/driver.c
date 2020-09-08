@@ -370,8 +370,10 @@ int main(int argc, char** argv) {
               innum = 1;
             } else {
               innum = 0;
-              printf("\nMessage %d:\n", messnum++);
-              printf("A register: %d\n", inbuff[0] | (out << 8));
+              printf("\nMessage %d: %d (0x%04X)\n", messnum++, inbuff[0] | (out << 8), inbuff[0] | (out << 8));
+              // printf("A register: %d\n", inbuff[0] | (out << 8));
+              // printf("ram address %d: %d\n", 1027, rambuff[1027]);
+              printf("ram address %d: %d\n", 1027, rambuff[1027]);
             }
           }
         }

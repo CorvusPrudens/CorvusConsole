@@ -546,6 +546,8 @@ def encode(lines, variables, preserved, dict):
           found = True
           break
       if not found:
+        # print(lines[i][2])
+        # print(variables)
         errstr = "-> undefined label \'{}\'".format(lines[i][2][1])
         err(preserved, lines[i][0], errstr, 37)
     elif opcode == 21: # JSR
@@ -633,7 +635,7 @@ def addLabels(lines, variables, preserved):
   while i < len(lines):
     if ':' in lines[i][1]:
       # lines[i].insert(1, address)
-      variables.append(['label', lines[i][1].strip(':'), address])
+      variables.append(['label', lines[i][1].strip(': '), address])
       lines.pop(i)
     else:
       lines[i].insert(1, address)
@@ -752,10 +754,13 @@ def convertVariables(lines, preserved, infile, dict):
       if len(tokens) > 2:
         errstr = "-> ram variable \'{}\' cannot be initialized".format(tokens[1])
         err(preserved, lines[i][0], errstr, 52)
+      elif len(tokens) < 2:
+        errstr = "-> ram type requires variable name for initialization"
+        err(preserved, lines[i][0], errstr, 52)
       variables.append(['var', tokens[1]])
   # we'll likely need to enter the variable index here!
   address = 0
-  ramadd = 0
+  ramadd = 1024 # address start for non-memory mapped data
   for i in range(len(variables)):
     if 'const' in variables[i][0]:
       variables[i].insert(1, address)

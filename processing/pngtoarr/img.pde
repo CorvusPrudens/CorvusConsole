@@ -1,3 +1,4 @@
+int wordLen = 16;
 PImage img;
 PImage testimg;
 int chars[][];
@@ -5,13 +6,14 @@ int chars[][];
 int idx(int x, int y, int w) {
   return  x + y*w;
 }
-
+// need to make this accept any word width (not just 8 bit words)
 int[] extractChar(PImage image, int x, int y, int w, int h, boolean inverted) {
+
   int tempval = 0;
-  if (h > 0 && (h & 7) == 0) {
-    tempval = 1 + ((h - 1)/8);
+  if (h > 0 && (h & (wordLen - 1)) == 0) {
+    tempval = 1 + ((h - 1)/wordLen);
   } else {
-    tempval = 1 + h/8;
+    tempval = 1 + h/wordLen;
   }
   int bits[] = new int[w*tempval];
   image.loadPixels();
@@ -21,14 +23,14 @@ int[] extractChar(PImage image, int x, int y, int w, int h, boolean inverted) {
       color pixel = image.pixels[idx(x + i, y + j, image.width)];
       int val;
       if (!inverted) {
-        val = int(round(brightness(pixel)/255)) << (j & 7);
+        val = int(round(brightness(pixel)/255)) << (j & (wordLen - 1));
       } else {
-        val = 1 - int(round(brightness(pixel)/255)) << (j & 7);
+        val = 1 - int(round(brightness(pixel)/255)) << (j & (wordLen - 1));
       }
       //if (alpha(pixel) > 200) {
       //  val = 1;
       //}
-      bits[idx(i, floor(j/8), w)] |= val;
+      bits[idx(i, floor(j/wordLen), w)] |= val;
     }
   }
 
@@ -37,7 +39,7 @@ int[] extractChar(PImage image, int x, int y, int w, int h, boolean inverted) {
 
 void process(String path, int xnum, int ynum, int xgrid, int ygrid, int w, int h, boolean inverted) {
   img = loadImage(path);
-  chars = new int[xnum*ynum][w*floor((h + 1)/8)];
+  chars = new int[xnum*ynum][w*floor((h + 1)/wordLen)];
   img.loadPixels();
 
   for (int i = 0; i < ynum; i++) {
@@ -49,7 +51,7 @@ void process(String path, int xnum, int ynum, int xgrid, int ygrid, int w, int h
 
 void process(String path, int xoff, int yoff, int xnum, int ynum, int xgrid, int ygrid, int w, int h, boolean inverted) {
   img = loadImage(path);
-  chars = new int[xnum*ynum][w*floor((h + 1)/8)];
+  chars = new int[xnum*ynum][w*floor((h + 1)/wordLen)];
   img.loadPixels();
 
   for (int i = 0; i < ynum; i++) {
@@ -62,10 +64,10 @@ void process(String path, int xoff, int yoff, int xnum, int ynum, int xgrid, int
 void writeToFile(String path, int w, int h, int gridx) {
   // NEEDS FIXING!
   int tempval = 0;
-  if (h > 0 && (h & 7) == 0) {
-    tempval = 1 + ((h - 1)/8);
+  if (h > 0 && (h & (wordLen - 1)) == 0) {
+    tempval = 1 + ((h - 1)/wordLen);
   } else {
-    tempval = 1 + h/8;
+    tempval = 1 + h/wordLen;
   }
 
   String lines[] = new String[chars.length*(1 + tempval)];
@@ -74,8 +76,8 @@ void writeToFile(String path, int w, int h, int gridx) {
     for (int k = 0; k < tempval; k++) {
       String line = "  ";
       for (int j = 0; j < w; j++) {
-        println(idx(j + 1, k, w));
-        line += "0x" + hex(chars[i][idx(j, k, w)], 2) + ", ";
+        //println(idx(j + 1, k, w));
+        line += "0x" + hex(chars[i][idx(j, k, w)], round(2*(wordLen/8))) + ", ";
       }
       lines[i*(1 + tempval) + 1 + k] = line;
     }
@@ -85,7 +87,7 @@ void writeToFile(String path, int w, int h, int gridx) {
   while (!done) {
     int index = 0;
     if (lines[i].length() > 82) {
-      for (int j = 82; j > -1; j--){
+      for (int j = 81; j > -1; j--){
         if (lines[i].charAt(j) == ','){
           index = j;
           break;
@@ -112,7 +114,7 @@ PImage displayBitmap(int bm[], int w, int h, int bg) {
   strokeWeight(1);
   for (int i = 0; i < w; i++) {
     for (int j = 0; j < h; j++) {
-      if ((bm[idx(i, int(j/8), w)] & (1 << (j & 7))) > 0) {
+      if ((bm[idx(i, int(j/wordLen), w)] & (1 << (j & (wordLen - 1)))) > 0) {
         canv.pixels[idx(i, j, w)] = color((1 - bg)*255);
       } else {
         canv.pixels[idx(i, j, w)] = color((bg)*255);
