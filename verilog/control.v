@@ -32,10 +32,13 @@ module control(
   // {interrupt, display, compare, zero, carry}
   reg [4:0] flags = 5'b0;
   reg [2:0] increment = 3'b0;
-  reg [15:0] ramAddReg = 16'd1024;
-  reg [15:0] romAddReg = 16'b0;
+  // reg [15:0] ramAddReg = 16'd1024;
+  // reg [15:0] romAddReg = 16'b0;
+  reg [15:0] ramAddReg;
+  reg [15:0] romAddReg; 
   reg [15:0] gpuAddReg = 16'b0;
-  reg [15:0] programCounter = 16'b0;
+  // reg [15:0] programCounter = 16'b0;
+  reg [15:0] programCounter;
 
   wire [1:0] opvar = controlWord[1:0];
   wire [4:0] opcode = controlWord[6:2];
@@ -51,9 +54,9 @@ module control(
 
   //addrstack -- TODO must be replaced by proper BRAM
   reg [15:0] addrstack [255:0];
-  // verilator lint_off MULTIDRIVEN
-  reg [7:0] addrstackptr = 8'b0;
-  // verilator lint_on MULTIDRIVEN
+  reg [7:0] addrstackptr = 8'b0; // need to figure out how to do this without
+  reg [15:0] tempCounter = 16'b0;
+  // multidriving!!
 
   always @(posedge CLK) begin
     if (increment[2]) begin
@@ -63,7 +66,8 @@ module control(
         2'b10:
           begin
             programCounter <= dout;
-            addrstackptr <= addrstackptr + 1'b1;
+            // addrstackptr <= addrstackptr + 1'b1;
+            addrstack[addrstackptr - 1'b1] <= tempCounter;
           end
         2'b11: programCounter <= addrstack[addrstackptr];
       endcase
@@ -621,7 +625,9 @@ module control(
           aluOperation[6] <= 1'b0;
           increment <= 3'b110;
           dout <= word2Wire;
-          addrstack[addrstackptr] <= programCounter + 1'b1;
+          // addrstack[addrstackptr] <= programCounter + 1'b1;
+          tempCounter <= programCounter + 1'b1;
+          addrstackptr <= addrstackptr + 1'b1;
         end
       5'h16: // RTS
         begin
@@ -652,7 +658,9 @@ module control(
           if ((conditions & aluStatus) > 6'b0) begin
             increment <= 3'b110;
             dout <= word2Wire;
-            addrstack[addrstackptr] <= programCounter + 1'b1;
+            // addrstack[addrstackptr] <= programCounter + 1'b1;
+            tempCounter <= programCounter + 1'b1;
+            addrstackptr <= addrstackptr + 1'b1;
           end else begin
             increment <= 3'b100;
           end

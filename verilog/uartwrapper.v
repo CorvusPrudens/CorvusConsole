@@ -14,8 +14,8 @@ module uartwrapper(
     output wire TX
   );
 
-  reg [7:0] dataOutReg;
-  assign dataOut = {{4{1'b0}}, RXempty, RXfull, TXempty, TXfull, dataOutReg};
+  wire [7:0] dataOutWire;
+  assign dataOut = {{4{1'b0}}, RXempty, RXfull, TXempty, TXfull, dataOutWire};
 
   wire uartread;
   wire [7:0] uartin;
@@ -82,7 +82,7 @@ module uartwrapper(
       .dataIn(uartout),
       .write(uartoutwrite),
       .read(read & ~RXempty),
-      .dataOut(dataOutReg),
+      .dataOut(dataOutWire),
       .full(RXfull),
       .empty(RXempty)
     );

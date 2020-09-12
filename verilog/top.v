@@ -220,12 +220,12 @@ module top(
       .memwrite(MEMwrite)
     );
 
-    wire MEMstatus;
-    wire MEMuart;
-    wire MEMaddrstack;
-    wire MEMuserstack;
-    wire MEMgpio;
-    wire MEMgpiodir;
+    // wire MEMstatus;
+    // wire MEMuart;
+    // wire MEMaddrstack;
+    // wire MEMuserstack;
+    // wire MEMgpio;
+    // wire MEMgpiodir;
 
   uartwrapper UART(
       .CLK(CLK),
