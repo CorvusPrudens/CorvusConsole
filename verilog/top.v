@@ -10,7 +10,8 @@
 `include "prom.v"
 `include "drom.v"
 `include "control.v"
-`include "uartwrapper.v"
+// disabled for performance
+// `include "uartwrapper.v"
 `include "gpu.v"
 
 module top(
@@ -220,22 +221,15 @@ module top(
       .memwrite(MEMwrite)
     );
 
-    // wire MEMstatus;
-    // wire MEMuart;
-    // wire MEMaddrstack;
-    // wire MEMuserstack;
-    // wire MEMgpio;
-    // wire MEMgpiodir;
-
-  uartwrapper UART(
-      .CLK(CLK),
-      .dataIn(MEMbus[7:0]),
-      .write(MEMwrite & MEMuart),
-      .read(MEMuart),
-      .dataOut(uartOut),
-      .RX(RX),
-      .TX(TX)
-    );
+  // uartwrapper UART(
+  //     .CLK(CLK),
+  //     .dataIn(MEMbus[7:0]),
+  //     .write(MEMwrite & MEMuart),
+  //     .read(MEMuart),
+  //     .dataOut(uartOut),
+  //     .RX(RX),
+  //     .TX(TX)
+  //   );
 
   gpu GPU(
       .CLK(CLK),

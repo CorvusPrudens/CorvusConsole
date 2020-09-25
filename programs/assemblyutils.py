@@ -219,7 +219,7 @@ def writeVerilogDROM(code, outfile):
         # print(code[i])
         data = int(code[i][3])
         index = code[i][1]
-        line = '      16\'h{:04X}: dintern = 16\'h{:08X};\n'.format(index, data)
+        line = '        16\'h{:04X}: dintern = 16\'h{:04X};\n'.format(index, data)
         file.write(line)
 
     file.write('        default: dintern = 16\'h0;\n')

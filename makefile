@@ -5,7 +5,7 @@
 
 COM = g++
 VSRC = top
-CSRC = driver
+CSRC = display
 OUT = run
 PROG = program
 PROGOUT = out
@@ -47,32 +47,32 @@ all: clean prog src sim execute
 
 .PHONY: clean all sim src prog reset execute trace src_w_trace sim_w_trace thread
 
-src: ./verilog/${VSRC}.v ./env/${CSRC}.c
+src: ./verilog/${VSRC}.v ./env/${CSRC}.cpp
 	${SRCEX} ${SRCOPT}
 	make -f V${VSRC}.mk -C ./obj_dir/
 
-src_w_thread: ./verilog/${VSRC}.v ./env/${CSRC}.c
+src_w_thread: ./verilog/${VSRC}.v ./env/${CSRC}.cpp
 	${SRCEX} ${SRCOPT_THREAD}
 	make -f V${VSRC}.mk -C ./obj_dir/
 
-sim: ./env/${CSRC}.c
-	${COM} -c ./env/${CSRC}.c -I ./env/ \
+sim: ./env/${CSRC}.cpp
+	${COM} -c ./env/${CSRC}.cpp -I ./env/ \
   -I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp
 	@ # ./obj_dir/V${VSRC}__ALL.a
 	${COM} ${CSRC}.o -o ${OUT} \
-	-lsfml-graphics -lsfml-window -lsfml-system -pthread \
+	-lglfw -lGLEW -lGL -pthread \
 	-I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp \
 	./obj_dir/V${VSRC}__ALL.a
 
-sim_w_thread: ./env/${CSRC}.c
-	${COM} -c ./env/${CSRC}.c -D THREAD ${THREADED} -I ./env/ \
+sim_w_thread: ./env/${CSRC}.cpp
+	${COM} -c ./env/${CSRC}.cpp -D THREAD ${THREADED} -I ./env/ \
   -I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp ${INCL}/verilated_threads.cpp
 	@ # ./obj_dir/V${VSRC}__ALL.a
 	${COM} ${CSRC}.o -o ${OUT} ${THREADED} \
-	-lsfml-graphics -lsfml-window -lsfml-system -pthread \
+	-lglfw -lGLEW -lGL -pthread \
 	-I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp \
 	./obj_dir/V${VSRC}__ALL.a ${INCL}/verilated_threads.cpp
@@ -100,11 +100,11 @@ src_w_trace:
 	make -f V${VSRC}.mk -C ./obj_dir/
 
 sim_w_trace:
-	${COM} -c ./env/${CSRC}.c -D TRACE -I ./env/ \
+	${COM} -c ./env/${CSRC}.cpp -D TRACE -I ./env/ \
   -I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp
 	@ # ./obj_dir/V${VSRC}__ALL.a
-	${COM} ${CSRC}.o -o ${OUT} -lsfml-graphics -lsfml-window -lsfml-system \
+	${COM} ${CSRC}.o -o ${OUT} -lglfw -lGLEW -lGL \
 	-I ${INCL} -I ./obj_dir/ ${INCL}/verilated.cpp \
 	${INCL}/verilated_vcd_c.cpp \
 	./obj_dir/V${VSRC}__ALL.a

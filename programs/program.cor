@@ -10,16 +10,12 @@ pre COLOR_INDEX = 1
 pre POS_0 = 32 | (12 << 8)
 
 rom string[] = "I now have *simple* working sprite and text graphics"
-rom string1[] = "Although my display emulator is so damn slow that a"
-rom string2[] = "few strings of text brings it to its knees"
 pre string = $string[0]
-pre string1 = $string1[0]
-pre string2 = $string2[0]
 
 ram animationTimer
 ram currentSprite
 ram currentPosition
-pre ANIMATION_TICK = 3
+pre ANIMATION_TICK = 1
 
 ldr a, 0
 str a, animationTimer
@@ -39,6 +35,7 @@ main:
   ldr f, 0
   jsr drawString
 
+  /*
   ldr g, string1
   ldr h, POS_0 + 0x0700
   ldr e, p.GRAY
@@ -50,6 +47,7 @@ main:
   ldr e, p.WHITE
   ldr f, 0
   jsr drawString
+  */
   jsr animateDownwell
   jmp main
   //jmp stop
