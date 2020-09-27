@@ -5,7 +5,7 @@ Max Top 5 critical clocks will be reported. For rest user needs to refer to Deta
 *******************************************************************************************-->
 <report_table display_priority="2" name="Timing Summary">
 <report_link name="Detailed report">
-<data>C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synlog\MULT_fpga_mapper.srr</data>
+<data>D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\icecube\MULT\MULT_Implmnt\synlog\MULT_fpga_mapper.srr</data>
 <title>START OF TIMING REPORT</title>
 </report_link>
 <row>
@@ -16,8 +16,8 @@ Max Top 5 critical clocks will be reported. For rest user needs to refer to Deta
 </row>
 <row>
 <data>top|CLK</data>
-<data>45.0 MHz</data>
-<data>38.3 MHz</data>
-<data>-3.920</data>
+<data>40.7 MHz</data>
+<data>17.3 MHz</data>
+<data>-16.570</data>
 </row>
 </report_table>

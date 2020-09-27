@@ -1,4 +1,2 @@
-@E: CS164 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":97:18:97:27|Expecting wire for output connection, found aluReadBus
-@E: CS164 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":97:18:97:27|Illegal or Unsupported Syntax within black box. Use: // synthesis translate_off {  unsupported Verilog } // synthesis translate_on 
-@E: CS164 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":97:18:97:27|Alternatively, set the builtin compiler directive IGNORE_VERILOG_BLACKBOX_GUTS in the Verilog tab of the UI or set `define IGNORE_VERILOG_BLACKBOX_GUTS in any Verilog file.
+@E: CG306 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\top.v":79:17:79:25|default_nettype is set to none. Net type of aluStatus must be declared.
 

@@ -1,14 +1,15 @@
 Synopsys Netlist Linker, version comp2016q3p1, Build 141R, built Dec  5 2016
 @N|Running in 64-bit mode
+File C:\lscc\iCEcube2.2017.08\synpbase\bin64\syn_nfilter.exe changed - recompiling
 File C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\synwork\MULT_comp.srs changed - recompiling
-@N: NF107 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":12:7:12:9|Selected library: work cell: top view verilog as top level
-@N: NF107 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":12:7:12:9|Selected library: work cell: top view verilog as top level
+@N: NF107 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\top.v":17:7:17:9|Selected library: work cell: top view verilog as top level
+@N: NF107 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\top.v":17:7:17:9|Selected library: work cell: top view verilog as top level
 
-At syn_nfilter Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 68MB peak: 69MB)
+At syn_nfilter Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 69MB peak: 70MB)
 
 Process took 0h:00m:01s realtime, 0h:00m:01s cputime
 
 Process completed successfully.
-# Tue Aug 18 14:54:49 2020
+# Sun Sep 27 03:02:21 2020
 
 ###########################################################]

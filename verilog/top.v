@@ -66,6 +66,7 @@ module top(
   wire [15:0] gpuAddress;
   wire [15:0] ctrlOut;
   wire [31:0] controlWord;
+  wire [5:0] aluStatus;
 
   control CONTROL(
       .CLK(CLK),
@@ -166,7 +167,6 @@ module top(
 
   // ALU
   wire overflow;
-  wire [5:0] aluStatus;
 
   alu ALU(
       // .CLK(testClock),

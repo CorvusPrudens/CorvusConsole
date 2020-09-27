@@ -9,26 +9,34 @@ Part:			ICE40HX8KCT256 (Lattice)
 SEQUENTIAL ELEMENTS
 Name      Total elements     Utilization     Notes
 --------------------------------------------------
-FLOPS     265                100 %                
+FLOPS     345                100 %                
 ==================================================
-Total SEQUENTIAL ELEMENTS in the block top:	265 (18.47 % Utilization)
+Total SEQUENTIAL ELEMENTS in the block top:	345 (14.75 % Utilization)
 
 
 COMBINATIONAL LOGIC
 Name       Total elements     Utilization     Notes
 ---------------------------------------------------
-LUTS       1086               100 %                
-CARRYS     69                 100 %                
+LUTS       1653               100 %                
+CARRYS     205                100 %                
 ===================================================
-Total COMBINATIONAL LOGIC in the block top:	1155 (80.49 % Utilization)
+Total COMBINATIONAL LOGIC in the block top:	1858 (79.44 % Utilization)
+
+
+MEMORY ELEMENTS
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+RAMS     5                  100 %                
+=================================================
+Total MEMORY ELEMENTS in the block top:	5 (0.21 % Utilization)
 
 
 IO PADS
 Name     Total elements     Utilization     Notes
 -------------------------------------------------
-PADS     7                  100 %                
+PADS     111                100 %                
 =================================================
-Total IO PADS in the block top:	7 (0.49 % Utilization)
+Total IO PADS in the block top:	111 (4.75 % Utilization)
 
 --------------------------------------------------------------
 ########   Utilization report for  cell:   alu_xmr0   ########
@@ -38,18 +46,18 @@ Instance path:   top.alu_xmr0
 SEQUENTIAL ELEMENTS
 Name      Total elements     Utilization     Notes
 --------------------------------------------------
-FLOPS     128                48.3 %               
+FLOPS     134                38.8 %               
 ==================================================
-Total SEQUENTIAL ELEMENTS in the block top.alu_xmr0:	128 (8.92 % Utilization)
+Total SEQUENTIAL ELEMENTS in the block top.alu_xmr0:	134 (5.73 % Utilization)
 
 
 COMBINATIONAL LOGIC
 Name       Total elements     Utilization     Notes
 ---------------------------------------------------
-LUTS       993                91.4 %               
-CARRYS     44                 63.8 %               
+LUTS       827                50 %                 
+CARRYS     160                78 %                 
 ===================================================
-Total COMBINATIONAL LOGIC in the block top.alu_xmr0:	1037 (72.26 % Utilization)
+Total COMBINATIONAL LOGIC in the block top.alu_xmr0:	987 (42.20 % Utilization)
 
 -------------------------------------------------------------
 ########   Utilization report for  cell:   control   ########
@@ -59,38 +67,168 @@ Instance path:   top.control
 SEQUENTIAL ELEMENTS
 Name      Total elements     Utilization     Notes
 --------------------------------------------------
-FLOPS     39                 14.7 %               
+FLOPS     170                49.3 %               
 ==================================================
-Total SEQUENTIAL ELEMENTS in the block top.control:	39 (2.72 % Utilization)
-
-
-COMBINATIONAL LOGIC
-Name     Total elements     Utilization     Notes
--------------------------------------------------
-LUTS     26                 2.39 %               
-=================================================
-Total COMBINATIONAL LOGIC in the block top.control:	26 (1.81 % Utilization)
-
-----------------------------------------------------------
-########   Utilization report for  cell:   uart   ########
-Instance path:   top.uart                                 
-==========================================================
-
-SEQUENTIAL ELEMENTS
-Name      Total elements     Utilization     Notes
---------------------------------------------------
-FLOPS     31                 11.7 %               
-==================================================
-Total SEQUENTIAL ELEMENTS in the block top.uart:	31 (2.16 % Utilization)
+Total SEQUENTIAL ELEMENTS in the block top.control:	170 (7.27 % Utilization)
 
 
 COMBINATIONAL LOGIC
 Name       Total elements     Utilization     Notes
 ---------------------------------------------------
-LUTS       40                 3.68 %               
-CARRYS     2                  2.9 %                
+LUTS       395                23.9 %               
+CARRYS     22                 10.7 %               
 ===================================================
-Total COMBINATIONAL LOGIC in the block top.uart:	42 (2.93 % Utilization)
+Total COMBINATIONAL LOGIC in the block top.control:	417 (17.83 % Utilization)
+
+
+MEMORY ELEMENTS
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+RAMS     1                  20 %                 
+=================================================
+Total MEMORY ELEMENTS in the block top.control:	1 (0.04 % Utilization)
+
+----------------------------------------------------------
+########   Utilization report for  cell:   drom   ########
+Instance path:   top.drom                                 
+==========================================================
+
+SEQUENTIAL ELEMENTS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+FLOPS     17                 4.93 %               
+==================================================
+Total SEQUENTIAL ELEMENTS in the block top.drom:	17 (0.73 % Utilization)
+
+
+COMBINATIONAL LOGIC
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+LUTS     22                 1.33 %               
+=================================================
+Total COMBINATIONAL LOGIC in the block top.drom:	22 (0.94 % Utilization)
+
+
+MEMORY ELEMENTS
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+RAMS     4                  80 %                 
+=================================================
+Total MEMORY ELEMENTS in the block top.drom:	4 (0.17 % Utilization)
+
+--------------------------------------------------------------
+########   Utilization report for  cell:   dromdata   ########
+Instance path:   drom.dromdata                                
+==============================================================
+
+SEQUENTIAL ELEMENTS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+FLOPS     17                 4.93 %               
+==================================================
+Total SEQUENTIAL ELEMENTS in the block drom.dromdata:	17 (0.73 % Utilization)
+
+
+COMBINATIONAL LOGIC
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+LUTS     22                 1.33 %               
+=================================================
+Total COMBINATIONAL LOGIC in the block drom.dromdata:	22 (0.94 % Utilization)
+
+
+MEMORY ELEMENTS
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+RAMS     4                  80 %                 
+=================================================
+Total MEMORY ELEMENTS in the block drom.dromdata:	4 (0.17 % Utilization)
+
+---------------------------------------------------------
+########   Utilization report for  cell:   gpu   ########
+Instance path:   top.gpu                                 
+=========================================================
+
+COMBINATIONAL LOGIC
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+LUTS     2                  0.1210 %             
+=================================================
+Total COMBINATIONAL LOGIC in the block top.gpu:	2 (0.09 % Utilization)
+
+-----------------------------------------------------------------
+########   Utilization report for  cell:   framebuffer   ########
+Instance path:   gpu.framebuffer                                 
+=================================================================
+
+COMBINATIONAL LOGIC
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+LUTS     2                  0.1210 %             
+=================================================
+Total COMBINATIONAL LOGIC in the block gpu.framebuffer:	2 (0.09 % Utilization)
+
+----------------------------------------------------------
+########   Utilization report for  cell:   prom   ########
+Instance path:   top.prom                                 
+==========================================================
+
+COMBINATIONAL LOGIC
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+LUTS     376                22.7 %               
+=================================================
+Total COMBINATIONAL LOGIC in the block top.prom:	376 (16.08 % Utilization)
+
+--------------------------------------------------------------
+########   Utilization report for  cell:   promdata   ########
+Instance path:   prom.promdata                                
+==============================================================
+
+COMBINATIONAL LOGIC
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+LUTS     376                22.7 %               
+=================================================
+Total COMBINATIONAL LOGIC in the block prom.promdata:	376 (16.08 % Utilization)
+
+---------------------------------------------------------
+########   Utilization report for  cell:   ram   ########
+Instance path:   top.ram                                 
+=========================================================
+
+COMBINATIONAL LOGIC
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+LUTS     7                  0.4230 %             
+=================================================
+Total COMBINATIONAL LOGIC in the block top.ram:	7 (0.30 % Utilization)
+
+#### START OF Block RAM DETAILED REPORT ####
+
+Total Block RAMs: 5
+
+DROM.ROMDATA.dintern_0_0
+----------------------------
+----------------------------
+
+DROM.ROMDATA.dintern_0_1
+----------------------------
+----------------------------
+
+DROM.ROMDATA.dintern_0_2
+----------------------------
+----------------------------
+
+DROM.ROMDATA.dintern_0_3
+----------------------------
+----------------------------
+
+CONTROL.addrstack_addrstack_0_0
+----------------------------
+----------------------------
+
+#### END OF  Block RAM DETAILED REPORT ####
 
 
 ##### END OF AREA REPORT #####]

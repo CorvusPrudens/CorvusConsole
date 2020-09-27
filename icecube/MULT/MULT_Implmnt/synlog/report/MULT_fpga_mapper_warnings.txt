@@ -1,51 +1,36 @@
-@W: FA239 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|ROM busState_2[2:0] (in view: work.control(verilog)) mapped in logic. To map to a technology ROM, apply attribute syn_romstyle on this instance.
-@W: FA239 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|ROM aluReadBus_2 (in view: work.control(verilog)) mapped in logic. To map to a technology ROM, apply attribute syn_romstyle on this instance.
-@W: FA239 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|ROM busState_2[2:0] (in view: work.control(verilog)) mapped in logic. To map to a technology ROM, apply attribute syn_romstyle on this instance.
-@W: FA239 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":47:4:47:7|ROM aluReadBus_2 (in view: work.control(verilog)) mapped in logic. To map to a technology ROM, apply attribute syn_romstyle on this instance.
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|User-specified initial value defined for instance FTDI.TXstate[3:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|User-specified initial value defined for instance FTDI.RXstate[3:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|User-specified initial value defined for instance FTDI.TXshift[7:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|User-specified initial value defined for instance FTDI.RXready is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|User-specified initial value defined for instance FTDI.gap[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":30:2:30:7|User-specified initial value defined for instance FTDI.baudAcc[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\uart.v":66:2:66:7|User-specified initial value defined for instance FTDI.RXbuffer[7:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.aluParams[3:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.results[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.operand1[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.aluOperation[5:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.operand2[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.busState_1[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|User-specified initial value defined for instance CONTROL.aluReadBus is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.overflow is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.h[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.g[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.f[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.e[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.d[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.c[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.b[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\alu.v":118:2:118:7|User-specified initial value defined for instance ALU.a[15:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance testState[2:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[15] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[14] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[13] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[12] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[11] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[10] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[9] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|User-specified initial value defined for instance bus[8] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance clkdiv[23:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance TXstart is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance testWord[31:0] is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance testClock is being ignored. 
-@W: FX1039 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":160:2:160:7|User-specified initial value defined for instance TXbuffer[7:0] is being ignored. 
-@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[8] is reduced to a combinational gate by constant propagation.
-@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[9] is reduced to a combinational gate by constant propagation.
-@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[10] is reduced to a combinational gate by constant propagation.
-@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[11] is reduced to a combinational gate by constant propagation.
-@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[12] is reduced to a combinational gate by constant propagation.
-@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[13] is reduced to a combinational gate by constant propagation.
-@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[14] is reduced to a combinational gate by constant propagation.
-@W: MO129 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":119:4:119:7|Sequential instance bus_0[15] is reduced to a combinational gate by constant propagation.
-@W: BN132 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Removing instance CONTROL.busState_1[1] because it is equivalent to instance CONTROL.aluReadBus. To keep the instance, apply constraint syn_preserve=1 on the instance.
-@W: MT420 |Found inferred clock top|CLK with period 22.21ns. Please declare a user-defined clock on object "p:CLK"
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.addrstackptr[7:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.busState_1[2:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.gpuAddReg[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.increment[2:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.ramWrite is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.aluOperation[6:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.aluParams_1[1:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.aluReadBus is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.tempCounter[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.operand2[2:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.gpuWrite is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.results[2:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|User-specified initial value defined for instance CONTROL.operand1[2:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.status[5:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.h[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.g[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.f[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.e[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.d[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.c[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.b[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\alu.v":119:2:119:7|User-specified initial value defined for instance ALU.a[15:0] is being ignored. 
+@W: FX1039 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\top.v":250:2:250:7|User-specified initial value defined for instance clkdiv[23:0] is being ignored. 
+@W: FX107 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":61:2:61:7|RAM addrstack[15:0] (in view: work.control(verilog)) does not have a read/write conflict check. Possible simulation mismatch. To resolve a read/write conflict, either set syn_ramstyle = rw_check, or enable the "Read Write Check on RAM" Implementation Option. For more information, search for "read/write conflict check" in Online Help.
+@W: MO129 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\control.v":78:2:78:7|Sequential instance CONTROL.increment[2] is reduced to a combinational gate by constant propagation.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_1_sr_en because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_en. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_2_sr_en because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_en. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_3_sr_en because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_en. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_1_sr_en_0 because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_en_0. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_2_sr_en_0 because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_en_0. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_3_sr_en_0 because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_en_0. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_1_sr_rst_0 because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_rst_0. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_2_sr_rst_0 because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_rst_0. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_3_sr_rst_0 because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_rst_0. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing instance DROM.ROMDATA.dintern_0_1_sr_rst because it is equivalent to instance DROM.ROMDATA.dintern_0_0_sr_rst. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: MT420 |Found inferred clock top|CLK with period 24.60ns. Please declare a user-defined clock on object "p:CLK"

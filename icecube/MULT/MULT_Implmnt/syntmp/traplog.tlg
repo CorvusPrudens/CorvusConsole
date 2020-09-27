@@ -1,43 +1,17 @@
-@N: CD630 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\MULT\icecube\MULT\MULT_Implmnt\syntmp\gentmp1637a44316":4:7:4:9|Synthesizing work.top.gen.
-@N: CD630 :"syng0a44316":303:7:303:10|Synthesizing work.mult.arch1.
-@N: CD630 :"syng0a44316":197:7:197:15|Synthesizing work.addertree.arch1.
-@N: CD630 :"syng0a44316":108:7:108:11|Synthesizing work.floor.arch1.
-@N: CD630 :"syng0a44316":50:10:50:16|Synthesizing work.pipebuf.syn_black_box.
-Post processing for work.pipebuf.syn_black_box
-@N: CD630 :"syng0a44316":73:7:73:12|Synthesizing work.addreg.arch1.
-Post processing for work.addreg.arch1
-Post processing for work.floor.arch1
-@N: CD630 :"syng0a44316":108:7:108:11|Synthesizing work.floor.arch1.
-@N: CD630 :"syng0a44316":73:7:73:12|Synthesizing work.addreg.arch1.
-Post processing for work.addreg.arch1
-Post processing for work.floor.arch1
-@N: CD630 :"syng0a44316":108:7:108:11|Synthesizing work.floor.arch1.
-@N: CD630 :"syng0a44316":73:7:73:12|Synthesizing work.addreg.arch1.
-Post processing for work.addreg.arch1
-Post processing for work.floor.arch1
-@N: CD630 :"syng0a44316":108:7:108:11|Synthesizing work.floor.arch1.
-@N: CD630 :"syng0a44316":73:7:73:12|Synthesizing work.addreg.arch1.
-Post processing for work.addreg.arch1
-Post processing for work.floor.arch1
-Post processing for work.addertree.arch1
-@N: CD630 :"syng0a44316":19:7:19:19|Synthesizing work.firstproducts.arch1.
-@W: CD638 :"syng0a44316":34:10:34:14|Signal a_aux is undriven. Either assign the signal a value or remove the signal declaration.
-@W: CD638 :"syng0a44316":35:10:35:14|Signal b_aux is undriven. Either assign the signal a value or remove the signal declaration.
-Post processing for work.firstproducts.arch1
-Post processing for work.mult.arch1
+@N: CD630 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\icecube\MULT\MULT_Implmnt\syntmp\gentmp30a05876":4:7:4:9|Synthesizing work.top.gen.
+@N: CD630 :"syng0a05876":69:7:69:12|Synthesizing work.cmp_eq.cell_level.
+@W: CD796 :"syng0a05876":92:11:92:18|Bit 8 of signal data_tmp is undriven. Possible simulation mismatch as initial value or default value is ignored. To avoid simulation mismatches, explicitly drive this bit. 
+@W: CD796 :"syng0a05876":92:11:92:18|Bit 9 of signal data_tmp is undriven. Possible simulation mismatch as initial value or default value is ignored. To avoid simulation mismatches, explicitly drive this bit. 
+@W: CD796 :"syng0a05876":92:11:92:18|Bit 10 of signal data_tmp is undriven. Possible simulation mismatch as initial value or default value is ignored. To avoid simulation mismatches, explicitly drive this bit. 
+@W: CD796 :"syng0a05876":92:11:92:18|Bit 11 of signal data_tmp is undriven. Possible simulation mismatch as initial value or default value is ignored. To avoid simulation mismatches, explicitly drive this bit. 
+@W: CD796 :"syng0a05876":92:11:92:18|Bit 12 of signal data_tmp is undriven. Possible simulation mismatch as initial value or default value is ignored. To avoid simulation mismatches, explicitly drive this bit. 
+@W: CD796 :"syng0a05876":92:11:92:18|Bit 13 of signal data_tmp is undriven. Possible simulation mismatch as initial value or default value is ignored. To avoid simulation mismatches, explicitly drive this bit. 
+@W: CD796 :"syng0a05876":92:11:92:18|Bit 14 of signal data_tmp is undriven. Possible simulation mismatch as initial value or default value is ignored. To avoid simulation mismatches, explicitly drive this bit. 
+@W: CD796 :"syng0a05876":92:11:92:18|Bit 15 of signal data_tmp is undriven. Possible simulation mismatch as initial value or default value is ignored. To avoid simulation mismatches, explicitly drive this bit. 
+@N: CD630 :"syng0a05876":6:7:6:16|Synthesizing work.eq_element.eqn.
+@W: CD280 :"syng0a05876":15:11:15:17|Unbound component MUXCY_L mapped to black box
+@N: CD630 :"syng0a05876":15:11:15:17|Synthesizing work.muxcy_l.syn_black_box.
+Post processing for work.muxcy_l.syn_black_box
+Post processing for work.eq_element.eqn
+Post processing for work.cmp_eq.cell_level
 Post processing for work.top.gen
-@W: CL247 :"syng0a44316":116:20:116:24|Input port bit 495 of input(527 downto 0) is unused 
-@W: CL247 :"syng0a44316":116:20:116:24|Input port bit 429 of input(527 downto 0) is unused 
-@W: CL247 :"syng0a44316":116:20:116:24|Input port bit 363 of input(527 downto 0) is unused 
-@W: CL247 :"syng0a44316":116:20:116:24|Input port bit 297 of input(527 downto 0) is unused 
-@W: CL247 :"syng0a44316":116:20:116:24|Input port bit 231 of input(527 downto 0) is unused 
-@W: CL247 :"syng0a44316":116:20:116:24|Input port bit 165 of input(527 downto 0) is unused 
-@W: CL247 :"syng0a44316":116:20:116:24|Input port bit 99 of input(527 downto 0) is unused 
-@W: CL247 :"syng0a44316":116:20:116:24|Input port bit 33 of input(527 downto 0) is unused 
-@W: CL246 :"syng0a44316":116:20:116:24|Input port bits 232 to 231 of input(263 downto 0) are unused. Assign logic for all port bits or change the input port size.
-@W: CL246 :"syng0a44316":116:20:116:24|Input port bits 166 to 165 of input(263 downto 0) are unused. Assign logic for all port bits or change the input port size.
-@W: CL246 :"syng0a44316":116:20:116:24|Input port bits 100 to 99 of input(263 downto 0) are unused. Assign logic for all port bits or change the input port size.
-@W: CL246 :"syng0a44316":116:20:116:24|Input port bits 34 to 33 of input(263 downto 0) are unused. Assign logic for all port bits or change the input port size.
-@W: CL246 :"syng0a44316":116:20:116:24|Input port bits 102 to 99 of input(131 downto 0) are unused. Assign logic for all port bits or change the input port size.
-@W: CL246 :"syng0a44316":116:20:116:24|Input port bits 36 to 33 of input(131 downto 0) are unused. Assign logic for all port bits or change the input port size.
-@W: CL246 :"syng0a44316":116:20:116:24|Input port bits 40 to 33 of input(65 downto 0) are unused. Assign logic for all port bits or change the input port size.

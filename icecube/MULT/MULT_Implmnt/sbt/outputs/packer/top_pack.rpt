@@ -6,7 +6,7 @@
 
 * Build Date:         Sep 11 2017 16:52:36
 
-* File Generated:     Aug 18 2020 14:56:15
+* File Generated:     Sep 27 2020 03:05:03
 
 * Purpose:            General info of design implementation
 
@@ -27,58 +27,162 @@ Device Info:
 
 Design statistics:
 ------------------
-    FFs:                  265
-    LUTs:                 1233
-    RAMs:                 0
-    IOBs:                 6
-    GBs:                  2
+    FFs:                  345
+    LUTs:                 1894
+    RAMs:                 5
+    IOBs:                 111
+    GBs:                  1
     PLLs:                 0
     Warm Boots:           0
 
 Logic Resource Utilization:
 ---------------------------
-    Total Logic Cells: 1235/7680
-        Combinational Logic Cells: 970      out of   7680      12.6302%
-        Sequential Logic Cells:    265      out of   7680      3.45052%
-        Logic Tiles:               192      out of   960       20%
+    Total Logic Cells: 1924/7680
+        Combinational Logic Cells: 1579     out of   7680      20.5599%
+        Sequential Logic Cells:    345      out of   7680      4.49219%
+        Logic Tiles:               292      out of   960       30.4167%
     Registers: 
-        Logic Registers:           265      out of   7680      3.45052%
+        Logic Registers:           345      out of   7680      4.49219%
         IO Registers:              0        out of   1280      0
-    Block RAMs:                    0        out of   32        0%
+    Block RAMs:                    5        out of   32        15.625%
     Warm Boots:                    0        out of   1         0%
     Pins:
-        Input Pins:                2        out of   206       0.970874%
-        Output Pins:               4        out of   206       1.94175%
+        Input Pins:                33       out of   206       16.0194%
+        Output Pins:               78       out of   206       37.8641%
         InOut Pins:                0        out of   206       0%
-    Global Buffers:                2        out of   8         25%
+    Global Buffers:                1        out of   8         12.5%
     PLLs:                          0        out of   2         0%
 
 IO Bank Utilization:
 --------------------
-    Bank 3: 0        out of   52        0%
-    Bank 1: 0        out of   52        0%
-    Bank 0: 3        out of   52        5.76923%
-    Bank 2: 3        out of   50        6%
+    Bank 3: 47       out of   52        90.3846%
+    Bank 1: 26       out of   52        50%
+    Bank 0: 36       out of   52        69.2308%
+    Bank 2: 2        out of   50        4%
 
 Detailed I/O Info:
 ------------------
     Input Pins: 
-    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function    Signal Name
-    ----------  ---------  -----------  -------  -------  -----------    -----------
-    R9          Input      SB_LVCMOS    No       2        Simple Input   CLK     
-    T15         Input      SB_LVCMOS    No       2        Simple Input   RX      
+    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function                   Signal Name          
+    ----------  ---------  -----------  -------  -------  -----------                   -----------          
+    A1          Input      SB_LVCMOS    No       0        Simple Input                  D9_in                
+    A2          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[8]    
+    A5          Input      SB_LVCMOS    No       0        Simple Input                  D13_in               
+    A6          Input      SB_LVCMOS    No       0        Simple Input                  D3_in                
+    A7          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[10]   
+    A9          Input      SB_LVCMOS    No       0        Simple Input                  D2_in                
+    B1          Input      SB_LVCMOS    No       3        Simple Input                  BUFFER_DATA_IN[4]    
+    B2          Input      SB_LVCMOS    No       3        Simple Input                  BUFFER_DATA_IN[6]    
+    B3          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[5]    
+    B5          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[13]   
+    B6          Input      SB_LVCMOS    No       0        Simple Input                  D7_in                
+    B8          Input      SB_LVCMOS    No       0        Simple Input                  D0_in                
+    B9          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[11]   
+    C1          Input      SB_LVCMOS    No       3        Simple Input                  D4_in                
+    C5          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[9]    
+    C6          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[7]    
+    C7          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[0]    
+    C8          Input      SB_LVCMOS    No       0        Simple Input                  D11_in               
+    C9          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[2]    
+    D3          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[14]   
+    D5          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[15]   
+    D6          Input      SB_LVCMOS    No       0        Simple Input                  D8_in                
+    D8          Input      SB_LVCMOS    No       0        Simple Input                  D10_in               
+    D9          Input      SB_LVCMOS    No       0        Simple Input                  D1_in                
+    D10         Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[1]    
+    E4          Input      SB_LVCMOS    No       3        Simple Input                  D6_in                
+    E5          Input      SB_LVCMOS    No       0        Simple Input                  D5_in                
+    E6          Input      SB_LVCMOS    No       0        Simple Input                  D15_in               
+    E9          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[3]    
+    F5          Input      SB_LVCMOS    No       3        Simple Input                  D14_in               
+    F7          Input      SB_LVCMOS    No       0        Simple Input                  BUFFER_DATA_IN[12]   
+    F9          Input      SB_LVCMOS    No       0        Simple Input                  D12_in               
+    R9          Input      SB_LVCMOS    No       2        Simple Input                  CLK                  
 
     Output Pins: 
-    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function    Signal Name
-    ----------  ---------  -----------  -------  -------  -----------    -----------
-    B4          Output     SB_LVCMOS    No       0        Simple Output  GPIO9   
-    C3          Output     SB_LVCMOS    No       0        Simple Output  GPIO3   
-    D4          Output     SB_LVCMOS    No       0        Simple Output  GPIO11  
-    T13         Output     SB_LVCMOS    No       2        Simple Output  TX      
+    Pin Number  Direction  IO Standard  Pull Up  IO Bank  IO Function                   Signal Name          
+    ----------  ---------  -----------  -------  -------  -----------                   -----------          
+    A15         Output     SB_LVCMOS    No       0        Simple Output                 A15                  
+    A16         Output     SB_LVCMOS    No       0        Simple Output                 A13                  
+    B4          Output     SB_LVCMOS    No       0        Simple Output                 GPIO9                
+    B15         Output     SB_LVCMOS    No       0        Simple Output                 A14                  
+    B16         Output     SB_LVCMOS    No       1        Simple Output                 A12                  
+    C2          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[10]  
+    C3          Output     SB_LVCMOS    No       0        Simple Output                 GPIO3                
+    C13         Output     SB_LVCMOS    No       0        Simple Output                 A9                   
+    C14         Output     SB_LVCMOS    No       0        Simple Output                 A10                  
+    C16         Output     SB_LVCMOS    No       1        Simple Output                 A11                  
+    D1          Output     SB_LVCMOS    No       3        Simple Output                 LB                   
+    D2          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[9]   
+    D4          Output     SB_LVCMOS    No       0        Simple Output                 GPIO11               
+    D13         Output     SB_LVCMOS    No       0        Simple Output                 A5                   
+    D14         Output     SB_LVCMOS    No       1        Simple Output                 A6                   
+    D15         Output     SB_LVCMOS    No       1        Simple Output                 A7                   
+    D16         Output     SB_LVCMOS    No       1        Simple Output                 A8                   
+    E2          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[1]   
+    E3          Output     SB_LVCMOS    No       3        Simple Output                 UB                   
+    E13         Output     SB_LVCMOS    No       1        Simple Output                 A2                   
+    E14         Output     SB_LVCMOS    No       1        Simple Output                 A3                   
+    E16         Output     SB_LVCMOS    No       1        Simple Output                 A4                   
+    F1          Output     SB_LVCMOS    No       3        Simple Output                 B_LB                 
+    F2          Output     SB_LVCMOS    No       3        Simple Output                 B_WR                 
+    F3          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[8]   
+    F4          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[12]  
+    F15         Output     SB_LVCMOS    No       1        Simple Output                 A0                   
+    F16         Output     SB_LVCMOS    No       1        Simple Output                 A1                   
+    G1          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[1]    
+    G2          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[3]   
+    G3          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[14]  
+    G4          Output     SB_LVCMOS    No       3        Simple Output                 OE                   
+    G5          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[7]   
+    H1          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[11]   
+    H2          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[2]   
+    H5          Output     SB_LVCMOS    No       3        Simple Output                 WR                   
+    H6          Output     SB_LVCMOS    No       3        Simple Output                 B_UB                 
+    J1          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[13]   
+    J2          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[12]   
+    J3          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[10]   
+    J4          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[4]   
+    J5          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[0]    
+    K1          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[14]   
+    K3          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[15]   
+    K4          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[5]   
+    K5          Output     SB_LVCMOS    No       3        Simple Output                 CE                   
+    K12         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D11                  
+    K13         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D12                  
+    K14         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D13                  
+    K15         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D14                  
+    K16         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D15                  
+    L1          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[13]  
+    L3          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[0]   
+    L4          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[6]   
+    L5          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[5]    
+    L7          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[9]    
+    L12         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D7                   
+    L13         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D8                   
+    L14         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D9                   
+    L16         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D10                  
+    M2          Output     SB_LVCMOS    No       3        Simple Output                 B_CE                 
+    M3          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[6]    
+    M4          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[2]    
+    M5          Output     SB_LVCMOS    No       3        Simple Output                 B_OE                 
+    M6          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[7]    
+    M13         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D3                   
+    M14         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D4                   
+    M15         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D5                   
+    M16         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D6                   
+    N2          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[8]    
+    N3          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[4]    
+    N4          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[11]  
+    N16         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D2                   
+    P1          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_ADDRESS[3]    
+    P15         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D0                   
+    P16         Output     SB_LVCMOS    No       1        Output Tristatable by Enable  D1                   
+    R1          Output     SB_LVCMOS    No       3        Simple Output                 BUFFER_DATA_OUT[15]  
+    T13         Output     SB_LVCMOS    No       2        Output Tristatable by Enable  TX                   
 
 Detailed Global Buffer Info:
 ----------------------------
-    Buffer Number  IO Bank  Driven By  Fanout  Signal Name      
-    -------------  -------  ---------  ------  -----------      
-    6              2        IO         244     CLK_0_c_g        
-    3              3                   30      testState_i_g_2  
+    Buffer Number  IO Bank  Driven By  Fanout  Signal Name
+    -------------  -------  ---------  ------  -----------
+    6              2        IO         289     CLK_c_g  

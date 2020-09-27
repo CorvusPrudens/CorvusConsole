@@ -1,16 +1,8 @@
 @N: MF248 |Running in 64-bit mode.
 @N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":235:32:235:32|Connected syn_hyper_connect __xmr_use__1_, tag __xmr_tag__2_0_7d5186020056a223808828e9cc25bba0
-@N: BN397 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\top.v":82:21:82:23|Connected syn_hyper_connect __xmr_use__3_, tag __xmr_tag__1_0_7d5186020056a223808828e9cc25bba0
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_1 (in view: work.control(verilog)) on net hreg_1 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_2 (in view: work.control(verilog)) on net hreg_2 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_3 (in view: work.control(verilog)) on net hreg_3 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_4 (in view: work.control(verilog)) on net hreg_4 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_5 (in view: work.control(verilog)) on net hreg_5 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_6 (in view: work.control(verilog)) on net hreg_6 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_7 (in view: work.control(verilog)) on net hreg_7 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_8 (in view: work.control(verilog)) on net hreg_8 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_9 (in view: work.control(verilog)) on net hreg_9 (in view: work.control(verilog)) has its enable tied to GND.
-@N: MO111 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":19:23:19:26|Tristate driver hreg_10 (in view: work.control(verilog)) on net hreg_10 (in view: work.control(verilog)) has its enable tied to GND.
-@N: BN362 :"c:\linuxenv\cygwin\home\gabriel\testbenches\reg\verilog\control.v":46:2:46:7|Removing sequential instance ramWrite (in view: work.control(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
-@N: BN225 |Writing default property annotation file C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap.
+@N: BN397 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\top.v":85:12:85:14|Connected syn_hyper_connect __xmr_use__1_, tag __xmr_tag__3_0_52911da27fa5f414a2f3c2c9883a4e75
+@N: BN397 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\top.v":84:12:84:14|Connected syn_hyper_connect __xmr_use__3_, tag __xmr_tag__2_0_52911da27fa5f414a2f3c2c9883a4e75
+@N: BN397 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\top.v":83:12:83:14|Connected syn_hyper_connect __xmr_use__5_, tag __xmr_tag__1_0_52911da27fa5f414a2f3c2c9883a4e75
+@N: MO111 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\top.v":21:16:21:17|Tristate driver TX (in view: work.top(verilog)) on net TX (in view: work.top(verilog)) has its enable tied to GND.
+@N: MO111 :"d:\linuxenv\cygwin\home\corvus\testbenches\reg\verilog\top.v":21:16:21:17|Tristate driver TX (in view: work.top(verilog)) on net TX (in view: work.top(verilog)) has its enable tied to GND.
+@N: BN225 |Writing default property annotation file D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\icecube\MULT\MULT_Implmnt\MULT.sap.

@@ -1,20 +1,30 @@
 @N|Running in 64-bit mode
 @N|Running in 64-bit mode
-@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v":5:7:5:10|Synthesizing module uart in library work.
-@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\control.v":5:7:5:13|Synthesizing module control in library work.
-@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\alu.v":3:7:3:9|Synthesizing module alu in library work.
-@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
-@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
-@N: CG364 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":12:7:12:9|Synthesizing module top in library work.
-@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
-@N: CG364 :"C:\lscc\iCEcube2.2017.08\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
-@N: CL201 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":160:2:160:7|Trying to extract state machine for register testState.
-@N: CL189 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":160:2:160:7|Register bit testState[3] is always 0.
-@N: CL189 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\control.v":46:2:46:7|Register bit busState[3] is always 0.
-@N: CL159 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\control.v":18:22:18:25|Input greg is unused.
-@N: CL201 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v":30:2:30:7|Trying to extract state machine for register TXstate.
-@N: CL201 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\uart.v":66:2:66:7|Trying to extract state machine for register RXstate.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\control.v":5:7:5:13|Synthesizing module control in library work.
+@N: CL134 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\control.v":61:2:61:7|Found RAM addrstack, depth=256, width=16
+@N: CL189 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\control.v":78:2:78:7|Register bit aluParams[2] is always 0.
+@N: CL189 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\control.v":78:2:78:7|Register bit aluParams[3] is always 0.
+@N: CL189 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\control.v":78:2:78:7|Register bit busState[3] is always 0.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\promdata.v":1:7:1:14|Synthesizing module promdata in library work.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\prom.v":3:7:3:10|Synthesizing module prom in library work.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\dromdata.v":1:7:1:14|Synthesizing module dromdata in library work.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\drom.v":3:7:3:10|Synthesizing module drom in library work.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\alu.v":3:7:3:9|Synthesizing module alu in library work.
+@N: CG364 :"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+@N: CG364 :"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+@N: CG364 :"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\hypermods.v":9:7:9:22|Synthesizing module syn_hyper_source in library __hyper__lib__.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\ram.v":2:7:2:9|Synthesizing module ram in library work.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\framebuffer.v":2:7:2:17|Synthesizing module framebuffer in library work.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\gpu.v":4:7:4:9|Synthesizing module gpu in library work.
+@N: CG364 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\top.v":17:7:17:9|Synthesizing module top in library work.
+@N: CG364 :"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+@N: CG364 :"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+@N: CG364 :"D:\1_FPGA_Design\Lattice\iCEcube2.2017\synpbase\lib\vlog\hypermods.v":16:7:16:23|Synthesizing module syn_hyper_connect in library __hyper__lib__.
+@N: CL159 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\top.v":20:15:20:16|Input RX is unused.
+@N: CL159 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\ram.v":11:22:11:26|Input memIn is unused.
+@N: CL159 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\dromdata.v":2:15:2:17|Input CLK is unused.
+@N: CL159 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\promdata.v":2:15:2:17|Input CLK is unused.
 @N|Running in 64-bit mode
-@N: NF107 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":12:7:12:9|Selected library: work cell: top view verilog as top level
-@N: NF107 :"C:\LinuxEnv\Cygwin\home\Gabriel\testbenches\REG\verilog\top.v":12:7:12:9|Selected library: work cell: top view verilog as top level
+@N: NF107 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\top.v":17:7:17:9|Selected library: work cell: top view verilog as top level
+@N: NF107 :"D:\LinuxEnv\Cygwin\home\corvus\testbenches\REG\verilog\top.v":17:7:17:9|Selected library: work cell: top view verilog as top level
 
